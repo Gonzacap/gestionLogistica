@@ -13,7 +13,8 @@ public class InsumoGeneral extends Insumo {
 
 	private double peso;
 
-	
+
+	@Override
 	public double pesoPorUnidad() {
 		// TODO Auto-generated method stub
 		return peso;
