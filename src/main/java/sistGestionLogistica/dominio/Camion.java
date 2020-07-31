@@ -1,5 +1,6 @@
 package sistGestionLogistica.dominio;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Camion {
@@ -20,7 +21,7 @@ public class Camion {
 	private Double costoKM;
 	private Double costoHora;
 	private Integer km;
-	private LocalDate fechaCompra;
+	private Date fechaCompra;  //NO ME DEJA TRAER EL DATE DE LA TABLA
 	
 	public Integer getId() {
 		return id;
@@ -58,11 +59,11 @@ public class Camion {
 	public void setKm(Integer km) {
 		this.km = km;
 	}
-	public LocalDate getFechaCompra() {
+	public Date getFechaCompra() {
 		return fechaCompra;
 	}
-	public void setFechaCompra(LocalDate fechaCompra) {
-		this.fechaCompra = fechaCompra;
+	public void setFechaCompra(Date date) {
+		this.fechaCompra = date;
 	}
 	public String getPatente() {
 		return patente;

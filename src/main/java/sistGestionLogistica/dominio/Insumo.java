@@ -3,17 +3,17 @@ package sistGestionLogistica.dominio;
 import sistGestionLogistica.enums.UnidadMedida;
 
 public abstract class Insumo {
-	private int idInsumo;
-	private String descripcion;
-	private double costo;
-	private double precio;
-	private UnidadMedida unidadMedida;
+	protected Integer idInsumo;
+	protected String descripcion;
+	protected Double costo;
+	protected Double precio;
+	protected UnidadMedida unidadMedida;
 
-	public int getIdInsumo() {
+	public Integer getIdInsumo() {
 		return idInsumo;
 	}
 
-	public void setIdInsumo(int idInsumo) {
+	public void setIdInsumo(Integer idInsumo) {
 		this.idInsumo = idInsumo;
 	}
 
@@ -25,19 +25,19 @@ public abstract class Insumo {
 		this.descripcion = descripcion;
 	}
 
-	public double getCosto() {
+	public Double getCosto() {
 		return costo;
 	}
 
-	public void setCosto(double costo) {
+	public void setCosto(Double costo) {
 		this.costo = costo;
 	}
 
-	public double getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 
@@ -49,8 +49,8 @@ public abstract class Insumo {
 		this.unidadMedida = unidadMedida;
 	}
 
-	public Insumo(int idInsumo, String descripcion, double costo, double precio, UnidadMedida unidadMedida) {
-		
+	public Insumo(Integer idInsumo, String descripcion, Double costo, Double precio, UnidadMedida unidadMedida) {
+		super();
 		this.idInsumo = idInsumo;
 		this.descripcion = descripcion;
 		this.costo = costo;

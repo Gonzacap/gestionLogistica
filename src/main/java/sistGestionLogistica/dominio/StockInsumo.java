@@ -1,9 +1,9 @@
 package sistGestionLogistica.dominio;
 
 public class StockInsumo {
-		private int idStockInsumo;
+		private Integer idStockInsumo;
 		private Planta planta;
      	private Insumo insumo;
-		private int cantidad ;
-		private int puntoReposicion;
+		private Integer cantidad ;
+		private Integer puntoReposicion;
 }

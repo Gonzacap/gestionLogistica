@@ -3,20 +3,22 @@ package sistGestionLogistica.dominio;
 import sistGestionLogistica.enums.UnidadMedida;
 
 public class InsumoGeneral extends Insumo {
+	private Double peso;
 	
-	
-     public InsumoGeneral(int idInsumo, String descripcion, double costo, double precio, UnidadMedida unidadMedida) {
+     public InsumoGeneral(int idInsumo, String descripcion, double costo, double precio, UnidadMedida unidadMedida, double peso) {
 		super(idInsumo, descripcion, costo, precio, unidadMedida);
-		// TODO Auto-generated constructor stub
+		this.peso = peso;
 	}
 
 
-	private double peso;
+	
 
 
 	@Override
 	public double pesoPorUnidad() {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return peso;
 	}
      
