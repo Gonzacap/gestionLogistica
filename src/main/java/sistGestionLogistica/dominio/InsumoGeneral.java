@@ -16,9 +16,6 @@ public class InsumoGeneral extends Insumo {
 
 	@Override
 	public double pesoPorUnidad() {
-		
-		
-		
 		return peso;
 	}
      

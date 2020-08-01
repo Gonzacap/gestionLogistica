@@ -17,8 +17,20 @@ public class InsumoLiquido extends Insumo{
 	
 	@Override
 	public double pesoPorUnidad() {
+		double resultado=0;
+		switch(this.unidadMedida) {
+		case LT:
+			resultado= densidad * 0.001;   //[KG/M3] * [M3/LT] para que quede en [KG/LT] que es el peso por unidad
+			break;
+		case M3: 
+			resultado= densidad;		// la densidad ya esta en [KG/M3]
+			break;
+		case CM3:
+			resultado= densidad * 0.000001; //[KG/M3] * [M3/CM3] para que quede en [KG/CM3] que es el peso por unidad
+			break;
+		}
 		
-		return densidad;
+		return resultado;
 	}
 
 }
