@@ -1,4 +1,4 @@
-package sistGestionLogistica.sistema;
+package sistGestionLogistica.gui;
 
 import java.awt.EventQueue;
 
@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AppPantalla {
+public class PanelCamion {
 
 	private JFrame frame;
 
@@ -20,7 +20,7 @@ public class AppPantalla {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppPantalla window = new AppPantalla();
+					PanelCamion window = new PanelCamion();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +32,7 @@ public class AppPantalla {
 	/**
 	 * Create the application.
 	 */
-	public AppPantalla() {
+	public PanelCamion() {
 		initialize();
 	}
 
@@ -48,12 +48,10 @@ public class AppPantalla {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		
+		//---------Botones-----------------
+		
 		JButton btnCrear = new JButton("Crear");
-		btnCrear.setEnabled(false);
-		btnCrear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCrear.setBounds(23, 37, 89, 23);
 		panel.add(btnCrear);
 		
@@ -61,14 +59,24 @@ public class AppPantalla {
 		btnConsultar.setBounds(221, 37, 89, 23);
 		panel.add(btnConsultar);
 		
-		JButton Bajan = new JButton("Baja");
-		Bajan.setEnabled(false);
-		Bajan.setBounds(122, 37, 89, 23);
-		panel.add(Bajan);
+		JButton btnBaja = new JButton("Baja");
+		btnBaja.setBounds(122, 37, 89, 23);
+		panel.add(btnBaja);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setEnabled(false);
 		btnEliminar.setBounds(320, 37, 89, 23);
 		panel.add(btnEliminar);
+		
+		//----------------------------
+		
+
+		
+		btnCrear.addActionListener(	new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+
 	}
 }
