@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class PanelPlanta extends JFrame {
+public class PanelPlanta extends JFrame {	//JInternalFrame¿
 
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -23,7 +23,7 @@ public class PanelPlanta extends JFrame {
 
 
 	public PanelPlanta() {
-		super("Aplicacion de Gestion Loistica - Plantas");
+		super("Sistema de Gestion Loistica - Plantas");
 		initialize();
 	}
 
@@ -70,7 +70,7 @@ public class PanelPlanta extends JFrame {
 		 
 		 public void actionPerformed(ActionEvent e) {
 			 
-			 System.out.println("Camion -> Alta");
+			 System.out.println("Planta -> Alta");
 
 		 }
 	}
@@ -79,7 +79,7 @@ public class PanelPlanta extends JFrame {
 		 
 		 public void actionPerformed(ActionEvent e) {
 			 
-			 System.out.println("Camion -> Baja");
+			 System.out.println("Planta -> Baja");
 
 		 }
 	}
@@ -88,7 +88,7 @@ public class PanelPlanta extends JFrame {
 		 
 		 public void actionPerformed(ActionEvent e) {
 			 
-			 System.out.println("Camion -> Modificar");
+			 System.out.println("Planta -> Modificar");
 
 		 }
 	}
@@ -97,7 +97,7 @@ public class PanelPlanta extends JFrame {
 		 
 		 public void actionPerformed(ActionEvent e) {
 			 
-			 System.out.println("Camion -> Buscar");
+			 System.out.println("Planta -> Buscar");
 
 		 }
 	}

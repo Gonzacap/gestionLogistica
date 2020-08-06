@@ -34,16 +34,22 @@ public class App extends JFrame {
 
 	private void initialize() {
 		
+		// 1. Crea el marco		
 		frmSistemaDeGestion = new JFrame();
 		frmSistemaDeGestion.setTitle("Sistema de Gestion Logistica");
-		frmSistemaDeGestion.setBounds(100, 100, 450, 300);
+		
+		// 2. Opcional: ¿Qué sucede cuando se cierra el marco?
 		frmSistemaDeGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSistemaDeGestion.getContentPane().setLayout(null);
-		
+		// 3. Crear componentes y ponerlos en el marco.
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 434, 261);
 		frmSistemaDeGestion.getContentPane().add(panel);
 		panel.setLayout(null);
+		// 4. Tamaño del marco.
+		frmSistemaDeGestion.setBounds(100, 100, 450, 300);//frmSistemaDeGestion.pack();
+		// 5. Enséñalo.
+		//frmSistemaDeGestion.setVisible (true); //esto no afecta en nada
 		
 		//barra menu
 		JMenuBar menuBar = new JMenuBar();

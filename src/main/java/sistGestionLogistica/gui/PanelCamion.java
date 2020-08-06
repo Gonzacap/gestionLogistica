@@ -7,7 +7,6 @@ import javax.swing.*;
 
 public class PanelCamion extends JFrame {
 
-	//private JFrame frame;
 
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -24,7 +23,7 @@ public class PanelCamion extends JFrame {
 
 
 	public PanelCamion() {
-		super("Aplicacion de Gestion Loistica - Camiones");
+		super("Sistema de Gestion Loistica - Camiones");
 		initialize();
 	}
 
