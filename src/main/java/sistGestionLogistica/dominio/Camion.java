@@ -97,7 +97,8 @@ public class Camion {
 	}
 	@Override
 	public String toString() {
-		return "id=" + id + "; patente=" + patente + "; marca=" + marca + "; modelo=" + modelo + "]";
+		return "[id=" + id + "; patente=" + patente + "; marca=" + marca + "; modelo=" + modelo +"; KM="+ km +"]";
+		
 	}
 	
 	

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.dominio.Camion;
@@ -33,7 +34,7 @@ public class CamionController {
 		
 		//validamos los datos
 		if(costok>=0 && costoh>=0 && kilometros>=0 && !this.existePatente(patente)) {
-			Camion cam= new Camion(-1,patente, marca, modelo, costok , costoh,kilometros, date);
+			Camion cam= new Camion(-1,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costok , costoh,kilometros, date);
 			ServiceCamion ser = new ServiceCamion();
 			ser.crearCamion(cam);
 		}
@@ -58,7 +59,7 @@ public class CamionController {
 		
 		//validamos los datos
 		if(costok>=0 && costoh>=0 && kilometros>=0 && this.existeId(id)) {
-			Camion cam= new Camion(id,patente, marca, modelo, costok , costoh,kilometros, date);
+			Camion cam= new Camion(id,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costok , costoh,kilometros, date);
 			ServiceCamion ser = new ServiceCamion();
 			ser.editarCamion(cam);
 		}
@@ -77,10 +78,34 @@ public class CamionController {
 		else throw new DatosInvalidosException();
 	}
 	
+
+	public List<Camion> buscarCamion(String idCamion, String patente, String marca, String modelo, String costoKM, String costoHora, String km,
+			String fechaCompra) throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
+		LocalDate date= LocalDate.MIN;
+		Double costok=-1.0, costoh=-1.0;
+		Integer kilometros=-1, id=-1;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		//Formateamos los parametros de busqueda
+		if(idCamion != "") id=Integer.valueOf(idCamion);
+		if(costoKM != "") costok= Double.valueOf(costoKM);
+		if(costoHora != "") costoh=Double.valueOf(costoHora);
+		if(km!= "") kilometros= Integer.valueOf(km);
+		if(fechaCompra != "") date = LocalDate.parse(fechaCompra, formatter);
+		
+		Camion cam= new Camion(id,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costok , costoh,kilometros, date);
+		ServiceCamion ser = new ServiceCamion();
+		
+		
+		return ser.buscarCamion(cam);
+		
+		
+	}
+	
 	
 	public Boolean existePatente(String patente) throws SQLException {
 		ServiceCamion sc=new ServiceCamion();
-		if(sc.buscarPorPatente(patente).getId()<0) return false;
+		if(sc.buscarPorPatente(patente.toUpperCase()).getId()<0) return false;
 		return true;
 	}
 	

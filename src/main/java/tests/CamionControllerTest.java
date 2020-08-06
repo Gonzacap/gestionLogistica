@@ -3,11 +3,15 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.CamionController;
+import sistGestionLogistica.dominio.Camion;
 
 public class CamionControllerTest {
 
@@ -44,19 +48,36 @@ public class CamionControllerTest {
 //		
 //	}
 	
-	@Test 
-	public void testBorrarCamion() {
+//	@Test 
+//	public void testBorrarCamion() {
+//		CamionController cc= new CamionController();
+//		
+//		try {
+//			cc.borrarCamion("9");
+//		} catch (DatosInvalidosException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
+	
+	@Test
+	public void testBuscarCamion() {
 		CamionController cc= new CamionController();
 		
+		
 		try {
-			cc.borrarCamion("9");
-		} catch (DatosInvalidosException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+			List<Camion> lis = cc.buscarCamion("5", "", "", "", "", "", "", "");
+			System.out.println(lis);
+		} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		
 	}
 
