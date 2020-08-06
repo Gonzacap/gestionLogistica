@@ -5,9 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class PanelCamion extends JFrame {
-
-	//private JFrame frame;
+public class PanelPlanta extends JFrame {
 
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -15,6 +13,7 @@ public class PanelCamion extends JFrame {
 				try {
 					PanelCamion window = new PanelCamion();
 					window.frame.setVisible(true);
+					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //esta linea no se si anda ahre
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -23,13 +22,13 @@ public class PanelCamion extends JFrame {
 	}*/
 
 
-	public PanelCamion() {
-		super("Aplicacion de Gestion Loistica - Camiones");
+	public PanelPlanta() {
+		super("Aplicacion de Gestion Loistica - Plantas");
 		initialize();
 	}
 
 	private void initialize() {
-		//frame = new JFrame();
+
 		
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
