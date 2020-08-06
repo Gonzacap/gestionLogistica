@@ -36,6 +36,7 @@ public class ServiceCamion {
 		
 	}
 	public void borrar(int id) throws SQLException {
+		
 		camionDao.borrar(id);
 		
 	}

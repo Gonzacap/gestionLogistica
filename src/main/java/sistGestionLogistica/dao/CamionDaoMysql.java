@@ -139,11 +139,15 @@ public class CamionDaoMysql implements CamionDao{
 
 
 	public void borrar(Integer id) throws SQLException {
-		String borrar = "DELETE * FROM camion WHERE ID="+id;
+		//String borrar = "DELETE * FROM camion WHERE ID="+id;
+		String borrar = "DELETE FROM camion WHERE ID=?";
 		 try {
 	            conn=DB.getConexion();
+	            System.out.println("BORRADO?");
 	            pstmt=conn.prepareStatement(borrar);
+	            pstmt.setInt(1,id);
 	            pstmt.executeUpdate();
+	            System.out.println("BORRADO");
 	        } catch (Exception e) {
 	        }
 		 finally {

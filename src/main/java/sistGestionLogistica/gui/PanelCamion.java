@@ -70,7 +70,8 @@ public class PanelCamion extends JFrame {
 	class AccionAlta implements ActionListener {
 		 
 		 public void actionPerformed(ActionEvent e) {
-			 
+			 AgregarCamion aC = new AgregarCamion();
+			 aC.frame.setVisible(true);
 			 System.out.println("Camion -> Alta");
 
 		 }
@@ -79,7 +80,8 @@ public class PanelCamion extends JFrame {
 	class AccionBaja implements ActionListener {
 		 
 		 public void actionPerformed(ActionEvent e) {
-			 
+			 BajaCamion bC = new BajaCamion();
+			 bC.setVisible(true);
 			 System.out.println("Camion -> Baja");
 
 		 }
@@ -88,7 +90,8 @@ public class PanelCamion extends JFrame {
 	class AccionModificar implements ActionListener {
 		 
 		 public void actionPerformed(ActionEvent e) {
-			 
+			 EditarCamion eC = new EditarCamion();
+			 eC.setVisible(true);
 			 System.out.println("Camion -> Modificar");
 
 		 }

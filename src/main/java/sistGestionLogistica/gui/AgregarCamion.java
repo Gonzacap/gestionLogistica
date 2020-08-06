@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 
 public class AgregarCamion {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField textField_CostoKm;
 	private JTextField textField_Patente;
 	private JTextField textField_CostoHs;
@@ -33,18 +33,18 @@ public class AgregarCamion {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregarCamion window = new AgregarCamion();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AgregarCamion window = new AgregarCamion();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -139,18 +139,29 @@ public class AgregarCamion {
 					try {
 						cc.agregarCamion(textField_Patente.getText(), textField_marca.getText(), textField_Modelo.getText(), textField_CostoKm.getText(), textField_CostoHs.getText(), textField_KmRec.getText(), textField_Fecha.getText());
 					} catch (DateTimeParseException e1) {
+						//Mensaje de error
 						JOptionPane.showMessageDialog(frame,
 							    "Por favor verifique sus datos.",
 							    "Datos Invalidos",
 							    JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (SQLException e1) {
+						
+						//Mensaje de error
 						JOptionPane.showMessageDialog(frame,
 							    "Verifique su conexion a la Base de Datos.",
 							    "Error en la Base de Datos",
 							    JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
 					} catch (DatosInvalidosException e1) {
+						//Mensaje de error
+						JOptionPane.showMessageDialog(frame,
+							    "Por favor verifique sus datos.",
+							    "Datos Invalidos",
+							    JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					}catch (NumberFormatException e1) {
+						//Mensaje de error
 						JOptionPane.showMessageDialog(frame,
 							    "Por favor verifique sus datos.",
 							    "Datos Invalidos",
@@ -164,5 +175,9 @@ public class AgregarCamion {
 		});
 		btnAgregar.setBounds(252, 105, 89, 23);
 		panel.add(btnAgregar);
+		
+		JLabel lblNewLabel_1 = new JLabel("Formato de fecha: dd/MM/aaaa");
+		lblNewLabel_1.setBounds(93, 211, 217, 39);
+		panel.add(lblNewLabel_1);
 	}
 }

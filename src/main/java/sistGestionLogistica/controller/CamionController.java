@@ -19,7 +19,7 @@ public class CamionController {
 	}
 	
 	public void agregarCamion(String patente, String marca, String modelo, String costoKM, String costoHora, String km,
-			String fechaCompra) throws SQLException, DatosInvalidosException,DateTimeParseException{
+			String fechaCompra) throws SQLException, DatosInvalidosException,DateTimeParseException,NumberFormatException{
 		LocalDate date;
 		Double costok, costoh;
 		Integer kilometros;
@@ -43,7 +43,7 @@ public class CamionController {
 	}
 	
 	public void editarCamion(String idCamion, String patente, String marca, String modelo, String costoKM, String costoHora, String km,
-			String fechaCompra) throws DatosInvalidosException, SQLException {
+			String fechaCompra) throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
 		LocalDate date;
 		Double costok, costoh;
 		Integer kilometros, id;
@@ -65,6 +65,16 @@ public class CamionController {
 		else throw new DatosInvalidosException();
 		
 		
+	}
+	public void borrarCamion(String idCamion) throws DatosInvalidosException, SQLException,NumberFormatException {
+		Integer id;
+		id=Integer.valueOf(idCamion);
+		
+		if(this.existeId(id)) {
+			ServiceCamion ser = new ServiceCamion();
+			ser.borrar(id);
+		}
+		else throw new DatosInvalidosException();
 	}
 	
 	
