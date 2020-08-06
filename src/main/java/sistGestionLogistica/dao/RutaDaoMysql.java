@@ -17,7 +17,6 @@ public class RutaDaoMysql implements RutaDao{
 	private ResultSet rs = null;
 			
 			
-	@Override
 	public Ruta saveOrUpdate(Ruta r) {
 		
 		String updateRuta =" UPDATE ruta SET distancia = ? , duracionViaje =? , pesoMaximo =? , plantaOrigen=? , plantaDestino=?"
@@ -54,12 +53,10 @@ public class RutaDaoMysql implements RutaDao{
 		
 		return r;
 	}
-	@Override
 	public Ruta buscarPorId(Integer id) {
 		
 		return null;
 	}
-	@Override
 	public void borrar(Integer id) {
 		String borrar = "DELETE * FROM ruta WHERE idRuta="+id;
 		 try {
@@ -79,7 +76,6 @@ public class RutaDaoMysql implements RutaDao{
 		}
 		
 	}
-	@Override
 	public List<Ruta> buscarTodos() {
 		// TODO Auto-generated method stub
 		return null;

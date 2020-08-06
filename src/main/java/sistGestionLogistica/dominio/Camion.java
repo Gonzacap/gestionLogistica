@@ -21,8 +21,32 @@ public class Camion {
 	private Double costoKM;
 	private Double costoHora;
 	private Integer km;
-	private Date fechaCompra;  //NO ME DEJA TRAER EL DATE DE LA TABLA
+	private LocalDate fechaCompra;  //NO ME DEJA TRAER EL DATE DE LA TABLA
 	
+	
+	
+	public Camion(Integer id, String patente, String marca, String modelo, Double costoKM, Double costoHora, Integer km,
+			LocalDate fechaCompra) {
+		super();
+		this.id=id;
+		this.patente = patente;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.costoKM = costoKM;
+		this.costoHora = costoHora;
+		this.km = km;
+		this.fechaCompra = fechaCompra;
+	}
+	
+	
+	
+	public Camion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -59,10 +83,10 @@ public class Camion {
 	public void setKm(Integer km) {
 		this.km = km;
 	}
-	public Date getFechaCompra() {
+	public LocalDate getFechaCompra() {
 		return fechaCompra;
 	}
-	public void setFechaCompra(Date date) {
+	public void setFechaCompra(LocalDate date) {
 		this.fechaCompra = date;
 	}
 	public String getPatente() {

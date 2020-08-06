@@ -73,6 +73,7 @@ public class App extends JFrame {
 
 			 PanelCamion pC = new PanelCamion();
 			 pC.setVisible(true);
+			 
 		 }
 	}
 	
