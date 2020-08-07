@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.format.DateTimeParseException;
 import java.awt.event.ActionEvent;
 
 public class BajaCamion extends JFrame {
@@ -77,7 +78,7 @@ CamionController cc = new CamionController();
 					JOptionPane.showMessageDialog(contentPane,
 						    "El camion fue dado de baja con exito.", "Baja Exitosa",JOptionPane.INFORMATION_MESSAGE);
 					
-				} catch (DatosInvalidosException e1) {
+				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
 					JOptionPane.showMessageDialog(contentPane,
 						    "El id ingresado no es valido.",
@@ -90,13 +91,6 @@ CamionController cc = new CamionController();
 					JOptionPane.showMessageDialog(contentPane,
 						    "Verifique su conexion a la Base de Datos.",
 						    "Error en la Base de Datos",
-						    JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
-				}catch (NumberFormatException e1) {
-					//Mensaje de error
-					JOptionPane.showMessageDialog(contentPane,
-						    "El id ingresado no es valido.",
-						    "Error al Ingresar datos",
 						    JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
 				}

@@ -143,7 +143,9 @@ public class EditarCamion extends JFrame {
 				CamionController cc= new CamionController();
 				try {
 					cc.editarCamion(textField_id.getText(),textField_patente.getText(), textField_marca.getText(), textField_modelo.getText(), textField_costokm.getText(), textField_costohora.getText(), textField_KM.getText(), textField_fecha.getText());
-				} catch (DatosInvalidosException e1) {
+					JOptionPane.showMessageDialog(contentPane,
+						    "El camion fue editado con exito.", "Edicion Exitosa",JOptionPane.INFORMATION_MESSAGE);
+				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
 					JOptionPane.showMessageDialog(contentPane,
 						    "Por favor verifique sus datos.",
@@ -157,21 +159,7 @@ public class EditarCamion extends JFrame {
 						    "Error en la Base de Datos",
 						    JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
-				}catch (DateTimeParseException e1) {
-					//Mensaje de error
-					JOptionPane.showMessageDialog(contentPane,
-						    "Por favor verifique sus datos.",
-						    "Datos Invalidos",
-						    JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
-				}catch (NumberFormatException e1) {
-				//Mensaje de error
-				JOptionPane.showMessageDialog(contentPane,
-					    "Por favor verifique sus datos.",
-					    "Datos Invalidos",
-					    JOptionPane.ERROR_MESSAGE);
-				e1.printStackTrace();
-			}
+				}
 			}
 		});
 		btnEditar.setBounds(290, 115, 89, 23);

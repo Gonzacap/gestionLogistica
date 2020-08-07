@@ -70,7 +70,7 @@ public class CamionControllerTest {
 		
 		
 		try {
-			List<Camion> lis = cc.buscarCamion("5", "", "", "", "", "", "", "");
+			String[][] lis = cc.buscarCamion("5", "", "", "", "", "", "", "");
 			System.out.println(lis);
 		} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e) {
 			// TODO Auto-generated catch block

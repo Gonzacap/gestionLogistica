@@ -76,13 +76,22 @@ public class CamionDaoMysql implements CamionDao{
 			pstmt.setString(1, patente);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				c.setId(rs.getInt(1));
-				c.setPatente(rs.getString(2));
-				c.setMarca(rs.getString(3));
-				c.setModelo(rs.getString(4));
-				c.setCostoKM(rs.getDouble(5));
-				c.setCostoHora(rs.getDouble(6));
-				c.setFechaCompra(rs.getDate(7).toLocalDate());
+//				c.setId(rs.getInt(1));
+//				c.setPatente(rs.getString(2));
+//				c.setMarca(rs.getString(3));
+//				c.setModelo(rs.getString(4));
+//				c.setCostoKM(rs.getDouble(5));
+//				c.setCostoHora(rs.getDouble(6));
+//				c.setFechaCompra(rs.getDate(7).toLocalDate());
+				
+				c.setId(rs.getInt("ID"));
+				c.setMarca(rs.getString("MARCA"));
+				c.setModelo(rs.getString("MODELO"));
+				c.setPatente(rs.getString("PATENTE"));
+				c.setKm(rs.getInt("KM"));
+				c.setCostoKM(rs.getDouble("COSTO_KM"));
+				c.setCostoHora(rs.getDouble("COSTO_HORA"));
+				c.setFechaCompra(rs.getDate("FECHA_COMPRA").toLocalDate());
 			}
 			
 		} catch (Exception e) {
@@ -112,13 +121,22 @@ public class CamionDaoMysql implements CamionDao{
 			pstmt.setInt(1,id);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				c.setId(rs.getInt(1));
-				c.setPatente(rs.getString(2));
-				c.setMarca(rs.getString(3));
-				c.setModelo(rs.getString(4));
-				c.setCostoKM(rs.getDouble(5));
-				c.setCostoHora(rs.getDouble(6));
-				c.setFechaCompra(rs.getDate(7).toLocalDate());
+//				c.setId(rs.getInt(1));
+//				c.setPatente(rs.getString(2));
+//				c.setMarca(rs.getString(3));
+//				c.setModelo(rs.getString(4));
+//				c.setCostoKM(rs.getDouble(5));
+//				c.setCostoHora(rs.getDouble(6));
+//				c.setFechaCompra(rs.getDate(7).toLocalDate());
+				
+				c.setId(rs.getInt("ID"));
+				c.setMarca(rs.getString("MARCA"));
+				c.setModelo(rs.getString("MODELO"));
+				c.setPatente(rs.getString("PATENTE"));
+				c.setKm(rs.getInt("KM"));
+				c.setCostoKM(rs.getDouble("COSTO_KM"));
+				c.setCostoHora(rs.getDouble("COSTO_HORA"));
+				c.setFechaCompra(rs.getDate("FECHA_COMPRA").toLocalDate());
 			}
 			
 		} catch (Exception e) {
@@ -175,11 +193,15 @@ public class CamionDaoMysql implements CamionDao{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Camion c = new Camion();
+
 				c.setId(rs.getInt("ID"));
 				c.setMarca(rs.getString("MARCA"));
 				c.setModelo(rs.getString("MODELO"));
 				c.setPatente(rs.getString("PATENTE"));
 				c.setKm(rs.getInt("KM"));
+				c.setCostoKM(rs.getDouble("COSTO_KM"));
+				c.setCostoHora(rs.getDouble("COSTO_HORA"));
+				c.setFechaCompra(rs.getDate("FECHA_COMPRA").toLocalDate());
 				lista.add(c);
 			}			
 		} catch (SQLException e) {

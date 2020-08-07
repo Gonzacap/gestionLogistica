@@ -138,7 +138,9 @@ public class AgregarCamion {
 		
 					try {
 						cc.agregarCamion(textField_Patente.getText(), textField_marca.getText(), textField_Modelo.getText(), textField_CostoKm.getText(), textField_CostoHs.getText(), textField_KmRec.getText(), textField_Fecha.getText());
-					} catch (DateTimeParseException e1) {
+						JOptionPane.showMessageDialog(frame,
+							    "El camion fue dado de alta con exito.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
+					} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 						//Mensaje de error
 						JOptionPane.showMessageDialog(frame,
 							    "Por favor verifique sus datos.",
@@ -153,21 +155,7 @@ public class AgregarCamion {
 							    "Error en la Base de Datos",
 							    JOptionPane.ERROR_MESSAGE);
 						e1.printStackTrace();
-					} catch (DatosInvalidosException e1) {
-						//Mensaje de error
-						JOptionPane.showMessageDialog(frame,
-							    "Por favor verifique sus datos.",
-							    "Datos Invalidos",
-							    JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
-					}catch (NumberFormatException e1) {
-						//Mensaje de error
-						JOptionPane.showMessageDialog(frame,
-							    "Por favor verifique sus datos.",
-							    "Datos Invalidos",
-							    JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
-					}
+					} 
 		
 				
 				
