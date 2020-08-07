@@ -7,93 +7,137 @@ import javax.swing.*;
 
 import sistGestionLogistica.gui.PanelCamion;
 import sistGestionLogistica.gui.PanelPlanta;
-
-public class App extends JFrame {
-
-	private JFrame frmSistemaDeGestion;
+import sistGestionLogistica.gui.PanelInsumo;
 
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					App window = new App();
-					window.frmSistemaDeGestion.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-
+public class App extends JFrame{
 	public App() {
-		initialize();
 	}
-
-
-	private void initialize() {
+	
+	public static void main(String[] args) {
 		
-		// 1. Crea el marco		
-		frmSistemaDeGestion = new JFrame();
-		frmSistemaDeGestion.setTitle("Sistema de Gestion Logistica");
+		App aplicacion = new App();
 		
-		// 2. Opcional: ¿Qué sucede cuando se cierra el marco?
-		frmSistemaDeGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmSistemaDeGestion.getContentPane().setLayout(null);
-		// 3. Crear componentes y ponerlos en el marco.
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 434, 261);
-		frmSistemaDeGestion.getContentPane().add(panel);
+		Toolkit miPantalla = Toolkit.getDefaultToolkit();
+		Dimension tamPant = miPantalla.getScreenSize();
+		int alturaP = tamPant.height;
+		int anchoP = tamPant.width;
+		aplicacion.setSize(anchoP/2,alturaP/2);
+		aplicacion.setLocation(anchoP/4,alturaP/4);
+		
+		aplicacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		aplicacion.inicializar();
+		aplicacion.setTitle("Sistema de Gestion Logistica");
+		aplicacion.setVisible(true);
+	
+
+	}
+	
+	public GridBagConstraints gridbag;
+	private JMenu menuPlantas;
+	private JMenu menuCamiones;
+	private JMenu menuInsumos;
+	private JMenuBar barraMenu;
+	private JMenuItem gestorPlantas;
+	private JMenuItem gestorCamiones;
+	private JMenuItem gestorInsumos;
+	
+	private PanelPlanta pP;
+	private PanelCamion pC;
+	private PanelInsumo pI;
+	 
+	
+	//----------------METODOS----------------
+	
+	
+	private void inicializar() {
+		
+		//this.panel=new JPanel(new GridBagLayout());
+		this.menuPlantas = new JMenu("Plantas");
+		this.menuCamiones = new JMenu("Camiones");
+		this.menuInsumos = new JMenu("Insumos");
+		this.barraMenu = new JMenuBar();
+		this.gridbag = new GridBagConstraints();
+		this.gestorPlantas = new JMenuItem("Gestionar plantas");
+		this.gestorCamiones = new JMenuItem("Gestionar camiones");
+		this.gestorInsumos=new JMenuItem("Gestionar insumos");
+		
+		this.pC= new PanelCamion();
+		this.pP = new PanelPlanta();
+		this.pI = new PanelInsumo();
+		
+		pC.inicializar(this);
+		pP.inicializar(this);
+		pI.inicializar(this);
+		
+		menuPlantas.add(gestorPlantas);
+		menuCamiones.add(gestorCamiones);
+		menuInsumos.add(gestorInsumos);
+		barraMenu.add(menuPlantas);
+		barraMenu.add(menuCamiones);
+		barraMenu.add(menuInsumos);
+		this.setJMenuBar(barraMenu);
+		
+		
+		//Pantalla de inicio?---------
+		
+		/*JPanel panel = new JPanel();
 		panel.setLayout(null);
-		// 4. Tamaño del marco.
-		frmSistemaDeGestion.setBounds(100, 100, 450, 300);//frmSistemaDeGestion.pack();
-		// 5. Enséñalo.
-		//frmSistemaDeGestion.setVisible (true); //esto no afecta en nada
+		panel.setBackground(Color.red);
+		panel.add(new Label("Sistema de Gestion Logistica"));
 		
-		//barra menu
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 433, 21);
-		panel.add(menuBar);
-		//menu acciones
-		JMenu menuAcciones = new JMenu("Acciones");
-		menuBar.add(menuAcciones);
+		this.setContentPane(panel);
+		this.revalidate();
+		this.repaint();*/
 		
-		//items menu
-		JMenuItem menuCamiones = new JMenuItem("Gestion de Camiones");
-		menuAcciones.add(menuCamiones);
-		menuCamiones.addActionListener(new abrirPanelCamion());
-		JMenuItem menuPlantas = new JMenuItem("Gestion de Plantas");
-		menuAcciones.add(menuPlantas);
-		menuPlantas.addActionListener(new abrirPanelPlanta());
+		JOptionPane.showMessageDialog(null, "¡Bienvenido!");
+		
+		//--------Acciones Botones--------------	
+		
+		gestorCamiones.addActionListener(e-> {
+			
+			System.out.println("App -> Panel Camiones");
+			pC.inicializar(this);
+			this.revalidate();
+			this.repaint();
+		});
+		
+		gestorPlantas.addActionListener(e->{
+			
+			System.out.println("App -> Panel Plantas");
+			pP.inicializar(this);			
+			this.revalidate();
+			this.repaint();
+		});
+		
+		gestorInsumos.addActionListener(e->{
+			
+			System.out.println("App -> Panel Insumos");
+			pI.inicializar(this);			
+			this.revalidate();
+			this.repaint();
+		});
+		
 		
 	}
 	
+	//-------------otros metodos-------------------
 	
-
-	class abrirPanelCamion implements ActionListener {
-		 
-		 public void actionPerformed(ActionEvent e) {
-			 
-			 System.out.println("cambio de pantalla a PanelCamion");
-
-			 PanelCamion pC = new PanelCamion();
-			 pC.setVisible(true);
-			 
-		 }
+	public void camionesActivated() {
+		this.gestorCamiones.setEnabled(false);
+		this.gestorPlantas.setEnabled(true);
+		this.gestorInsumos.setEnabled(true);
+	}
+	public void plantasActivated() {
+		this.gestorCamiones.setEnabled(true);
+		this.gestorPlantas.setEnabled(false);
+		this.gestorInsumos.setEnabled(true);
+	}
+	public void insumosActivated() {
+		this.gestorCamiones.setEnabled(true);
+		this.gestorPlantas.setEnabled(true);
+		this.gestorInsumos.setEnabled(false);
 	}
 	
-	class abrirPanelPlanta implements ActionListener {
-		 
-		 public void actionPerformed(ActionEvent e) {
-			 
-			 System.out.println("cambio de pantalla a PanelPlanta");
-
-			 PanelPlanta pP = new PanelPlanta();
-			 pP.setVisible(true);
-		 }
-	}
-	
-	
-
 }
+	

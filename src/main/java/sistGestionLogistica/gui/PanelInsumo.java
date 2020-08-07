@@ -5,18 +5,18 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import sistGestionLogistica.gui.PanelCamion.AccionBuscar;
 import sistGestionLogistica.sistema.App;
 
-public class PanelPlanta extends JPanel {	//JInternalFrame¿
+
+public class PanelInsumo extends JPanel {
+
 
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanelCamion window = new PanelCamion();
-					window.frame.setVisible(true);
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //esta linea no se si anda ahre
+					PanelInsumo window = new PanelInsumo();
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -25,18 +25,18 @@ public class PanelPlanta extends JPanel {	//JInternalFrame¿
 	}*/
 
 
-	public PanelPlanta() {
+	public PanelInsumo() {
 
 	}
-	
+
 	public void inicializar(App aplicacion) {
-		aplicacion.setTitle("Sistema de Gestion Logistica - Plantas");		
-		
-		PanelPlanta panel = new PanelPlanta();
+		aplicacion.setTitle("Sistema de Gestion Logistica - Insumos");
+
+		PanelInsumo panel= new PanelInsumo();
 		panel.setLayout(null);
-		panel.setBackground(Color.white);
+		panel.setBackground(Color.blue);
 		
-		aplicacion.plantasActivated();
+		aplicacion.insumosActivated();
 		aplicacion.setContentPane(panel);
 		aplicacion.revalidate();
 		aplicacion.repaint();
@@ -60,29 +60,30 @@ public class PanelPlanta extends JPanel {	//JInternalFrame¿
 		//----------------------------
 
 		
-		//--------Acciones Botones--------------	
-		
-		btnAlta.addActionListener(e-> {	//AccionAlta
-			
-			System.out.println("Planta -> Alta");
-			
-		});
-		btnBaja.addActionListener(e-> { //AccionBaja
-			
-			System.out.println("Planta -> Baja");
+				//--------Acciones Botones--------------	
+				
+				btnAlta.addActionListener(e-> {	//AccionAlta
+					
+					System.out.println("Insumo -> Alta");
+					
+				});
+				btnBaja.addActionListener(e-> { //AccionBaja
+					
+					System.out.println("Insumo -> Baja");
 
-		});
-		btnModificar.addActionListener(e-> {
-		
-			System.out.println("Planta -> Modificar");
+				});
+				btnModificar.addActionListener(e-> {
+				
+					System.out.println("Insumo -> Modificar");
 
-		});
-		btnBuscar.addActionListener(e-> {
-			
-			System.out.println("Planta -> Buscar");
+				});
+				btnBuscar.addActionListener(e-> {
+					
+					System.out.println("Insumo -> Buscar");
 
-		});
+				});
 
-	}
+			}
+	
 	
 }

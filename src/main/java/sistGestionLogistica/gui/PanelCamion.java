@@ -2,6 +2,7 @@ package sistGestionLogistica.gui;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import java.sql.SQLException;
 import java.time.format.DateTimeParseException;
 
@@ -10,10 +11,10 @@ import javax.swing.table.DefaultTableModel;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.CamionController;
+import sistGestionLogistica.sistema.App;
 
-import javax.swing.border.TitledBorder;
 
-public class PanelCamion extends JFrame {
+public class PanelCamion extends JPanel {
 	private JTable table_Camiones;
 	private JTextField textField_ID;
 	private JTextField textField_Patente;
@@ -40,42 +41,36 @@ public class PanelCamion extends JFrame {
 
 
 	public PanelCamion() {
-		super("Sistema de Gestion Loistica - Camiones");
-		initialize();
+		
 	}
 
-	private void initialize() {
-		//frame = new JFrame();
+	public void inicializar(App aplicacion) { //App seria el JFrame
+		aplicacion.setTitle("Sistema de Gestion Logistica - Camiones");		
 		
-		setBounds(100, 100, 720, 480);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
+		PanelCamion panel = new PanelCamion();
 		panel.setLayout(null);
+		panel.setBackground(Color.yellow);
+		
+		aplicacion.camionesActivated();
+		aplicacion.setContentPane(panel);
+		aplicacion.revalidate();
+		aplicacion.repaint();
 		
 		
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
 		btnAlta.setBounds(23, 37, 89, 23);
-		btnAlta.addActionListener(new AccionAlta());
-		panel.add(btnAlta);
-		
 		JButton btnBaja = new JButton("Baja");
 		btnBaja.setBounds(307, 37, 89, 23);
-		btnBaja.addActionListener(new AccionBaja());
-		panel.add(btnBaja);
-		
 		JButton btnModificar = new JButton("Modificar Por ID");
 		btnModificar.setBounds(136, 37, 130, 23);
-		btnModificar.addActionListener(new AccionModificar());
-		panel.add(btnModificar);
-		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(419, 37, 89, 23);
-		btnBuscar.addActionListener(new AccionBuscar());
+		
+		panel.add(btnAlta);
+		panel.add(btnBaja);
+		panel.add(btnModificar);
 		panel.add(btnBuscar);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -176,38 +171,35 @@ public class PanelCamion extends JFrame {
 		
 		//----------------------------
 		
+		
+		//--------Acciones Botones--------------	
+		
+		btnAlta.addActionListener(e-> {	//AccionAlta
+			
+			System.out.println("Camion -> Alta");
+			AgregarCamion aC = new AgregarCamion();
+			aC.frame.setVisible(true);
+			
+		});
+		btnBaja.addActionListener(e-> { //AccionBaja
+			
+			System.out.println("Camion -> Baja");
+			BajaCamion bC = new BajaCamion();
+			bC.setVisible(true);
+
+		});
+		btnModificar.addActionListener(e-> {
+		
+			System.out.println("Camion -> Modificar");
+			EditarCamion eC = new EditarCamion();
+			eC.setVisible(true);
+
+		});
+		btnBuscar.addActionListener(new AccionBuscar());
+		
 
 	}
 	
-	class AccionAlta implements ActionListener {
-		 
-		 public void actionPerformed(ActionEvent e) {
-			 AgregarCamion aC = new AgregarCamion();
-			 aC.frame.setVisible(true);
-			 System.out.println("Camion -> Alta");
-
-		 }
-	}
-	
-	class AccionBaja implements ActionListener {
-		 
-		 public void actionPerformed(ActionEvent e) {
-			 BajaCamion bC = new BajaCamion();
-			 bC.setVisible(true);
-			 System.out.println("Camion -> Baja");
-
-		 }
-	}
-	
-	class AccionModificar implements ActionListener {
-		 
-		 public void actionPerformed(ActionEvent e) {
-			 EditarCamion eC = new EditarCamion();
-			 eC.setVisible(true);
-			 System.out.println("Camion -> Modificar");
-
-		 }
-	}
 	
 	class AccionBuscar implements ActionListener {
 		 
