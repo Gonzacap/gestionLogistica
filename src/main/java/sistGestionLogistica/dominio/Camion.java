@@ -2,6 +2,7 @@ package sistGestionLogistica.dominio;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import com.mysql.cj.jdbc.Driver;
 
 public class Camion {
 	

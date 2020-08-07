@@ -45,8 +45,11 @@ public class BajaCamion extends JFrame {
 	 * Create the frame.
 	 */
 	public BajaCamion() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		setTitle("Borrar Camiones");
 		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -84,7 +87,7 @@ CamionController cc = new CamionController();
 						    "El id ingresado no es valido.",
 						    "Error al Ingresar datos",
 						    JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
+					//e1.printStackTrace();
 				} catch (SQLException e1) {
 					
 					//Mensaje de error

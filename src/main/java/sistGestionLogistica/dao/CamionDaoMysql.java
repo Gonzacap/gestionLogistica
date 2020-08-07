@@ -10,6 +10,8 @@ import java.util.List;
 
 import sistGestionLogistica.connection.*;
 import sistGestionLogistica.dominio.Camion;
+import com.mysql.cj.jdbc.Driver;
+
 
 public class CamionDaoMysql implements CamionDao{
 	

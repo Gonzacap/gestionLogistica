@@ -1,5 +1,9 @@
 package excepciones;
 
+import java.awt.Component;
+
+import javax.swing.JOptionPane;
+
 public class DatosInvalidosException extends Exception {
 
 	public DatosInvalidosException() {
@@ -8,6 +12,8 @@ public class DatosInvalidosException extends Exception {
 
 	public DatosInvalidosException(String message) {
 		super(message);
+		
+		JOptionPane.showMessageDialog(null,message,"Por favor verifique sus datos.",JOptionPane.ERROR_MESSAGE);
 		// TODO Auto-generated constructor stub
 	}
 

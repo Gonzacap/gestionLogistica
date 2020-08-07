@@ -9,9 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.servicios.ServiceCamion;
+
+import com.mysql.cj.jdbc.Driver;
 
 public class CamionController {
 
@@ -19,51 +23,82 @@ public class CamionController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void agregarCamion(String patente, String marca, String modelo, String costoKM, String costoHora, String km,
-			String fechaCompra) throws SQLException, DatosInvalidosException,DateTimeParseException,NumberFormatException{
+	public void agregarCamion(String patente, String marca, String modelo, String costo_kmM, String costo_hora, String km, String fechaCompra) 
+					throws SQLException, DatosInvalidosException,DateTimeParseException,NumberFormatException{
+		
 		LocalDate date;
-		Double costok, costoh;
+		Double costo_km, costo_h;
 		Integer kilometros;
 		
 		// parseamos todos los datos que no sean String
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		date = LocalDate.parse(fechaCompra, formatter);
-		costok= Double.valueOf(costoKM);
-		costoh=Double.valueOf(costoHora);
-		kilometros= Integer.valueOf(km);
+		
+		//try{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			date = LocalDate.parse((CharSequence)fechaCompra, formatter);
+		//}catch (DatosInvalidosException e) {  
+		//	e.setMessage("fecha invalida");
+		//	JOptionPane.showMessageDialog(null,"Por favor ingrese una fecha valida.","Por favor verifique sus datos.",JOptionPane.ERROR_MESSAGE);
+		//}
+		
+		costo_km = Double.valueOf(costo_kmM);
+		costo_h = Double.valueOf(costo_hora);
+		kilometros = Integer.valueOf(km);
+		
 		
 		//validamos los datos
-		if(costok>=0 && costoh>=0 && kilometros>=0 && !patente.equals("") && !marca.equals("") && !modelo.equals("") && !this.existePatente(patente)) {
-			Camion cam= new Camion(-1,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costok , costoh,kilometros, date);
-			ServiceCamion ser = new ServiceCamion();
-			ser.crearCamion(cam);
+		if(!this.existePatente(patente)) {
+			
+			if(!patente.equals("") && !marca.equals("") && !modelo.equals("")) {
+				
+				if(costo_km>=0 && costo_h>=0 && kilometros>=0) {
+					Camion cam= new Camion(-1,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costo_km , costo_h,kilometros, date);
+					System.out.println("creando camion");
+					ServiceCamion ser = new ServiceCamion();
+					ser.crearCamion(cam);
+					System.out.println("camion agregado");
+				}
+				else throw new DatosInvalidosException("Los valores no pueden ser menores que 0");
+			}
+			else throw new DatosInvalidosException("Por favor rellene los campos");
 		}
-		else throw new DatosInvalidosException();
+		else throw new DatosInvalidosException("Patente existente, camion ya registrado");
 			
 		
 	}
 	
-	public void editarCamion(String idCamion, String patente, String marca, String modelo, String costoKM, String costoHora, String km,
-			String fechaCompra) throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
+	public void editarCamion(String idCamion, String patente, String marca, String modelo, String costo_kmM, String costo_hora, String km, String fechaCompra) 
+					throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
+		
 		LocalDate date;
-		Double costok, costoh;
+		Double costo_km, costo_h;
 		Integer kilometros, id;
 		
 		// parseamos todos los datos que no sean String
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		date = LocalDate.parse(fechaCompra, formatter);
-		costok= Double.valueOf(costoKM);
-		costoh=Double.valueOf(costoHora);
+		costo_km= Double.valueOf(costo_kmM);
+		costo_h=Double.valueOf(costo_hora);
 		kilometros= Integer.valueOf(km);
 		id=Integer.valueOf(idCamion);
 		
 		//validamos los datos
-		if(costok>=0 && costoh>=0 && kilometros>=0 && !patente.equals("") && !marca.equals("") && !modelo.equals("") &&  this.existeId(id)) {
-			Camion cam= new Camion(id,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costok , costoh,kilometros, date);
-			ServiceCamion ser = new ServiceCamion();
-			ser.editarCamion(cam);
-		}
-		else throw new DatosInvalidosException();
+				if(!this.existePatente(patente)) {
+					
+					if(!patente.equals("") && !marca.equals("") && !modelo.equals("")) {
+						
+						if(costo_km>=0 && costo_h>=0 && kilometros>=0) {
+							Camion cam= new Camion(-1,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costo_km , costo_h,kilometros, date);
+							System.out.println("creando camion");
+							ServiceCamion ser = new ServiceCamion();
+							ser.crearCamion(cam);
+							System.out.println("camion agregado");
+						}
+						else throw new DatosInvalidosException("Los valores no pueden ser menores que 0");
+					}
+					else throw new DatosInvalidosException("Por favor rellene los campos");
+				}
+				else throw new DatosInvalidosException("Patente existente, camion ya registrado");;
 		
 		
 	}
@@ -79,17 +114,19 @@ public class CamionController {
 	}
 	
 
-	public String[][] buscarCamion(String idCamion, String patente, String marca, String modelo, String costoKM, String costoHora, String km,
-			String fechaCompra) throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
+	public String[][] buscarCamion(String idCamion, String patente, String marca, String modelo, String costo_kmM, String costo_hora, String km,String fechaCompra) 
+					throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
+		
 		LocalDate date= LocalDate.MIN;
-		Double costok=-1.0, costoh=-1.0;
+		Double costo_km=-1.0, costo_h=-1.0;
 		Integer kilometros=-1, id=-1;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		//Formateamos los parametros de busqueda
+		
 		if(!idCamion.equals("")) id=Integer.valueOf(idCamion);
-		if(!costoKM.equals("")) costok= Double.valueOf(costoKM);
-		if(!costoHora.equals("")) costoh=Double.valueOf(costoHora);
+		if(!costo_kmM.equals("")) costo_km= Double.valueOf(costo_kmM);
+		if(!costo_hora.equals("")) costo_h=Double.valueOf(costo_hora);
 		if(!km.equals("")) kilometros= Integer.valueOf(km);
 		if(!fechaCompra.equals("")) date = LocalDate.parse(fechaCompra, formatter);
 		if(!patente.equals("")) patente = patente.toUpperCase();
@@ -99,7 +136,7 @@ public class CamionController {
 		
 		
 		//creamos el modelo del camion a buscar
-		Camion cam= new Camion(id,patente, marca, modelo, costok , costoh,kilometros, date);
+		Camion cam= new Camion(id,patente, marca, modelo, costo_km , costo_h,kilometros, date);
 		ServiceCamion ser = new ServiceCamion();
 		
 		//buscamos los camiones que coincidan con la busqueda y los devolvemos como matriz de string

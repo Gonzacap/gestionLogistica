@@ -1,4 +1,6 @@
 package sistGestionLogistica.servicios;
+
+import com.mysql.cj.jdbc.Driver;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +21,7 @@ public class ServiceCamion {
 		// TODO Auto-generated constructor stub
 	}
 	public Camion crearCamion(Camion c) throws SQLException {
+		
 		// si hay alguna regla de negocio que indque que no se 
 		// puede agregar un camion si no se cumplen determinadas
 		// condiciones en otras entidades o reglas 
