@@ -22,8 +22,8 @@ public class App extends JFrame{
 		Dimension tamPant = miPantalla.getScreenSize();
 		int alturaP = tamPant.height;
 		int anchoP = tamPant.width;
-		aplicacion.setSize(anchoP/2,alturaP/2);
-		aplicacion.setLocation(anchoP/4,alturaP/4);
+		aplicacion.setSize(3*(anchoP/5),3*(alturaP/5));
+		aplicacion.setLocation((anchoP/5),(alturaP/5));
 		
 		aplicacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		aplicacion.inicializar();

@@ -77,6 +77,8 @@ public class PanelCamion extends JPanel {
 		scrollPane.setBounds(23, 208, 671, 222);
 		panel.add(scrollPane);
 		
+		//-------tabla-------
+		
 		table_Camiones = new JTable();
 		scrollPane.setViewportView(table_Camiones);
 		table_Camiones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -96,43 +98,44 @@ public class PanelCamion extends JPanel {
 			}
 		});
 		
+		//-------tabla-------
+		
 		JLabel lblNewLabel = new JLabel("ID");
 		lblNewLabel.setBounds(35, 86, 46, 14);
-		panel.add(lblNewLabel);
-		
 		JLabel lblNewLabel_1 = new JLabel("Patente");
 		lblNewLabel_1.setBounds(23, 117, 46, 14);
-		panel.add(lblNewLabel_1);
-		
 		JLabel lblNewLabel_2 = new JLabel("Marca");
 		lblNewLabel_2.setBounds(23, 150, 46, 14);
+		
+		panel.add(lblNewLabel);
+		panel.add(lblNewLabel_1);		
 		panel.add(lblNewLabel_2);
 		
 		textField_ID = new JTextField();
 		textField_ID.setBounds(76, 83, 86, 20);
-		panel.add(textField_ID);
-		textField_ID.setColumns(10);
-		
 		textField_Patente = new JTextField();
 		textField_Patente.setBounds(79, 114, 86, 20);
-		panel.add(textField_Patente);
-		textField_Patente.setColumns(10);
-		
 		textField_Marca = new JTextField();
 		textField_Marca.setBounds(79, 147, 86, 20);
+		
+		panel.add(textField_ID);
+		panel.add(textField_Patente);
 		panel.add(textField_Marca);
+		
+		
+		textField_ID.setColumns(10);
+		textField_Patente.setColumns(10);
 		textField_Marca.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Modelo");
-		lblNewLabel_3.setBounds(221, 86, 46, 14);
-		panel.add(lblNewLabel_3);
-		
+		JLabel lblModelo = new JLabel("Modelo");
+		lblModelo.setBounds(221, 86, 46, 14);
 		JLabel lblNewLabel_4 = new JLabel("KM Recorridos");
 		lblNewLabel_4.setBounds(221, 117, 75, 14);
-		panel.add(lblNewLabel_4);
-		
 		JLabel lblNewLabel_5 = new JLabel("Costo por KM");
 		lblNewLabel_5.setBounds(221, 150, 75, 14);
+		
+		panel.add(lblModelo);		
+		panel.add(lblNewLabel_4);
 		panel.add(lblNewLabel_5);
 		
 		textField_Modelo = new JTextField();
