@@ -1,5 +1,7 @@
 package sistGestionLogistica.dominio;
 
+
+
 public class Ruta {
 	private Integer idRuta;
 	private Double distancia;
@@ -11,20 +13,22 @@ public class Ruta {
 	
 	
 
-	public Ruta(double distancia, double duracionViaje, double pesoMaximo, Planta plantaOrigen, Planta plantaDestino) {
-	
+	public Ruta(Integer idRuta,double distancia, double duracionViaje, double pesoMaximo, Planta plantaOrigen, Planta plantaDestino) {
+		this.idRuta=idRuta;
 		this.distancia = distancia;
 		this.duracionViaje = duracionViaje;
 		this.pesoMaximo = pesoMaximo;
 		this.plantaOrigen = plantaOrigen;
 		this.plantaDestino = plantaDestino;
 	}
-
-
-
-	public Ruta() {
 	
+	//Constructor para pruebas
+	public Ruta(Integer idRuta,Planta plantaOrigen, Planta plantaDestino) {
+		this.idRuta=idRuta;
+		this.plantaOrigen = plantaOrigen;
+		this.plantaDestino = plantaDestino;
 	}
+
 
 
 
@@ -74,6 +78,17 @@ public class Ruta {
 
 	public void setPlantaDestino(Planta plantaDestino) {
 		this.plantaDestino = plantaDestino;
+	}
+	
+	@Override
+	public String toString() {
+		return "( "+this.plantaOrigen.getNombre()+" --> "+this.plantaDestino.getNombre()+" )";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return (obj instanceof Ruta) && ((Ruta)obj).getPlantaOrigen().equals(this.getPlantaOrigen()) 
+				&& ((Ruta)obj).getPlantaDestino().equals(this.getPlantaDestino()); 
 	}
 
 }
