@@ -5,8 +5,8 @@ import java.util.List;
 import sistGestionLogistica.dominio.Planta;
 
 public interface PlantaDao {
-	public Planta saveOrUpdate(Planta p);
-	public Planta buscarPorId(Integer id);
+	public Boolean saveOrUpdate(Planta p);
+	public Boolean buscarPorId(Integer id);
 	public void borrar(Integer id);
 	public List<Planta> buscarTodos();
 }

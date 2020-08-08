@@ -35,6 +35,9 @@ public class Planta {
 	public void setListaStock(List<StockInsumo> listaStock) {
 		this.listaStock = listaStock;
 	}
+	public void agregarStockInsumo(StockInsumo s) {
+		this.listaStock.add(s);
+	}
 
 	
 	
