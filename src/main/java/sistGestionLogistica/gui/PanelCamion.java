@@ -207,34 +207,35 @@ public class PanelCamion extends JPanel {
 	class AccionBuscar implements ActionListener {
 		 
 		 public void actionPerformed(ActionEvent e) {
+			 
 			 System.out.println("Camion -> Buscar");
-			// DefaultTableModel modelo = (DefaultTableModel) table_Camiones.getModel();
+			 
+			 DefaultTableModel modelo = (DefaultTableModel) table_Camiones.getModel();
 			 CamionController cc=new CamionController();
-			 try {
-				 
+			 
+			 try { 
 				this.actualizarTabla(cc.buscarCamion(textField_ID.getText(), textField_Patente.getText(), textField_Marca.getText(), textField_Modelo.getText(), textField_CostoKM.getText(), textField_CostoHora.getText(), textField_KM.getText(), textField_FechaCompra.getText()));
-			} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
+			
+			 } catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				//e1.printStackTrace();
 			}
 		 }
 
 		private void actualizarTabla(String[][] aMostrar) throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
 			
-			table_Camiones.setModel(new DefaultTableModel(
-					aMostrar,
-					new String[] {
-						"ID", "Patente", "Marca", "Modelo", "KM", "CostoKM", "CostoHora", "FechaCompra"
-					}
-				) {
-					Class[] columnTypes = new Class[] {
-						Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
-					};
-					public Class getColumnClass(int columnIndex) {
+			table_Camiones.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Patente", "Marca", "Modelo", "KM", "CostoKM", "CostoHora", "FechaCompra"}) 
+			{
+				Class[] columnTypes = new Class[] {
+					Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+				};
+					
+				public Class getColumnClass(int columnIndex) {
 						return columnTypes[columnIndex];
-					}
-				});
+				}
+			});
 			
 		}
 	}
+	
 }
