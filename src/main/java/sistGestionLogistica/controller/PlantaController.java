@@ -18,7 +18,7 @@ public class PlantaController {
 		// TODO Auto-generated constructor stub
 	}
 	//faltan las Excepciones
-	public void registrarPlanta(String nombre) {
+	public void registrarPlanta(String nombre) throws DatosInvalidosException {
 		
 		//validamos que lo ingresado no este vacio y que el nombre no sea repetido
 		if(!nombre.isBlank() && !this.existeNombre(nombre)) {
@@ -27,6 +27,7 @@ public class PlantaController {
 			sp.registrarPlanta(p);
 			
 		}
+		else throw new DatosInvalidosException("Por favor, ingrese un nombre");
 	}
 	
 	
