@@ -49,10 +49,17 @@ public class EditarCamion extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	public EditarCamion(Integer id) {
+		this.textField_id = new JTextField();
+		this.textField_id.setText(id.toString());
+		Editar();
+	}
+	
 	public EditarCamion() {
+		Editar();
+	}
+	
+	public void Editar() {
 		
 		setTitle("Modificar Camiones");
 		setBounds(100, 100, 450, 300);
@@ -68,9 +75,9 @@ public class EditarCamion extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Id");
-		lblNewLabel.setBounds(71, 37, 46, 14);
-		panel.add(lblNewLabel);
+		//JLabel lblNewLabel = new JLabel("Id");
+		//lblNewLabel.setBounds(71, 37, 46, 14);
+		//panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Patente");
 		lblNewLabel_1.setBounds(71, 61, 46, 14);
@@ -100,9 +107,9 @@ public class EditarCamion extends JFrame {
 		lblNewLabel_7.setBounds(67, 217, 82, 22);
 		panel.add(lblNewLabel_7);
 		
-		textField_id = new JTextField();
-		textField_id.setBounds(142, 37, 86, 20);
-		panel.add(textField_id);
+		//textField_id = new JTextField();
+		//textField_id.setBounds(142, 37, 86, 20);
+		//panel.add(textField_id);
 		textField_id.setColumns(10);
 		
 		textField_patente = new JTextField();

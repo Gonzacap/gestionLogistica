@@ -62,15 +62,15 @@ public class PanelCamion extends JPanel {
 		JButton btnAlta = new JButton("Alta");
 		btnAlta.setBounds(23, 37, 89, 23);
 		JButton btnBaja = new JButton("Baja");
-		btnBaja.setBounds(307, 37, 89, 23);
-		JButton btnModificar = new JButton("Modificar Por ID");
-		btnModificar.setBounds(136, 37, 130, 23);
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(419, 37, 89, 23);
+		btnBaja.setBounds(136, 37, 89, 23);
+		//JButton btnModificar = new JButton("Modificar Por ID");
+		//btnModificar.setBounds(307, 37, 89, 23);
+		JButton btnBuscar = new JButton("Buscar/Actualizar");
+		btnBuscar.setBounds(419, 37, 120, 23);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
-		panel.add(btnModificar);
+		//panel.add(btnModificar);
 		panel.add(btnBuscar);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -174,6 +174,25 @@ public class PanelCamion extends JPanel {
 		
 		//----------------------------
 		
+		//---------accion click-------
+		
+		table_Camiones.addMouseListener(new MouseAdapter() {
+				
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Camion -> click Modificar");
+				int fila = table_Camiones.rowAtPoint(e.getPoint());
+				int columna = table_Camiones.columnAtPoint(e.getPoint());
+				
+				if(fila>-1 && columna>-1) {
+					Integer idAux = Integer.valueOf((String) table_Camiones.getValueAt(fila,columna));
+					EditarCamion eC = new EditarCamion(idAux);
+					eC.setVisible(true);
+				}
+				
+			}
+		});
+		
+		//---------------------------
 		
 		//--------Acciones Botones--------------	
 		
@@ -189,13 +208,6 @@ public class PanelCamion extends JPanel {
 			System.out.println("Camion -> Baja");
 			BajaCamion bC = new BajaCamion();
 			bC.setVisible(true);
-
-		});
-		btnModificar.addActionListener(e-> {
-		
-			System.out.println("Camion -> Modificar");
-			EditarCamion eC = new EditarCamion();
-			eC.setVisible(true);
 
 		});
 		btnBuscar.addActionListener(new AccionBuscar());
