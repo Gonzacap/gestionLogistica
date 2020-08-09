@@ -236,6 +236,8 @@ public class PanelCamion extends JPanel {
 			});
 			
 		}
+		
 	}
+	
 	
 }
