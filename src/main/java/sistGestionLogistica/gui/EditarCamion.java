@@ -56,6 +56,7 @@ public class EditarCamion extends JFrame {
 	}
 	
 	public EditarCamion() {
+		this.textField_id = new JTextField();
 		Editar();
 	}
 	

@@ -60,18 +60,15 @@ public class PanelCamion extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.setBounds(23, 37, 89, 23);
+		btnAlta.setBounds(20, 37, 90, 25);
 		JButton btnBaja = new JButton("Baja");
-		btnBaja.setBounds(136, 37, 89, 23);
-		//JButton btnModificar = new JButton("Modificar Por ID");
-		//btnModificar.setBounds(307, 37, 89, 23);
-		JButton btnBuscar = new JButton("Buscar/Actualizar");
-		btnBuscar.setBounds(419, 37, 120, 23);
+		btnBaja.setBounds(130, 37, 90, 25);
+		JLabel lblModificar = new JLabel("Seleccione un camion de la tabla para poder editarlo");
+		lblModificar.setBounds(240, 37, 300, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
-		//panel.add(btnModificar);
-		panel.add(btnBuscar);
+		panel.add(lblModificar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(23, 208, 671, 222);
@@ -98,78 +95,149 @@ public class PanelCamion extends JPanel {
 			}
 		});
 		
-		//-------tabla-------
+		//-------tabla--------
 		
-		JLabel lblNewLabel = new JLabel("ID");
-		lblNewLabel.setBounds(35, 86, 46, 14);
-		JLabel lblNewLabel_1 = new JLabel("Patente");
-		lblNewLabel_1.setBounds(23, 117, 46, 14);
-		JLabel lblNewLabel_2 = new JLabel("Marca");
-		lblNewLabel_2.setBounds(23, 150, 46, 14);
+		//--------------------
 		
-		panel.add(lblNewLabel);
-		panel.add(lblNewLabel_1);		
-		panel.add(lblNewLabel_2);
+		JPanel panelBuscar = new JPanel(new GridBagLayout());
+		//panelBuscar.setLocation(40,80);
+		panelBuscar.setBounds(50, 80, 700, 120);
 		
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		c.weightx = 50;
+		c.weighty = 80;
+		
+		//c.fill = GridBagConstraints.CENTER;
+		
+		//----------------------
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+
 		textField_ID = new JTextField();
-		textField_ID.setBounds(76, 83, 86, 20);
+		c.gridx = 1;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(textField_ID, c);
+		
 		textField_Patente = new JTextField();
-		textField_Patente.setBounds(79, 114, 86, 20);
+		c.gridx = 1;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(textField_Patente, c);
+		
 		textField_Marca = new JTextField();
-		textField_Marca.setBounds(79, 147, 86, 20);
-		
-		panel.add(textField_ID);
-		panel.add(textField_Patente);
-		panel.add(textField_Marca);
-		
-		
-		textField_ID.setColumns(10);
-		textField_Patente.setColumns(10);
-		textField_Marca.setColumns(10);
-		
-		JLabel lblModelo = new JLabel("Modelo");
-		lblModelo.setBounds(221, 86, 46, 14);
-		JLabel lblNewLabel_4 = new JLabel("KM Recorridos");
-		lblNewLabel_4.setBounds(221, 117, 75, 14);
-		JLabel lblNewLabel_5 = new JLabel("Costo por KM");
-		lblNewLabel_5.setBounds(221, 150, 75, 14);
-		
-		panel.add(lblModelo);		
-		panel.add(lblNewLabel_4);
-		panel.add(lblNewLabel_5);
+		c.gridx = 3;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(textField_Marca, c);
 		
 		textField_Modelo = new JTextField();
-		textField_Modelo.setBounds(307, 83, 86, 20);
-		panel.add(textField_Modelo);
-		textField_Modelo.setColumns(10);
+		c.gridx = 3;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(textField_Modelo, c);
 		
+		//-------------------------
+		
+		c.fill = GridBagConstraints.CENTER;
+		
+		JLabel lbl_0 = new JLabel("Id");
+		c.gridx = 4;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(lbl_0, c);
+		
+		JLabel lbl_1 = new JLabel("Patente");
+		c.gridx = 4;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(lbl_1, c);
+		
+		JLabel lbl_2 = new JLabel("Marca");
+		c.gridx = 6;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(lbl_2, c);
+		
+		JLabel lbl_3 = new JLabel("Modelo");
+		c.gridx = 6;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(lbl_3, c);
+		
+		//----------------------
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+
 		textField_KM = new JTextField();
-		textField_KM.setBounds(307, 114, 86, 20);
-		panel.add(textField_KM);
-		textField_KM.setColumns(10);
+		c.gridx = 5;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(textField_KM, c);
 		
 		textField_CostoKM = new JTextField();
-		textField_CostoKM.setBounds(306, 147, 86, 20);
-		panel.add(textField_CostoKM);
-		textField_CostoKM.setColumns(10);
-		
-		JLabel lblNewLabel_6 = new JLabel("Costo Hora");
-		lblNewLabel_6.setBounds(419, 86, 75, 14);
-		panel.add(lblNewLabel_6);
-		
-		JLabel lblNewLabel_7 = new JLabel("Fecha de Compra");
-		lblNewLabel_7.setBounds(419, 117, 89, 14);
-		panel.add(lblNewLabel_7);
+		c.gridx = 5;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(textField_CostoKM, c);
 		
 		textField_CostoHora = new JTextField();
-		textField_CostoHora.setBounds(526, 83, 86, 20);
-		panel.add(textField_CostoHora);
-		textField_CostoHora.setColumns(10);
+		c.gridx = 7;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(textField_CostoHora, c);
 		
 		textField_FechaCompra = new JTextField();
-		textField_FechaCompra.setBounds(526, 114, 86, 20);
-		panel.add(textField_FechaCompra);
-		textField_FechaCompra.setColumns(10);
+		c.gridx = 7;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(textField_FechaCompra, c);
+				
+		//-------------------------
+		
+		c.fill = GridBagConstraints.CENTER;
+				
+		JLabel lbl_4 = new JLabel("Id");
+		c.gridx = 0;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(lbl_4, c);
+		
+		JLabel lbl_5 = new JLabel("Patente");
+		c.gridx = 0;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(lbl_5, c);
+				
+		JLabel lbl_6 = new JLabel("Marca");
+		c.gridx = 2;
+		c.gridwidth = 1;
+		c.gridy = 0;
+		panelBuscar.add(lbl_6, c);
+		
+		JLabel lbl_7 = new JLabel("Modelo");
+		c.gridx = 2;
+		c.gridwidth = 1;
+		c.gridy = 1;
+		panelBuscar.add(lbl_7, c);
+		
+		//----------------------
+		
+		c.fill = GridBagConstraints.CENTER;
+		
+		JButton btnBuscar = new JButton("Buscar"+"\n"+"Actualizar");
+		c.gridx = 8;
+		c.gridheight = 2;
+		c.gridy = 0;
+		panelBuscar.add(btnBuscar, c);
+		
+		panelBuscar.setVisible(true);
+		panel.add(panelBuscar);
+		
+		//--------------------
+		
 		table_Camiones.getColumnModel().getColumn(0).setPreferredWidth(35);
 		
 		//----------------------------

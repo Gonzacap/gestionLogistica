@@ -62,17 +62,17 @@ public class App extends JFrame{
 		this.gestorCamiones = new JMenuItem("Gestionar camiones");
 		this.gestorInsumos=new JMenuItem("Gestionar insumos");
 		
-		this.pC= new PanelCamion();
 		this.pP = new PanelPlanta();
 		this.pI = new PanelInsumo();
+		this.pC= new PanelCamion();
 		
-		pC.inicializar(this);
 		pP.inicializar(this);
 		pI.inicializar(this);
+		pC.inicializar(this);
 		
 		menuPlantas.add(gestorPlantas);
-		menuCamiones.add(gestorCamiones);
 		menuInsumos.add(gestorInsumos);
+		menuCamiones.add(gestorCamiones);
 		barraMenu.add(menuPlantas);
 		barraMenu.add(menuCamiones);
 		barraMenu.add(menuInsumos);
