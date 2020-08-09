@@ -83,22 +83,22 @@ public class CamionController {
 		id=Integer.valueOf(idCamion);
 		
 		//validamos los datos
-				if(!this.existePatente(patente)) {
+				if(this.existeId(id)) {
 					
 					if(!patente.equals("") && !marca.equals("") && !modelo.equals("")) {
 						
 						if(costo_km>=0 && costo_h>=0 && kilometros>=0) {
-							Camion cam= new Camion(-1,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costo_km , costo_h,kilometros, date);
-							System.out.println("creando camion");
+							Camion cam= new Camion(id,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costo_km , costo_h,kilometros, date);
+							System.out.println("editando camion");
 							ServiceCamion ser = new ServiceCamion();
-							ser.crearCamion(cam);
-							System.out.println("camion agregado");
+							ser.editarCamion(cam);
+							System.out.println("camion editado");
 						}
 						else throw new DatosInvalidosException("Los valores no pueden ser menores que 0");
 					}
 					else throw new DatosInvalidosException("Por favor rellene los campos");
 				}
-				else throw new DatosInvalidosException("Patente existente, camion ya registrado");;
+				else throw new DatosInvalidosException();;
 		
 		
 	}

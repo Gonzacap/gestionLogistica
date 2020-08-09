@@ -7,7 +7,8 @@ import sistGestionLogistica.dominio.Camion;
 
 public interface CamionDao {
 
-	public Camion saveOrUpdate(Camion c) throws SQLException;
+	public Camion save(Camion c) throws SQLException;
+	public Camion update(Camion c) throws SQLException;
 	public Camion buscarPorPatente(String patente) throws SQLException;
 	public Camion buscarPorId(Integer id) throws SQLException;
 	public void borrar(Integer id) throws SQLException;

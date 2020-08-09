@@ -26,12 +26,12 @@ public class ServiceCamion {
 		// puede agregar un camion si no se cumplen determinadas
 		// condiciones en otras entidades o reglas 
 		// se valida aquí
-			return this.camionDao.saveOrUpdate(c);
+			return this.camionDao.save(c);
 	}
 	
 	public Camion editarCamion(Camion c) throws SQLException {
 		
-		return this.camionDao.saveOrUpdate(c);
+		return this.camionDao.update(c);
 	}
 	public Camion buscarPorPatente(String patente) throws SQLException {
 		return camionDao.buscarPorPatente(patente);

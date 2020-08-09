@@ -20,25 +20,13 @@ public class CamionDaoMysql implements CamionDao{
 	private ResultSet rs = null;
 	
 
-	public Camion saveOrUpdate(Camion c) throws SQLException {
+	public Camion save(Camion c) throws SQLException {
 		
 		String insertCamion = "INSERT INTO camion (PATENTE,MARCA,MODELO,KM,COSTO_KM,COSTO_HORA,FECHA_COMPRA) VALUES (?,?,?,?,?,?,?)";
 		String updateCamion =	" UPDATE camion SET PATENTE = ?, MARCA =? ,MODELO = ? , KM =?,COSTO_KM=? ,COSTO_HORA=? ,FECHA_COMPRA=?  WHERE ID = ?";
 		
 		try {
-			if(c.getId()!=null && c.getId()>0) {
-				conn = DB.getConexion();
-				System.out.println("EJECUTA UPDATE");
-				pstmt= conn.prepareStatement(updateCamion);
-				pstmt.setString(1, c.getPatente());
-				pstmt.setString(2, c.getMarca());
-				pstmt.setString(3, c.getModelo());
-				pstmt.setInt(4, c.getKm());
-				pstmt.setDouble(5, c.getCostoKM());
-				pstmt.setDouble(6,c.getCostoHora());
-				pstmt.setDate(7, Date.valueOf(c.getFechaCompra()));
-				pstmt.setInt(8, c.getId());
-			}else {
+		
 				conn = DB.getConexion();
 				System.out.println("EJECUTA INSERT");
 				pstmt= conn.prepareStatement(insertCamion);
@@ -49,8 +37,7 @@ public class CamionDaoMysql implements CamionDao{
 				pstmt.setInt(4, c.getKm());
 				pstmt.setDouble(5, c.getCostoKM());
 				pstmt.setDouble(6,c.getCostoHora());
-				pstmt.setDate(7, Date.valueOf(c.getFechaCompra()));
-			}
+			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -222,7 +209,38 @@ public class CamionDaoMysql implements CamionDao{
 	}
 
 
-
+	@Override
+	public Camion update(Camion c) throws SQLException {
+		String updateCamion =	" UPDATE camion SET PATENTE = ?, MARCA =? ,MODELO = ? , KM =?,COSTO_KM=? ,COSTO_HORA=? ,FECHA_COMPRA=?  WHERE ID = ?";
+		try {
+			if(c.getId()!=null && c.getId()>0) {
+				conn = DB.getConexion();
+				System.out.println("EJECUTA UPDATE");
+				pstmt= conn.prepareStatement(updateCamion);
+				pstmt.setString(1, c.getPatente());
+				pstmt.setString(2, c.getMarca());
+				pstmt.setString(3, c.getModelo());
+				pstmt.setInt(4, c.getKm());
+				pstmt.setDouble(5, c.getCostoKM());
+				pstmt.setDouble(6,c.getCostoHora());
+				pstmt.setDate(7, Date.valueOf(c.getFechaCompra()));
+				pstmt.setInt(8, c.getId());
+			}
+			pstmt.executeUpdate();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(pstmt!=null) pstmt.close();
+					if(conn!=null) conn.close();				
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		
+	
+		return c;
+	}
 	
 
 }
