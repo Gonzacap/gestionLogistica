@@ -6,7 +6,6 @@ public abstract class Insumo {
 	protected Integer idInsumo;
 	protected String descripcion;
 	protected Double costo;
-	
 	//por que va precio??
 	protected Double precio;
 	protected UnidadMedida unidadMedida;

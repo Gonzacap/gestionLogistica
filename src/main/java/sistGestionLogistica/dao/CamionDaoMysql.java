@@ -23,7 +23,7 @@ public class CamionDaoMysql implements CamionDao{
 	public Camion save(Camion c) throws SQLException {
 		
 		String insertCamion = "INSERT INTO camion (PATENTE,MARCA,MODELO,KM,COSTO_KM,COSTO_HORA,FECHA_COMPRA) VALUES (?,?,?,?,?,?,?)";
-		String updateCamion =	" UPDATE camion SET PATENTE = ?, MARCA =? ,MODELO = ? , KM =?,COSTO_KM=? ,COSTO_HORA=? ,FECHA_COMPRA=?  WHERE ID = ?";
+		
 		
 		try {
 		
