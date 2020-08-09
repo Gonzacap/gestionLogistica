@@ -14,6 +14,22 @@ public class InsumoGeneral extends Insumo {
 	
 
 
+	public Double getPeso() {
+		return peso;
+	}
+
+
+
+
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
+
+
+
+
 	@Override
 	public double pesoPorUnidad() {
 		return peso;

@@ -18,26 +18,20 @@ public class PlantaDaoMysql implements PlantaDao {
 	private ResultSet rs = null;
 
 	@Override
-	public Boolean saveOrUpdate(Planta p) {
+	public Boolean save(Planta p) {
 		
 		String insert = "INSERT INTO planta (nombre) VALUES (?)";
 		String update =	" UPDATE planta SET nombre = ? WHERE id = ?";
 		
 		try {
-			if(p.getId()!=null && p.getId()>0) {
-				conn = DB.getConexion();
-				System.out.println("EJECUTA UPDATE");
-				pstmt= conn.prepareStatement(update);
-				pstmt.setString(1, p.getNombre());
-				pstmt.setInt(2, p.getId());
-			}else {
+			
 				conn = DB.getConexion();
 				System.out.println("EJECUTA INSERT");
 				pstmt= conn.prepareStatement(insert);
 				
 				pstmt.setString(1, p.getNombre());
 			
-			}
+			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,6 +87,32 @@ public class PlantaDaoMysql implements PlantaDao {
 			System.out.println("Resultado "+lista);
 			return lista;
 		
+	}
+
+	@Override
+	public Boolean update(Planta p) {
+		String update =	" UPDATE planta SET nombre = ? WHERE id = ?";
+		try {
+			if(p.getId()!=null && p.getId()>0) {
+				conn = DB.getConexion();
+				System.out.println("EJECUTA UPDATE");
+				pstmt= conn.prepareStatement(update);
+				pstmt.setString(1, p.getNombre());
+				pstmt.setInt(2, p.getId());
+			}
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return true;
 	}
 
 }

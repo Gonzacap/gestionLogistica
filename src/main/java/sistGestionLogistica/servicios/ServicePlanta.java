@@ -19,7 +19,7 @@ public class ServicePlanta {
 	}
 	
 	public Boolean registrarPlanta(Planta p) {
-		return this.plantaDao.saveOrUpdate(p);		
+		return this.plantaDao.save(p);		
 	}
 	
 	public List<Planta> buscarPlanta(Planta p){
