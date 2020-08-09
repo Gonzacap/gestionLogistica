@@ -63,8 +63,8 @@ public class PanelCamion extends JPanel {
 		btnAlta.setBounds(20, 37, 90, 25);
 		JButton btnBaja = new JButton("Baja");
 		btnBaja.setBounds(130, 37, 90, 25);
-		JLabel lblModificar = new JLabel("Seleccione un camion de la tabla para poder editarlo");
-		lblModificar.setBounds(240, 37, 300, 25);
+		JLabel lblModificar = new JLabel("Seleccione el Id de un camion de la tabla para poder editarlo");
+		lblModificar.setBounds(240, 37, 350, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
@@ -143,29 +143,29 @@ public class PanelCamion extends JPanel {
 		
 		c.fill = GridBagConstraints.CENTER;
 		
-		JLabel lbl_0 = new JLabel("Id");
-		c.gridx = 4;
+		JLabel lbl_4 = new JLabel("Id");
+		c.gridx = 0;
 		c.gridwidth = 1;
 		c.gridy = 0;
-		panelBuscar.add(lbl_0, c);
+		panelBuscar.add(lbl_4, c);
 		
-		JLabel lbl_1 = new JLabel("Patente");
-		c.gridx = 4;
+		JLabel lbl_5 = new JLabel("Patente");
+		c.gridx = 0;
 		c.gridwidth = 1;
 		c.gridy = 1;
-		panelBuscar.add(lbl_1, c);
-		
-		JLabel lbl_2 = new JLabel("Marca");
-		c.gridx = 6;
+		panelBuscar.add(lbl_5, c);
+				
+		JLabel lbl_6 = new JLabel("Marca");
+		c.gridx = 2;
 		c.gridwidth = 1;
 		c.gridy = 0;
-		panelBuscar.add(lbl_2, c);
+		panelBuscar.add(lbl_6, c);
 		
-		JLabel lbl_3 = new JLabel("Modelo");
-		c.gridx = 6;
+		JLabel lbl_7 = new JLabel("Modelo");
+		c.gridx = 2;
 		c.gridwidth = 1;
 		c.gridy = 1;
-		panelBuscar.add(lbl_3, c);
+		panelBuscar.add(lbl_7, c);
 		
 		//----------------------
 		
@@ -199,29 +199,29 @@ public class PanelCamion extends JPanel {
 		
 		c.fill = GridBagConstraints.CENTER;
 				
-		JLabel lbl_4 = new JLabel("Id");
-		c.gridx = 0;
+		JLabel lbl_0 = new JLabel("Km recorridos");
+		c.gridx = 4;
 		c.gridwidth = 1;
 		c.gridy = 0;
-		panelBuscar.add(lbl_4, c);
+		panelBuscar.add(lbl_0, c);
 		
-		JLabel lbl_5 = new JLabel("Patente");
-		c.gridx = 0;
+		JLabel lbl_1 = new JLabel("Costo por Km");
+		c.gridx = 4;
 		c.gridwidth = 1;
 		c.gridy = 1;
-		panelBuscar.add(lbl_5, c);
-				
-		JLabel lbl_6 = new JLabel("Marca");
-		c.gridx = 2;
+		panelBuscar.add(lbl_1, c);
+		
+		JLabel lbl_2 = new JLabel("Costo por Hora");
+		c.gridx = 6;
 		c.gridwidth = 1;
 		c.gridy = 0;
-		panelBuscar.add(lbl_6, c);
+		panelBuscar.add(lbl_2, c);
 		
-		JLabel lbl_7 = new JLabel("Modelo");
-		c.gridx = 2;
+		JLabel lbl_3 = new JLabel("Fecha");
+		c.gridx = 6;
 		c.gridwidth = 1;
 		c.gridy = 1;
-		panelBuscar.add(lbl_7, c);
+		panelBuscar.add(lbl_3, c);
 		
 		//----------------------
 		
