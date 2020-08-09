@@ -13,8 +13,8 @@ public class Ruta {
 	
 	
 
-	public Ruta(Integer idRuta,double distancia, double duracionViaje, double pesoMaximo, Planta plantaOrigen, Planta plantaDestino) {
-		this.idRuta=idRuta;
+	public Ruta(double distancia, double duracionViaje, double pesoMaximo, Planta plantaOrigen, Planta plantaDestino) {
+	
 		this.distancia = distancia;
 		this.duracionViaje = duracionViaje;
 		this.pesoMaximo = pesoMaximo;

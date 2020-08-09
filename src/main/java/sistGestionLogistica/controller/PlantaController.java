@@ -27,7 +27,11 @@ public class PlantaController {
 			sp.registrarPlanta(p);
 			
 		}
+<<<<<<< HEAD
 		else throw new DatosInvalidosException("Por favor rellene los campos");
+=======
+		else throw new DatosInvalidosException("Por favor, ingrese un nombre");
+>>>>>>> 5f5df83a2aaa4c330373ccb68857b9353192d2a3
 	}
 	
 	
