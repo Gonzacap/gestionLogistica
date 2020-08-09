@@ -206,6 +206,7 @@ public class EditarCamion extends JFrame {
 		btnEditar.setBounds(290, 100, 90, 25);
 		panel.add(btnEditar);
 		
+		//------label fecha----------
 		
 		JLabel lblNewLabel_9 = new JLabel("formato:\r\n dd/MM/aaaa");
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.LEFT);

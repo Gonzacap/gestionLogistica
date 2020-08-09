@@ -125,6 +125,8 @@ public class PanelPlanta extends JPanel {
 		btnAlta.addActionListener(e-> {	//AccionAlta
 			
 			System.out.println("Planta -> Alta");
+			AgregarEditarPlanta aP = new AgregarEditarPlanta();
+			aP.agregar();
 			
 		});
 		btnBaja.addActionListener(e-> { //AccionBaja
@@ -135,6 +137,8 @@ public class PanelPlanta extends JPanel {
 		btnModificar.addActionListener(e-> {
 		
 			System.out.println("Planta -> Modificar");
+			AgregarEditarPlanta aP = new AgregarEditarPlanta();
+			aP.editar();
 
 		});
 		btnBuscar.addActionListener(e-> {

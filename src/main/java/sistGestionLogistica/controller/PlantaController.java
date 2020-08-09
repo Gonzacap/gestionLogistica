@@ -18,15 +18,16 @@ public class PlantaController {
 		// TODO Auto-generated constructor stub
 	}
 	//faltan las Excepciones
-	public void registrarPlanta(String nombre) {
+	public void registrarPlanta(String nombre) throws DatosInvalidosException {
 		
 		//validamos que lo ingresado no este vacio y que el nombre no sea repetido
-		if(!nombre.isBlank() && !this.existeNombre(nombre)) {
+		if(!nombre.isEmpty() && !this.existeNombre(nombre)) {
 			Planta p = new Planta(-1,nombre.toUpperCase());
 			ServicePlanta sp = new ServicePlanta();
 			sp.registrarPlanta(p);
 			
 		}
+		else throw new DatosInvalidosException("Por favor rellene los campos");
 	}
 	
 	
@@ -38,8 +39,10 @@ public class PlantaController {
 		
 		//Formateamos los parametros de busqueda
 		
-		if(!idPlanta.isBlank()) id=Integer.valueOf(idPlanta);	
-		
+		if(!idPlanta.isEmpty()) {
+			id=Integer.valueOf(idPlanta);	
+		}
+		else throw new DatosInvalidosException("Por favor rellene los campos");
 		
 		//creamos el modelo de la planta a buscar
 		Planta p= new Planta(id,nombre);

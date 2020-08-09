@@ -98,7 +98,7 @@ public class CamionController {
 					}
 					else throw new DatosInvalidosException("Por favor rellene los campos");
 				}
-				else throw new DatosInvalidosException();;
+				else throw new DatosInvalidosException();
 		
 		
 	}
