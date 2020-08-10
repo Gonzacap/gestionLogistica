@@ -209,7 +209,6 @@ public class CamionDaoMysql implements CamionDao{
 	}
 
 
-	@Override
 	public Camion update(Camion c) throws SQLException {
 		String updateCamion =	" UPDATE camion SET PATENTE = ?, MARCA =? ,MODELO = ? , KM =?,COSTO_KM=? ,COSTO_HORA=? ,FECHA_COMPRA=?  WHERE ID = ?";
 		try {

@@ -21,22 +21,20 @@ public class GrafoLogistica {
 		return listaPlanta;
 	}
 	
-	//conecto dos rutas y las agrego a la lista de rutas 
-		public void conectar(Planta origen, Planta destino , double distancia , double duracionViaje, double pesoMaximo ) {
+	// agrego a la lista de rutas 
+		public void registrarRuta(Ruta ruta) {
 			
-			listaRuta.add(new Ruta(distancia, duracionViaje,pesoMaximo,origen,destino));
+//			listaRuta.add(new Ruta(-1,distancia, duracionViaje,pesoMaximo,origen,destino));
+			listaRuta.add(ruta);
 			
 		}
 		
 		//registro una planta y la agrego a la lista de plantas 
 		
-		public void registrarPlanta(String nombre) {
-			 if(listaPlanta.isEmpty()){
-				 listaPlanta.add(new Planta(1 , nombre)); //genero el primer id
-			 }
-			 else{
-				 listaPlanta.add(new Planta(listaPlanta.get(listaPlanta.size() - 1).getId() + 1 , nombre)); // busco el id de la ultima planta agregada y sumo 1 para el nuevo id
-			 }
+		public void registrarPlanta(Planta p) {
+			
+				 listaPlanta.add(p); 
+		
 		}
 	
 

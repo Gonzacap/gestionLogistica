@@ -17,7 +17,6 @@ public class PlantaDaoMysql implements PlantaDao {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	@Override
 	public Boolean save(Planta p) {
 		
 		String insert = "INSERT INTO planta (nombre) VALUES (?)";
@@ -47,19 +46,16 @@ public class PlantaDaoMysql implements PlantaDao {
 		return true;
 	}
 
-	@Override
 	public Boolean buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void borrar(Integer id) {
 		// TODO Auto-generated method stub
 		
 	}
 	//Faltaria agregar el StockInsumos
-	@Override
 	public List<Planta> buscarTodos() {
 		 String select_todos ="SELECT * FROM planta";
 			List<Planta> lista = new ArrayList<Planta>();
@@ -89,7 +85,6 @@ public class PlantaDaoMysql implements PlantaDao {
 		
 	}
 
-	@Override
 	public Boolean update(Planta p) {
 		String update =	" UPDATE planta SET nombre = ? WHERE id = ?";
 		try {

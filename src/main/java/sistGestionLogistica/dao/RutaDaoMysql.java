@@ -80,4 +80,9 @@ public class RutaDaoMysql implements RutaDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public Boolean save(Ruta r) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

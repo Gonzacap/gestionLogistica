@@ -21,7 +21,6 @@ public class InsumoDaoMysql implements InsumoDao{
 	private ResultSet rs = null;	
 	
 	
-	@Override
 	public Insumo save(Insumo i) throws SQLException {
 		
 		String insertInsumo = "INSERT INTO INSUMO (idInsumo,descripcion,unidadMedida,costo,precio) values(?,?,?,?)";
@@ -61,7 +60,6 @@ public class InsumoDaoMysql implements InsumoDao{
 		
 	}
 
-	@Override
 	public Insumo update(Insumo i) throws SQLException {
 		String updateInsumo =	" UPDATE INSUMO SET DESCRIPCION = ?, UNIDADMEDIDA =? ,COSTO= ? , PRECIO =?  WHERE idInsumo = ?";
 		
@@ -102,13 +100,11 @@ public class InsumoDaoMysql implements InsumoDao{
 	
 	}
 
-	@Override
 	public Insumo buscarPorId(Integer id) throws SQLException {
 	   
 		return null;
 	}
 
-	@Override
 	public void borrar(Integer id) throws SQLException {
 		String borrar = "DELETE FROM insumo i,insumoGeneral g,insumoLiquido l WHERE i.idInsumo = ? AND i.idInsumo=g.idInsumo OR i.idInsumo=l.idInsumo"; //FIJATE ESTO MILTON 
 		 try {
@@ -133,7 +129,6 @@ public class InsumoDaoMysql implements InsumoDao{
 		
 	}
 
-	@Override
 	public List<Insumo> buscarTodos() throws SQLException {
 		
 	  

@@ -137,7 +137,6 @@ public class AgregarCamion {
 		
 		btnAgregar.addActionListener(new ActionListener(){
 				
-				@Override
 				public void actionPerformed(ActionEvent e) {
 				
 				CamionController cc= new CamionController();
