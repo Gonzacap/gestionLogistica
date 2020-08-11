@@ -95,7 +95,7 @@ public class ServiceGrafoLogistica {
 	private boolean existeRuta(Ruta r) throws SQLException {
 		ServiceRuta sr = new ServiceRuta();
 		List<Ruta> li = sr.buscarRuta(r);
-		if(li.isEmpty()) return true;
+		if(!li.isEmpty()) return true;
 		return false;
 	}
 
@@ -103,7 +103,7 @@ public class ServiceGrafoLogistica {
 	private Boolean existePlanta(Planta p) {
 		ServicePlanta sp=new ServicePlanta();
 		List<Planta> li = sp.buscarPlanta(p);
-		if(li.isEmpty()) return true;
+		if(!li.isEmpty()) return true;
 		return false;
 	}
 

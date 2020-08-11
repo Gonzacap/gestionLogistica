@@ -16,7 +16,7 @@ public class PlantaControllerTest {
 	public void test() throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
 		PlantaController pc = new PlantaController();
 		String[][] ma;
-		pc.registrarPlanta("plantaDeLosPies");
+		pc.registrarPlanta("buenos aires");
 		
 		ma= pc.buscarPlanta("", "");
 		
