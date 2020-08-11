@@ -15,6 +15,30 @@ public class ServiceGrafoLogistica {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public GrafoLogistica inicializarGrafo() throws SQLException {
+		Planta plantaModelo = new Planta(-1,""); //modelo para buscar todas las plantas
+		
+		//obtenemos la lista de todas las plantas del sistemas
+		ServicePlanta sp = new ServicePlanta();
+		List<Planta> plantas = sp.buscarPlanta(plantaModelo);
+		
+		// obtenemos la lista de todas las rutas del sistema
+		ServiceRuta se = new ServiceRuta();
+		List<Ruta> rutas = se.buscarRuta(new Ruta(-1,-1,-1,-1,plantaModelo,plantaModelo));
+		
+		//creamos el grafo
+		GrafoLogistica gf= new GrafoLogistica();
+		
+		//agregamos las plantas
+		for(Planta p : plantas) gf.registrarPlanta(p);
+		
+		//agregamos las rutas
+		for(Ruta r : rutas) gf.registrarRuta(r);
+		
+
+		return gf;
+	}
+	
 	public void agregarPlanta(GrafoLogistica gf, Planta p) throws GrafoException {
 		
 		
@@ -32,6 +56,19 @@ public class ServiceGrafoLogistica {
 		gf.registrarPlanta(p);
 		
 	
+	}
+	public void conectar(GrafoLogistica gf, double distancia, double duracionViaje, double pesoMaximo, Planta origen, Planta destino) throws GrafoException, SQLException {
+		
+		//si las plantas no estan en el grafo se agrega
+		if(!gf.getListaPlanta().contains(origen)) this.agregarPlanta(gf, origen);
+		if(!gf.getListaPlanta().contains(destino)) this.agregarPlanta(gf, destino);
+		
+		//creamos la ruta y la agregamos al grafo
+		Ruta ruta = new Ruta(-1,distancia,duracionViaje,pesoMaximo, origen,destino);
+		this.agregarRuta(gf, ruta);
+		
+		
+		
 	}
 	
 	public void agregarRuta(GrafoLogistica gf, Ruta r) throws SQLException, GrafoException{
@@ -51,20 +88,7 @@ public class ServiceGrafoLogistica {
 		
 		
 	}
-	public void conectar(GrafoLogistica gf, double distancia, double duracionViaje, double pesoMaximo, Planta origen, Planta destino) throws GrafoException, SQLException {
-		
-		//si las plantas no estan en el grafo se agrega
-		if(!gf.getListaPlanta().contains(origen)) this.agregarPlanta(gf, origen);
-		if(!gf.getListaPlanta().contains(destino)) this.agregarPlanta(gf, destino);
-		
-		//creamos la ruta y la agregamos al grafo
-		ServiceRuta sr = new ServiceRuta();
-		Ruta ruta = new Ruta(-1,distancia,duracionViaje,pesoMaximo, origen,destino);
-		this.agregarRuta(gf, ruta);
-		
-		
-		
-	}
+
 	
 	
 	//devuelve true si existe la ruta en la base de datos

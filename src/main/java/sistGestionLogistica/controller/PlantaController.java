@@ -33,6 +33,8 @@ public class PlantaController {
 	
 	
 	//No devuelve listaStockInsumos
+	//para buscar todos los id: idPlanta=-1
+	//para buscar todos los nombre: nombre=""
 	public String[][] buscarPlanta(String idPlanta, String nombre) 
 			throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
 

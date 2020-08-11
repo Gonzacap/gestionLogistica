@@ -65,7 +65,12 @@ public class Planta {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		
+		return "["+id+","+nombre+"]";
+		
+	}
 	
 	
 	

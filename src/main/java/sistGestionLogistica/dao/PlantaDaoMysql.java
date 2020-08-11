@@ -20,7 +20,7 @@ public class PlantaDaoMysql implements PlantaDao {
 	public Boolean save(Planta p) {
 		
 		String insert = "INSERT INTO planta (nombre) VALUES (?)";
-		String update =	" UPDATE planta SET nombre = ? WHERE id = ?";
+//		String update =	" UPDATE planta SET nombre = ? WHERE id = ?";
 		
 		try {
 			
@@ -46,10 +46,6 @@ public class PlantaDaoMysql implements PlantaDao {
 		return true;
 	}
 
-	public Boolean buscarPorId(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void borrar(Integer id) {
 		// TODO Auto-generated method stub

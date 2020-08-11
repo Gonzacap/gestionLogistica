@@ -7,8 +7,7 @@ import sistGestionLogistica.dominio.Ruta;
 
 public interface RutaDao {
 	public Boolean save(Ruta r) throws SQLException;
-	public Ruta saveOrUpdate(Ruta r) throws SQLException;// modificar
-	public Ruta  buscarPorId(Integer id) throws SQLException;
+	public Boolean update(Ruta r) throws SQLException;
 	public void borrar(Integer id) throws SQLException;
 	public List<Ruta> buscarTodos() throws SQLException;
 }

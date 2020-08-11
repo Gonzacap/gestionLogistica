@@ -20,7 +20,7 @@ public class ServiceCamion {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Camion crearCamion(Camion c) throws SQLException {
+	public Boolean crearCamion(Camion c) throws SQLException {
 		
 		// si hay alguna regla de negocio que indque que no se 
 		// puede agregar un camion si no se cumplen determinadas
@@ -29,7 +29,7 @@ public class ServiceCamion {
 			return this.camionDao.save(c);
 	}
 	
-	public Camion editarCamion(Camion c) throws SQLException {
+	public Boolean editarCamion(Camion c) throws SQLException {
 		
 		return this.camionDao.update(c);
 	}

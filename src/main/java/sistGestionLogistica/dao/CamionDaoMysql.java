@@ -20,7 +20,7 @@ public class CamionDaoMysql implements CamionDao{
 	private ResultSet rs = null;
 	
 
-	public Camion save(Camion c) throws SQLException {
+	public Boolean save(Camion c) throws SQLException {
 		
 		String insertCamion = "INSERT INTO camion (PATENTE,MARCA,MODELO,KM,COSTO_KM,COSTO_HORA,FECHA_COMPRA) VALUES (?,?,?,?,?,?,?)";
 		
@@ -49,7 +49,7 @@ public class CamionDaoMysql implements CamionDao{
 				e.printStackTrace();
 			}
 		}
-		return c;
+		return true;
 	}
 
 
@@ -209,7 +209,7 @@ public class CamionDaoMysql implements CamionDao{
 	}
 
 
-	public Camion update(Camion c) throws SQLException {
+	public Boolean update(Camion c) throws SQLException {
 		String updateCamion =	" UPDATE camion SET PATENTE = ?, MARCA =? ,MODELO = ? , KM =?,COSTO_KM=? ,COSTO_HORA=? ,FECHA_COMPRA=?  WHERE ID = ?";
 		try {
 			if(c.getId()!=null && c.getId()>0) {
@@ -238,7 +238,7 @@ public class CamionDaoMysql implements CamionDao{
 			}
 		
 	
-		return c;
+		return true;
 	}
 	
 
