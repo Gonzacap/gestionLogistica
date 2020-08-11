@@ -9,18 +9,21 @@ import org.junit.Test;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.PlantaController;
+import sistGestionLogistica.enums.UnidadMedida;
 
 public class PlantaControllerTest {
 
 	@Test
 	public void test() throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
-		PlantaController pc = new PlantaController();
-		String[][] ma;
-		pc.registrarPlanta("buenos aires");
+//		PlantaController pc = new PlantaController();
+//		String[][] ma;
+//		pc.registrarPlanta("buenos aires");
+//		
+//		ma= pc.buscarPlanta("", "");
+//		
+//		System.out.println(ma);
 		
-		ma= pc.buscarPlanta("", "");
-		
-		System.out.println(ma);
+		System.out.println(UnidadMedida.CM3);
 		
 		
 	}
