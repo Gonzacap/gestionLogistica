@@ -1,7 +1,6 @@
 package sistGestionLogistica.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sistGestionLogistica.connection.DB;
-import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.InsumoGeneral;
 import sistGestionLogistica.dominio.InsumoLiquido;
@@ -24,7 +22,7 @@ public class InsumoDaoMysql implements InsumoDao{
 	
 	public Insumo save(Insumo i) throws SQLException {
 		
-		String insertInsumo = "INSERT INTO INSUMO (idInsumo,descripcion,unidadMedida,costo,precio) values(?,?,?,?)";
+		String insertInsumo = "INSERT INTO insumo (idInsumo,descripcion,unidadMedida,costo,precio) values(?,?,?,?,?)";
 	
 
 		try {
@@ -43,7 +41,7 @@ public class InsumoDaoMysql implements InsumoDao{
 				}
 			    else if(i instanceof InsumoLiquido) {
 			    	String densidad =String.valueOf(((InsumoLiquido) i).getDensidad());
-			    	pstmt.execute("INSERT INTO insumoLiqudido values("+i.getIdInsumo()+","+densidad+");");
+			    	pstmt.execute("INSERT INTO insumoLiquido values("+i.getIdInsumo()+","+densidad+");");
 			    	
 			    }
 		} catch (SQLException e) {
@@ -62,7 +60,7 @@ public class InsumoDaoMysql implements InsumoDao{
 	}
 
 	public Insumo update(Insumo i) throws SQLException {
-		String updateInsumo =	" UPDATE INSUMO SET DESCRIPCION = ?, UNIDADMEDIDA =? ,COSTO= ? , PRECIO =?  WHERE idInsumo = ?";
+		String updateInsumo =	" UPDATE insumo SET DESCRIPCION = ?, UNIDADMEDIDA =? ,COSTO= ? , PRECIO =?  WHERE idInsumo = ?";
 		
 		try {
 			if(i.getIdInsumo()!=null && i.getIdInsumo()>0) {
@@ -78,12 +76,12 @@ public class InsumoDaoMysql implements InsumoDao{
 			pstmt.executeUpdate();
 			
 			if(i instanceof InsumoGeneral) {
-				String peso = String.valueOf(((InsumoGeneral) i).getPeso());
-		    	pstmt.execute("UPDATE insumoGeneral SET ID="+i.getIdInsumo()+", SET PESO = "+peso+" WHERE idInsumo = "+i.getIdInsumo()+");");
+				
+		    	pstmt.execute("UPDATE insumoGeneral SET idInsumo="+i.getIdInsumo()+", PESO = "+ ((InsumoGeneral) i).getPeso()+" WHERE idInsumo = "+i.getIdInsumo()+";");
 			}
 			else if(i instanceof InsumoLiquido) {
-				String densidad =String.valueOf(((InsumoLiquido) i).getDensidad());
-		    	pstmt.execute("UPDATE  insumoLiqudido SET ID="+i.getIdInsumo()+", SET DENSIDAD="+densidad+");");
+				
+		    	pstmt.execute("UPDATE  insumoLiquido SET idInsumo="+i.getIdInsumo()+", densidad=" + ((InsumoLiquido) i).getDensidad() +" WHERE idInsumo= "+i.getIdInsumo()+";");
 			}
 			}catch (SQLException e) {
 				e.printStackTrace();
@@ -107,27 +105,31 @@ public class InsumoDaoMysql implements InsumoDao{
 	}
 
 	public void borrar(Integer id) throws SQLException {
-//		String borrar = "DELETE FROM insumo i,insumoGeneral g,insumoLiquido l WHERE i.idInsumo = ? AND i.idInsumo=g.idInsumo OR i.idInsumo=l.idInsumo"; //FIJATE ESTO MILTON 
+
 		String borrar = "DELETE FROM insumo WHERE idInsumo = ?";
+		String borrarLiquido = "DELETE FROM insumoLiquido WHERE idInsumo= ? ";
+		String borrarGeneral = "DELETE FROM insumoGeneral WHERE idInsumo= ? ";
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
 		try {
 	            conn=DB.getConexion();
-	            System.out.println("INDUMO BORRADO?");
-	            //borramos el sinsumo de la tabla insumo
-	            pstmt=conn.prepareStatement(borrar);
-	            pstmt.setInt(1,id);
-	            pstmt.executeUpdate();
+	            System.out.println("INSUMO BORRADO?");
+	           
+	            //Borramos el insumo Liquido
+	            ps1 = conn.prepareStatement(borrarLiquido);
+	            ps1.setInt(1, id);
+	            ps1.executeUpdate();
 	            
-	            //borramos el insumo de la tabla insumo liquido
-	            borrar = "DELETE FROM insumoLiquido WHERE idInsumo = ?";
-	            pstmt=conn.prepareStatement(borrar);
-	            pstmt.setInt(1,id);
-	            pstmt.executeUpdate();
+	            //Borramos el insumo General
+	            ps2 = conn.prepareStatement(borrarGeneral);
+	            ps2.setInt(1, id);
+	            ps2.executeUpdate();
 	            
-	            //borramos el insumo de la tabla insumo general
-	            borrar = "DELETE FROM insumoGeneral WHERE idInsumo = ?";
+	            //borramos el insumo de la tabla insumo
 	            pstmt=conn.prepareStatement(borrar);
 	            pstmt.setInt(1,id);
 	            pstmt.executeUpdate();
+	           
 	           
 	            System.out.println("BORRADO");
 	        } catch (Exception e) {
@@ -145,10 +147,8 @@ public class InsumoDaoMysql implements InsumoDao{
 	}
 
 	public List<Insumo> buscarTodos() throws SQLException {
-		 String select_todos ="SELECT i.idInsumo, i.descripcion, i.unidadMedida, i.costo, i.precio, il.densidad, ig.peso "
-		 		+ "FROM insumo i, insumoLiquido il, insumoGeneral ig "
-		 		+ "WHERE i.idInsumo=il.idInsumo "
-		 		+ "AND i.idInsumo= ig.idInsumo";
+		String select_todos ="SELECT * FROM( SELECT i.idInsumo, i.descripcion, i.unidadMedida, i.costo, i.precio, il.densidad, ig.peso FROM insumo i LEFT JOIN insumoGeneral ig ON ig.idInsumo = i.idInsumo LEFT JOIN insumoLiquido il ON  il.idInsumo=i.idInsumo) AS alias;";
+		 
 		List<Insumo> lista = new ArrayList<Insumo>();
 		 conn = DB.getConexion();
 		
@@ -157,20 +157,26 @@ public class InsumoDaoMysql implements InsumoDao{
 			pstmt= conn.prepareStatement(select_todos);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Insumo insumo;
-				Integer id= rs.getInt("idInsumo");
-				String descripcion = rs.getString("descripcion");
-				UnidadMedida unidad = UnidadMedida.valueof(rs.getString("unidadMedida"));
-				Double costo = rs.getDouble("costo");
-				Double precio = rs.getDouble("precio");
-				Double densidad = rs.getDouble("densidad");
-				Double peso = rs.getDouble("peso");
+				Insumo i;
+				
+				if(rs.getDouble("peso") >0) {
+					i = new InsumoGeneral();
+					((InsumoGeneral)i).setPeso(rs.getDouble("peso"));
+				}
+				else{
+					i = new InsumoLiquido();
+					((InsumoLiquido) i).setDensidad(rs.getDouble("densidad"));
+				}
 				
 				
-				if(densidad >0)  insumo = new InsumoLiquido(id, descripcion,costo, precio, unidad,densidad);
-				else insumo = new InsumoGeneral(id,descripcion,costo,precio,unidad, peso);
+				 i.setIdInsumo(rs.getInt("idInsumo"));
+				 i.setDescripcion(rs.getString("descripcion"));
+				 i.setUnidadMedida(UnidadMedida.valueof(rs.getString("unidadMedida"))); 
+				 i.setCosto(rs.getDouble("costo")); 
+			     i.setPrecio(rs.getDouble("precio"));	
+			
 				
-				lista.add(insumo);
+				lista.add(i);
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();

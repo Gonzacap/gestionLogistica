@@ -6,6 +6,10 @@ public class InsumoLiquido extends Insumo{
 	
 	private double densidad;
 	
+	 public InsumoLiquido() {
+			super();
+		}
+	
 	public InsumoLiquido(int idInsumo, String descripcion, double costo, double precio, UnidadMedida unidadMedida, Double densidad) {
 		super(idInsumo, descripcion, costo, precio, unidadMedida);
 		this.densidad= densidad;
