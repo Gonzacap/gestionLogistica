@@ -203,11 +203,8 @@ public class PanelCamion extends JPanel {
 		panelBuscar.setVisible(true);
 		panel.add(panelBuscar);
 		
-		//--------------------
-		
 		table_Camiones.getColumnModel().getColumn(0).setPreferredWidth(35);
 		
-		//----------------------------
 		
 		//---------accion click-------
 		
@@ -220,8 +217,11 @@ public class PanelCamion extends JPanel {
 				
 				if(fila>-1 && columna>-1) {
 					Integer idAux = Integer.valueOf((String) table_Camiones.getValueAt(fila,columna));
-					EditarCamion eC = new EditarCamion(idAux);
-					eC.setVisible(true);
+					
+					//EditarCamion eC = new EditarCamion(idAux);
+					//eC.setVisible(true);
+					AgregarEditarCamion eC = new AgregarEditarCamion();
+					eC.editarCamion(idAux);
 				}
 				
 			}
@@ -234,8 +234,11 @@ public class PanelCamion extends JPanel {
 		btnAlta.addActionListener(e-> {	//AccionAlta
 			
 			System.out.println("Camion -> Alta");
-			AgregarCamion aC = new AgregarCamion();
-			aC.frame.setVisible(true);
+			
+			AgregarEditarCamion aC = new AgregarEditarCamion();
+			aC.agregar();
+			//AgregarCamion aC = new AgregarCamion();
+			//aC.frame.setVisible(true);
 			
 		});
 		btnBaja.addActionListener(e-> { //AccionBaja

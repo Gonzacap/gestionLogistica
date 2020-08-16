@@ -37,15 +37,20 @@ public class CamionDaoMysql implements CamionDao{
 				pstmt.setInt(4, c.getKm());
 				pstmt.setDouble(5, c.getCostoKM());
 				pstmt.setDouble(6,c.getCostoHora());
+				pstmt.setDate(7,Date.valueOf(c.getFechaCompra()));
+				
 			
-			pstmt.executeUpdate();
+				pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("el problema 1");
 		}finally {
 			try {
 				if(pstmt!=null) pstmt.close();
-				if(conn!=null) conn.close();				
+				if(conn!=null) conn.close();	
+				
 			}catch(SQLException e) {
+				System.out.println("el problema 2");
 				e.printStackTrace();
 			}
 		}

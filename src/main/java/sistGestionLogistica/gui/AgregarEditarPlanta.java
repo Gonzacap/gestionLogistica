@@ -54,7 +54,7 @@ public class AgregarEditarPlanta {
 
 	public void agregar(){
 		
-		this.inicializar();
+		//this.inicializar();
 		frame.setTitle("Agregar Planta");
 		frame.setVisible(true);
 		
@@ -96,7 +96,7 @@ public class AgregarEditarPlanta {
 	
 	public void editar(){
 		
-		this.inicializar();	
+		//this.inicializar();	
 		frame.setTitle("Editar Planta");
 		frame.setVisible(true);
 		
