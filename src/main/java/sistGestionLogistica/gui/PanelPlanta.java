@@ -1,16 +1,15 @@
 package sistGestionLogistica.gui;
 
 import java.awt.Color;
+import java.awt.event.*;
+import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import excepciones.DatosInvalidosException;
+import sistGestionLogistica.controller.PlantaController;
+import sistGestionLogistica.gui.PanelCamion.AccionBuscar;
 import sistGestionLogistica.sistema.App;
 
 public class PanelPlanta extends JPanel {
@@ -19,21 +18,8 @@ public class PanelPlanta extends JPanel {
 	private JTextField textField_ID;
 	private JTextField textField_Nombre;
 	private JTextField textField_Tipo;
-	
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PanelCamion window = new PanelCamion();
-					window.frame.setVisible(true);
-					setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //esta linea no se si anda ahre
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
+	//Integer idAux;
 
 	public PanelPlanta() {
 
@@ -53,21 +39,25 @@ public class PanelPlanta extends JPanel {
 		
 		//---------Botones-----------------
 		
-		//---------Botones-----------------
-		
 		JButton btnAlta = new JButton("Alta");
 		btnAlta.setBounds(23, 37, 89, 23);
 		JButton btnBaja = new JButton("Baja");
 		btnBaja.setBounds(307, 37, 89, 23);
 		JButton btnModificar = new JButton("Modificar Por ID");
 		btnModificar.setBounds(136, 37, 130, 23);
+		JButton btnAgregarStock = new JButton("Agregar Stock");
+		btnAgregarStock.setBounds(419, 37, 89, 23);
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(419, 37, 89, 23);
+		btnBuscar.setBounds(550, 37, 89, 23);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
 		panel.add(btnModificar);
+		panel.add(btnAgregarStock);
 		panel.add(btnBuscar);
+		
+		//btnAgregarStock.setVisible(true);
+		btnAgregarStock.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(23, 208, 671, 222);
@@ -80,10 +70,10 @@ public class PanelPlanta extends JPanel {
 		table_Plantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_Plantas.setToolTipText("");
 		
-		table_Plantas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"ID", "Nombre", "Tipo"}) {
+		table_Plantas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"ID", "Nombre"/*, "Tipo"*/}) {
 			
 			Class[] columnTypes = new Class[] {
-				Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+				Object.class, String.class//, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -132,49 +122,68 @@ public class PanelPlanta extends JPanel {
 		btnBaja.addActionListener(e-> { //AccionBaja
 			
 			System.out.println("Planta -> Baja");
+			BajaPlanta bp = new BajaPlanta();
+			bp.setVisible(true);
 
 		});
-		btnModificar.addActionListener(e-> {
+		btnAgregarStock.addActionListener(e-> {	//agregar stock
 		
-			System.out.println("Planta -> Modificar");
-			AgregarEditarPlanta aP = new AgregarEditarPlanta();
-			aP.editar();
+			System.out.println("Planta -> Editar Stock");
+			//AgregarEditarPlanta aP = new AgregarEditarPlanta();
+			//aP.editar();
 
 		});
-		btnBuscar.addActionListener(e-> {
+		btnBuscar.addActionListener(new AccionBuscar());
+	
+	//---------accion click-------
+	
+	table_Plantas.addMouseListener(new MouseAdapter() { //
+		
+		
+		
+		public void mouseClicked(MouseEvent e) {
+			System.out.println("Plantas -> click Seleccionar");
+			int fila = table_Plantas.rowAtPoint(e.getPoint());
+			int columna = table_Plantas.columnAtPoint(e.getPoint());
 			
-			System.out.println("Planta -> Buscar");
-
-		});
-
-		
+			if(fila>-1 && columna>-1) {
+				Integer idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,columna));
+				//EditarCamion eC = new EditarCamion(idAux);
+				//eC.setVisible(true);
+				btnAgregarStock.setEnabled(true);
+			}
+			
+		}
+	});
+	
 	}
 	
+	//-----------------buscar-actualizar----------------
 	
-	/*class AccionBuscar implements ActionListener {
+	class AccionBuscar implements ActionListener {
 		 
+		@Override
 		 public void actionPerformed(ActionEvent e) {
 			 
-			 System.out.println("Camion -> Buscar");
+			 System.out.println("Planta -> Buscar");
 			 
-			 DefaultTableModel modelo = (DefaultTableModel) table_Camiones.getModel();
-			 CamionController cc=new CamionController();
+			 PlantaController pc=new PlantaController();
 			 
-			 try { 
-				this.actualizarTabla(cc.buscarCamion(textField_ID.getText(), textField_Patente.getText(), textField_Marca.getText(), textField_Modelo.getText(), textField_CostoKM.getText(), textField_CostoHora.getText(), textField_KM.getText(), textField_FechaCompra.getText()));
+			 try {
+				this.actualizarTabla(pc.buscarPlanta(textField_ID.getText(), textField_Nombre.getText()));
+				System.out.println("Buscar OK");
 			
-			 } catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
-				// TODO Auto-generated catch block
+			 } catch (DatosInvalidosException | SQLException e1) {
 				//e1.printStackTrace();
 			}
-		 }
+		 }	
 
-		private void actualizarTabla(String[][] aMostrar) throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
+		private void actualizarTabla(String[][] aMostrar) throws NumberFormatException, DatosInvalidosException, SQLException {
 			
-			table_Camiones.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Patente", "Marca", "Modelo", "KM", "CostoKM", "CostoHora", "FechaCompra"}) 
+			table_Plantas.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Nombre"/*, "Tipo"*/}) 
 			{
 				Class[] columnTypes = new Class[] {
-					Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+					Object.class, String.class//, String.class
 				};
 					
 				public Class getColumnClass(int columnIndex) {
@@ -183,7 +192,6 @@ public class PanelPlanta extends JPanel {
 			});
 			
 		}
-	}*/
-	
+	}
 	
 }

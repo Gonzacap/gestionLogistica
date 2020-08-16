@@ -81,13 +81,13 @@ public class AgregarEditarPlanta {
 				PlantaController pc= new PlantaController();
 				
 				try {
-					//pc.registrarPlanta(textField_Nombre.getText()));
+					pc.registrarPlanta(textField_Nombre.getText());
 					JOptionPane.showMessageDialog(frame,"La planta fue creada exitosamente.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
 					
-				} catch (DateTimeParseException | NumberFormatException e1) {
+				} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException e1) {
 					//e1.printStackTrace();
 					
-				} 
+				}
 			}				
 		});
 		

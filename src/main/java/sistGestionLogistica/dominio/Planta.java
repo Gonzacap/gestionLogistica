@@ -15,7 +15,9 @@ public class Planta {
 		this.listaStock = new ArrayList<StockInsumo>();
 	}
 	
-	
+	public Planta() {
+		super();
+	}
 	
 	public Integer getId() {
 		return id;

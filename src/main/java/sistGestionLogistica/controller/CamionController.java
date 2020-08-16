@@ -32,13 +32,8 @@ public class CamionController {
 		
 		// parseamos todos los datos que no sean String
 		
-		//try{
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			date = LocalDate.parse((CharSequence)fechaCompra, formatter);
-		//}catch (DatosInvalidosException e) {  
-		//	e.setMessage("fecha invalida");
-		//	JOptionPane.showMessageDialog(null,"Por favor ingrese una fecha valida.","Por favor verifique sus datos.",JOptionPane.ERROR_MESSAGE);
-		//}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		date = LocalDate.parse((CharSequence)fechaCompra, formatter);
 		
 		costo_km = Double.valueOf(costo_kmM);
 		costo_h = Double.valueOf(costo_hora);

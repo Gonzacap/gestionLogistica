@@ -11,6 +11,10 @@ import sistGestionLogistica.gui.PanelInsumo;
 
 
 public class App extends JFrame{
+	
+	//private Integer alturaP;
+	//private Integer anchoP;
+	
 	public App() {
 	}
 	
@@ -29,7 +33,8 @@ public class App extends JFrame{
 		aplicacion.inicializar();
 		aplicacion.setTitle("Sistema de Gestion Logistica");
 		aplicacion.setVisible(true);
-	
+		
+		JOptionPane.showMessageDialog(null, "¡Bienvenido!");
 
 	}
 	
@@ -89,8 +94,6 @@ public class App extends JFrame{
 		this.setContentPane(panel);
 		this.revalidate();
 		this.repaint();*/
-		
-		JOptionPane.showMessageDialog(null, "¡Bienvenido!");
 		
 		//--------Acciones Botones--------------	
 		

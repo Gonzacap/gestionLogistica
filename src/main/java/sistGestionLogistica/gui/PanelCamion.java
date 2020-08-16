@@ -26,20 +26,6 @@ public class PanelCamion extends JPanel {
 	private JTextField textField_FechaCompra;
 
 
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PanelCamion window = new PanelCamion();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
-
 	public PanelCamion() {
 		
 	}
@@ -290,7 +276,6 @@ public class PanelCamion extends JPanel {
 			 
 			 System.out.println("Camion -> Buscar");
 			 
-			 DefaultTableModel modelo = (DefaultTableModel) table_Camiones.getModel();
 			 CamionController cc=new CamionController();
 			 
 			 try { 

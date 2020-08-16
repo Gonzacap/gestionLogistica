@@ -1,5 +1,6 @@
 package sistGestionLogistica.servicios;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -9,6 +10,7 @@ import sistGestionLogistica.dao.CamionDao;
 import sistGestionLogistica.dao.CamionDaoMysql;
 import sistGestionLogistica.dao.PlantaDao;
 import sistGestionLogistica.dao.PlantaDaoMysql;
+import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.Planta;
 
 public class ServicePlanta {
@@ -34,6 +36,15 @@ public class ServicePlanta {
 		
 		return plantaDao.buscarTodos().stream()
 				.filter(filtroId).filter(filtroNombre).collect(Collectors.toList());
+	}
+	public Planta buscarPorId(Integer id) throws SQLException {
+		return plantaDao.buscarPorId(id);
+		
+	}
+	public void borrar(int id) throws SQLException {
+		
+		plantaDao.borrar(id);
+		
 	}
 
 }
