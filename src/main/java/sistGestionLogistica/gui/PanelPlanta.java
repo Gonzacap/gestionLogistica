@@ -1,6 +1,8 @@
 package sistGestionLogistica.gui;
 
-import java.awt.Color;
+import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.*;
 import java.sql.SQLException;
 
@@ -9,7 +11,6 @@ import javax.swing.table.DefaultTableModel;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.PlantaController;
-import sistGestionLogistica.gui.PanelCamion.AccionBuscar;
 import sistGestionLogistica.sistema.App;
 
 public class PanelPlanta extends JPanel {
@@ -18,8 +19,6 @@ public class PanelPlanta extends JPanel {
 	private JTextField textField_ID;
 	private JTextField textField_Nombre;
 	private JTextField textField_Tipo;
-
-	//Integer idAux;
 
 	public PanelPlanta() {
 
@@ -47,16 +46,13 @@ public class PanelPlanta extends JPanel {
 		btnModificar.setBounds(136, 37, 130, 23);
 		JButton btnAgregarStock = new JButton("Agregar Stock");
 		btnAgregarStock.setBounds(419, 37, 89, 23);
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(550, 37, 89, 23);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
 		panel.add(btnModificar);
 		panel.add(btnAgregarStock);
-		panel.add(btnBuscar);
 		
-		//btnAgregarStock.setVisible(true);
+		btnModificar.setEnabled(false);
 		btnAgregarStock.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -80,35 +76,72 @@ public class PanelPlanta extends JPanel {
 			}
 		});
 		
-		//-------tabla-------
+		//--------------------
 		
-		JLabel lblId = new JLabel("ID");
-		lblId.setBounds(35, 86, 46, 14);
-		JLabel lblNom = new JLabel("Nombre");
-		lblNom.setBounds(23, 117, 46, 14);
-		JLabel lblTipoP = new JLabel("Tipo");
-		lblTipoP.setBounds(23, 150, 46, 14);
+		//----------panel buscar----------
 		
-		panel.add(lblId);
-		panel.add(lblNom);		
-		panel.add(lblTipoP);
+		JPanel panelBuscar = new JPanel(new GridBagLayout());
+		panelBuscar.setBounds(50, 80, 700, 120);
+		
+		GridBagConstraints p = new GridBagConstraints();
+		p.gridheight = 1;
+		p.gridwidth = 1;
+		p.weightx = 50;
+		p.weighty = 80;
+		
+		//----------------------
+		
+		p.fill = GridBagConstraints.HORIZONTAL;
 		
 		textField_ID = new JTextField();
-		textField_ID.setBounds(76, 83, 86, 20);
+		p.gridx = 1;
+		p.gridy = 0;
+		panelBuscar.add(textField_ID, p);
+		
 		textField_Nombre = new JTextField();
-		textField_Nombre.setBounds(79, 114, 86, 20);
-		textField_Tipo = new JTextField();
-		textField_Tipo.setBounds(79, 147, 86, 20);
+		p.gridx = 1;
+		p.gridy = 1;
+		panelBuscar.add(textField_Nombre, p);
 		
-		panel.add(textField_ID);
-		panel.add(textField_Nombre);
-		//panel.add(textField_Tipo);
-		textField_ID.setColumns(10);
-		textField_Nombre.setColumns(10);
-		textField_Tipo.setColumns(10);		
+		/*textField_Tipo = new JTextField();
+		p.gridx = 3;
+		p.gridy = 0;
+		panelBuscar.add(textField_Tipo, p);	*/	
 		
+		//-------------------------
+		
+		p.fill = GridBagConstraints.CENTER;
+		
+		JLabel lblId = new JLabel("ID");
+		p.gridx = 0;
+		p.gridy = 0;
+		panelBuscar.add(lblId, p);
+		JLabel lblNom = new JLabel("Nombre");
+		p.gridx = 0;
+		p.gridy = 1;
+		panelBuscar.add(lblNom, p);
+		/*JLabel lblTipoP = new JLabel("Tipo");
+		p.gridx = 2;
+		p.gridy = 0;
+		panelBuscar.add(lblTipoP, p);*/
+		
+		//---------------------
+		
+		p.fill = GridBagConstraints.CENTER;
+		
+		JButton btnBuscar = new JButton("Buscar"+"\n"+"Actualizar");
+		p.gridx = 8;
+		p.gridheight = 1;
+		p.gridy = 0;
+		panelBuscar.add(btnBuscar, p);
+		
+		panelBuscar.setVisible(true);
+		panel.add(panelBuscar);
+		
+		//--------------------
+	
 		table_Plantas.getColumnModel().getColumn(0).setPreferredWidth(35);
-
+		
 		
 		//--------Acciones Botones--------------	
 		
@@ -151,6 +184,7 @@ public class PanelPlanta extends JPanel {
 				//EditarCamion eC = new EditarCamion(idAux);
 				//eC.setVisible(true);
 				btnAgregarStock.setEnabled(true);
+				btnModificar.setEnabled(true);
 			}
 			
 		}

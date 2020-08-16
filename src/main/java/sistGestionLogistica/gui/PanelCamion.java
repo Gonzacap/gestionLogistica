@@ -81,12 +81,11 @@ public class PanelCamion extends JPanel {
 			}
 		});
 		
-		//-------tabla--------
-		
 		//--------------------
 		
+		//---------panel buscar-----------
+		
 		JPanel panelBuscar = new JPanel(new GridBagLayout());
-		//panelBuscar.setLocation(40,80);
 		panelBuscar.setBounds(50, 80, 700, 120);
 		
 		GridBagConstraints c = new GridBagConstraints();
@@ -95,33 +94,27 @@ public class PanelCamion extends JPanel {
 		c.weightx = 50;
 		c.weighty = 80;
 		
-		//c.fill = GridBagConstraints.CENTER;
-		
 		//----------------------
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 
 		textField_ID = new JTextField();
 		c.gridx = 1;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(textField_ID, c);
 		
 		textField_Patente = new JTextField();
 		c.gridx = 1;
-		c.gridwidth = 1;
 		c.gridy = 1;
 		panelBuscar.add(textField_Patente, c);
 		
 		textField_Marca = new JTextField();
 		c.gridx = 3;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(textField_Marca, c);
 		
 		textField_Modelo = new JTextField();
 		c.gridx = 3;
-		c.gridwidth = 1;
 		c.gridy = 1;
 		panelBuscar.add(textField_Modelo, c);
 		
@@ -131,25 +124,21 @@ public class PanelCamion extends JPanel {
 		
 		JLabel lbl_4 = new JLabel("Id");
 		c.gridx = 0;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(lbl_4, c);
 		
 		JLabel lbl_5 = new JLabel("Patente");
 		c.gridx = 0;
-		c.gridwidth = 1;
 		c.gridy = 1;
 		panelBuscar.add(lbl_5, c);
 				
 		JLabel lbl_6 = new JLabel("Marca");
 		c.gridx = 2;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(lbl_6, c);
 		
 		JLabel lbl_7 = new JLabel("Modelo");
 		c.gridx = 2;
-		c.gridwidth = 1;
 		c.gridy = 1;
 		panelBuscar.add(lbl_7, c);
 		
@@ -159,25 +148,21 @@ public class PanelCamion extends JPanel {
 
 		textField_KM = new JTextField();
 		c.gridx = 5;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(textField_KM, c);
 		
 		textField_CostoKM = new JTextField();
 		c.gridx = 5;
-		c.gridwidth = 1;
 		c.gridy = 1;
 		panelBuscar.add(textField_CostoKM, c);
 		
 		textField_CostoHora = new JTextField();
 		c.gridx = 7;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(textField_CostoHora, c);
 		
 		textField_FechaCompra = new JTextField();
-		c.gridx = 7;
-		c.gridwidth = 1;
+		c.gridx = 7;;
 		c.gridy = 1;
 		panelBuscar.add(textField_FechaCompra, c);
 				
@@ -187,25 +172,21 @@ public class PanelCamion extends JPanel {
 				
 		JLabel lbl_0 = new JLabel("Km recorridos");
 		c.gridx = 4;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(lbl_0, c);
 		
 		JLabel lbl_1 = new JLabel("Costo por Km");
 		c.gridx = 4;
-		c.gridwidth = 1;
 		c.gridy = 1;
 		panelBuscar.add(lbl_1, c);
 		
 		JLabel lbl_2 = new JLabel("Costo por Hora");
 		c.gridx = 6;
-		c.gridwidth = 1;
 		c.gridy = 0;
 		panelBuscar.add(lbl_2, c);
 		
 		JLabel lbl_3 = new JLabel("Fecha");
 		c.gridx = 6;
-		c.gridwidth = 1;
 		c.gridy = 1;
 		panelBuscar.add(lbl_3, c);
 		
@@ -282,7 +263,6 @@ public class PanelCamion extends JPanel {
 				this.actualizarTabla(cc.buscarCamion(textField_ID.getText(), textField_Patente.getText(), textField_Marca.getText(), textField_Modelo.getText(), textField_CostoKM.getText(), textField_CostoHora.getText(), textField_KM.getText(), textField_FechaCompra.getText()));
 			
 			 } catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
-				// TODO Auto-generated catch block
 				//e1.printStackTrace();
 			}
 		 }
