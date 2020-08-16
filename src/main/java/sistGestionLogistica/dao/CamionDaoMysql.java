@@ -110,13 +110,7 @@ public class CamionDaoMysql implements CamionDao{
 			pstmt.setInt(1,id);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-//				c.setId(rs.getInt(1));
-//				c.setPatente(rs.getString(2));
-//				c.setMarca(rs.getString(3));
-//				c.setModelo(rs.getString(4));
-//				c.setCostoKM(rs.getDouble(5));
-//				c.setCostoHora(rs.getDouble(6));
-//				c.setFechaCompra(rs.getDate(7).toLocalDate());
+
 				
 				c.setId(rs.getInt("ID"));
 				c.setMarca(rs.getString("MARCA"));

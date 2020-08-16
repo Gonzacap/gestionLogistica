@@ -102,7 +102,7 @@ public class PanelPlanta extends JPanel {
 		
 		panel.add(textField_ID);
 		panel.add(textField_Nombre);
-		panel.add(textField_Tipo);
+		//panel.add(textField_Tipo);
 		textField_ID.setColumns(10);
 		textField_Nombre.setColumns(10);
 		textField_Tipo.setColumns(10);		

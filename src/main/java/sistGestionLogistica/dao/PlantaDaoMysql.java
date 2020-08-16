@@ -73,7 +73,7 @@ public class PlantaDaoMysql implements PlantaDao {
 	}
 
 	public Boolean update(Planta p) {
-		String update =	" UPDATE planta SET nombre = ? WHERE id = ?";
+		String update =	" UPDATE planta SET nombre = ? WHERE idPlanta = ?";
 		try {
 			if(p.getId()!=null && p.getId()>0) {
 				conn = DB.getConexion();
@@ -101,7 +101,7 @@ public class PlantaDaoMysql implements PlantaDao {
 	@Override
 	public Planta buscarPorId(Integer id)  throws SQLException{ 
 		
-		String buscar = "SELECT * FROM planta WHERE ID = ?";
+		String buscar = "SELECT * FROM planta WHERE idPlanta = ?";
 		Planta p = new Planta();
 		p.setId(-1);
 		try {
@@ -111,8 +111,8 @@ public class PlantaDaoMysql implements PlantaDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				
-				p.setId(rs.getInt("ID"));
-				p.setNombre(rs.getString("NOMBRE"));
+				p.setId(rs.getInt("idPlanta"));
+				p.setNombre(rs.getString("nombre"));
 			}
 			
 		} catch (Exception e) {
@@ -133,7 +133,7 @@ public class PlantaDaoMysql implements PlantaDao {
 	
 	public void borrar(Integer id) {
 		
-		String borrar = "DELETE FROM planta WHERE ID=?";
+		String borrar = "DELETE FROM planta WHERE idPlanta=?";
 			try {
 				conn=DB.getConexion();
 	            System.out.println("BORRADO?");
