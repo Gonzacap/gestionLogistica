@@ -2,9 +2,12 @@ package sistGestionLogistica.sistema;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.time.format.DateTimeParseException;
 
 import javax.swing.*;
 
+import excepciones.DatosInvalidosException;
 import sistGestionLogistica.gui.PanelCamion;
 import sistGestionLogistica.gui.PanelPlanta;
 import sistGestionLogistica.gui.PanelRutas;
@@ -17,7 +20,7 @@ public class App extends JFrame{
 	public App() {
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
 		
 		App aplicacion = new App();
 		
@@ -59,7 +62,7 @@ public class App extends JFrame{
 	//----------------METODOS----------------
 	
 	
-	private void inicializar() {
+	private void inicializar() throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
 		
 		//this.panel=new JPanel(new GridBagLayout());
 		this.menuPlantas = new JMenu("Plantas");
@@ -148,7 +151,12 @@ public class App extends JFrame{
 		gestorRutas.addActionListener(e->{
 	
 			System.out.println("App -> Panel Rutas");
-			pR.inicializar(this);			
+			try {
+				pR.inicializar(this);
+			} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}			
 			this.revalidate();
 			this.repaint();
 		});
@@ -186,7 +194,7 @@ public class App extends JFrame{
 		this.gestorPedidos.setEnabled(false);
 		this.gestorRutas.setEnabled(true);
 	}
-	public void RutasActivated() {
+	public void rutasActivated() {
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(true);
