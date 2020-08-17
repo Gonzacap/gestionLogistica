@@ -5,9 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DB {
-	private static final String url ="jdbc:mysql://db4free.net:3306/died2020?useSSL=false";
-	private static final String user="recursante2021";
-	private static final String pass="tpdied2020";
+//	private static final String url ="jdbc:mysql://db4free.net:3306/died2020?useSSL=false";
+	//private static final String user="recursante2021";
+//	private static final String pass="tpdied2020";
+	private static final String url ="jdbc:mysql://localhost:3306/died2020?serverTimezone=UTC";
+	private static final String user="root";
+	private static final String pass="";
 	
 	private static Connection crearConexion(){
 		Connection conn=null;

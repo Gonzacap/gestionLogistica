@@ -100,7 +100,9 @@ public class InsumoDaoMysql implements InsumoDao{
 	}
 
 	public Insumo buscarPorId(Integer id) throws SQLException {
-	   
+	    String buscar = "SELECT * FROM(SELECT i.idInsumo, i.descripcion, i.unidadMedida, i.costo, i.precio, il.densidad, ig.peso FROM insumo i LEFT JOIN insumoGeneral ig ON ig.idInsumo = i.idInsumo LEFT JOIN insumoLiquido il ON il.idInsumo=i.idInsumo) AS ALIAS WHERE idInsumo = ?";
+	     Insumo unInsumo;
+	     
 		return null;
 	}
 

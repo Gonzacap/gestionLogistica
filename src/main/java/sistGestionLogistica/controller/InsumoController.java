@@ -7,6 +7,7 @@ import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.InsumoGeneral;
 import sistGestionLogistica.dominio.InsumoLiquido;
 import sistGestionLogistica.enums.UnidadMedida;
+import sistGestionLogistica.servicios.ServiceCamion;
 import sistGestionLogistica.servicios.ServiceInsumo;
 
 public class InsumoController {
@@ -45,6 +46,12 @@ public class InsumoController {
 		else throw new DatosInvalidosException("Por favor rellene los campos");
 		
 		
+	}
+	
+	private Boolean existeId(Integer id) throws SQLException {
+		ServiceInsumo i=new ServiceInsumo();
+	//	if(i.buscarPorId(id).getId()<0) return false;
+		return true;
 	}
 
 }
