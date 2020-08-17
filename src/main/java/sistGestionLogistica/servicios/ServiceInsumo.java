@@ -43,18 +43,13 @@ public class ServiceInsumo {
 			//Aplicamos Filtros solo si corresponde
 			if(i.getIdInsumo()>=0) filtroId = (t) -> (i.getIdInsumo().equals(t.getIdInsumo()));
 			if(!i.getDescripcion().equals("")) filtroDescripcion = (t) -> (i.getDescripcion().equals(t.getDescripcion()));
-			if(i.getCosto()>=0) filtroCosto = (t) -> (i.getCosto().equals(t.getCosto()));
-			if(i.getPrecio()>=0) filtroPrecio = (t) -> (i.getPrecio().equals(t.getPrecio()));
 		
-			//falta unidad de medida
-			
 			
 			
 			
 			
 			return insumoDao.buscarTodos().stream().filter(filtroId)
-					.filter(filtroDescripcion).filter(filtroCosto)
-					.filter(filtroPrecio).collect(Collectors.toList());
+					.filter(filtroDescripcion).collect(Collectors.toList());
 		}
 
 }
