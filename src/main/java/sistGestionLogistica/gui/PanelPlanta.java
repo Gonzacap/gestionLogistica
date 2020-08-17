@@ -103,11 +103,6 @@ public class PanelPlanta extends JPanel {
 		p.gridy = 1;
 		panelBuscar.add(textField_Nombre, p);
 		
-		/*textField_Tipo = new JTextField();
-		p.gridx = 3;
-		p.gridy = 0;
-		panelBuscar.add(textField_Tipo, p);	*/	
-		
 		//-------------------------
 		
 		p.fill = GridBagConstraints.CENTER;
@@ -120,10 +115,6 @@ public class PanelPlanta extends JPanel {
 		p.gridx = 0;
 		p.gridy = 1;
 		panelBuscar.add(lblNom, p);
-		/*JLabel lblTipoP = new JLabel("Tipo");
-		p.gridx = 2;
-		p.gridy = 0;
-		panelBuscar.add(lblTipoP, p);*/
 		
 		//---------------------
 		
@@ -159,11 +150,16 @@ public class PanelPlanta extends JPanel {
 			bp.setVisible(true);
 
 		});
+		btnModificar.addActionListener(e-> {	//editar
+			
+			System.out.println("Planta -> Editar Stock");
+			AgregarEditarPlanta aP = new AgregarEditarPlanta();
+			aP.editar();
+
+		});
 		btnAgregarStock.addActionListener(e-> {	//agregar stock
 		
 			System.out.println("Planta -> Editar Stock");
-			//AgregarEditarPlanta aP = new AgregarEditarPlanta();
-			//aP.editar();
 
 		});
 		btnBuscar.addActionListener(new AccionBuscar());

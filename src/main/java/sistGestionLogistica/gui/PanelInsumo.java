@@ -17,6 +17,14 @@ public class PanelInsumo extends JPanel {
 	public PanelInsumo() {
 
 	}
+	
+	private JTable table_Insumos;
+	private JTextField textField_ID;
+	private JTextField textField_Desc;
+	private JTextField textField_UM;
+	private JTextField textField_Costo;
+	private JTextField textField_Precio;
+	private JTextField textField_Algo;
 
 	public void inicializar(App aplicacion) {
 		aplicacion.setTitle("Sistema de Gestion Logistica - Insumos");
@@ -33,46 +41,138 @@ public class PanelInsumo extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.setBounds(23, 37, 89, 23);
+		btnAlta.setBounds(20, 37, 90, 25);
 		JButton btnBaja = new JButton("Baja");
-		btnBaja.setBounds(221, 37, 89, 23);
-		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(122, 37, 89, 23);
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(320, 37, 89, 23);
+		btnBaja.setBounds(130, 37, 90, 25);
+		JLabel lblModificar = new JLabel("Seleccione el Id de un Insumo de la tabla para poder editarlo");
+		lblModificar.setBounds(240, 37, 350, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
-		panel.add(btnModificar);
-		panel.add(btnBuscar);
+		panel.add(lblModificar);
 		
-		//----------------------------
-
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(23, 208, 671, 222);
+		panel.add(scrollPane);
 		
-		//--------Acciones Botones--------------	
-			
-		btnAlta.addActionListener(e-> {	//AccionAlta
-					
-			System.out.println("Insumo -> Alta");
-					
+		//-------tabla-------
+		
+		table_Insumos = new JTable();
+		scrollPane.setViewportView(table_Insumos);
+		table_Insumos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_Insumos.setToolTipText("");
+		table_Insumos.setModel(new DefaultTableModel(
+		new Object[][] {
+			},
+			new String[] {
+				"ID", "Descripcion", "Unidad de Medida", "Costo", "Precio", "Algo¿"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+		};
+		public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
 		});
-		btnBaja.addActionListener(e-> { //AccionBaja
-					
-			System.out.println("Insumo -> Baja");
-
-		});
-		btnModificar.addActionListener(e-> {
+		
+		//--------------------
+		
+		//---------panel buscar-----------
 				
-			System.out.println("Insumo -> Modificar");
-
-		});
-		btnBuscar.addActionListener(e-> {
-					
-		System.out.println("Insumo -> Buscar");
-
-		});
-
+		JPanel panelBuscar = new JPanel(new GridBagLayout());
+		panelBuscar.setBounds(50, 80, 700, 120);
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		c.weightx = 50;
+		c.weighty = 80;
+		
+		//----------------------
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+		textField_ID = new JTextField();
+		c.gridx = 1;
+		c.gridy = 0;
+		panelBuscar.add(textField_ID, c);
+		textField_Desc = new JTextField();
+		c.gridx = 1;
+		c.gridy = 1;
+		panelBuscar.add(textField_Desc, c);
+		textField_UM = new JTextField();
+		c.gridx = 3;
+		c.gridy = 0;
+		panelBuscar.add(textField_UM, c);	
+		textField_Costo = new JTextField();
+		c.gridx = 3;
+		c.gridy = 1;
+		panelBuscar.add(textField_Costo, c);
+		textField_Precio = new JTextField();
+		c.gridx = 5;
+		c.gridy = 0;
+		panelBuscar.add(textField_Precio, c);
+		
+		//-------------------------
+		
+		c.fill = GridBagConstraints.CENTER;
+		
+		JLabel lblId = new JLabel("Id");
+		c.gridx = 0;
+		c.gridy = 0;
+		panelBuscar.add(lblId, c);
+		JLabel lblDesc = new JLabel("Descripcipon");
+		c.gridx = 0;
+		c.gridy = 1;
+		panelBuscar.add(lblDesc, c);		
+		JLabel lblUM = new JLabel("Unidad de Medida");
+		c.gridx = 2;
+		c.gridy = 0;
+		panelBuscar.add(lblUM, c);
+		JLabel lblCosto = new JLabel("Costo");
+		c.gridx = 2;
+		c.gridy = 1;
+		panelBuscar.add(lblCosto, c);
+		JLabel lblPrecio = new JLabel("Precio");
+		c.gridx = 4;
+		c.gridy = 0;
+		panelBuscar.add(lblPrecio, c);
+		
+		//----------------------
+			
+		c.fill = GridBagConstraints.CENTER;
+		
+		JButton btnBuscar = new JButton("Buscar"+"\n"+"Actualizar");
+		c.gridx = 4;
+		c.gridwidth = 2;
+		c.gridy = 1;
+		panelBuscar.add(btnBuscar, c);
+			
+		panelBuscar.setVisible(true);
+		panel.add(panelBuscar);
+				
+		table_Insumos.getColumnModel().getColumn(0).setPreferredWidth(35);
+			
+				
 		//---------accion click-------
+		
+		/*table_Insumos.addMouseListener(new MouseAdapter() {
+						
+		public void mouseClicked(MouseEvent e) {
+			System.out.println("Camion -> click Modificar");
+			int fila = table_Insumos.rowAtPoint(e.getPoint());
+			int columna = table_Insumos.columnAtPoint(e.getPoint());
+				
+				if(fila>-1 && columna>-1) {
+					Integer idAux = Integer.valueOf((String) table_Insumos.getValueAt(fila,columna));
+					
+					AgregarEditarCamion eC = new AgregarEditarCamion();
+					eC.editarCamion(idAux);
+				}
+			}
+		});*/
+				
+		//---------------------------
 		
 		/*table_Plantas.addMouseListener(new MouseAdapter() { //
 			
