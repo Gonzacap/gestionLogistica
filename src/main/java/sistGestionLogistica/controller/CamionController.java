@@ -41,9 +41,10 @@ public class CamionController {
 		
 		
 		//validamos los datos
-		if(!this.existePatente(patente)) {
+		if(!patente.equals("") && !marca.equals("") && !modelo.equals("")) {
+		
 			
-			if(!patente.equals("") && !marca.equals("") && !modelo.equals("")) {
+			if(!this.existePatente(patente)) {
 				
 				if(costo_km>=0 && costo_h>=0 && kilometros>=0) {
 					Camion cam= new Camion(-1,patente.toUpperCase(), marca.toUpperCase(), modelo.toUpperCase(), costo_km , costo_h,kilometros, date);
@@ -54,9 +55,10 @@ public class CamionController {
 				}
 				else throw new DatosInvalidosException("Los valores no pueden ser menores que 0");
 			}
-			else throw new DatosInvalidosException("Por favor rellene los campos");
+			else throw new DatosInvalidosException("Patente existente, camion ya registrado");
 		}
-		else throw new DatosInvalidosException("Patente existente, camion ya registrado");
+		
+		else throw new DatosInvalidosException("Por favor rellene los campos");
 			
 		
 	}
