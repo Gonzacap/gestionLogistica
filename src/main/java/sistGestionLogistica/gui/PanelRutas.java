@@ -10,26 +10,25 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import excepciones.DatosInvalidosException;
-import sistGestionLogistica.controller.PlantaController;
 import sistGestionLogistica.sistema.App;
 
-public class PanelPlanta extends JPanel {
+public class PanelRutas extends JPanel {
 
 	private JTable table_Plantas;
 	private JTextField textField_ID;
 	private JTextField textField_Nombre;
 	private JTextField textField_Tipo;
 
-	public PanelPlanta() {
+	public PanelRutas() {
 
 	}
 	
 	public void inicializar(App aplicacion) {
-		aplicacion.setTitle("Sistema de Gestion Logistica - Plantas");		
+		aplicacion.setTitle("Sistema de Gestion Logistica - Rutas");		
 		
-		PanelPlanta panel = new PanelPlanta();
+		PanelRutas panel = new PanelRutas();
 		panel.setLayout(null);
-		panel.setBackground(Color.white);
+		panel.setBackground(Color.gray);
 		
 		aplicacion.plantasActivated();
 		aplicacion.setContentPane(panel);
@@ -103,11 +102,6 @@ public class PanelPlanta extends JPanel {
 		p.gridy = 1;
 		panelBuscar.add(textField_Nombre, p);
 		
-		/*textField_Tipo = new JTextField();
-		p.gridx = 3;
-		p.gridy = 0;
-		panelBuscar.add(textField_Tipo, p);	*/	
-		
 		//-------------------------
 		
 		p.fill = GridBagConstraints.CENTER;
@@ -120,10 +114,6 @@ public class PanelPlanta extends JPanel {
 		p.gridx = 0;
 		p.gridy = 1;
 		panelBuscar.add(lblNom, p);
-		/*JLabel lblTipoP = new JLabel("Tipo");
-		p.gridx = 2;
-		p.gridy = 0;
-		panelBuscar.add(lblTipoP, p);*/
 		
 		//---------------------
 		
@@ -149,28 +139,26 @@ public class PanelPlanta extends JPanel {
 			
 			System.out.println("Planta -> Alta");
 			AgregarEditarPlanta aP = new AgregarEditarPlanta();
-			aP.agregar();
+			
 			
 		});
 		btnBaja.addActionListener(e-> { //AccionBaja
 			
 			System.out.println("Planta -> Baja");
-			BajaPlanta bp = new BajaPlanta();
-			bp.setVisible(true);
+			
 
 		});
 		btnAgregarStock.addActionListener(e-> {	//agregar stock
 		
 			System.out.println("Planta -> Editar Stock");
-			//AgregarEditarPlanta aP = new AgregarEditarPlanta();
-			//aP.editar();
+			
 
 		});
-		btnBuscar.addActionListener(new AccionBuscar());
+		//btnBuscar.addActionListener(new AccionBuscar());
 	
 	//---------accion click-------
 	
-	table_Plantas.addMouseListener(new MouseAdapter() { //
+	/*table_Plantas.addMouseListener(new MouseAdapter() { //
 		
 		
 		
@@ -186,13 +174,13 @@ public class PanelPlanta extends JPanel {
 			}
 			
 		}
-	});
+	});*/
 	
 	}
 	
 	//-----------------buscar-actualizar----------------
 	
-	class AccionBuscar implements ActionListener {
+	/*class AccionBuscar implements ActionListener {
 		 
 		@Override
 		 public void actionPerformed(ActionEvent e) {
@@ -212,7 +200,7 @@ public class PanelPlanta extends JPanel {
 
 		private void actualizarTabla(String[][] aMostrar) throws NumberFormatException, DatosInvalidosException, SQLException {
 			
-			table_Plantas.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Nombre"/*, "Tipo"*/}) 
+			table_Plantas.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Nombre"}) 
 			{
 				Class[] columnTypes = new Class[] {
 					Object.class, String.class//, String.class
@@ -224,6 +212,6 @@ public class PanelPlanta extends JPanel {
 			});
 			
 		}
-	}
+	}*/
 	
 }

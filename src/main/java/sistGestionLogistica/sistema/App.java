@@ -7,13 +7,12 @@ import javax.swing.*;
 
 import sistGestionLogistica.gui.PanelCamion;
 import sistGestionLogistica.gui.PanelPlanta;
+import sistGestionLogistica.gui.PanelRutas;
 import sistGestionLogistica.gui.PanelInsumo;
+import sistGestionLogistica.gui.PanelPedidos;
 
 
 public class App extends JFrame{
-	
-	//private Integer alturaP;
-	//private Integer anchoP;
 	
 	public App() {
 	}
@@ -42,15 +41,20 @@ public class App extends JFrame{
 	private JMenu menuPlantas;
 	private JMenu menuCamiones;
 	private JMenu menuInsumos;
+	private JMenu menuPedidos;
+	private JMenu menuRutas;
 	private JMenuBar barraMenu;
 	private JMenuItem gestorPlantas;
 	private JMenuItem gestorCamiones;
 	private JMenuItem gestorInsumos;
+	private JMenuItem gestorPedidos;
+	private JMenuItem gestorRutas;
 	
 	private PanelPlanta pP;
 	private PanelCamion pC;
 	private PanelInsumo pI;
-	 
+	private PanelPedidos pD;
+	private PanelRutas pR; 
 	
 	//----------------METODOS----------------
 	
@@ -61,26 +65,38 @@ public class App extends JFrame{
 		this.menuPlantas = new JMenu("Plantas");
 		this.menuCamiones = new JMenu("Camiones");
 		this.menuInsumos = new JMenu("Insumos");
+		this.menuPedidos = new JMenu("Pedidos");
+		this.menuRutas = new JMenu("Rutas");
 		this.barraMenu = new JMenuBar();
 		this.gridbag = new GridBagConstraints();
-		this.gestorPlantas = new JMenuItem("Gestionar plantas");
-		this.gestorCamiones = new JMenuItem("Gestionar camiones");
-		this.gestorInsumos=new JMenuItem("Gestionar insumos");
+		this.gestorPlantas = new JMenuItem("Gestionar Plantas");
+		this.gestorCamiones = new JMenuItem("Gestionar Camiones");
+		this.gestorInsumos =new JMenuItem("Gestionar Insumos");
+		this.gestorPedidos =new JMenuItem("Gestionar Pedidos");
+		this.gestorRutas =new JMenuItem("Gestionar Rutas");
 		
 		this.pP = new PanelPlanta();
 		this.pI = new PanelInsumo();
-		this.pC= new PanelCamion();
+		this.pC = new PanelCamion();
+		this.pD = new PanelPedidos();
+		this.pR = new PanelRutas();
 		
 		pP.inicializar(this);
 		pI.inicializar(this);
+		pD.inicializar(this);
+		pR.inicializar(this);
 		pC.inicializar(this);
 		
 		menuPlantas.add(gestorPlantas);
 		menuInsumos.add(gestorInsumos);
+		menuPedidos.add(gestorPedidos);
+		menuRutas.add(gestorRutas);
 		menuCamiones.add(gestorCamiones);
 		barraMenu.add(menuPlantas);
 		barraMenu.add(menuCamiones);
 		barraMenu.add(menuInsumos);
+		barraMenu.add(menuPedidos);
+		barraMenu.add(menuRutas);
 		this.setJMenuBar(barraMenu);
 		
 		
@@ -121,6 +137,22 @@ public class App extends JFrame{
 			this.repaint();
 		});
 		
+		gestorPedidos.addActionListener(e->{
+			
+			System.out.println("App -> Panel Pedidos");
+			pD.inicializar(this);			
+			this.revalidate();
+			this.repaint();
+		});
+
+		gestorRutas.addActionListener(e->{
+	
+			System.out.println("App -> Panel Rutas");
+			pR.inicializar(this);			
+			this.revalidate();
+			this.repaint();
+		});
+		
 		
 	}
 	
@@ -130,16 +162,36 @@ public class App extends JFrame{
 		this.gestorCamiones.setEnabled(false);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(true);
+		this.gestorPedidos.setEnabled(true);
+		this.gestorRutas.setEnabled(true);
 	}
 	public void plantasActivated() {
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(false);
 		this.gestorInsumos.setEnabled(true);
+		this.gestorPedidos.setEnabled(true);
+		this.gestorRutas.setEnabled(true);
 	}
 	public void insumosActivated() {
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(false);
+		this.gestorPedidos.setEnabled(true);
+		this.gestorRutas.setEnabled(true);
+	}
+	public void pedidosActivated() {
+		this.gestorCamiones.setEnabled(true);
+		this.gestorPlantas.setEnabled(true);
+		this.gestorInsumos.setEnabled(true);
+		this.gestorPedidos.setEnabled(false);
+		this.gestorRutas.setEnabled(true);
+	}
+	public void RutasActivated() {
+		this.gestorCamiones.setEnabled(true);
+		this.gestorPlantas.setEnabled(true);
+		this.gestorInsumos.setEnabled(true);
+		this.gestorPedidos.setEnabled(true);
+		this.gestorRutas.setEnabled(false);
 	}
 	
 }
