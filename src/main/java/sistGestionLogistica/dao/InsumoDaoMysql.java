@@ -100,12 +100,49 @@ public class InsumoDaoMysql implements InsumoDao{
 	}
 
 	public Insumo buscarPorId(Integer id) throws SQLException {
-	    String buscar = "SELECT * FROM(SELECT i.idInsumo, i.descripcion, i.unidadMedida, i.costo, i.precio, il.densidad, ig.peso FROM insumo i LEFT JOIN insumoGeneral ig ON ig.idInsumo = i.idInsumo LEFT JOIN insumoLiquido il ON il.idInsumo=i.idInsumo) AS ALIAS WHERE idInsumo = ?";
-	     Insumo unInsumo;
-	     
-		return null;
-	}
+		String buscar = "SELECT * FROM(SELECT i.idInsumo, i.descripcion, i.unidadMedida, i.costo, i.precio, il.densidad, ig.peso FROM insumo i LEFT JOIN insumoGeneral ig ON ig.idInsumo = i.idInsumo LEFT JOIN insumoLiquido il ON il.idInsumo=i.idInsumo) AS ALIAS WHERE idInsumo = ?";
+		Insumo i = null;
+		try {
+			conn = DB.getConexion();
+			pstmt = conn.prepareStatement(buscar);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				//Insumo i;
 
+				if (rs.getDouble("peso") > 0) {
+					i = new InsumoGeneral();
+					((InsumoGeneral) i).setPeso(rs.getDouble("peso"));
+				} else {
+					i = new InsumoLiquido();
+					((InsumoLiquido) i).setDensidad(rs.getDouble("densidad"));
+				}
+
+				i.setIdInsumo(rs.getInt("idInsumo"));
+				i.setDescripcion(rs.getString("descripcion"));
+				i.setUnidadMedida(UnidadMedida.valueof(rs.getString("unidadMedida")));
+				i.setCosto(rs.getDouble("costo"));
+				i.setPrecio(rs.getDouble("precio"));
+			
+			}
+		} catch (Exception e) {
+			e.getStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return i;
+	}
 	public void borrar(Integer id) throws SQLException {
 
 		String borrar = "DELETE FROM insumo WHERE idInsumo = ?";

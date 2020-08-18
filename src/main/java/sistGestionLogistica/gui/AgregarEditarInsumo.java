@@ -97,8 +97,8 @@ public class AgregarEditarInsumo {
 		btnAgregar.setBounds(290, 100, 90, 25);
 		panel.add(btnAgregar);
 		
-		/*
-		btnAgregar.addActionListener(new ActionListener(){
+		
+		/*btnAgregar.addActionListener(new ActionListener(){
 				
 				public void actionPerformed(ActionEvent e) {
 				
@@ -118,7 +118,7 @@ public class AgregarEditarInsumo {
 					e1.printStackTrace();
 				} 
 			}				
-		});*/
+		})*/
 		
 	}
 	

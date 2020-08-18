@@ -52,4 +52,9 @@ public class ServiceInsumo {
 					.filter(filtroDescripcion).collect(Collectors.toList());
 		}
 
+	public Insumo buscarPorId(Integer id) throws SQLException {
+		this.insumoDao.buscarPorId(id);
+		return null;
+	}
+
 }

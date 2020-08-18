@@ -129,11 +129,11 @@ public class PanelRutas extends JPanel {
 		p.gridx = 0;
 		p.gridy = 2;
 		panelBuscar.add(lblPM, p);
-		JLabel lblPO = new JLabel("Duracion");
+		JLabel lblPO = new JLabel("Planta Origen");
 		p.gridx = 0;
 		p.gridy = 3;
 		panelBuscar.add(lblPO, p);
-		JLabel lblPD = new JLabel("Duracion");
+		JLabel lblPD = new JLabel("Planta Destino");
 		p.gridx = 0;
 		p.gridy = 4;
 		panelBuscar.add(lblPD, p);
