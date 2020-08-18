@@ -172,10 +172,11 @@ public class PanelRutas extends JPanel {
 				try {
 					gc.conectarPlantas(textField_Distancia.getText(), textField_DViaje.getText(), textField_PesoMax.getText(), 
 							idOr.toString(), idDest.toString());
+					JOptionPane.showMessageDialog(null,"La ruta due dada de alta con exito.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
 				} catch (DatosInvalidosException | SQLException | GrafoException e1) {
 					//e1.printStackTrace();
 				}
-				JOptionPane.showMessageDialog(null,"La ruta due dada de alta con exito.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
+				
 			}
 			else{
 				JOptionPane.showMessageDialog(null,"La planta de origen debe ser distinta a la de destino ", "Alta no completada",JOptionPane.ERROR_MESSAGE);

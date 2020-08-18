@@ -77,7 +77,7 @@ public class AgregarEditarInsumo {
 		
 
 		textField_Descripcion.setColumns(10);
-	  // comboBox_UnidadMedida).setColumns(10);
+	  //comboBox_UnidadMedida).setColumns(10);
 		textField_Costo.setColumns(10);
 		textField_Precio.setColumns(10);
         
