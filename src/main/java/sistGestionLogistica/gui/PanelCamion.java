@@ -213,10 +213,10 @@ public class PanelCamion extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Camion -> click Modificar");
 				int fila = table_Camiones.rowAtPoint(e.getPoint());
-				int columna = table_Camiones.columnAtPoint(e.getPoint());
+				//int columna = table_Camiones.columnAtPoint(e.getPoint());
 				
-				if(fila>-1 && columna>-1) {
-					Integer idAux = Integer.valueOf((String) table_Camiones.getValueAt(fila,columna));
+				if(fila>-1 /*&& columna>-1*/) {
+					Integer idAux = Integer.valueOf((String) table_Camiones.getValueAt(fila,0));
 					
 					//EditarCamion eC = new EditarCamion(idAux);
 					//eC.setVisible(true);

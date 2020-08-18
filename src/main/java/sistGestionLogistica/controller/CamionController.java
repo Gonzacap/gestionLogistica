@@ -97,8 +97,8 @@ public class CamionController {
 				}
 				else throw new DatosInvalidosException();
 		
-		
 	}
+	
 	public void borrarCamion(String idCamion) throws DatosInvalidosException, SQLException,NumberFormatException {
 		Integer id;
 		id=Integer.valueOf(idCamion);

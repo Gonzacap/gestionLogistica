@@ -129,11 +129,18 @@ public class PanelInsumo extends JPanel {
 		
       btnAlta.addActionListener(e-> {	//AccionAlta
 			
-			System.out.println("Camion -> Alta");
+			System.out.println("Insumo -> Alta");
 			
 			AgregarEditarInsumo aI = new AgregarEditarInsumo();
 			aI.agregar();			
-		});
+      });
+      btnBaja.addActionListener(e-> {	//AccionAlta
+			
+			System.out.println("Insumo -> Baja");
+			
+			BajaInsumo bI = new BajaInsumo();
+			bI.setVisible(true);			
+      });
       
       btnBuscar.addActionListener(new AccionBuscar());
 				

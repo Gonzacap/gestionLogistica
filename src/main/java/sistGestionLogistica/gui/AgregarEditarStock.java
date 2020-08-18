@@ -15,10 +15,9 @@ import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.PlantaController;
 
 
-public class AgregarEditarPlanta {
+public class AgregarEditarStock {
 
 	private JFrame frame;
-	private JTextField textField_id;
 	private JTextField textField_Nombre;
 	private JPanel panel;
 
@@ -26,9 +25,8 @@ public class AgregarEditarPlanta {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarEditarPlanta window = new AgregarEditarPlanta();
+					AgregarEditarStock window = new AgregarEditarStock();
 					window.frame.setVisible(true);
-					window.editarPlanta(3);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,7 +35,7 @@ public class AgregarEditarPlanta {
 	}
 
 
-	public AgregarEditarPlanta() {
+	public AgregarEditarStock() {
 		//super();
 		inicializar();
 	}
@@ -96,12 +94,6 @@ public class AgregarEditarPlanta {
 		
 	}
 	
-	public void editarPlanta(Integer id) {
-		this.textField_id = new JTextField();
-		this.textField_id.setText(id.toString());
-		editar();
-	}
-	
 	public void editar(){
 		
 		//this.inicializar();	
@@ -118,30 +110,25 @@ public class AgregarEditarPlanta {
 		panel.add(lblNombre);
 		panel.add(textField_Nombre);
 		
-		JButton btnEditar= new JButton("Editar");
-		btnEditar.setBounds(252, 105, 89, 23);
-		panel.add(btnEditar);
+		JButton btnAgregar = new JButton("Editar");
+		btnAgregar.setBounds(252, 105, 89, 23);
+		panel.add(btnAgregar);
 		
 		
-		
-		
+		JButton btnEditar = new JButton("EDITAR");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				System.out.println("accion editar");
 				
 				PlantaController pc= new PlantaController();
 				
 				try {
-					pc.editarPlanta(textField_id.getText(), textField_Nombre.getText());
+					pc.registrarPlanta(textField_Nombre.getText());
 					
 					JOptionPane.showMessageDialog(frame,"La planta fue editada con exito.", "Edicion Exitosa",JOptionPane.INFORMATION_MESSAGE);
 				
 				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
 					JOptionPane.showMessageDialog(frame,"Por favor verifique sus datos.","Datos Invalidos",JOptionPane.ERROR_MESSAGE);
-					//e1.printStackTrace();
-				} catch (SQLException e1) {
 					//e1.printStackTrace();
 				}
 			}

@@ -19,6 +19,7 @@ public class PanelPlanta extends JPanel {
 	private JTextField textField_ID;
 	private JTextField textField_Nombre;
 	private JTextField textField_Tipo;
+	private Integer idAux;
 
 	public PanelPlanta() {
 
@@ -152,14 +153,15 @@ public class PanelPlanta extends JPanel {
 		});
 		btnModificar.addActionListener(e-> {	//editar
 			
-			System.out.println("Planta -> Editar Stock");
-			AgregarEditarPlanta aP = new AgregarEditarPlanta();
-			aP.editar();
+			System.out.println("Planta -> Editar Planta");
+			AgregarEditarPlanta eP = new AgregarEditarPlanta();
+			eP.editarPlanta(idAux);
 
 		});
 		btnAgregarStock.addActionListener(e-> {	//agregar stock
 		
 			System.out.println("Planta -> Editar Stock");
+			AgregarEditarStock aP = new AgregarEditarStock();
 
 		});
 		btnBuscar.addActionListener(new AccionBuscar());
@@ -173,10 +175,10 @@ public class PanelPlanta extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Plantas -> click Seleccionar");
 			int fila = table_Plantas.rowAtPoint(e.getPoint());
-			int columna = table_Plantas.columnAtPoint(e.getPoint());
+			//int columna = table_Plantas.columnAtPoint(e.getPoint());
 			
-			if(fila>-1 && columna>-1) {
-				Integer idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,columna));
+			if(fila>-1 /*&& columna>-1*/){
+				idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
 				btnAgregarStock.setEnabled(true);
 				btnModificar.setEnabled(true);
 			}

@@ -23,6 +23,9 @@ public class ServicePlanta {
 	public Boolean registrarPlanta(Planta p) {
 		return this.plantaDao.save(p);		
 	}
+	public Boolean editarPlanta(Planta p) {
+		return this.plantaDao.update(p);		
+	}
 	
 	public List<Planta> buscarPlanta(Planta p){
 		

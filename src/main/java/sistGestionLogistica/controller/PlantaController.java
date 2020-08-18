@@ -28,6 +28,26 @@ public class PlantaController {
 
 	}
 	
+	public void editarPlanta(String idPlanta, String nombre) throws DatosInvalidosException, SQLException {
+		
+		Integer id = Integer.valueOf(idPlanta);
+		
+		if(this.existeId(id)) {
+			
+			if(!nombre.isEmpty() && !this.existeNombre(nombre)) {
+				
+				Planta p = new Planta(id,nombre.toUpperCase());
+				System.out.println("Editando planta");
+				ServicePlanta sp = new ServicePlanta();
+				sp.editarPlanta(p);
+				System.out.println("Planta editada");
+			
+			}
+			else throw new DatosInvalidosException("Por favor, ingrese un nombre");
+		}
+		else throw new DatosInvalidosException("ID inexistente");
+		
+	}
 	
 	public String[][] buscarPlanta(String idPlanta, String nombre) 
 			throws DatosInvalidosException, SQLException,DateTimeParseException,NumberFormatException {
