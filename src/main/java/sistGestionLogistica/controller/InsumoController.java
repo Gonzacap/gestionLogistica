@@ -1,8 +1,10 @@
 package sistGestionLogistica.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import excepciones.DatosInvalidosException;
+import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.InsumoGeneral;
 import sistGestionLogistica.dominio.InsumoLiquido;
@@ -98,6 +100,49 @@ public class InsumoController {
 		ServiceInsumo i=new ServiceInsumo();
 		if(i.buscarPorId(id).getIdInsumo()<0) return false;
 		return true;
+	}
+	
+	
+	//devuelve una matriz con columnas ID, DESCRIPCION, PRECIO, COSTO, UNIDADMEDIDA, TIPO, DENSIDAD, PESO
+	public String[][] buscarInsumo(String idInsumo, String descripcion) throws SQLException{
+		Integer id=-1;
+		
+		//Formateamos los parametros de busqueda
+		if(!idInsumo.isBlank()) id=Integer.valueOf(idInsumo);
+		if(!descripcion.isBlank()) descripcion = descripcion.toUpperCase();
+		
+		//creamos el modelo del camion a buscar
+		Insumo ins= new InsumoLiquido(id,descripcion,-1.0,-1.0,UnidadMedida.KG,-1.0);
+		ServiceInsumo ser = new ServiceInsumo();
+				
+		//buscamos los camiones que coincidan con la busqueda y los devolvemos como matriz de string
+		return this.aMatriz(ser.buscarInsumo(ins));
+		
+		
+	}
+	
+	public String[][] aMatriz(List<Insumo> listaInsumo){
+		String[][] matriz = new String[listaInsumo.size()][8];
+		
+		for(int i=0; i<listaInsumo.size();i++) {
+			matriz[i][0]= listaInsumo.get(i).getIdInsumo().toString();
+			matriz[i][1]= listaInsumo.get(i).getDescripcion().toString();
+			matriz[i][2]= listaInsumo.get(i).getPrecio().toString();
+			matriz[i][3]= listaInsumo.get(i).getCosto().toString();
+			matriz[i][4]= listaInsumo.get(i).getUnidadMedida().toString();
+			if(listaInsumo.get(i) instanceof InsumoLiquido) {
+				matriz[i][5]= "LIQUIDO";
+				matriz[i][6]= ((InsumoLiquido) listaInsumo.get(i)).getDensidad().toString();
+				matriz[i][7]= "";
+			}else {
+				matriz[i][5]= "GENERAL";
+				matriz[i][6]= "";
+				matriz[i][7]= ((InsumoGeneral) listaInsumo.get(i)).getPeso().toString();
+			}
+
+		}
+		
+		return matriz;
 	}
 
 }

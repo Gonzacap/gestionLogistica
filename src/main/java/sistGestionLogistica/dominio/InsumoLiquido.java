@@ -4,7 +4,7 @@ import sistGestionLogistica.enums.UnidadMedida;
 
 public class InsumoLiquido extends Insumo{
 	
-	private double densidad;
+	private Double densidad;
 	
 	 public InsumoLiquido() {
 			super();
@@ -24,7 +24,7 @@ public class InsumoLiquido extends Insumo{
 
 	//0.001
 	
-	public double getDensidad() {
+	public Double getDensidad() {
 		return densidad;
 	}
 

@@ -35,10 +35,7 @@ public class ServiceInsumo {
 			//inicializamos predicados
 			Predicate<Insumo> filtroId = (t) -> (true);
 			Predicate<Insumo> filtroDescripcion = (t) -> (true);
-			Predicate<Insumo> filtroUnidadMedida = (t) -> (true);
-			Predicate<Insumo> filtroCosto = (t) -> (true);
-			Predicate<Insumo> filtroPrecio = (t) -> (true);
-			Predicate<Insumo> filtroTipo = (t) -> (true);
+		
 			
 			//Aplicamos Filtros solo si corresponde
 			if(i.getIdInsumo()>=0) filtroId = (t) -> (i.getIdInsumo().equals(t.getIdInsumo()));
