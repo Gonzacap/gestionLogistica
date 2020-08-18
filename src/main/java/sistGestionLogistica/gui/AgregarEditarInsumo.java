@@ -17,9 +17,16 @@ public class AgregarEditarInsumo {
 	private JPanel panel;
 	private JTextField textField_id;
 	private JTextField textField_Descipcion;
-	private JTextField textField_UnidadMedida;
+	private JComboBox  comboBox_UnidadMedida;
 	private JTextField textField_Costo;
 	private JTextField textField_Precio;
+	private JComboBox  comboBox_Tipo;
+	private JTextField textField_Densidad;
+	private JTextField textField_Peso;
+	
+	
+	private String[] unidadM = {"KG","PIEZA","GR","M","LT","M2","M3","CM3"};
+	private String[] tipo = {"LIQUIDO","GENERAL"};
 	
 
 	public static void main(String[] args) {
@@ -52,38 +59,78 @@ public class AgregarEditarInsumo {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		
+		comboBox_Tipo = new JComboBox(tipo);
+		comboBox_Tipo.setBounds(140, 25, 100, 20);
 		textField_Descipcion = new JTextField();
-		textField_Descipcion.setBounds(140, 25, 100, 20);
-		textField_UnidadMedida = new JTextField();
-		textField_UnidadMedida.setBounds(140, 50, 100, 20);
+		textField_Descipcion.setBounds(140, 50, 100, 20);
+		comboBox_UnidadMedida = new JComboBox(unidadM);
+		comboBox_UnidadMedida.setBounds(140, 75, 100, 20);
 		textField_Costo = new JTextField();
-		textField_Costo.setBounds(140, 75, 100, 20);
+		textField_Costo.setBounds(140, 100, 100, 20);
 		textField_Precio = new JTextField();
-		textField_Precio.setBounds(140, 100, 100, 20);
+		textField_Precio.setBounds(140, 125, 100, 20);
+		textField_Densidad = new JTextField();
+		textField_Densidad.setBounds(140, 150, 100, 20);
+		textField_Peso = new JTextField();
+		textField_Peso.setBounds(140, 175, 100, 20);
+		
 
 		textField_Descipcion.setColumns(10);
-		textField_UnidadMedida.setColumns(10);
+	  // comboBox_UnidadMedida).setColumns(10);
 		textField_Costo.setColumns(10);
 		textField_Precio.setColumns(10);
-
-		JLabel lblDescipcion = new JLabel("Descipcion");
-		lblDescipcion.setBounds(30, 25, 100, 14);
+        
+		JLabel lblTipo = new JLabel("Tipo Insumo");
+		lblTipo.setBounds(30, 25, 100, 14);
+		JLabel lblDescipcion = new JLabel("Descripcion");
+		lblDescipcion.setBounds(30, 50, 100, 14);
 		JLabel lblUnidadMedida = new JLabel("Unidad de Medida");
-		lblUnidadMedida.setBounds(30, 50, 100, 14);
-		JLabel lblCosto = new JLabel("textField_Costo");
-		lblCosto.setBounds(30, 75, 100, 14);
-		JLabel lblPrecio = new JLabel("Km Recorrido");
-		lblPrecio.setBounds(30, 100, 100, 14);		
+		lblUnidadMedida.setBounds(30, 75, 100, 14);
+		JLabel lblCosto = new JLabel("Costo");
+		lblCosto.setBounds(30, 100, 100, 14);
+		JLabel lblPrecio = new JLabel("Precio");
+		lblPrecio.setBounds(30, 125, 100, 14);		
+		JLabel lblDensidad = new JLabel("Densidad");
+		lblDensidad.setBounds(30, 150, 100, 14);	
+		JLabel lblPeso = new JLabel("Peso");
+		lblPeso.setBounds(30, 175, 100, 14);		
 		
+	    panel.add(lblTipo);
 		panel.add(lblDescipcion);
 		panel.add(lblUnidadMedida);		
 		panel.add(lblCosto);
-		panel.add(lblPrecio);		
+		panel.add(lblPrecio);
+		panel.add(lblDensidad);
+		panel.add(lblPeso);
+		panel.add(comboBox_Tipo);
 		panel.add(textField_Descipcion);
-		panel.add(textField_UnidadMedida);
+		panel.add(comboBox_UnidadMedida);
 		panel.add(textField_Costo);
 		panel.add(textField_Precio);
+		panel.add(textField_Densidad);
+		panel.add(textField_Peso);
+		
+		
+		
+		comboBox_Tipo.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(comboBox_Tipo.getSelectedItem().equals("GENERAL")) {
+					textField_Densidad.setEnabled(false);
+					textField_Peso.setEnabled(true);
+				}
+				else {
+					textField_Peso.setEnabled(false);
+					textField_Densidad.setEnabled(true);
+				}
+				
+				
+			}
+		});
+		
+		
+	
 		
 	}
 	

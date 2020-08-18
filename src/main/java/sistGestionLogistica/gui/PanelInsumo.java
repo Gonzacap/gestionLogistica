@@ -153,6 +153,17 @@ public class PanelInsumo extends JPanel {
 				
 		table_Insumos.getColumnModel().getColumn(0).setPreferredWidth(35);
 			
+		
+      btnAlta.addActionListener(e-> {	//AccionAlta
+			
+			System.out.println("Camion -> Alta");
+			
+			AgregarEditarInsumo aI = new AgregarEditarInsumo();
+			aI.agregar();
+			//AgregarCamion aC = new AgregarCamion();
+			//aC.frame.setVisible(true);
+			
+		});
 				
 		//---------accion click-------
 		
