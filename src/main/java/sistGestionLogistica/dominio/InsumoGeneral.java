@@ -18,7 +18,10 @@ public class InsumoGeneral extends Insumo {
 		super(idInsumo, descripcion, costo, precio, unidadMedida);
 		this.peso = peso;
 	}
-
+	public InsumoGeneral( String descripcion, double costo, double precio, UnidadMedida unidadMedida, double peso) {
+		super( descripcion, costo, precio, unidadMedida);
+		this.peso = peso;
+	}
 
 	
 

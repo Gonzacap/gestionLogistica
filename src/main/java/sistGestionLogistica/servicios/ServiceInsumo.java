@@ -56,5 +56,7 @@ public class ServiceInsumo {
 		this.insumoDao.buscarPorId(id);
 		return null;
 	}
-
+   public Integer ultimoId() throws SQLException {
+	   return this.insumoDao.ultimoId();
+   }
 }

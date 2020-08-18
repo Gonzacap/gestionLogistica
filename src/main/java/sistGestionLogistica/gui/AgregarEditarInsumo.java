@@ -10,13 +10,14 @@ import javax.swing.*;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.CamionController;
+import sistGestionLogistica.controller.InsumoController;
 
 public class AgregarEditarInsumo {
 
 	private JFrame frame;
 	private JPanel panel;
 	private JTextField textField_id;
-	private JTextField textField_Descipcion;
+	private JTextField textField_Descripcion;
 	private JComboBox  comboBox_UnidadMedida;
 	private JTextField textField_Costo;
 	private JTextField textField_Precio;
@@ -61,8 +62,8 @@ public class AgregarEditarInsumo {
 		
 		comboBox_Tipo = new JComboBox(tipo);
 		comboBox_Tipo.setBounds(140, 25, 100, 20);
-		textField_Descipcion = new JTextField();
-		textField_Descipcion.setBounds(140, 50, 100, 20);
+		textField_Descripcion = new JTextField();
+		textField_Descripcion.setBounds(140, 50, 100, 20);
 		comboBox_UnidadMedida = new JComboBox(unidadM);
 		comboBox_UnidadMedida.setBounds(140, 75, 100, 20);
 		textField_Costo = new JTextField();
@@ -75,7 +76,7 @@ public class AgregarEditarInsumo {
 		textField_Peso.setBounds(140, 175, 100, 20);
 		
 
-		textField_Descipcion.setColumns(10);
+		textField_Descripcion.setColumns(10);
 	  // comboBox_UnidadMedida).setColumns(10);
 		textField_Costo.setColumns(10);
 		textField_Precio.setColumns(10);
@@ -103,14 +104,15 @@ public class AgregarEditarInsumo {
 		panel.add(lblDensidad);
 		panel.add(lblPeso);
 		panel.add(comboBox_Tipo);
-		panel.add(textField_Descipcion);
+		panel.add(textField_Descripcion);
 		panel.add(comboBox_UnidadMedida);
 		panel.add(textField_Costo);
 		panel.add(textField_Precio);
 		panel.add(textField_Densidad);
 		panel.add(textField_Peso);
 		
-		
+		//Porque aparece liquido primero
+		textField_Peso.setEnabled(false);
 		
 		comboBox_Tipo.addItemListener(new ItemListener() {
 			
@@ -120,9 +122,10 @@ public class AgregarEditarInsumo {
 					textField_Densidad.setEnabled(false);
 					textField_Peso.setEnabled(true);
 				}
-				else {
+				else if(comboBox_Tipo.getSelectedItem().equals("LIQUIDO")) {
 					textField_Peso.setEnabled(false);
 					textField_Densidad.setEnabled(true);
+					
 				}
 				
 				
@@ -145,15 +148,15 @@ public class AgregarEditarInsumo {
 		panel.add(btnAgregar);
 		
 		
-		/*btnAgregar.addActionListener(new ActionListener(){
+		btnAgregar.addActionListener(new ActionListener(){
 				
 				public void actionPerformed(ActionEvent e) {
 				
-				CamionController cc= new CamionController();
+				InsumoController ic = new InsumoController();
 				
 				try {
-					cc.agregarCamion(textField_Patente.getText(), textField_Marca.getText(), textField_Modelo.getText(), textField_CostoKm.getText(), textField_CostoHs.getText(), textField_KmRec.getText(), textField_Fecha.getText());
-					JOptionPane.showMessageDialog(frame,"El camion fue dado de alta con exito.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
+					ic.agregarInsumo(textField_Descripcion.getText(), comboBox_UnidadMedida.getSelectedItem().toString(),textField_Costo.getText(), textField_Precio.getText(),textField_Peso.getText() ,textField_Densidad.getText(), comboBox_Tipo.getSelectedItem().toString());
+					JOptionPane.showMessageDialog(frame,"El insumo fue dado de alta con exito.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
 					
 				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
@@ -165,11 +168,11 @@ public class AgregarEditarInsumo {
 					e1.printStackTrace();
 				} 
 			}				
-		})*/
+		});
 		
 	}
 	
-	public void editarCamion(Integer id) {
+    public void editarInsumo(Integer id) {
 		this.textField_id = new JTextField();
 		this.textField_id.setText(id.toString());
 		editar();
@@ -185,14 +188,14 @@ public class AgregarEditarInsumo {
 		btnEditar.setBounds(290, 100, 90, 25);
 		panel.add(btnEditar);
 		
-		/*
+		
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CamionController cc= new CamionController();
+				InsumoController ic = new InsumoController();
 				try {
-					cc.editarCamion(textField_id.getText(),textField_Patente.getText(), textField_Marca.getText(), textField_Modelo.getText(), textField_CostoKm.getText(), textField_CostoHs.getText(), textField_KmRec.getText(), textField_Fecha.getText());
+					ic.editarInsumo(textField_id.getText(), textField_Descripcion.getText(), comboBox_UnidadMedida.getSelectedItem().toString(),textField_Costo.getText(), textField_Precio.getText(),textField_Peso.getText() ,textField_Densidad.getText(), comboBox_Tipo.getSelectedItem().toString());
 					JOptionPane.showMessageDialog(
-							frame,"El camion fue editado con exito.", "Edicion Exitosa",JOptionPane.INFORMATION_MESSAGE);
+							frame,"El insumo fue editado con exito.", "Edicion Exitosa",JOptionPane.INFORMATION_MESSAGE);
 				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
 					JOptionPane.showMessageDialog(
@@ -205,7 +208,7 @@ public class AgregarEditarInsumo {
 					e1.printStackTrace();
 				}
 			}
-		});*/
+		});
 			
 	}
 	

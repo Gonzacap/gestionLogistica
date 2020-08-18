@@ -16,7 +16,11 @@ public class InsumoLiquido extends Insumo{
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	public InsumoLiquido( String descripcion, double costo, double precio, UnidadMedida unidadMedida, Double densidad) {
+		super( descripcion, costo, precio, unidadMedida);
+		this.densidad= densidad;
+		// TODO Auto-generated constructor stub
+	}
 
 	//0.001
 	

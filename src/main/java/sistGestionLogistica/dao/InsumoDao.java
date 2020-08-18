@@ -12,5 +12,6 @@ public interface InsumoDao {
 	public Insumo buscarPorId(Integer id) throws SQLException;
 	public void borrar(Integer id) throws SQLException;
 	public List<Insumo> buscarTodos() throws SQLException;
+	public Integer ultimoId() throws SQLException;
 
 }

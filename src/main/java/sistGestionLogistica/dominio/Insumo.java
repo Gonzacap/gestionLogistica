@@ -58,6 +58,14 @@ public abstract class Insumo {
 		this.precio = precio;
 		this.unidadMedida = unidadMedida;
 	}
+	public Insumo( String descripcion, Double costo, Double precio, UnidadMedida unidadMedida) {
+		super();
+		
+		this.descripcion = descripcion;
+		this.costo = costo;
+		this.precio = precio;
+		this.unidadMedida = unidadMedida;
+	}
     
 	public Insumo() {}
 	public abstract double pesoPorUnidad();

@@ -19,6 +19,7 @@ public class InsumoController {
 	public void agregarInsumo(String descripcion, String unidadMedida, String costo,String precio, String peso, String densidad, String tipo) throws DatosInvalidosException, SQLException {
 		Double precioFinal=0.0, costoFinal=0.0,densidadFinal=0.0,pesoFinal=0.0;
 		Insumo insumo;
+		Integer id = null;
 		
 		// parseamos todos los datos que no sean String
 		precioFinal = Double.valueOf(precio);
@@ -31,14 +32,14 @@ public class InsumoController {
 			
 			if(precioFinal<=0 || costoFinal<=0) throw new DatosInvalidosException("Los valores no pueden ser menores que 0");
 			ServiceInsumo si=new ServiceInsumo();
-			
+			id = si.ultimoId() + 1;
 			if(tipo.toUpperCase().equals("GENERAL")) {
-				insumo= new InsumoGeneral(-1,descripcion.toUpperCase(),costoFinal, precioFinal,UnidadMedida.valueof(unidadMedida) , pesoFinal);
+				insumo= new InsumoGeneral(id,descripcion.toUpperCase(),costoFinal, precioFinal,UnidadMedida.valueof(unidadMedida) , pesoFinal);
 				si.crearInsumo(insumo);	
 			}
 			
 			if(tipo.toUpperCase().equals("LIQUIDO")) {
-				insumo = new InsumoLiquido(-1,descripcion.toUpperCase(),costoFinal, precioFinal,UnidadMedida.valueof(unidadMedida) ,densidadFinal);
+				insumo = new InsumoLiquido(id,descripcion.toUpperCase(),costoFinal, precioFinal,UnidadMedida.valueof(unidadMedida) ,densidadFinal);
 				si.crearInsumo(insumo);	
 			}				
 			

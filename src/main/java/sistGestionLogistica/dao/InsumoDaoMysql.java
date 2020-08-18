@@ -23,6 +23,7 @@ public class InsumoDaoMysql implements InsumoDao{
 	public Insumo save(Insumo i) throws SQLException {
 		
 		String insertInsumo = "INSERT INTO insumo (idInsumo,descripcion,unidadMedida,costo,precio) values(?,?,?,?,?)";
+
 	
 
 		try {
@@ -233,6 +234,30 @@ public class InsumoDaoMysql implements InsumoDao{
 
 	}
 	
+	public Integer ultimoId() {
+		String ultimoId = "SELECT MAX(idInsumo) FROM insumo";
+		Integer id=null;
+		try {
+			 conn = DB.getConexion();
+			 pstmt = conn.prepareStatement(ultimoId);
+			 rs = pstmt.executeQuery();
+			 rs.next();
+			 id= rs.getInt("MAX(idInsumo)");
+			 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		
+		return id;
+	}
 	
 
 }
