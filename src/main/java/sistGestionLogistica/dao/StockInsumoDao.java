@@ -7,7 +7,8 @@ import sistGestionLogistica.dominio.StockInsumo;
 
 public interface StockInsumoDao {
 
-	public Boolean save(Integer id, StockInsumo s) throws SQLException;
+	public Boolean save(StockInsumo s) throws SQLException;
 	public Boolean update(StockInsumo stock) throws SQLException;
+	public Boolean existeStock(Integer idPlanta, Integer idInsumo) throws SQLException;
 
 }

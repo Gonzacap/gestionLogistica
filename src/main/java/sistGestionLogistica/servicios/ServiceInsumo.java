@@ -50,8 +50,8 @@ public class ServiceInsumo {
 		}
 
 	public Insumo buscarPorId(Integer id) throws SQLException {
-		this.insumoDao.buscarPorId(id);
-		return null;
+		return this.insumoDao.buscarPorId(id);
+		
 	}
    public Integer ultimoId() throws SQLException {
 	   return this.insumoDao.ultimoId();
