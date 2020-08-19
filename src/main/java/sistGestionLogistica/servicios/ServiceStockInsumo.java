@@ -24,5 +24,8 @@ public class ServiceStockInsumo {
 		return this.stockDao.existeStock(idPlanta, idInsumo);
 		
 	}
+	public Integer stockTotal(Integer idInsumo) {
+		return stockDao.stockTotal(idInsumo);
+	}
 
 }

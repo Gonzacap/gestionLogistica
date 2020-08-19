@@ -62,13 +62,44 @@ public class StockInsumoDaoMysql implements StockInsumoDao{
 	@Override
 	public Boolean existeStock(Integer idPlanta, Integer idInsumo) throws SQLException {
 		String buscar = "SELECT * FROM stockinsumo WHERE planta = ? AND insumo = ?";
-		
+		Boolean res= true;
 		try {
 			conn = DB.getConexion();
 			pstmt = conn.prepareStatement(buscar);
 			pstmt.setInt(1, idPlanta);
 			pstmt.setInt(2, idInsumo);
 			rs = pstmt.executeQuery();
+			res = rs.next();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+		return res;
+	}
+
+	@Override
+	public Integer stockTotal(Integer idInsumo) {
+		String buscar = "SELECT SUM(cantidad) FROM stockinsumo WHERE insumo=?";
+		Integer resultado= 0;
+		
+		try {
+			conn = DB.getConexion();
+			pstmt = conn.prepareStatement(buscar);
+			pstmt.setInt(1, idInsumo);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				resultado = rs.getInt(1);
+			}
 
 			
 		} catch (Exception e) {
@@ -84,7 +115,7 @@ public class StockInsumoDaoMysql implements StockInsumoDao{
 			
 		}
 
-		return rs.next();
+		return resultado;
 	}
 	
 	
