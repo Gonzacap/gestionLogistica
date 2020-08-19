@@ -5,11 +5,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import sistGestionLogistica.connection.DB;
 import sistGestionLogistica.dominio.Camion;
+import sistGestionLogistica.dominio.Insumo;
+import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.dominio.StockInsumo;
+import sistGestionLogistica.servicios.ServiceInsumo;
+import sistGestionLogistica.servicios.ServicePlanta;
 
 
 
@@ -116,6 +121,45 @@ public class StockInsumoDaoMysql implements StockInsumoDao{
 		}
 
 		return resultado;
+	}
+
+	@Override
+	public List<StockInsumo> faltantes() {
+		String select_faltantes ="SELECT * FROM stockinsumo WHERE cantidad < puntoReposicion";
+		List<StockInsumo> lista = new ArrayList<StockInsumo>();
+		ServiceInsumo si= new ServiceInsumo();
+		ServicePlanta sp= new ServicePlanta();
+		 conn = DB.getConexion();
+		
+		ResultSet rs = null;
+		try {
+			pstmt= conn.prepareStatement(select_faltantes);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Integer idStockInsumo = rs.getInt("idStockInsumo");
+				Integer cantidad = rs.getInt("cantidad");
+				Integer puntoReposicion =rs.getInt("puntoReposicion");
+				
+				Planta planta = sp.buscarPorId(rs.getInt("planta"));
+				
+				Insumo insumo = si.buscarPorId(rs.getInt("insumo"));
+				
+				//creamos el stockinsumo y lo agregamos a la lista
+				lista.add(new StockInsumo(idStockInsumo,planta,insumo,cantidad,puntoReposicion));
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		System.out.println("Resultado "+lista);
+		return lista;
 	}
 	
 	
