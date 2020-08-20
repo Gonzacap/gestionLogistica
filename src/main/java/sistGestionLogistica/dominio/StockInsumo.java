@@ -41,6 +41,12 @@ public class StockInsumo {
 		public Integer getPuntoReposicion() {
 			return puntoReposicion;
 		}
+
+		@Override
+		public String toString() {
+			return "StockInsumo [idStockInsumo=" + idStockInsumo + ", planta=" + planta + ", insumo=" + insumo
+					+ ", cantidad=" + cantidad + ", puntoReposicion=" + puntoReposicion + "]";
+		}
 		
 		
 		

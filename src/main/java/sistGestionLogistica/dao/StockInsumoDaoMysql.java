@@ -1,15 +1,16 @@
 package sistGestionLogistica.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import sistGestionLogistica.connection.DB;
-import sistGestionLogistica.dominio.Camion;
+
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.dominio.StockInsumo;
@@ -162,6 +163,50 @@ public class StockInsumoDaoMysql implements StockInsumoDao{
 		return lista;
 	}
 	
-	
+	public List<StockInsumo> buscarStockPlanta(Integer id){
+		ArrayList<StockInsumo> lista = new ArrayList<StockInsumo>();
+		String buscarTodos = "SELECT * FROM stockinsumo where planta =?";
+        PlantaDao  pd = new PlantaDaoMysql();
+        InsumoDao idao = new InsumoDaoMysql();
+        Planta p = new Planta();
+        Insumo i = null;
+       
+		try {
+			conn = DB.getConexion();
+			pstmt= conn.prepareStatement(buscarTodos);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				p = pd.buscarPorId(rs.getInt("planta"));
+			    i = idao.buscarPorId(rs.getInt("insumo"));
+				
+				StockInsumo s = new StockInsumo(rs.getInt("idStockInsumo"),
+						 p,
+						 i,
+						rs.getInt("cantidad"),
+						rs.getInt("puntoReposicion"));
+						
+				
+				lista.add(s);
+
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		System.out.println("Resultado "+lista);
+		return lista;
+		
+		
+	}
 
 }

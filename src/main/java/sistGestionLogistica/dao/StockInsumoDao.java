@@ -13,5 +13,5 @@ public interface StockInsumoDao {
 	public Boolean existeStock(Integer idPlanta, Integer idInsumo) throws SQLException;
 	public Integer stockTotal(Integer idInsumo);
 	public List<StockInsumo> faltantes();
-
+	public List<StockInsumo> buscarStockPlanta(Integer id);
 }
