@@ -48,6 +48,7 @@ public class App extends JFrame{
 	private JMenuItem gestorInsumos;
 	private JMenuItem gestorPedidos;
 	private JMenuItem gestorRutas;
+	private JMenuItem gestorStock;
 	
 	private PanelPlanta pP;
 	private PanelCamion pC;
@@ -74,23 +75,27 @@ public class App extends JFrame{
 		this.gestorInsumos =new JMenuItem("Gestionar Insumos");
 		this.gestorPedidos =new JMenuItem("Gestionar Pedidos");
 		this.gestorRutas =new JMenuItem("Gestionar Rutas");
+		this.gestorStock =new JMenuItem("Stocks a Reponer");
 		
 		this.pP = new PanelPlanta();
 		this.pI = new PanelInsumo();
 		this.pC = new PanelCamion();
 		this.pD = new PanelPedidos();
 		this.pR = new PanelRutas();
+		this.pS = new PanelStock();
 		
 		//--estoy habria que borrarlo si se hace una pantalla de inicio--
 		pP.inicializar(this);
 		pI.inicializar(this);
 		pD.inicializar(this);
 		pR.inicializar(this);
+		pS.inicializar(this);
 		pC.inicializar(this);
 		//--------------------------
 		
 		menuPlantas.add(gestorPlantas);
 		menuInsumos.add(gestorInsumos);
+		menuInsumos.add(gestorStock);
 		menuPedidos.add(gestorPedidos);
 		menuRutas.add(gestorRutas);
 		menuCamiones.add(gestorCamiones);
@@ -160,6 +165,14 @@ public class App extends JFrame{
 			this.repaint();
 		});
 		
+		gestorStock.addActionListener(e->{
+			
+			System.out.println("App -> Panel Stocks");
+			pS.inicializar(this);
+			pS.pantallaInsumosAReponer(this);
+			this.revalidate();
+			this.repaint();
+		});
 		
 	}
 	
@@ -167,14 +180,14 @@ public class App extends JFrame{
 	
 	public void mostrarPanelStock(Integer idAux) {
 		System.out.println("App -> Panel Stock");
-		this.pS = new PanelStock();
-		pS.inicializar(this,idAux);	
+		pS.inicializar(this,idAux);
+		pS.pantallaStockPlanta(this);
 		this.revalidate();
 		this.repaint();
 	}
 	public void volverStock() {
 		this.remove(pS);
-		this.pS = null;
+		//this.pS = null;
 		pP.inicializar(this);
 		this.revalidate();
 		this.repaint();
@@ -186,6 +199,7 @@ public class App extends JFrame{
 		this.gestorInsumos.setEnabled(true);
 		this.gestorPedidos.setEnabled(true);
 		this.gestorRutas.setEnabled(true);
+		this.gestorStock.setEnabled(true);
 	}
 	public void plantasActivated() {
 		this.gestorCamiones.setEnabled(true);
@@ -193,6 +207,7 @@ public class App extends JFrame{
 		this.gestorInsumos.setEnabled(true);
 		this.gestorPedidos.setEnabled(true);
 		this.gestorRutas.setEnabled(true);
+		this.gestorStock.setEnabled(true);
 	}
 	public void insumosActivated() {
 		this.gestorCamiones.setEnabled(true);
@@ -200,6 +215,7 @@ public class App extends JFrame{
 		this.gestorInsumos.setEnabled(false);
 		this.gestorPedidos.setEnabled(true);
 		this.gestorRutas.setEnabled(true);
+		this.gestorStock.setEnabled(true);
 	}
 	public void pedidosActivated() {
 		this.gestorCamiones.setEnabled(true);
@@ -207,6 +223,7 @@ public class App extends JFrame{
 		this.gestorInsumos.setEnabled(true);
 		this.gestorPedidos.setEnabled(false);
 		this.gestorRutas.setEnabled(true);
+		this.gestorStock.setEnabled(true);
 	}
 	public void rutasActivated() {
 		this.gestorCamiones.setEnabled(true);
@@ -214,6 +231,15 @@ public class App extends JFrame{
 		this.gestorInsumos.setEnabled(true);
 		this.gestorPedidos.setEnabled(true);
 		this.gestorRutas.setEnabled(false);
+		this.gestorStock.setEnabled(true);
+	}
+	public void stockActivated() {
+		this.gestorCamiones.setEnabled(true);
+		this.gestorPlantas.setEnabled(true);
+		this.gestorInsumos.setEnabled(true);
+		this.gestorPedidos.setEnabled(true);
+		this.gestorRutas.setEnabled(true);
+		this.gestorStock.setEnabled(false);
 	}
 	public void stockEnabled() {
 		this.gestorCamiones.setEnabled(false);
@@ -221,6 +247,7 @@ public class App extends JFrame{
 		this.gestorInsumos.setEnabled(false);
 		this.gestorPedidos.setEnabled(false);
 		this.gestorRutas.setEnabled(false);
+		this.gestorStock.setEnabled(false);
 	}
 	
 }

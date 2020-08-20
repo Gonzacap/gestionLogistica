@@ -21,16 +21,15 @@ import sistGestionLogistica.sistema.App;
 
 public class PanelStock extends JPanel {
 	
+	private PanelStock panel;
 	private JTable table_Stock;
-	private JTextField textField_ID;
-	private JTextField textField_Patente;
-	private JTextField textField_Marca;
-	private JTextField textField_Modelo;
-	private JTextField textField_KM;
-	private JTextField textField_CostoKM;
-	private JTextField textField_CostoHora;
-	private JTextField textField_FechaCompra;
+	private JTextField textField_IdPlanta;
+	private JTextField textField_IdProd;
 	private Integer idAux;
+	private Integer altoP;
+	private Integer anchoP;
+	private GridBagConstraints c;
+	private JPanel panelBuscar;
 
 	public PanelStock() {
 		
@@ -44,33 +43,17 @@ public class PanelStock extends JPanel {
 	public void inicializar(App aplicacion) { //App seria el JFrame
 		aplicacion.setTitle("Sistema de Gestion Logistica - Stock");		
 		
-		PanelStock panel = new PanelStock();
+		panel = new PanelStock();
 		panel.setLayout(null);
-		panel.setBackground(Color.blue);
 		
-		Integer altoP = aplicacion.getHeight()/10;
-		Integer anchoP = aplicacion.getWidth()/8;
+		altoP = aplicacion.getHeight()/10;
+		anchoP = aplicacion.getWidth()/8;
 		
-		aplicacion.stockEnabled();
 		aplicacion.setContentPane(panel);
 		aplicacion.revalidate();
 		aplicacion.repaint();
 		
-		
-		//---------Botones-----------------
-		
-		JButton btnAlta = new JButton("Agregar Insumos");
-		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
-		JButton btnEditar = new JButton("Editar Isumo");
-		btnEditar.setBounds((anchoP+110), (altoP/5), 90, 25);
-		JButton btnAtras= new JButton("Volver a Plantas");
-		btnAtras.setBounds((anchoP+2*110), (altoP/5), 90, 25);
-		
-		panel.add(btnAlta);
-		panel.add(btnEditar);
-		panel.add(btnAtras);
-		
-		btnEditar.setEnabled(false);
+		//----------------------
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
@@ -99,65 +82,16 @@ public class PanelStock extends JPanel {
 		
 		//---------panel buscar-----------
 		
-		JPanel panelBuscar = new JPanel(new GridBagLayout());
+		panelBuscar = new JPanel(new GridBagLayout());
 		panelBuscar.setBounds((anchoP), (altoP), (6*anchoP), (2*altoP));
 		
-		GridBagConstraints c = new GridBagConstraints();
+		c = new GridBagConstraints();
 		c.gridheight = 1;
 		c.gridwidth = 1;
 		c.weightx = (anchoP);
 		c.weighty = (altoP);
 		
-		//----------------------
 		
-		/*c.fill = GridBagConstraints.HORIZONTAL;
-
-		textField_ID = new JTextField();
-		c.gridx = 1;
-		c.gridy = 0;
-		panelBuscar.add(textField_ID, c);
-		
-		textField_Patente = new JTextField();
-		c.gridx = 1;
-		c.gridy = 1;
-		panelBuscar.add(textField_Patente, c);
-		
-		textField_Marca = new JTextField();
-		c.gridx = 3;
-		c.gridy = 0;
-		panelBuscar.add(textField_Marca, c);
-		
-		textField_Modelo = new JTextField();
-		c.gridx = 3;
-		c.gridy = 1;
-		panelBuscar.add(textField_Modelo, c);
-		
-		//-------------------------
-		
-		c.fill = GridBagConstraints.CENTER;
-		
-		JLabel lbl_4 = new JLabel("Id");
-		c.gridx = 0;
-		c.gridy = 0;
-		panelBuscar.add(lbl_4, c);
-		
-		JLabel lbl_5 = new JLabel("Patente");
-		c.gridx = 0;
-		c.gridy = 1;
-		panelBuscar.add(lbl_5, c);
-				
-		JLabel lbl_6 = new JLabel("Marca");
-		c.gridx = 2;
-		c.gridy = 0;
-		panelBuscar.add(lbl_6, c);
-		
-		JLabel lbl_7 = new JLabel("Modelo");
-		c.gridx = 2;
-		c.gridy = 1;
-		panelBuscar.add(lbl_7, c);
-		
-		//----------------------
-		*/
 		c.fill = GridBagConstraints.CENTER;
 		
 		JButton btnBuscar = new JButton("Actualizar");
@@ -170,10 +104,32 @@ public class PanelStock extends JPanel {
 		panel.add(panelBuscar);
 		
 		table_Stock.getColumnModel().getColumn(0).setPreferredWidth(35);
-		/*
+		btnBuscar.addActionListener(new AccionBuscar());
+
+	}
+	
+	public void pantallaStockPlanta(App aplicacion) {
+		
+		panel.setBackground(Color.blue);
+		aplicacion.stockEnabled();
+		
+		//---------Botones-----------------
+		
+		JButton btnAlta = new JButton("Agregar Insumos");
+		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
+		JButton btnEditar = new JButton("Editar Isumo");
+		btnEditar.setBounds((anchoP+110), (altoP/5), 90, 25);
+		JButton btnAtras= new JButton("Volver a Plantas");
+		btnAtras.setBounds((anchoP+2*110), (altoP/5), 90, 25);
+		
+		panel.add(btnAlta);
+		panel.add(btnEditar);
+		panel.add(btnAtras);
+		
+		btnEditar.setEnabled(false);
 		
 		//---------accion click-------
-		
+		/*
 		table_Stock.addMouseListener(new MouseAdapter() {
 				
 			public void mouseClicked(MouseEvent e) {
@@ -187,8 +143,6 @@ public class PanelStock extends JPanel {
 				
 			}
 		});*/
-		
-		//---------------------------
 		
 		//--------Acciones Botones--------------	
 		
@@ -214,11 +168,45 @@ public class PanelStock extends JPanel {
 			System.out.println("Volviendo a Panel Planta");
 			aplicacion.volverStock();
 		});
-		btnBuscar.addActionListener(new AccionBuscar());
 		
-
 	}
+	
+	public void pantallaInsumosAReponer(App aplicacion){
 		
+		panel.setBackground(Color.cyan);
+		aplicacion.stockActivated();
+		
+		//----------------------
+		
+		c.fill = GridBagConstraints.HORIZONTAL;
+
+		textField_IdPlanta = new JTextField();
+		c.gridx = 1;
+		c.gridy = 0;
+		panelBuscar.add(textField_IdPlanta, c);
+		
+		textField_IdProd = new JTextField();
+		c.gridx = 1;
+		c.gridy = 1;
+		panelBuscar.add(textField_IdProd, c);
+				
+		//-------------------------
+				
+		c.fill = GridBagConstraints.CENTER;
+				
+		JLabel lbl_4 = new JLabel("Id Planta");
+		c.gridx = 0;
+		c.gridy = 0;
+		panelBuscar.add(lbl_4, c);
+		
+		JLabel lbl_5 = new JLabel("Id Insumo");
+		c.gridx = 0;
+		c.gridy = 1;
+		panelBuscar.add(lbl_5, c);
+		
+		//----------------------
+		
+	}	
 	
 	class AccionBuscar implements ActionListener {
 		 
@@ -230,7 +218,10 @@ public class PanelStock extends JPanel {
 			 StockInsumoController sC = new StockInsumoController();
 			 
 			 try { 
-				this.actualizarTabla(sC.aMatriz(sI.buscarStockPlanta(idAux)));
+				 
+				 
+					 this.actualizarTabla(sC.aMatriz(sI.faltantes()));
+				 
 			
 			 } catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
 				//e1.printStackTrace();
