@@ -5,22 +5,24 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.EventQueue;
-
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import excepciones.DatosInvalidosException;
+import sistGestionLogistica.controller.InsumoController;
 import sistGestionLogistica.controller.PlantaController;
 import sistGestionLogistica.controller.StockInsumoController;
+import sistGestionLogistica.dominio.Insumo;
+import sistGestionLogistica.servicios.ServiceInsumo;
 
 
 public class AgregarEditarStock {
 
 	private JFrame frame;
-	private JComboBox  comboBox_Insumo;
+	private JComboBox<String>  comboBox_Insumo; 
 	private JTextField textField_Cantidad;
 	private JTextField textField_PtoRep;
 	private JPanel panel;
@@ -59,25 +61,26 @@ public class AgregarEditarStock {
 		
 	}
 	
-	public void agregarStock(Integer id) {
+	public void agregarStock(Integer id) throws SQLException {
 		
 		this.idPlanta = id;
 		agregar();
 	}
 
-	public void agregar(){
+	public void agregar() throws SQLException{
 		
 		frame.setTitle("Agregar Insumo a Stock");
 		frame.setVisible(true);
 		
 		//----------string para el combo box-------
 		
-		StockInsumoController ic = new StockInsumoController();
-		String[][] insumos = ic.faltante(idPlanta.toString(), "");
+	    ServiceInsumo si = new ServiceInsumo();
+		ArrayList<Insumo> lista =  (ArrayList<Insumo>) si.buscarTodos() ;
 		Vector<String> insumoID= new Vector<>();
-		for(int i = 0; i< insumos.length; i++){
-			System.out.print(insumos[i][0]);
-			insumoID.add(insumos[i][0]) ;
+		
+		for(int i = 0; i < lista.size(); i++){
+			//System.out.print(insumos[i][0]);
+			insumoID.add(lista.get(i).getDescripcion());
 		}
 		System.out.print("\n");
 		//--------------

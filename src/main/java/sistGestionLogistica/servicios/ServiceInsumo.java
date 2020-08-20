@@ -56,4 +56,7 @@ public class ServiceInsumo {
    public Integer ultimoId() throws SQLException {
 	   return this.insumoDao.ultimoId();
    }
+   public List<Insumo> buscarTodos() throws SQLException {
+	   return this.insumoDao.buscarTodos();
+   }
 }

@@ -192,7 +192,12 @@ public class PanelStock extends JPanel {
 			
 			System.out.println("Stock -> Alta");
 			AgregarEditarStock aS = new AgregarEditarStock();
-			aS.agregarStock(idAux);			
+			try {
+				aS.agregarStock(idAux);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}			
 		});
 		btnEditar.addActionListener(e-> { //AccionEditar
 			
