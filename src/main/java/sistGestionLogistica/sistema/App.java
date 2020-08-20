@@ -168,7 +168,9 @@ public class App extends JFrame{
 	public void mostrarPanelStock(Integer idAux) {
 		System.out.println("App -> Panel Stock");
 		this.pS = new PanelStock();
-		pS.inicializar(this,idAux);		
+		pS.inicializar(this,idAux);	
+		this.revalidate();
+		this.repaint();
 	}
 	public void volverStock() {
 		this.remove(pS);

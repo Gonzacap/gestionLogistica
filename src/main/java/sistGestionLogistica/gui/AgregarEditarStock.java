@@ -1,19 +1,16 @@
 package sistGestionLogistica.gui;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.InsumoController;
-import sistGestionLogistica.controller.PlantaController;
 import sistGestionLogistica.controller.StockInsumoController;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.servicios.ServiceInsumo;

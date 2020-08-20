@@ -133,10 +133,10 @@ public class InsumoController {
 			if(listaInsumo.get(i) instanceof InsumoLiquido) {
 				matriz[i][5]= "LIQUIDO";
 				matriz[i][6]= ((InsumoLiquido) listaInsumo.get(i)).getDensidad().toString();
-				matriz[i][7]= "";
+				matriz[i][7]= "-";
 			}else {
 				matriz[i][5]= "GENERAL";
-				matriz[i][6]= "";
+				matriz[i][6]= "-";
 				matriz[i][7]= ((InsumoGeneral) listaInsumo.get(i)).getPeso().toString();
 			}
 

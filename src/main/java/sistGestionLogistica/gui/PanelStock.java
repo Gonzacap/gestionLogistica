@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import java.sql.SQLException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,6 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.CamionController;
 import sistGestionLogistica.controller.StockInsumoController;
+import sistGestionLogistica.dao.StockInsumoDaoMysql;
+import sistGestionLogistica.dominio.Insumo;
+import sistGestionLogistica.servicios.ServiceInsumo;
 import sistGestionLogistica.sistema.App;
 
 
@@ -95,7 +99,7 @@ public class PanelStock extends JPanel {
 		
 		//---------panel buscar-----------
 		
-		/*JPanel panelBuscar = new JPanel(new GridBagLayout());
+		JPanel panelBuscar = new JPanel(new GridBagLayout());
 		panelBuscar.setBounds((anchoP), (altoP), (6*anchoP), (2*altoP));
 		
 		GridBagConstraints c = new GridBagConstraints();
@@ -106,7 +110,7 @@ public class PanelStock extends JPanel {
 		
 		//----------------------
 		
-		c.fill = GridBagConstraints.HORIZONTAL;
+		/*c.fill = GridBagConstraints.HORIZONTAL;
 
 		textField_ID = new JTextField();
 		c.gridx = 1;
@@ -153,7 +157,7 @@ public class PanelStock extends JPanel {
 		panelBuscar.add(lbl_7, c);
 		
 		//----------------------
-		
+		*/
 		c.fill = GridBagConstraints.CENTER;
 		
 		JButton btnBuscar = new JButton("Buscar"+"\n"+"Actualizar");
@@ -166,7 +170,7 @@ public class PanelStock extends JPanel {
 		panel.add(panelBuscar);
 		
 		table_Stock.getColumnModel().getColumn(0).setPreferredWidth(35);
-		
+		/*
 		
 		//---------accion click-------
 		
@@ -210,7 +214,7 @@ public class PanelStock extends JPanel {
 			System.out.println("Volviendo a Panel Planta");
 			aplicacion.volverStock();
 		});
-		//btnBuscar.addActionListener(new AccionBuscar());
+		btnBuscar.addActionListener(new AccionBuscar());
 		
 
 	}
@@ -222,14 +226,15 @@ public class PanelStock extends JPanel {
 			 
 			 System.out.println("Stock -> Buscar");
 			 
-			 StockInsumoController ic =new StockInsumoController();
+			 StockInsumoDaoMysql sI = new StockInsumoDaoMysql();
+			 StockInsumoController sC = new StockInsumoController();
 			 
-			 /*try { 
-				this.actualizarTabla(ic.buscar()));
+			 try { 
+				this.actualizarTabla(sC.aMatriz(sI.buscarStockPlanta(idAux)));
 			
 			 } catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
 				//e1.printStackTrace();
-			}*/
+			}
 		 }
 
 		private void actualizarTabla(String[][] aMostrar) throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
