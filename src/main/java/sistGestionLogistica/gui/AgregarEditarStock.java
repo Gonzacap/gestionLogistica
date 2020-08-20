@@ -12,6 +12,8 @@ import java.util.Vector;
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.InsumoController;
 import sistGestionLogistica.controller.StockInsumoController;
+import sistGestionLogistica.dao.StockInsumoDao;
+import sistGestionLogistica.dao.StockInsumoDaoMysql;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.servicios.ServiceInsumo;
 
@@ -74,10 +76,13 @@ public class AgregarEditarStock {
 	    ServiceInsumo si = new ServiceInsumo();
 		ArrayList<Insumo> lista =  (ArrayList<Insumo>) si.buscarTodos() ;
 		Vector<String> insumoID= new Vector<>();
-		
+		StockInsumoDao sid = new StockInsumoDaoMysql();
 		for(int i = 0; i < lista.size(); i++){
 			//System.out.print(insumos[i][0]);
-			insumoID.add(lista.get(i).getDescripcion());
+			if(!sid.existeStock(idPlanta, i)) {
+				insumoID.add(lista.get(i).getDescripcion());
+			}
+			
 		}
 		System.out.print("\n");
 		//--------------
@@ -107,6 +112,9 @@ public class AgregarEditarStock {
 		btnAgregar.setBounds(252, 105, 89, 23);
 		panel.add(btnAgregar);
 
+		
+		
+		
 		
 		btnAgregar.addActionListener(new ActionListener(){
 				
