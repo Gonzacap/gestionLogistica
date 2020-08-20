@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import excepciones.DatosInvalidosException;
+import sistGestionLogistica.dao.StockInsumoDaoMysql;
 import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.InsumoGeneral;
@@ -122,7 +123,8 @@ public class InsumoController {
 	}
 	
 	public String[][] aMatriz(List<Insumo> listaInsumo){
-		String[][] matriz = new String[listaInsumo.size()][8];
+		String[][] matriz = new String[listaInsumo.size()][9];
+		StockInsumoDaoMysql aux = new StockInsumoDaoMysql();
 		
 		for(int i=0; i<listaInsumo.size();i++) {
 			matriz[i][0]= listaInsumo.get(i).getIdInsumo().toString();
@@ -139,7 +141,9 @@ public class InsumoController {
 				matriz[i][6]= "-";
 				matriz[i][7]= ((InsumoGeneral) listaInsumo.get(i)).getPeso().toString();
 			}
-
+			
+			
+			matriz[i][8] = aux.stockTotal(listaInsumo.get(i).getIdInsumo()).toString();
 		}
 		
 		return matriz;

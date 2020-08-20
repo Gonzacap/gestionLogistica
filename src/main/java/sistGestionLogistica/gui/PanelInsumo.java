@@ -68,11 +68,10 @@ public class PanelInsumo extends JPanel {
 		new Object[][] {
 			},
 			new String[] {
-				"ID", "Descripcion", "Unidad de Medida", "Costo", "Precio", "Tipo", "Densidad", "Peso"
-			}
+				"ID", "Descripcion", "Unidad de Medida", "Costo", "Precio", "Tipo", "Densidad", "Peso", "Stock Total"}
 		) {
 			Class[] columnTypes = new Class[] {
-				Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+				Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
 		};
 		public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -197,10 +196,10 @@ public class PanelInsumo extends JPanel {
 
 			private void actualizarTabla(String[][] aMostrar) throws NumberFormatException, DatosInvalidosException, SQLException {
 				
-				table_Insumos.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Descripcion", "Unidad de Medida", "Costo", "Precio", "Tipo", "Densidad", "Peso"}) 
+				table_Insumos.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Descripcion", "Unidad de Medida", "Costo", "Precio", "Tipo", "Densidad", "Peso","Stock Total"}) 
 				{
 					Class[] columnTypes = new Class[] {
-							Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+							Object.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
 					};
 						
 					public Class getColumnClass(int columnIndex) {
