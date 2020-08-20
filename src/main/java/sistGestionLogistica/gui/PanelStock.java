@@ -160,7 +160,7 @@ public class PanelStock extends JPanel {
 		*/
 		c.fill = GridBagConstraints.CENTER;
 		
-		JButton btnBuscar = new JButton("Buscar"+"\n"+"Actualizar");
+		JButton btnBuscar = new JButton("Actualizar");
 		c.gridx = 8;
 		c.gridheight = 2;
 		c.gridy = 0;

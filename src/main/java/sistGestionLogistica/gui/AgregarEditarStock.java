@@ -75,19 +75,21 @@ public class AgregarEditarStock {
 		
 	    ServiceInsumo si = new ServiceInsumo();
 		ArrayList<Insumo> lista =  (ArrayList<Insumo>) si.buscarTodos() ;
-		Vector<String> insumoID= new Vector<>();
+		Vector<Integer> insumoID= new Vector<>();
+		Vector<String> insumoLbl= new Vector<>();
 		StockInsumoDao sid = new StockInsumoDaoMysql();
 		for(int i = 0; i < lista.size(); i++){
 			//System.out.print(insumos[i][0]);
 			if(!sid.existeStock(idPlanta, i)) {
-				insumoID.add(lista.get(i).getDescripcion());
+				insumoLbl.add(lista.get(i).getIdInsumo()+" - "+lista.get(i).getDescripcion());
+				insumoID.add(lista.get(i).getIdInsumo());
 			}
 			
 		}
 		System.out.print("\n");
 		//--------------
 		
-		comboBox_Insumo = new JComboBox<String>(insumoID);
+		comboBox_Insumo = new JComboBox<String>(insumoLbl);
 		comboBox_Insumo.setBounds(130, 25, 86, 20);
 		textField_Cantidad = new JTextField();
 		textField_Cantidad.setBounds(130, 50, 86, 20);
@@ -112,10 +114,6 @@ public class AgregarEditarStock {
 		btnAgregar.setBounds(252, 105, 89, 23);
 		panel.add(btnAgregar);
 
-		
-		
-		
-		
 		btnAgregar.addActionListener(new ActionListener(){
 				
 				@Override
@@ -124,14 +122,14 @@ public class AgregarEditarStock {
 				StockInsumoController ic= new StockInsumoController();
 								
 				try {
-					ic.agregarStockInsumo(idPlanta.toString(), comboBox_Insumo.getSelectedItem().toString(), textField_Cantidad.getText(), textField_PtoRep.getText());
-					JOptionPane.showMessageDialog(frame,"La planta fue creada exitosamente.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
+					ic.agregarStockInsumo(idPlanta.toString(), insumoID.get(comboBox_Insumo.getSelectedIndex()).toString(), textField_Cantidad.getText(), textField_PtoRep.getText());
+					JOptionPane.showMessageDialog(frame,"Insumo agregado correctamente", "Reposicion exitosa",JOptionPane.INFORMATION_MESSAGE);
 					
 				} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException e1) {
-					//e1.printStackTrace();
+					e1.printStackTrace();
 					
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					//TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}				
