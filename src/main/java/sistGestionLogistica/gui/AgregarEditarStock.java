@@ -20,7 +20,7 @@ import sistGestionLogistica.controller.StockInsumoController;
 public class AgregarEditarStock {
 
 	private JFrame frame;
-	private JComboBox  comboBoxInsumo;
+	private JComboBox  comboBox_Insumo;
 	private JTextField textField_Cantidad;
 	private JTextField textField_PtoRep;
 	private JPanel panel;
@@ -58,11 +58,16 @@ public class AgregarEditarStock {
 		
 		
 	}
+	
+	public void agregarStock(Integer id) {
+		
+		this.idPlanta = id;
+		agregar();
+	}
 
 	public void agregar(){
 		
-		//this.inicializar();
-		frame.setTitle("Agregar ");
+		frame.setTitle("Agregar Insumo a Stock");
 		frame.setVisible(true);
 		
 		//----------string para el combo box-------
@@ -71,29 +76,30 @@ public class AgregarEditarStock {
 		String[][] insumos = ic.faltante(idPlanta.toString(), "");
 		Vector<String> insumoID= new Vector<>();
 		for(int i = 0; i< insumos.length; i++){
-			insumoID.add(insumos[i][0]/*+" - "+insumos[i][1]*/) ;
+			System.out.print(insumos[i][0]);
+			insumoID.add(insumos[i][0]) ;
 		}
+		System.out.print("\n");
 		//--------------
 		
-		comboBoxInsumo = new JComboBox(insumoID);
+		comboBox_Insumo = new JComboBox<String>(insumoID);
+		comboBox_Insumo.setBounds(130, 25, 86, 20);
 		textField_Cantidad = new JTextField();
 		textField_Cantidad.setBounds(130, 50, 86, 20);
-		textField_Cantidad.setColumns(10);	
 		textField_PtoRep = new JTextField();
 		textField_PtoRep.setBounds(130, 75, 86, 20);
-		textField_PtoRep.setColumns(10);
 		
 		JLabel lblInsumo = new JLabel("ID Insumo");
 		lblInsumo.setBounds(25, 25, 46, 14);
 		JLabel lblCant = new JLabel("Cantidad");
-		lblCant.setBounds(25, 25, 46, 14);
+		lblCant.setBounds(25, 50, 46, 14);
 		JLabel lblPtoRep = new JLabel("Punto de reposicion");
-		lblPtoRep.setBounds(25, 25, 46, 14);
+		lblPtoRep.setBounds(25, 75, 46, 14);
 		
 		panel.add(lblInsumo);
 		panel.add(lblCant);
 		panel.add(lblPtoRep);
-		panel.add(comboBoxInsumo);
+		panel.add(comboBox_Insumo);
 		panel.add(textField_Cantidad);
 		panel.add(textField_PtoRep);
 		
@@ -108,25 +114,34 @@ public class AgregarEditarStock {
 				public void actionPerformed(ActionEvent e) {
 				
 				StockInsumoController ic= new StockInsumoController();
-				
-				/*try {
-					//ic.agregarStockInsumo(idPlanta, comboBoxInsumo.getco, cantidad, puntoReposicion);
+								
+				try {
+					ic.agregarStockInsumo(idPlanta.toString(), comboBox_Insumo.getSelectedItem().toString(), textField_Cantidad.getText(), textField_PtoRep.getText());
 					JOptionPane.showMessageDialog(frame,"La planta fue creada exitosamente.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
 					
 				} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException e1) {
 					//e1.printStackTrace();
 					
-				}*/
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}				
 		});
 		
 		
 	}
 	
+	public void editarStock(Integer id) {
+		
+		this.idPlanta = id;
+		editar();
+	}
+	
 	public void editar(){
 		
 		//this.inicializar();	
-		frame.setTitle("Editar Planta");
+		frame.setTitle("Editar Insumo en Stock");
 		frame.setVisible(true);
 		
 		textField_Cantidad = new JTextField();
@@ -146,7 +161,7 @@ public class AgregarEditarStock {
 		panel.add(lblInsumo);
 		panel.add(lblCant);
 		panel.add(lblPtoRep);
-		panel.add(comboBoxInsumo);
+		panel.add(comboBox_Insumo);
 		panel.add(textField_Cantidad);
 		panel.add(textField_PtoRep);
 		
@@ -156,23 +171,23 @@ public class AgregarEditarStock {
 		
 		
 		JButton btnEditar = new JButton("EDITAR");
-		/*btnEditar.addActionListener(new ActionListener() {
+		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				PlantaController pc= new PlantaController();
+				StockInsumoController ic= new StockInsumoController();
 				
-				try {
-					pc.registrarPlanta(textField_Nombre.getText());
+				//try {
+					//pc.registrarPlanta(textField_Nombre.getText());
 					
 					JOptionPane.showMessageDialog(frame,"La planta fue editada con exito.", "Edicion Exitosa",JOptionPane.INFORMATION_MESSAGE);
 				
-				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
+				//} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
-					JOptionPane.showMessageDialog(frame,"Por favor verifique sus datos.","Datos Invalidos",JOptionPane.ERROR_MESSAGE);
+					//JOptionPane.showMessageDialog(frame,"Por favor verifique sus datos.","Datos Invalidos",JOptionPane.ERROR_MESSAGE);
 					//e1.printStackTrace();
-				}
+				//}
 			}
-		});*/
+		});
 
 		
 	}

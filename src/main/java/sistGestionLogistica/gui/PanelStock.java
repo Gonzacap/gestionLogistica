@@ -192,13 +192,13 @@ public class PanelStock extends JPanel {
 			
 			System.out.println("Stock -> Alta");
 			AgregarEditarStock aS = new AgregarEditarStock();
-			aS.agregar();			
+			aS.agregarStock(idAux);			
 		});
 		btnEditar.addActionListener(e-> { //AccionEditar
 			
 			System.out.println("Stock -> Editar");
-			//AgregarEditarCamion eC = new AgregarEditarCamion();
-			//eC.editarCamion(idAux);	
+			AgregarEditarStock eS = new AgregarEditarStock();
+			eS.editarStock(idAux);	
 		});
 		btnAtras.addActionListener(e-> {	//AccionVolver
 			
