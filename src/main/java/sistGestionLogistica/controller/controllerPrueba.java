@@ -21,7 +21,7 @@ public class controllerPrueba {
 		StockInsumo si = new StockInsumo(1, p,i,45,40);
 		
 		//sic.agregarStockInsumo("1", "2", "85", "90");
-		sic.agregarStockInsumo("1", "3", "95", "30");
+		sic.agregarStockInsumo("1", "4", "30.", "10");
 	    	
          // System.out.println(sid.buscarStockPlanta(1));
 	}

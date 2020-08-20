@@ -219,8 +219,13 @@ public class PanelStock extends JPanel {
 			 
 			 try { 
 				 
-				 
+				    
+				 if(idAux==null) {
 					 this.actualizarTabla(sC.aMatriz(sI.faltantes()));
+				 }
+				 else{
+					 this.actualizarTabla(sC.aMatriz(sI.buscarStockPlanta(idAux)));
+				 }
 				 
 			
 			 } catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e1) {
