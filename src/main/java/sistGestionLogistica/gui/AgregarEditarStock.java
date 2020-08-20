@@ -10,16 +10,21 @@ import java.awt.EventQueue;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
+import java.util.Vector;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.PlantaController;
+import sistGestionLogistica.controller.StockInsumoController;
 
 
 public class AgregarEditarStock {
 
 	private JFrame frame;
-	private JTextField textField_Nombre;
+	private JComboBox  comboBoxInsumo;
+	private JTextField textField_Cantidad;
+	private JTextField textField_PtoRep;
 	private JPanel panel;
+	private Integer idPlanta;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -33,7 +38,6 @@ public class AgregarEditarStock {
 			}
 		});
 	}
-
 
 	public AgregarEditarStock() {
 		//super();
@@ -61,15 +65,37 @@ public class AgregarEditarStock {
 		frame.setTitle("Agregar ");
 		frame.setVisible(true);
 		
-		textField_Nombre = new JTextField();
-		textField_Nombre.setBounds(130, 25, 86, 20);
-		textField_Nombre.setColumns(10);	
+		//----------string para el combo box-------
 		
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(25, 25, 46, 14);
+		StockInsumoController ic = new StockInsumoController();
+		String[][] insumos = ic.faltante(idPlanta.toString(), "");
+		Vector<String> insumoID= new Vector<>();
+		for(int i = 0; i< insumos.length; i++){
+			insumoID.add(insumos[i][0]/*+" - "+insumos[i][1]*/) ;
+		}
+		//--------------
 		
-		panel.add(lblNombre);
-		panel.add(textField_Nombre);
+		comboBoxInsumo = new JComboBox(insumoID);
+		textField_Cantidad = new JTextField();
+		textField_Cantidad.setBounds(130, 50, 86, 20);
+		textField_Cantidad.setColumns(10);	
+		textField_PtoRep = new JTextField();
+		textField_PtoRep.setBounds(130, 75, 86, 20);
+		textField_PtoRep.setColumns(10);
+		
+		JLabel lblInsumo = new JLabel("ID Insumo");
+		lblInsumo.setBounds(25, 25, 46, 14);
+		JLabel lblCant = new JLabel("Cantidad");
+		lblCant.setBounds(25, 25, 46, 14);
+		JLabel lblPtoRep = new JLabel("Punto de reposicion");
+		lblPtoRep.setBounds(25, 25, 46, 14);
+		
+		panel.add(lblInsumo);
+		panel.add(lblCant);
+		panel.add(lblPtoRep);
+		panel.add(comboBoxInsumo);
+		panel.add(textField_Cantidad);
+		panel.add(textField_PtoRep);
 		
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.setBounds(252, 105, 89, 23);
@@ -81,16 +107,16 @@ public class AgregarEditarStock {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 				
-				PlantaController pc= new PlantaController();
+				StockInsumoController ic= new StockInsumoController();
 				
-				try {
-					pc.registrarPlanta(textField_Nombre.getText());
+				/*try {
+					//ic.agregarStockInsumo(idPlanta, comboBoxInsumo.getco, cantidad, puntoReposicion);
 					JOptionPane.showMessageDialog(frame,"La planta fue creada exitosamente.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
 					
 				} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException e1) {
 					//e1.printStackTrace();
 					
-				}
+				}*/
 			}				
 		});
 		
@@ -103,15 +129,26 @@ public class AgregarEditarStock {
 		frame.setTitle("Editar Planta");
 		frame.setVisible(true);
 		
-		textField_Nombre = new JTextField();
-		textField_Nombre.setBounds(130, 25, 86, 20);
-		textField_Nombre.setColumns(10);	
+		textField_Cantidad = new JTextField();
+		textField_Cantidad.setBounds(130, 50, 86, 20);
+		textField_Cantidad.setColumns(10);	
+		textField_PtoRep = new JTextField();
+		textField_PtoRep.setBounds(130, 75, 86, 20);
+		textField_PtoRep.setColumns(10);
 		
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(25, 25, 46, 14);
+		JLabel lblInsumo = new JLabel("ID Insumo");
+		lblInsumo.setBounds(25, 25, 46, 14);
+		JLabel lblCant = new JLabel("Cantidad");
+		lblCant.setBounds(25, 25, 46, 14);
+		JLabel lblPtoRep = new JLabel("Punto de reposicion");
+		lblPtoRep.setBounds(25, 25, 46, 14);
 		
-		panel.add(lblNombre);
-		panel.add(textField_Nombre);
+		panel.add(lblInsumo);
+		panel.add(lblCant);
+		panel.add(lblPtoRep);
+		panel.add(comboBoxInsumo);
+		panel.add(textField_Cantidad);
+		panel.add(textField_PtoRep);
 		
 		JButton btnAgregar = new JButton("Editar");
 		btnAgregar.setBounds(252, 105, 89, 23);
@@ -119,7 +156,7 @@ public class AgregarEditarStock {
 		
 		
 		JButton btnEditar = new JButton("EDITAR");
-		btnEditar.addActionListener(new ActionListener() {
+		/*btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				PlantaController pc= new PlantaController();
@@ -135,7 +172,7 @@ public class AgregarEditarStock {
 					//e1.printStackTrace();
 				}
 			}
-		});
+		});*/
 
 		
 	}

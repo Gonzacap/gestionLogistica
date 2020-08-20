@@ -164,8 +164,7 @@ public class PanelPlanta extends JPanel {
 		btnAgregarStock.addActionListener(e-> {	//agregar stock
 		
 			System.out.println("Planta -> Editar Stock");
-			AgregarEditarStock aP = new AgregarEditarStock();
-
+			aplicacion.mostrarPanelStock(idAux);
 		});
 		btnBuscar.addActionListener(new AccionBuscar());
 	

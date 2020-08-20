@@ -8,11 +8,7 @@ import java.time.format.DateTimeParseException;
 import javax.swing.*;
 
 import excepciones.DatosInvalidosException;
-import sistGestionLogistica.gui.PanelCamion;
-import sistGestionLogistica.gui.PanelPlanta;
-import sistGestionLogistica.gui.PanelRutas;
-import sistGestionLogistica.gui.PanelInsumo;
-import sistGestionLogistica.gui.PanelPedidos;
+import sistGestionLogistica.gui.*;
 
 
 public class App extends JFrame{
@@ -57,7 +53,8 @@ public class App extends JFrame{
 	private PanelCamion pC;
 	private PanelInsumo pI;
 	private PanelPedidos pD;
-	private PanelRutas pR; 
+	private PanelRutas pR;
+	private PanelStock pS;
 	
 	//----------------METODOS----------------
 	
@@ -84,11 +81,13 @@ public class App extends JFrame{
 		this.pD = new PanelPedidos();
 		this.pR = new PanelRutas();
 		
+		//--estoy habria que borrarlo si se hace una pantalla de inicio--
 		pP.inicializar(this);
 		pI.inicializar(this);
 		pD.inicializar(this);
 		pR.inicializar(this);
 		pC.inicializar(this);
+		//--------------------------
 		
 		menuPlantas.add(gestorPlantas);
 		menuInsumos.add(gestorInsumos);
@@ -166,6 +165,19 @@ public class App extends JFrame{
 	
 	//-------------otros metodos-------------------
 	
+	public void mostrarPanelStock(Integer idAux) {
+		System.out.println("App -> Panel Stock");
+		this.pS = new PanelStock();
+		pS.inicializar(this,idAux);		
+	}
+	public void volverStock() {
+		this.remove(pS);
+		this.pS = null;
+		pP.inicializar(this);
+		this.revalidate();
+		this.repaint();
+	}
+	
 	public void camionesActivated() {
 		this.gestorCamiones.setEnabled(false);
 		this.gestorPlantas.setEnabled(true);
@@ -199,6 +211,13 @@ public class App extends JFrame{
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(true);
 		this.gestorPedidos.setEnabled(true);
+		this.gestorRutas.setEnabled(false);
+	}
+	public void stockEnabled() {
+		this.gestorCamiones.setEnabled(false);
+		this.gestorPlantas.setEnabled(false);
+		this.gestorInsumos.setEnabled(false);
+		this.gestorPedidos.setEnabled(false);
 		this.gestorRutas.setEnabled(false);
 	}
 	
