@@ -19,6 +19,7 @@ public class PanelPedidos extends JPanel {
 	private JTextField textField_ID;
 	private JTextField textField_Nombre;
 	private JTextField textField_Tipo;
+	private Integer idAux;
 
 	public PanelPedidos() {
 
@@ -31,6 +32,9 @@ public class PanelPedidos extends JPanel {
 		panel.setLayout(null);
 		panel.setBackground(Color.orange);
 		
+		Integer altoP = aplicacion.getHeight()/10;
+		Integer anchoP = aplicacion.getWidth()/8;
+		
 		aplicacion.pedidosActivated();
 		aplicacion.setContentPane(panel);
 		aplicacion.revalidate();
@@ -39,24 +43,20 @@ public class PanelPedidos extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.setBounds(23, 37, 89, 23);
+		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
 		JButton btnBaja = new JButton("Baja");
-		btnBaja.setBounds(307, 37, 89, 23);
-		JButton btnModificar = new JButton("Modificar Por ID");
-		btnModificar.setBounds(136, 37, 130, 23);
-		JButton btnAgregarStock = new JButton("Agregar Stock");
-		btnAgregarStock.setBounds(419, 37, 89, 23);
+		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds((anchoP+110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
-		panel.add(btnModificar);
-		panel.add(btnAgregarStock);
+		panel.add(btnEditar);
 		
-		btnModificar.setEnabled(false);
-		btnAgregarStock.setEnabled(false);
+		btnEditar.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 208, 671, 222);
+		scrollPane.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
 		panel.add(scrollPane);
 		
 		//-------tabla-------
@@ -81,13 +81,13 @@ public class PanelPedidos extends JPanel {
 		//----------panel buscar----------
 		
 		JPanel panelBuscar = new JPanel(new GridBagLayout());
-		panelBuscar.setBounds(50, 80, 700, 120);
+		panelBuscar.setBounds((anchoP), (altoP), (6*anchoP), (2*altoP));
 		
 		GridBagConstraints p = new GridBagConstraints();
 		p.gridheight = 1;
 		p.gridwidth = 1;
-		p.weightx = 50;
-		p.weighty = 80;
+		p.weightx = (anchoP);
+		p.weighty = (altoP);
 		
 		//----------------------
 		
@@ -148,10 +148,11 @@ public class PanelPedidos extends JPanel {
 			
 
 		});
-		btnAgregarStock.addActionListener(e-> {	//agregar stock
+		btnEditar.addActionListener(e-> {	//AccionEditar
 		
-			System.out.println("Pedidos -> Editar Stock");
-			
+			System.out.println("Pedidos -> Editar Pedido");
+			//nuevo pedidos controller
+			//llamar a metodo editar
 
 		});
 		//btnBuscar.addActionListener(new AccionBuscar());
@@ -160,19 +161,13 @@ public class PanelPedidos extends JPanel {
 	
 	table_Plantas.addMouseListener(new MouseAdapter() { //
 		
-		
-		
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Plantas -> click Seleccionar");
 			int fila = table_Plantas.rowAtPoint(e.getPoint());
-			int columna = table_Plantas.columnAtPoint(e.getPoint());
 			
-			if(fila>-1 && columna>-1) {
-				Integer idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,columna));
-				//EditarCamion eC = new EditarCamion(idAux);
-				//eC.setVisible(true);
-				btnAgregarStock.setEnabled(true);
-				btnModificar.setEnabled(true);
+			if(fila>-1) {
+				idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
+				btnEditar.setEnabled(true);
 			}
 			
 		}

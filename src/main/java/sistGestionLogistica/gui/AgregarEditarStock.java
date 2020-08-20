@@ -50,12 +50,15 @@ public class AgregarEditarStock {
 		panel.setBounds(0, 0, 434, 261);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
+		
+		
+		
 	}
 
 	public void agregar(){
 		
 		//this.inicializar();
-		frame.setTitle("Agregar Planta");
+		frame.setTitle("Agregar ");
 		frame.setVisible(true);
 		
 		textField_Nombre = new JTextField();

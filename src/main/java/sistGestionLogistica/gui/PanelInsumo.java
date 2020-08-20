@@ -22,6 +22,7 @@ public class PanelInsumo extends JPanel {
 	private JTable table_Insumos;
 	private JTextField textField_ID;
 	private JTextField textField_Desc;
+	private Integer idAux;
 
 	public void inicializar(App aplicacion) {
 		aplicacion.setTitle("Sistema de Gestion Logistica - Insumos");
@@ -29,6 +30,9 @@ public class PanelInsumo extends JPanel {
 		PanelInsumo panel= new PanelInsumo();
 		panel.setLayout(null);
 		panel.setBackground(Color.cyan);
+		
+		Integer altoP = aplicacion.getHeight()/10;
+		Integer anchoP = aplicacion.getWidth()/8;
 		
 		aplicacion.insumosActivated();
 		aplicacion.setContentPane(panel);
@@ -38,18 +42,20 @@ public class PanelInsumo extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.setBounds(20, 37, 90, 25);
+		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
 		JButton btnBaja = new JButton("Baja");
-		btnBaja.setBounds(130, 37, 90, 25);
-		JLabel lblModificar = new JLabel("Seleccione el Id de un Insumo de la tabla para poder editarlo");
-		lblModificar.setBounds(240, 37, 350, 25);
+		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
-		panel.add(lblModificar);
+		panel.add(btnEditar);
+		
+		btnEditar.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 208, 671, 222);
+		scrollPane.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
 		panel.add(scrollPane);
 		
 		//-------tabla-------
@@ -78,13 +84,13 @@ public class PanelInsumo extends JPanel {
 		//---------panel buscar-----------
 				
 		JPanel panelBuscar = new JPanel(new GridBagLayout());
-		panelBuscar.setBounds(50, 80, 700, 120);
+		panelBuscar.setBounds((anchoP), (altoP), (6*anchoP), (2*altoP));
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridheight = 1;
 		c.gridwidth = 1;
-		c.weightx = 50;
-		c.weighty = 80;
+		c.weightx = (anchoP);
+		c.weighty = (altoP);
 		
 		//----------------------
 		
@@ -134,13 +140,20 @@ public class PanelInsumo extends JPanel {
 			AgregarEditarInsumo aI = new AgregarEditarInsumo();
 			aI.agregar();			
       });
-      btnBaja.addActionListener(e-> {	//AccionAlta
+      btnBaja.addActionListener(e-> {	//AccionBaja
 			
 			System.out.println("Insumo -> Baja");
 			
 			BajaInsumo bI = new BajaInsumo();
 			bI.setVisible(true);			
       });
+      btnEditar.addActionListener(e-> {	//AccionEditar
+			
+			System.out.println("Insumo -> Editar");
+			
+			AgregarEditarInsumo eC = new AgregarEditarInsumo();
+			eC.editarInsumo(idAux);			
+    });
       
       btnBuscar.addActionListener(new AccionBuscar());
 				
@@ -151,13 +164,10 @@ public class PanelInsumo extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Insumo -> click Editar");
 			int fila = table_Insumos.rowAtPoint(e.getPoint());
-			int columna = table_Insumos.columnAtPoint(e.getPoint());
 				
-				if(fila>-1 && columna>-1) {
-					Integer idAux = Integer.valueOf((String) table_Insumos.getValueAt(fila,columna));
-					
-					AgregarEditarInsumo eC = new AgregarEditarInsumo();
-					eC.editarInsumo(idAux);
+				if(fila>-1) {
+					idAux = Integer.valueOf((String) table_Insumos.getValueAt(fila,0));
+					btnEditar.setEnabled(true);
 				}
 			}
 		});

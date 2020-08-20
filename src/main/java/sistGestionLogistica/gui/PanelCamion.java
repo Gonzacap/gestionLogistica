@@ -15,6 +15,7 @@ import sistGestionLogistica.sistema.App;
 
 
 public class PanelCamion extends JPanel {
+	
 	private JTable table_Camiones;
 	private JTextField textField_ID;
 	private JTextField textField_Patente;
@@ -24,7 +25,7 @@ public class PanelCamion extends JPanel {
 	private JTextField textField_CostoKM;
 	private JTextField textField_CostoHora;
 	private JTextField textField_FechaCompra;
-
+	private Integer idAux;
 
 	public PanelCamion() {
 		
@@ -37,6 +38,9 @@ public class PanelCamion extends JPanel {
 		panel.setLayout(null);
 		panel.setBackground(Color.yellow);
 		
+		Integer altoP = aplicacion.getHeight()/10;
+		Integer anchoP = aplicacion.getWidth()/8;
+		
 		aplicacion.camionesActivated();
 		aplicacion.setContentPane(panel);
 		aplicacion.revalidate();
@@ -46,18 +50,20 @@ public class PanelCamion extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.setBounds(20, 37, 90, 25);
+		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
 		JButton btnBaja = new JButton("Baja");
-		btnBaja.setBounds(130, 37, 90, 25);
-		JLabel lblModificar = new JLabel("Seleccione el Id de un camion de la tabla para poder editarlo");
-		lblModificar.setBounds(240, 37, 350, 25);
+		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
-		panel.add(lblModificar);
+		panel.add(btnEditar);
+		
+		btnEditar.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 208, 671, 222);
+		scrollPane.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
 		panel.add(scrollPane);
 		
 		//-------tabla-------
@@ -81,18 +87,16 @@ public class PanelCamion extends JPanel {
 			}
 		});
 		
-		//--------------------
-		
 		//---------panel buscar-----------
 		
 		JPanel panelBuscar = new JPanel(new GridBagLayout());
-		panelBuscar.setBounds(50, 80, 700, 120);
+		panelBuscar.setBounds((anchoP), (altoP), (6*anchoP), (2*altoP));
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridheight = 1;
 		c.gridwidth = 1;
-		c.weightx = 50;
-		c.weighty = 80;
+		c.weightx = (anchoP);
+		c.weighty = (altoP);
 		
 		//----------------------
 		
@@ -213,15 +217,10 @@ public class PanelCamion extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Camion -> click Modificar");
 				int fila = table_Camiones.rowAtPoint(e.getPoint());
-				//int columna = table_Camiones.columnAtPoint(e.getPoint());
 				
-				if(fila>-1 /*&& columna>-1*/) {
-					Integer idAux = Integer.valueOf((String) table_Camiones.getValueAt(fila,0));
-					
-					//EditarCamion eC = new EditarCamion(idAux);
-					//eC.setVisible(true);
-					AgregarEditarCamion eC = new AgregarEditarCamion();
-					eC.editarCamion(idAux);
+				if(fila>-1) {
+					idAux = Integer.valueOf((String) table_Camiones.getValueAt(fila,0));
+					btnEditar.setEnabled(true);
 				}
 				
 			}
@@ -234,19 +233,20 @@ public class PanelCamion extends JPanel {
 		btnAlta.addActionListener(e-> {	//AccionAlta
 			
 			System.out.println("Camion -> Alta");
-			
 			AgregarEditarCamion aC = new AgregarEditarCamion();
-			aC.agregar();
-			//AgregarCamion aC = new AgregarCamion();
-			//aC.frame.setVisible(true);
-			
+			aC.agregar();			
 		});
 		btnBaja.addActionListener(e-> { //AccionBaja
 			
 			System.out.println("Camion -> Baja");
 			BajaCamion bC = new BajaCamion();
 			bC.setVisible(true);
-
+		});
+		btnEditar.addActionListener(e-> {	//AccionEditar
+			
+			System.out.println("Camion -> Editar");
+			AgregarEditarCamion eC = new AgregarEditarCamion();
+			eC.editarCamion(idAux);			
 		});
 		btnBuscar.addActionListener(new AccionBuscar());
 		

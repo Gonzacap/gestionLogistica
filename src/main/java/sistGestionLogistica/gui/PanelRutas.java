@@ -40,6 +40,9 @@ public class PanelRutas extends JPanel {
 		panel.setLayout(null);
 		panel.setBackground(Color.gray);
 		
+		Integer altoP = aplicacion.getHeight()/10;
+		Integer anchoP = aplicacion.getWidth()/8;
+		
 		aplicacion.rutasActivated();
 		aplicacion.setContentPane(panel);
 		aplicacion.revalidate();
@@ -48,22 +51,27 @@ public class PanelRutas extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.setBounds(23, 37, 89, 23);		
+		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);	
+		/*JButton btnBaja = new JButton("Baja");
+		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);*/
+		
 		panel.add(btnAlta);	
 		
 		/*
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 208, 671, 222);
+		scrollPane.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
 		panel.add(scrollPane);
 		
 		//-------tabla-------
 		
-		table_Plantas = new JTable();
+		table_Rutas = new JTable();
 		scrollPane.setViewportView(table_Plantas);
-		table_Plantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_Plantas.setToolTipText("");
+		table_Rutas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_Rutass.setToolTipText("");
 		
-		table_Plantas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"ID", "Nombre"}) {
+		table_Rutas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"ID", "Nombre"}) {
 			
 			Class[] columnTypes = new Class[] {
 				Object.class, String.class
@@ -86,13 +94,13 @@ public class PanelRutas extends JPanel {
 		//----------panel agregar----------
 		
 		JPanel panelBuscar = new JPanel(new GridBagLayout());
-		panelBuscar.setBounds(50, 80, 700, 120);
+		panelBuscar.setBounds((anchoP), (altoP), (6*anchoP), (2*altoP));
 		
 		GridBagConstraints p = new GridBagConstraints();
 		p.gridheight = 1;
 		p.gridwidth = 1;
-		p.weightx = 50;
-		p.weighty = 80;
+		p.weightx = (anchoP);
+		p.weighty = (altoP);
 		
 		//----------------------
 		
@@ -194,12 +202,10 @@ public class PanelRutas extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Plantas -> click Seleccionar");
 			int fila = table_Plantas.rowAtPoint(e.getPoint());
-			int columna = table_Plantas.columnAtPoint(e.getPoint());
 			
-			if(fila>-1 && columna>-1) {
-				Integer idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,columna));
-				btnAgregarStock.setEnabled(true);
-				btnModificar.setEnabled(true);
+			if(fila>-1){
+				idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
+				btnEditar.setEnabled(true);
 			}
 			
 		}
