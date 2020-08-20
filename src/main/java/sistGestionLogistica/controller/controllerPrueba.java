@@ -20,9 +20,10 @@ public class controllerPrueba {
 		Insumo i = new InsumoLiquido("pruebaController", 456.0 , 123.1 , UnidadMedida.CM3,50.0) ;
 		StockInsumo si = new StockInsumo(1, p,i,45,40);
 		
-	//	sic.agregarStockInsumo("1", "1", "45", "40");
+		//sic.agregarStockInsumo("1", "2", "85", "90");
+		sic.agregarStockInsumo("1", "3", "95", "30");
 	    	
-          System.out.println(sid.buscarStockPlanta(1));
+         // System.out.println(sid.buscarStockPlanta(1));
 	}
 
 }
