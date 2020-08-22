@@ -82,14 +82,14 @@ public class App extends JFrame{
 		this.pC = new PanelCamion();
 		this.pD = new PanelPedidos();
 		this.pR = new PanelRutas();
-		this.pS = new PanelStock();
+		//this.pS = new PanelStock();
 		
 		//--estoy habria que borrarlo si se hace una pantalla de inicio--
 		pP.inicializar(this);
 		pI.inicializar(this);
 		pD.inicializar(this);
 		pR.inicializar(this);
-		pS.inicializar(this);
+		//pS.inicializar(this);
 		pC.inicializar(this);
 		//--------------------------
 		
@@ -166,7 +166,7 @@ public class App extends JFrame{
 		});
 		
 		gestorStock.addActionListener(e->{
-			
+			this.pS = new PanelStock();			
 			System.out.println("App -> Panel Stocks");
 			pS.inicializar(this);
 			pS.pantallaInsumosAReponer(this);
@@ -180,6 +180,7 @@ public class App extends JFrame{
 	
 	public void mostrarPanelStock(Integer idAux) {
 		System.out.println("App -> Panel Stock");
+		this.pS = new PanelStock();
 		pS.inicializar(this,idAux);
 		pS.pantallaStockPlanta(this);
 		this.revalidate();
@@ -187,7 +188,7 @@ public class App extends JFrame{
 	}
 	public void volverStock() {
 		this.remove(pS);
-		//this.pS = null;
+		this.pS = null;
 		pP.inicializar(this);
 		this.revalidate();
 		this.repaint();
