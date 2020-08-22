@@ -177,7 +177,7 @@ public class PanelStock extends JPanel {
 		aplicacion.stockActivated();
 		
 		//----------------------
-		
+		c.gridheight = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
 
 		textField_IdPlanta = new JTextField();
@@ -221,7 +221,8 @@ public class PanelStock extends JPanel {
 				 
 				    
 				 if(idAux==null) {
-					 this.actualizarTabla(sC.aMatriz(sI.faltantes()));
+//					 this.actualizarTabla(sC.aMatriz(sI.faltantes()));
+					 this.actualizarTabla(sC.faltante(textField_IdPlanta.getText(),textField_IdProd.getText()));
 				 }
 				 else{
 					 this.actualizarTabla(sC.aMatriz(sI.buscarStockPlanta(idAux)));
