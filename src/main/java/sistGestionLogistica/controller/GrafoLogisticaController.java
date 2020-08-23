@@ -1,10 +1,13 @@
 package sistGestionLogistica.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import excepciones.DatosInvalidosException;
 import excepciones.GrafoException;
+import sistGestionLogistica.dominio.Estado;
 import sistGestionLogistica.dominio.GrafoLogistica;
 import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.servicios.ServiceGrafoLogistica;
@@ -47,6 +50,25 @@ public class GrafoLogisticaController {
 		
 		//conectamos
 		sgl.conectar(gf, distancia, duracion, peso, plantaOrigen, plantaDestino);
+		
+	}
+	
+	public List<Integer> caminoMinimoTiempo() {
+		return null;
+		
+	}
+	
+	public List<Integer> caminoMinimoKm() {
+		return null;
+		
+	}
+	
+	public List<Integer> dijkstra(){
+		
+		PriorityQueue<Estado> cola = new PriorityQueue();
+		
+		
+		return null;
 		
 	}
 
