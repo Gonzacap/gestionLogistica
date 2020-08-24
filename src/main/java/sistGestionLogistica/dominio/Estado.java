@@ -6,13 +6,41 @@ public class Estado {
 
 	private Planta actual;
 	private Double peso;
-	private Integer indice;
-	private ArrayList<Integer> camino;
+	private Double acumulado;
+	private Ruta rutaEntrante;
+	private ArrayList<Ruta> camino;
 	
-	public Estado(Planta a, Double P, Integer i){
+	public Estado(Planta a, Double p, Double d, Ruta r){
 		this.actual = a;
-		this.peso = P;
-		this.indice = i;
+		this.peso = p;
+		this.acumulado = d;
+		this.rutaEntrante = r;
+		this.camino = new ArrayList<>();
+	}
+	
+	public Planta getActual() {
+		return actual;
+	}
+
+	public void setActual(Planta actual) {
+		this.actual = actual;
+	}
+
+	public Double getAcumulado() {
+		return acumulado;
+	}
+
+	public void setAcumulado(Double pesoAculado) {
+		this.acumulado = pesoAculado;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
+	public void setCamino(ArrayList<Ruta> camino, Ruta r) {
+		this.camino = camino;
+		this.camino.add(r);
 	}
 	
 	public Planta getPlanta() {
@@ -23,16 +51,12 @@ public class Estado {
 		return this.peso;
 	}
 	
-	public Integer getIndice() {
-		return this.indice;
-	}
-	
-	public ArrayList<Integer> getCamino(){
+	public ArrayList<Ruta> getCamino(){
 		return this.camino;
 	}
 	
-	public void setIndice(Integer i) {
-		this.indice = i;
+	public Ruta getRuta() {
+		return this.rutaEntrante;
 	}
 	
 }
