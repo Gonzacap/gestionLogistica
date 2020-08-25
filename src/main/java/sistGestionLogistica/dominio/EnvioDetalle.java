@@ -9,6 +9,8 @@ public class EnvioDetalle {
     Double costoEnvio;
     private List<Ruta> rutaAsignada;
     
+    public EnvioDetalle() {};
+    
 	public EnvioDetalle(Integer numOrden, Camion camionAsignado, Double costoEnvio, List<Ruta> rutaAsignada
 			) {
 		
@@ -39,8 +41,8 @@ public class EnvioDetalle {
 	public Double getCostoEnvio() {
 		return costoEnvio;
 	}
-	public void setCostoEnvio(Double costoEnvio) {
-		this.costoEnvio = costoEnvio;
+	public void setCostoEnvio() {
+		this.costoEnvio = costoEnvio(rutaAsignada, camionAsignado.getCostoKM(), camionAsignado.getCostoHora()) ;
 	}
 	public List<Ruta> getRutaAsignada() {
 		return rutaAsignada;

@@ -6,6 +6,11 @@ public class ItemDetalle{
     Insumo insumo;
     Integer cantidad;
     Double precio;
+    
+    public ItemDetalle(){
+    	
+    };
+    
 	public ItemDetalle( Integer numOrden, Insumo insumo, Integer cantidad) {
 		
 		this.numOrden = numOrden;

@@ -15,7 +15,9 @@ public class Pedido {
   private List<ItemDetalle> item; 
   private EstadoPedido estado;
   
-  
+  public Pedido() {
+	  
+  };
   
 public Pedido( Integer numOrden, Planta plantaDestino, LocalDate fechaSolicitud, LocalDate fechaEntrega,
 		Double costoEnvio, List<Ruta> rutaAsignada, List<ItemDetalle> item, Camion camionAsignado,
