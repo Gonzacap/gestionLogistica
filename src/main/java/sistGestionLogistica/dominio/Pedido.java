@@ -12,10 +12,7 @@ public class Pedido {
   private Planta plantaDestino;
   private LocalDate fechaSolicitud;
   private LocalDate fechaEntrega;
-  private Double costoEnvio;
-  private List<Ruta> rutaAsignada;
   private List<ItemDetalle> item; 
-  private Camion camionAsignado ;
   private EstadoPedido estado;
   
   
@@ -29,13 +26,10 @@ public Pedido( Integer numOrden, Planta plantaDestino, LocalDate fechaSolicitud,
 	this.plantaDestino = plantaDestino;
 	this.fechaSolicitud = fechaSolicitud;
 	this.fechaEntrega = fechaEntrega;
-	this.costoEnvio = costoEnvio;
-	this.rutaAsignada = rutaAsignada;
+
 	this.item = item;
-	this.camionAsignado = camionAsignado;
 	this.estado = estado;
 }
-
 
 
 
@@ -86,31 +80,6 @@ public void setFechaEntrega(LocalDate fechaEntrega) {
 }
 
 
-
-public Double getCostoEnvio() {
-	return costoEnvio;
-}
-
-
-
-public void setCostoEnvio(Double costoEnvio) {
-	this.costoEnvio = costoEnvio;
-}
-
-
-
-public List<Ruta> getRutaAsignada() {
-	return rutaAsignada;
-}
-
-
-
-public void setRutaAsignada(List<Ruta> rutaAsignada) {
-	this.rutaAsignada = rutaAsignada;
-}
-
-
-
 public List<ItemDetalle> getItem() {
 	return item;
 }
@@ -119,18 +88,6 @@ public List<ItemDetalle> getItem() {
 
 public void setItem(List<ItemDetalle> item) {
 	this.item = item;
-}
-
-
-
-public Camion getCamionAsignado() {
-	return camionAsignado;
-}
-
-
-
-public void setCamionAsignado(Camion camionAsignado) {
-	this.camionAsignado = camionAsignado;
 }
 
 
@@ -144,7 +101,11 @@ public EstadoPedido getEstado() {
 public void setEstado(EstadoPedido estado) {
 	this.estado = estado;
 }
-  
+
+
+
+
+
 
   
   

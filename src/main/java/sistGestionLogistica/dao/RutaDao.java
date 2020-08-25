@@ -10,4 +10,5 @@ public interface RutaDao {
 	public Boolean update(Ruta r) throws SQLException;
 	public void borrar(Integer id) throws SQLException;
 	public List<Ruta> buscarTodos() throws SQLException;
+	public Ruta buscarPorId(Integer id)  throws SQLException;
 }

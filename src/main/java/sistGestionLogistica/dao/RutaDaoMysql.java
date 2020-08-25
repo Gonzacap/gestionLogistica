@@ -116,7 +116,7 @@ public class RutaDaoMysql implements RutaDao{
 	public Boolean save(Ruta r) throws SQLException {
 		
 		String insertRuta = "INSERT INTO ruta (distancia,duracionViaje,pesoMaximo,plantaOrigen,plantaDestino) VALUES (?,?,?,?,?)";
-		
+	
 		 con = DB.getConexion();
 		 ps = null;
 		
@@ -135,5 +135,44 @@ public class RutaDaoMysql implements RutaDao{
 		}
 		
 		return true;
+	}
+	public Ruta buscarPorId(Integer id)  throws SQLException{ 
+
+		String buscar = "SELECT * FROM ruta WHERE idRuta = ?";
+		ServicePlanta sp = new ServicePlanta();
+		
+		Ruta r = new Ruta();
+		r.setIdRuta(-1);
+		try {
+			con = DB.getConexion();
+			ps = con.prepareStatement(buscar);
+			ps.setInt(1,id);
+			rs = ps.executeQuery();
+			while(rs.next()){
+
+				
+				r.setIdRuta(rs.getInt("idRuta"));
+				r.setDistancia(rs.getDouble("distancia"));
+				r.setDuracionViaje(rs.getDouble("duracionViaje"));
+				r.setPesoMaximo(rs.getDouble("pesoMaximo"));
+			    r.setPlantaOrigen(sp.buscarPorId(rs.getInt("plantaOrigen")));
+			    r.setPlantaDestino(sp.buscarPorId(rs.getInt("plantaDestino")));
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			try {
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+		return r;
 	}
 }

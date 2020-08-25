@@ -48,5 +48,8 @@ public List<Ruta> buscarRuta(Ruta r) throws SQLException{
 				.collect(Collectors.toList());
 	}
 	
+public Ruta buscarPorId(Integer id) throws SQLException {
+	return this.rutaDao.buscarPorId(id);
+}
 
 }

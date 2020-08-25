@@ -56,5 +56,13 @@ public class PedidoDaoMysql implements PedidoDao{
 		
 		
 	}
+	
+	public Pedido buscarNumOrden(Integer numOrden) {
+	
+		
+		
+	 return null;
+	 
+	}
 
 }

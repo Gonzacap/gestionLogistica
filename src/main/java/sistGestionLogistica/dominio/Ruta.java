@@ -29,7 +29,7 @@ public class Ruta {
 		this.plantaDestino = plantaDestino;
 	}
 
-
+   public Ruta() {};
 
 
 	public Integer getIdRuta() {

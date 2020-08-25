@@ -6,14 +6,14 @@ public class ItemDetalle{
     Insumo insumo;
     Integer cantidad;
     Double precio;
-	public ItemDetalle(Integer idDetalle, Integer numOrden, Insumo insumo, Integer cantidad) {
-		super();
-		this.idDetalle = idDetalle;
+	public ItemDetalle( Integer numOrden, Insumo insumo, Integer cantidad) {
+		
 		this.numOrden = numOrden;
 		this.insumo = insumo;
 		this.cantidad = cantidad;
 		this.precio = this.insumo.costo * this.cantidad;
 	}
+	
 	public Integer getIdDetalle() {
 		return idDetalle;
 	}
