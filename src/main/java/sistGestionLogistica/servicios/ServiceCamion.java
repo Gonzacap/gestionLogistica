@@ -1,9 +1,13 @@
 package sistGestionLogistica.servicios;
 
 import com.mysql.cj.jdbc.Driver;
+
+
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -15,6 +19,8 @@ public class ServiceCamion {
 
 	private CamionDao camionDao = new CamionDaoMysql();
 	
+
+	 
 	
 	public ServiceCamion() {
 		super();
@@ -26,10 +32,14 @@ public class ServiceCamion {
 		// puede agregar un camion si no se cumplen determinadas
 		// condiciones en otras entidades o reglas 
 		// se valida aquí
+		
+	
+
 			return this.camionDao.save(c);
 	}
 	
 	public Boolean editarCamion(Camion c) throws SQLException {
+		
 		
 		return this.camionDao.update(c);
 	}
@@ -43,6 +53,7 @@ public class ServiceCamion {
 	}
 	public void borrar(int id) throws SQLException {
 		
+	
 		camionDao.borrar(id);
 		
 	}
@@ -69,6 +80,7 @@ public class ServiceCamion {
 		if(!cam.getFechaCompra().equals(LocalDate.MIN)) filtroFecha = (t) -> (cam.getFechaCompra().equals(t.getFechaCompra()));
 		
 		
+	
 		
 		
 		return camionDao.buscarTodos().stream().filter(filtroId)
@@ -76,6 +88,9 @@ public class ServiceCamion {
 				.filter(filtroModelo).filter(filtroCostoKM)
 				.filter(filtroCostoHs).filter(filtroKM)
 				.filter(filtroFecha).collect(Collectors.toList());
+		
+		
+
 	}
 	
 	

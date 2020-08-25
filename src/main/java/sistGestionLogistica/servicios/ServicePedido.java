@@ -1,8 +1,10 @@
 package sistGestionLogistica.servicios;
 
 import java.sql.SQLException;
+import java.util.PriorityQueue;
 
 import sistGestionLogistica.dao.*;
+import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.dominio.Pedido;
 
@@ -12,6 +14,8 @@ public class ServicePedido {
 	public Boolean registrarPedido(Pedido p) throws SQLException {
 		
 		
+		 
+		 
 		return this.pedidoDao.save(p);
 		
 	}
