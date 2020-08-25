@@ -6,12 +6,14 @@ import com.mysql.cj.jdbc.Driver;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import sistGestionLogistica.dominio.*;
+import sistGestionLogistica.comparator.CompareCamion;
 import sistGestionLogistica.dao.*;
 
 
@@ -56,6 +58,20 @@ public class ServiceCamion {
 	
 		camionDao.borrar(id);
 		
+	}
+	
+	public PriorityQueue<Camion> obtenerColaCamiones() throws SQLException{
+		Comparator<Camion> comparator = new CompareCamion();
+		PriorityQueue<Camion> cola= new PriorityQueue<Camion>(comparator);
+		List<Camion> lista = this.buscarCamion(new Camion(-1,"","","",-1.0,-1.0,-1,LocalDate.MIN));
+		
+		for(Camion c : lista) {
+			cola.add(c);
+		}
+		
+		
+		
+		return cola;
 	}
 	public List<Camion> buscarCamion(Camion cam) throws SQLException {
 		
