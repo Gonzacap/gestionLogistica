@@ -155,6 +155,8 @@ public class ServiceGrafoLogistica {
 		PriorityQueue<Estado> cola = new PriorityQueue(1,new CompareRutas()); // La cola de prioridad.
 		Vector<Planta> marcado = new Vector(graph.getListaPlanta().size()); // Este arreglo nos permitira determinar los nodos procesados.
 		
+		System.out.println("dijkstra tiempo");
+		
 		List<Estado> adyacencias;
 		
 		//distancia.add(0, 0); //?¡ // Valor inicial del nodo de partida.
@@ -166,7 +168,9 @@ public class ServiceGrafoLogistica {
 			Estado e = cola.poll(); // Se desencola el elemento minimo.
 			marcado.add(e.getPlanta()); // Se marca el nodo como visitado.
 			
-			if (e.getPlanta() == fin)	return e.getCamino() ; // Retornamos el caminino?, hemos llegado al nodo destino.
+			System.out.println(e.getActual().getNombre());
+			
+			if (e.getPlanta() == fin) return e.getCamino() ; // Retornamos el caminino?, hemos llegado al nodo destino.
 			
 			adyacencias = this.adyacenciasT(graph, e.getPlanta()); // hacer un metodo que retorne la lista de rutas salientes de una planta
 			
@@ -185,14 +189,17 @@ public class ServiceGrafoLogistica {
 			
 		}
 		
+		System.out.println("no hay camino");
 		return null; // Si no se puede llegar al destino, retornar null;
 		
 	}
 	
-public ArrayList<Ruta> dijkstraKm(GrafoLogistica graph, Planta inicio, Planta fin){
+	public ArrayList<Ruta> dijkstraKm(GrafoLogistica graph, Planta inicio, Planta fin){
 		
 		PriorityQueue<Estado> cola = new PriorityQueue(1,new CompareRutas()); // La cola de prioridad.
 		Vector<Planta> marcado = new Vector(graph.getListaPlanta().size()); // Este arreglo nos permitira determinar los nodos procesados.
+		
+		System.out.println("dijkstra km");
 		
 		List<Estado> adyacencias;
 		
@@ -221,6 +228,8 @@ public ArrayList<Ruta> dijkstraKm(GrafoLogistica graph, Planta inicio, Planta fi
 			}
 			
 		}
+		
+		System.out.println("no encontro camino");
 		
 		return null; // Si no se puede llegar al destino, retornar null;
 		
