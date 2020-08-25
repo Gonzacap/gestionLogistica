@@ -3,7 +3,7 @@ package sistGestionLogistica.dominio;
 import java.util.List;
 
 public class EnvioDetalle {
-    Integer idEnvio;
+   
     Integer numOrden;
     Camion camionAsignado;
     Double costoEnvio;
@@ -20,12 +20,7 @@ public class EnvioDetalle {
 		
 		
 	}
-	public Integer getIdEnvio() {
-		return idEnvio;
-	}
-	public void setIdEnvio(Integer idEnvio) {
-		this.idEnvio = idEnvio;
-	}
+	
 	public Integer getNumOrden() {
 		return numOrden;
 	}

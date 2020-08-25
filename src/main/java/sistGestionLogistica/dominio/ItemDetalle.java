@@ -1,7 +1,7 @@
 package sistGestionLogistica.dominio;
 
 public class ItemDetalle{
-	Integer idDetalle;
+
 	Integer numOrden;
     Insumo insumo;
     Integer cantidad;
@@ -19,12 +19,7 @@ public class ItemDetalle{
 		this.precio = this.insumo.costo * this.cantidad;
 	}
 	
-	public Integer getIdDetalle() {
-		return idDetalle;
-	}
-	public void setIdDetalle(Integer idDetalle) {
-		this.idDetalle = idDetalle;
-	}
+	
 	public Integer getNumOrden() {
 		return numOrden;
 	}
@@ -49,9 +44,12 @@ public class ItemDetalle{
 	public void setPrecio() {
 		this.precio = this.insumo.costo * this.cantidad;
 	}
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
 	@Override
 	public String toString() {
-		return "ItemDetalle [idDetalle=" + idDetalle + ", numOrden=" + numOrden + ", insumo=" + insumo + ", cantidad="
+		return " numOrden=" + numOrden + ", insumo=" + insumo + ", cantidad="
 				+ cantidad + ", precio=" + precio + "]";
 	}
     

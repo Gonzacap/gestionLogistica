@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-08-2020 a las 02:18:39
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Tiempo de generación: 26-08-2020 a las 01:06:36
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,6 +57,18 @@ INSERT INTO `camion` (`ID`, `PATENTE`, `MARCA`, `MODELO`, `KM`, `COSTO_KM`, `COS
 (24, '123XYZ', 'FIAT', 'CARGO', 50, '100.00', '100.00', '2019-10-22'),
 (25, '2345', 'HONDA', 'ALGO', 123, '123.00', '123.00', '1992-12-12'),
 (27, '11112222', 'XIAOMI', 'REDMI', 123, '123.00', '123.00', '1999-12-12');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `enviodetalle`
+--
+
+CREATE TABLE `enviodetalle` (
+  `numOrden` int(11) NOT NULL,
+  `camionAsignado` int(11) NOT NULL,
+  `costoEnvio` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -133,7 +145,6 @@ INSERT INTO `insumoliquido` (`idInsumo`, `densidad`) VALUES
 --
 
 CREATE TABLE `itemdetalle` (
-  `idDetalle` int(11) NOT NULL,
   `numOrden` int(11) NOT NULL,
   `insumo` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
@@ -151,8 +162,6 @@ CREATE TABLE `pedido` (
   `plantaDestino` int(11) NOT NULL,
   `fechaSolicitud` date NOT NULL,
   `fechaEntrega` date NOT NULL,
-  `camionAsignado` int(11) NOT NULL,
-  `costoEnvio` double NOT NULL,
   `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -238,6 +247,14 @@ ALTER TABLE `camion`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indices de la tabla `enviodetalle`
+--
+ALTER TABLE `enviodetalle`
+  ADD PRIMARY KEY (`numOrden`),
+  ADD UNIQUE KEY `numOrden` (`numOrden`),
+  ADD UNIQUE KEY `camionAsignado` (`camionAsignado`);
+
+--
 -- Indices de la tabla `insumo`
 --
 ALTER TABLE `insumo`
@@ -259,9 +276,9 @@ ALTER TABLE `insumoliquido`
 -- Indices de la tabla `itemdetalle`
 --
 ALTER TABLE `itemdetalle`
-  ADD PRIMARY KEY (`idDetalle`),
-  ADD KEY `FK_insumo_ITEM` (`insumo`),
-  ADD KEY `FK_ITEM_ORDEN` (`numOrden`);
+  ADD PRIMARY KEY (`numOrden`) USING BTREE,
+  ADD UNIQUE KEY `numOrden` (`numOrden`),
+  ADD KEY `FK_insumo_ITEM` (`insumo`);
 
 --
 -- Indices de la tabla `pedido`
@@ -269,8 +286,7 @@ ALTER TABLE `itemdetalle`
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`numOrden`),
   ADD UNIQUE KEY `numOrden` (`numOrden`),
-  ADD KEY `FK_plantaDestino` (`plantaDestino`),
-  ADD KEY `FK_CAMIONASIGNADO` (`camionAsignado`);
+  ADD KEY `FK_plantaDestino` (`plantaDestino`);
 
 --
 -- Indices de la tabla `pertenecea`
@@ -352,6 +368,13 @@ ALTER TABLE `stockinsumo`
 --
 
 --
+-- Filtros para la tabla `enviodetalle`
+--
+ALTER TABLE `enviodetalle`
+  ADD CONSTRAINT `FK_ENVIO_CAMION` FOREIGN KEY (`camionAsignado`) REFERENCES `camion` (`ID`),
+  ADD CONSTRAINT `FK_ENVIO_ORDEN` FOREIGN KEY (`numOrden`) REFERENCES `pedido` (`numOrden`);
+
+--
 -- Filtros para la tabla `insumogeneral`
 --
 ALTER TABLE `insumogeneral`
@@ -374,7 +397,6 @@ ALTER TABLE `itemdetalle`
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `FK_CAMIONASIGNADO` FOREIGN KEY (`camionAsignado`) REFERENCES `camion` (`ID`),
   ADD CONSTRAINT `FK_plantaDestino` FOREIGN KEY (`plantaDestino`) REFERENCES `planta` (`idPlanta`);
 
 --

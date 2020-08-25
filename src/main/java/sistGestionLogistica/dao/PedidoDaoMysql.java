@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,8 @@ import sistGestionLogistica.connection.DB;
 import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.dominio.Pedido;
+import sistGestionLogistica.enums.EstadoPedido;
+import sistGestionLogistica.servicios.ServicePlanta;
 
 public class PedidoDaoMysql implements PedidoDao{
 	private Connection conn ;
@@ -64,6 +68,8 @@ public class PedidoDaoMysql implements PedidoDao{
 	public Pedido buscarNumOrden(Integer numOrden) {
 		String buscar = "SELECT * FROM pedido WHERE numOrden = ?";
 		Pedido pe = new Pedido();
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		ServicePlanta sp = new ServicePlanta();
 		pe.setNumOrden(-1);
 		try {
 			conn = DB.getConexion();
@@ -71,12 +77,12 @@ public class PedidoDaoMysql implements PedidoDao{
 			pstmt.setInt(1,numOrden);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-
-				pstmt.setInt(1,pe.getNumOrden());
-				pstmt.setInt(2, pe.getPlantaDestino().getId());
-				pstmt.setDate(3, Date.valueOf(pe.getFechaSolicitud()));
-				pstmt.setDate(4,Date.valueOf(pe.getFechaEntrega()));
-				pstmt.setString(7, pe.getEstado().toString());
+              
+				pe.setNumOrden(rs.getInt("numOrden"));
+				pe.setPlantaDestino(sp.buscarPorId(rs.getInt("PlantaDestino")));
+				pe.setFechaSolicitud(LocalDate.parse((CharSequence) rs.getString("fechaSolicitud"), formatter));
+				pe.setFechaEntrega(LocalDate.parse((CharSequence) rs.getString("fechaEntrega"), formatter));
+				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
 			}
 			
 		} catch (Exception e) {
@@ -98,7 +104,9 @@ public class PedidoDaoMysql implements PedidoDao{
 
 	@Override
 	public List<Pedido> buscarTodos() throws SQLException {
-		String buscar = "SELECT * FROM pedido WHERE numOrden = ?";
+		String buscar = "SELECT * FROM pedido ";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		ServicePlanta sp = new ServicePlanta();
 	    List<Pedido> lista = new ArrayList<Pedido>();
 	    
 		try {
@@ -109,11 +117,11 @@ public class PedidoDaoMysql implements PedidoDao{
 			
 			while(rs.next()){
 				Pedido pe = new Pedido();
-				pstmt.setInt(1,pe.getNumOrden());
-				pstmt.setInt(2, pe.getPlantaDestino().getId());
-				pstmt.setDate(3, Date.valueOf(pe.getFechaSolicitud()));
-				pstmt.setDate(4,Date.valueOf(pe.getFechaEntrega()));
-				pstmt.setString(7, pe.getEstado().toString());
+				pe.setNumOrden(rs.getInt("numOrden"));
+				pe.setPlantaDestino(sp.buscarPorId(rs.getInt("PlantaDestino")));
+				pe.setFechaSolicitud(LocalDate.parse((CharSequence) rs.getString("fechaSolicitud"), formatter));
+				pe.setFechaEntrega(LocalDate.parse((CharSequence) rs.getString("fechaEntrega"), formatter));
+				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
 				
 				lista.add(pe);
 			}

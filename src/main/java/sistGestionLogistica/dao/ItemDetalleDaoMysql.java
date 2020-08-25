@@ -5,9 +5,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import sistGestionLogistica.connection.DB;
 import sistGestionLogistica.dominio.ItemDetalle;
+import sistGestionLogistica.dominio.Pedido;
+import sistGestionLogistica.servicios.ServiceInsumo;
 
 public class ItemDetalleDaoMysql implements ItemDetalleDao {
 	
@@ -44,7 +48,86 @@ public class ItemDetalleDaoMysql implements ItemDetalleDao {
 	}
 	return true;
 	}
+
+	@Override
+	public Boolean update(ItemDetalle item) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ItemDetalle buscarNumOrden(Integer numOrden) throws SQLException {
+		String buscar = "SELECT * FROM itemdetalle WHERE numOrden = ?";
+		ItemDetalle item = new ItemDetalle();
+		ServiceInsumo si = new ServiceInsumo();
+		item.setNumOrden(-1);
+		try {
+			conn = DB.getConexion();
+			pstmt = conn.prepareStatement(buscar);
+			pstmt.setInt(1,numOrden);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				
+				item.setNumOrden(rs.getInt("numOrden"));
+				item.setInsumo(si.buscarPorId(rs.getInt("insumo")));
+				item.setCantidad(rs.getInt("cantidad"));
+				item.setPrecio(rs.getDouble("precioItem"));
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return item;
+	}
+
+	@Override
+	public List<ItemDetalle> buscarTodos() throws SQLException {
+		String buscar = "SELECT * FROM itemdetalle ";
+		
+		ServiceInsumo si = new ServiceInsumo();
+	    List<ItemDetalle> lista = new ArrayList<ItemDetalle>();
+		try {
+			conn = DB.getConexion();
+			pstmt = conn.prepareStatement(buscar);
+		
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ItemDetalle item = new ItemDetalle();
+				item.setNumOrden(rs.getInt("numOrden"));
+				item.setInsumo(si.buscarPorId(rs.getInt("insumo")));
+				item.setCantidad(rs.getInt("cantidad"));
+				item.setPrecio(rs.getDouble("precioItem"));
+				lista.add(item);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return lista;
+	}
    
+	
 	
 	
 }
