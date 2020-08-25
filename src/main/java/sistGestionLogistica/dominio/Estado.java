@@ -15,6 +15,14 @@ public class Estado {
 		this.peso = p;
 		this.acumulado = d;
 		this.rutaEntrante = r;
+	}
+	
+	//constructor nodo inicial
+	public Estado(Planta a, Double p, Double d){
+		this.actual = a;
+		this.peso = p;
+		this.acumulado = d;
+		this.rutaEntrante = null;
 		this.camino = new ArrayList<>();
 	}
 	
@@ -39,6 +47,8 @@ public class Estado {
 	}
 
 	public void setCamino(ArrayList<Ruta> camino, Ruta r) {
+		this.camino = null;
+		this.camino = new ArrayList<>();
 		this.camino = camino;
 		this.camino.add(r);
 	}

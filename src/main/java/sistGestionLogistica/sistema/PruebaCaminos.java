@@ -31,8 +31,9 @@ public class PruebaCaminos {
 			}
 			
 		}
+		System.out.println("rutas:");
 		for(Ruta r: gf.getListaRuta()) {
-			System.out.println(r.getIdRuta());
+			System.out.println(r.getIdRuta()+" "+r.getDuracionViaje()+" "+r.getDistancia());
 		}
 		
 		System.out.println("planta origen "+p1.getNombre());

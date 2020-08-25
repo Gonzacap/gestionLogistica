@@ -130,7 +130,7 @@ public class ServiceGrafoLogistica {
 		
 		for(Ruta r: graph.getListaRuta()) {
 			if(planta.equals(r.getPlantaOrigen())) {
-				ady.add(new Estado(r.getPlantaDestino(),r.getDuracionViaje(),0.0,r));
+				ady.add(new Estado(r.getPlantaDestino(),r.getDuracionViaje(),9999999.0,r));
 			}
 		}
 		
@@ -143,7 +143,7 @@ public class ServiceGrafoLogistica {
 		
 		for(Ruta r: graph.getListaRuta()) {
 			if(planta.equals(r.getPlantaOrigen())) {
-				ady.add(new Estado(r.getPlantaDestino(),r.getDistancia(),0.0,r));
+				ady.add(new Estado(r.getPlantaDestino(),r.getDistancia(),9999999.0,r));
 			}
 		}
 		
@@ -161,7 +161,8 @@ public class ServiceGrafoLogistica {
 		
 		//distancia.add(0, 0); //?¡ // Valor inicial del nodo de partida.
 		
-		cola.add(new Estado(inicio,0.0,0.0,null)); // Agregamos el primer elemento que es el nodo inicial, peso y distancia inicial cero
+		cola.add(new Estado(inicio,0.0,0.0)); // Agregamos el primer elemento que es el nodo inicial, peso y distancia inicial cero
+		
 		
 		while(!cola.isEmpty()) { // Mientras existan nodos por procesar.
 		
@@ -170,7 +171,7 @@ public class ServiceGrafoLogistica {
 			
 			System.out.println(e.getActual().getNombre());
 			
-			if (e.getPlanta() == fin) return e.getCamino() ; // Retornamos el caminino?, hemos llegado al nodo destino.
+			if (e.getPlanta().equals(fin)) return e.getCamino() ; // Retornamos el caminino?, hemos llegado al nodo destino.
 			
 			adyacencias = this.adyacenciasT(graph, e.getPlanta()); // hacer un metodo que retorne la lista de rutas salientes de una planta
 			
@@ -179,7 +180,7 @@ public class ServiceGrafoLogistica {
 				// Si no ha sido procesado el nodo p y la distancia hacia p2 es menor a la distancia
 				// entonces hemos encontrado un camino mas corto a i.
 				
-				if(!marcado.contains(p.getPlanta()) && (e.getAcumulado()+p.getPeso())< e.getAcumulado() ) {
+				if(!marcado.contains(p.getPlanta()) && (e.getAcumulado()+p.getPeso())< p.getAcumulado() ) {
 						
 					p.setAcumulado(e.getAcumulado()+p.getPeso());
 					p.setCamino(e.getCamino(), p.getRuta());
