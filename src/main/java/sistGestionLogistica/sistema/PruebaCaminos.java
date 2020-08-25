@@ -22,7 +22,7 @@ public class PruebaCaminos {
 		Planta p2 = new Planta();
 		
 		for(Planta p: gf.getListaPlanta()) {
-			System.out.println(p.getNombre());
+			//System.out.println(p.getNombre());
 			if(p.getId()==3) {
 				p1=p;
 			}
@@ -31,17 +31,17 @@ public class PruebaCaminos {
 			}
 			
 		}
-		System.out.println("rutas:");
+		/*System.out.println("rutas:");
 		for(Ruta r: gf.getListaRuta()) {
 			System.out.println(r.getIdRuta()+" "+r.getDuracionViaje()+" "+r.getDistancia());
-		}
+		}*/
 		
 		System.out.println("planta origen "+p1.getNombre());
 		System.out.println("planta destino "+p2.getNombre());
 		
-		l = sgl.dijkstraT(gf, p1, p2);
+		l = sgl.caminoMinimoKm(gf, p1, p2);
 		
-		System.out.println("esto es un separador");
+		//System.out.println("esto es un separador");
 		
 		for(Ruta r: l) {
 			System.out.println(r.getIdRuta());

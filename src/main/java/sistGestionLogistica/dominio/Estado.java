@@ -48,8 +48,7 @@ public class Estado {
 
 	public void setCamino(ArrayList<Ruta> camino, Ruta r) {
 		this.camino = null;
-		this.camino = new ArrayList<>();
-		this.camino = camino;
+		this.camino = new ArrayList<>(camino);
 		this.camino.add(r);
 	}
 	
