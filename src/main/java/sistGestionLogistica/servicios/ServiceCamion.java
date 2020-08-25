@@ -68,9 +68,6 @@ public class ServiceCamion {
 		for(Camion c : lista) {
 			cola.add(c);
 		}
-		
-		
-		
 		return cola;
 	}
 	public List<Camion> buscarCamion(Camion cam) throws SQLException {

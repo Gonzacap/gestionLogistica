@@ -209,4 +209,41 @@ public class StockInsumoDaoMysql implements StockInsumoDao{
 		
 	}
 
+	@Override
+	public List<Planta> plantasConInsumo(Integer idInsumo, Integer cantidad) {
+		ArrayList<Planta> lista = new ArrayList<Planta>();
+		String buscarPlantas = "SELECT planta FROM stockinsumo where insumo = ? AND cantidad > ?";
+        PlantaDao  pd = new PlantaDaoMysql();
+        Planta p = new Planta();
+        
+		try {
+			conn = DB.getConexion();
+			pstmt= conn.prepareStatement(buscarPlantas);
+			pstmt.setInt(1, idInsumo);
+			pstmt.setInt(2, cantidad);
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				p = pd.buscarPorId(rs.getInt("planta"));			
+				
+				lista.add(p);
+
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+        
+		return lista;
+	}
+	
+
 }

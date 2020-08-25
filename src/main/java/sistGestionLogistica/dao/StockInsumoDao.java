@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
+import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.dominio.StockInsumo;
 
 public interface StockInsumoDao {
@@ -14,4 +15,5 @@ public interface StockInsumoDao {
 	public Integer stockTotal(Integer idInsumo);
 	public List<StockInsumo> faltantes();
 	public List<StockInsumo> buscarStockPlanta(Integer id);
+	public List<Planta> plantasConInsumo(Integer idInsumo, Integer cantidad);
 }
