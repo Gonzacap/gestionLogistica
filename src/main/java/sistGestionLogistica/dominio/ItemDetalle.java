@@ -6,13 +6,13 @@ public class ItemDetalle{
     Insumo insumo;
     Integer cantidad;
     Double precio;
-	public ItemDetalle(Integer idDetalle, Integer numOrden, Insumo insumo, Integer cantidad, Double precio) {
+	public ItemDetalle(Integer idDetalle, Integer numOrden, Insumo insumo, Integer cantidad) {
 		super();
 		this.idDetalle = idDetalle;
 		this.numOrden = numOrden;
 		this.insumo = insumo;
 		this.cantidad = cantidad;
-		this.precio = precio;
+		this.precio = this.insumo.costo * this.cantidad;
 	}
 	public Integer getIdDetalle() {
 		return idDetalle;
@@ -41,8 +41,8 @@ public class ItemDetalle{
 	public Double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+	public void setPrecio() {
+		this.precio = this.insumo.costo * this.cantidad;
 	}
 	@Override
 	public String toString() {
@@ -51,7 +51,7 @@ public class ItemDetalle{
 	}
     
     
-    
+  
    
 
     
