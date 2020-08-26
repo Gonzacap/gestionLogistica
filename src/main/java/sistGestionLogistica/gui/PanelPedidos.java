@@ -140,6 +140,14 @@ public class PanelPedidos extends JPanel {
 			
 			System.out.println("Pedidos -> Alta");
 			
+			AgregarEditarPedido pedido = new AgregarEditarPedido();
+			try {
+				pedido.agregar();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			
 		});
 		btnBaja.addActionListener(e-> { //AccionBaja

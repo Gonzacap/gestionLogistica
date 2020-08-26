@@ -183,10 +183,10 @@ public class PanelInsumo extends JPanel {
 				 
 				 System.out.println("Insumo -> Buscar");
 				 
-				 InsumoController pc=new InsumoController();
+				 InsumoController ic=new InsumoController();
 				 
 				 try {
-					this.actualizarTabla(pc.buscarInsumo(textField_ID.getText(), textField_Desc.getText()));
+					this.actualizarTabla(ic.buscarInsumo(textField_ID.getText(), textField_Desc.getText()));
 					System.out.println("Buscar OK");
 				
 				 } catch (DatosInvalidosException | SQLException e1) {
