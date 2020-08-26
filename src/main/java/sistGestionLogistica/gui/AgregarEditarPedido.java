@@ -119,10 +119,10 @@ public class AgregarEditarPedido {
 		tableItemDetalle.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableItemDetalle.setToolTipText("");
 		
-		tableItemDetalle.setModel(new DefaultTableModel(new Object[][] {},new String[] {"Orden", "Insumo", "Cantidad", "Precio"}) {
+		tableItemDetalle.setModel(new DefaultTableModel(new Object[][] {},new String[] {"Insumo", "Cantidad", "Precio"}) {
 			
 			Class[] columnTypes = new Class[] {
-				Object.class, String.class, String.class, String.class
+				/*Object.class, */String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -134,6 +134,8 @@ public class AgregarEditarPedido {
 		JButton btnActualizar = new JButton("Actualizar");
 		btnActualizar.setBounds(225, 110, 120, 20);
 		panel.add(btnActualizar);
+		
+		btnActualizar.addActionListener(new AccionBuscar());
 		
 	}
 	
@@ -152,19 +154,15 @@ public class AgregarEditarPedido {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 				
-				StockInsumoController ic= new StockInsumoController();
-								
-				/*try {
-					ic.agregarStockInsumo(idPlanta.toString(), insumoID.get(comboBox_Insumo.getSelectedIndex()).toString(), textField_Cantidad.getText(), textField_PtoRep.getText());
-					JOptionPane.showMessageDialog(frame,"Insumo agregado correctamente", "Reposicion exitosa",JOptionPane.INFORMATION_MESSAGE);
-					
-				} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException e1) {
-					e1.printStackTrace();
+				try {
+					AgregarEditarInsumosAPedido ai = new AgregarEditarInsumosAPedido(items);
+					ai.setVisible(true);
 					
 				} catch (SQLException e1) {
-					//TODO Auto-generated catch block
-					e1.printStackTrace();
-				}*/
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				}
+				
 			}				
 		});
 		
@@ -217,13 +215,13 @@ public class AgregarEditarPedido {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		 
-			System.out.println("Planta -> Buscar");
+			System.out.println("Actualizando tabla de items");
 		 
 			ItemDetalleController ic=new ItemDetalleController();
 				 
 			try {
-				this.actualizarTabla(ic.aMatriz(items));
-				System.out.println("Buscar OK");
+				this.actualizarTabla(ic.aMatriz2(items));
+				System.out.println("Actualizar Ok");
 					
 			} catch (DatosInvalidosException | SQLException e1) {
 				//e1.printStackTrace();
@@ -232,10 +230,10 @@ public class AgregarEditarPedido {
 
 		private void actualizarTabla(String[][] aMostrar) throws NumberFormatException, DatosInvalidosException, SQLException {
 				
-			tableItemDetalle.setModel(new DefaultTableModel(aMostrar,	new String[] {"Orden", "Insumo", "Cantidad", "Precio"}) {
+			tableItemDetalle.setModel(new DefaultTableModel(aMostrar,	new String[] {"Insumo", "Cantidad", "Precio"}) {
 				
 				Class[] columnTypes = new Class[] {
-						Object.class, String.class, String.class, String.class
+						/*Object.class, */String.class, String.class, String.class
 				};
 				
 				public Class getColumnClass(int columnIndex) {

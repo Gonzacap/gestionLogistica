@@ -26,27 +26,32 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 	private Integer ancho;
 	private JComboBox<String> insumo;
 	private JTextField cantidad;
-	private Integer numOrden;
 	private ItemDetalle it;
-	private Boolean bandera;
+	public ArrayList<ItemDetalle> listaItems;
 
 	public static void main(String[] args) throws SQLException {
 		
-		AgregarEditarInsumosAPedido window = new AgregarEditarInsumosAPedido("-1");
+		AgregarEditarInsumosAPedido window = new AgregarEditarInsumosAPedido();
 		window.setVisible(true);
 	}
 
-	public AgregarEditarInsumosAPedido(String num) throws SQLException {
+	public AgregarEditarInsumosAPedido(ArrayList<ItemDetalle> lista) throws SQLException{
 		super();
-		this.numOrden = Integer.valueOf(num);
-		ItemDetalle item = inicializar();
+		this.listaItems = lista;
+		inicializar();
 	}
 	
-	private ItemDetalle inicializar() throws SQLException{
+	public AgregarEditarInsumosAPedido() throws SQLException {
+		super();
+		ArrayList<ItemDetalle> lista = new ArrayList<ItemDetalle>();
+		this.listaItems = lista;
+		inicializar();
+	}
+	
+	private void inicializar() throws SQLException{
 		
 		alto = 100;
 		ancho = 100;
-		bandera=false;
 		
 		this.setBounds(ancho, alto, 4*ancho, 2*alto);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,7 +73,6 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		
 		ArrayList<Insumo> lista =  (ArrayList<Insumo>) ser.buscarInsumo(in);
 		Vector<String> insumoLbl= new Vector<>();
-		StockInsumoDao sid = new StockInsumoDaoMysql();
 		
 		for(int i = 0; i < lista.size(); i++){
 			
@@ -80,7 +84,7 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		
 		insumo = new JComboBox<String>(insumoLbl);
 		insumo.setBounds(200, 25, 120, 20);
-		cantidad = new JTextField("-1");
+		cantidad = new JTextField();
 		cantidad.setBounds(200, 50, 120, 20);
 		JLabel lblInsumo = new JLabel("Insumo");
 		lblInsumo.setBounds(25, 25, 150, 20);
@@ -103,21 +107,28 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				bandera = true;
+				if(!cantidad.getText().isBlank()) {
+					
+					if(Integer.valueOf(cantidad.getText())>0) {
+						
+						it = new ItemDetalle(lista.get(insumo.getSelectedIndex()), Integer.valueOf(cantidad.getText()));
+						JOptionPane.showMessageDialog(null,"Insumo agregado correctamente a pedido", "Carga exitosa",JOptionPane.INFORMATION_MESSAGE);
+						listaItems.add(it);
+						btnAgregar.setEnabled(false);
+						System.out.println("Item detalle agregado");
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"La cantidad tiene que ser mayor a cero", "Datos Incorrectos",JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null,"Cantidad no puede ser vacio", "Datos Incorrectos",JOptionPane.ERROR_MESSAGE);
+				}
 				
-				it = new ItemDetalle(numOrden, lista.get(insumo.getSelectedIndex()), Integer.valueOf(cantidad.getText()));
-				//OptionPane.showMessageDialog(frame,"Insumo agregado correctamente", "Reposicion exitosa",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		
-		if(bandera) {
-			System.out.println("bien");
-			return it;
-		}
-		else {
-			System.out.println("mal");
-			return null;
-		}
-		
 	}
+	
+	
 }

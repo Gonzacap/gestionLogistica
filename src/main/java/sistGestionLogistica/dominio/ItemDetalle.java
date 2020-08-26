@@ -19,6 +19,12 @@ public class ItemDetalle{
 		this.precio = this.insumo.costo * this.cantidad;
 	}
 	
+	public ItemDetalle(Insumo insumo, Integer cantidad) {
+		
+		this.insumo = insumo;
+		this.cantidad = cantidad;
+		this.precio = this.insumo.costo * this.cantidad;
+	}
 	
 	public Integer getNumOrden() {
 		return numOrden;
