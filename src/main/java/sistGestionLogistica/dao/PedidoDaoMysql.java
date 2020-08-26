@@ -59,8 +59,38 @@ public class PedidoDaoMysql implements PedidoDao{
 
 	@Override
 	public Boolean update(Pedido pe) throws SQLException {
-		String update;
-		return null;
+		String update = "UPDATE pedido SET plantaDestino= ? , fechaSolicitud=?, fechaEntrega=? , estado=?  WHERE numOrden =?";
+		try {
+			
+			if(pe.getNumOrden() != null && pe.getNumOrden()>0) {
+				conn = DB.getConexion();
+				System.out.println("EJECUTA update");
+				pstmt= conn.prepareStatement(update);
+				
+				pstmt.setInt(1, pe.getPlantaDestino().getId());
+				pstmt.setDate(2, Date.valueOf(pe.getFechaSolicitud()));
+				pstmt.setDate(3,Date.valueOf(pe.getFechaEntrega()));
+				pstmt.setString(4, pe.getEstado().toString());
+				pstmt.setInt(5,pe.getNumOrden());
+			}
+			
+			
+			
+			pstmt.executeUpdate();
+			}
+		 catch (SQLException e) {
+		e.printStackTrace();
+	      }finally {
+		try {
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null) conn.close();	
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	return true;
 	}
 
 
