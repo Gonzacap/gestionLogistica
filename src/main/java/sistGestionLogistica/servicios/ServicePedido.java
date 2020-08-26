@@ -1,7 +1,9 @@
 package sistGestionLogistica.servicios;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 import sistGestionLogistica.dao.*;
 import sistGestionLogistica.dominio.Camion;
@@ -22,6 +24,11 @@ public class ServicePedido {
 
 	public void cambiarEstado(Integer numOrden, EstadoPedido estado) {
 		pedidoDao.cambiarEstado(numOrden, estado);
+	}
+	
+	public List<Pedido> buscarPorEstado(EstadoPedido estado) throws SQLException{
+		return pedidoDao.buscarTodos().stream().filter((t) -> t.getEstado().equals(estado)).collect(Collectors.toList());
+		
 	}
 
 }
