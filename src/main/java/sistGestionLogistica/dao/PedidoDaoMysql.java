@@ -35,7 +35,7 @@ public class PedidoDaoMysql implements PedidoDao{
 			pstmt.setInt(2, pe.getPlantaDestino().getId());
 			pstmt.setDate(3, Date.valueOf(pe.getFechaSolicitud()));
 			pstmt.setDate(4,Date.valueOf(pe.getFechaEntrega()));
-			pstmt.setString(7, pe.getEstado().toString());
+			pstmt.setString(5, pe.getEstado().toString());
 			
 			
 			pstmt.executeUpdate();

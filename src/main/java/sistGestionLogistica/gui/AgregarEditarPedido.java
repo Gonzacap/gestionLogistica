@@ -29,8 +29,9 @@ public class AgregarEditarPedido {
 	private Integer alto;
 	private Integer ancho;
 	private JTable tableItemDetalle;
-	private ArrayList<ItemDetalle> items;
-	Vector<Integer> plantaID;
+	private ArrayList<ItemDetalle> items ;
+	private Vector<Integer> plantaID;
+	private Vector<String> plantaLbl;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,6 +53,8 @@ public class AgregarEditarPedido {
 	}
 	
 	private void inicializar(){
+		
+		items = new ArrayList<ItemDetalle>();
 		
 		alto = 100;
 		ancho = 100;
@@ -75,8 +78,8 @@ public class AgregarEditarPedido {
 		ServicePlanta ser = new ServicePlanta();
 		
 		ArrayList<Planta> lista =  (ArrayList<Planta>) ser.buscarPlanta(p);
-		Vector<Integer> plantaID= new Vector<>();
-		Vector<String> plantaLbl= new Vector<>();
+		this.plantaID= new Vector<>();
+		this.plantaLbl= new Vector<>();
 		
 		for(int i = 0; i < lista.size(); i++){
 			
@@ -179,11 +182,13 @@ public class AgregarEditarPedido {
 				PedidoController pc = new PedidoController();
 				try {
 					pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
+				
 				} catch (SQLException | DatosInvalidosException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				System.out.println("Creando pedido");
+				
+				System.out.println("Pedido creado");
 			}				
 		});
 		
