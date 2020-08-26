@@ -143,15 +143,15 @@ public class PedidoDaoMysql implements PedidoDao{
 	}
 
 
-	@Override
-	public void cancelarPedido(Integer numOrden) {
-		String cancelar =	" UPDATE pedido SET estado = ?  WHERE numOrden = ?";
+
+	public void cambiarEstado(Integer numOrden, EstadoPedido estado) {
+		String update =	" UPDATE pedido SET estado = ?  WHERE numOrden = ?";
 		try {
 			
 				conn = DB.getConexion();
-				System.out.println("EJECUTA CANCELAR");
-				pstmt= conn.prepareStatement(cancelar);
-				pstmt.setString(1, EstadoPedido.CANCELADA.toString());
+				System.out.println("EJECUTA UPDATE ESTADO");
+				pstmt= conn.prepareStatement(update);
+				pstmt.setString(1, estado.toString());
 				pstmt.setInt(2, numOrden);
 		
 			pstmt.executeUpdate();
@@ -166,7 +166,7 @@ public class PedidoDaoMysql implements PedidoDao{
 				}
 			}
 		
-		
+			
 	}
 
 }

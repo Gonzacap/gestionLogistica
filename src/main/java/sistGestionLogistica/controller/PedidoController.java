@@ -101,7 +101,7 @@ public class PedidoController {
 		Pedido pedido = sp.buscarPorNumOrden(numOrden);
 		List<Planta> resultado = ssi.plantasConStock(pedido.getItem());
 		if(resultado.isEmpty()) {
-			sp.cancelarPedido(numOrden);
+			sp.cambiarEstado(numOrden, EstadoPedido.CANCELADA);
 			throw new PedidoCanceladoException("No existen plantas con esa cantidad de Stock. su pedido fue Cancelado.");
 		}
 		return resultado;

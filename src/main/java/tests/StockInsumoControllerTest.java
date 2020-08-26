@@ -30,15 +30,15 @@ public class StockInsumoControllerTest {
 //		
 //		System.out.println(p);
 		
-		ServiceStockInsumo ss = new ServiceStockInsumo();
-		Integer[][] matriz = new Integer[2][2];
-		matriz[0][0]= 3;
-		matriz[0][1]= 10;
-		matriz[1][0]= 8;
-		matriz[1][1]= 11;
-		
-		List<Planta> p= ss.plantasConStock(matriz);
-		System.out.println(p);
+//		ServiceStockInsumo ss = new ServiceStockInsumo();
+//		Integer[][] matriz = new Integer[2][2];
+//		matriz[0][0]= 3;
+//		matriz[0][1]= 10;
+//		matriz[1][0]= 8;
+//		matriz[1][1]= 11;
+//		
+//		List<Planta> p= ss.plantasConStock(matriz);
+//		System.out.println(p);
 		
 	}
 

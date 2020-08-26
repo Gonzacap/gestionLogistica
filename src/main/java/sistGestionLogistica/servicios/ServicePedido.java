@@ -7,6 +7,7 @@ import sistGestionLogistica.dao.*;
 import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.dominio.Pedido;
+import sistGestionLogistica.enums.EstadoPedido;
 
 public class ServicePedido {
 	private PedidoDao pedidoDao = new PedidoDaoMysql(); 
@@ -18,9 +19,9 @@ public class ServicePedido {
 	public Pedido buscarPorNumOrden(Integer numOrden) throws SQLException {
 		return pedidoDao.buscarNumOrden(numOrden);
 	}
-	public void cancelarPedido(Integer numOrden) {
-		pedidoDao.cancelarPedido(numOrden);
-		
+
+	public void cambiarEstado(Integer numOrden, EstadoPedido estado) {
+		pedidoDao.cambiarEstado(numOrden, estado);
 	}
 
 }
