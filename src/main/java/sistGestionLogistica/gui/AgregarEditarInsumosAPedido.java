@@ -28,6 +28,7 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 	private JTextField cantidad;
 	private Integer numOrden;
 	private ItemDetalle it;
+	private Boolean bandera;
 
 	public static void main(String[] args) throws SQLException {
 		
@@ -45,6 +46,7 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		
 		alto = 100;
 		ancho = 100;
+		bandera=false;
 		
 		this.setBounds(ancho, alto, 4*ancho, 2*alto);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -78,7 +80,7 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		
 		insumo = new JComboBox<String>(insumoLbl);
 		insumo.setBounds(200, 25, 120, 20);
-		cantidad = new JTextField();
+		cantidad = new JTextField("-1");
 		cantidad.setBounds(200, 50, 120, 20);
 		JLabel lblInsumo = new JLabel("Insumo");
 		lblInsumo.setBounds(25, 25, 150, 20);
@@ -97,15 +99,25 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		panel.add(btnAgregar);
 		
 		btnAgregar.addActionListener(new ActionListener(){
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
+				bandera = true;
+				
 				it = new ItemDetalle(numOrden, lista.get(insumo.getSelectedIndex()), Integer.valueOf(cantidad.getText()));
 				//OptionPane.showMessageDialog(frame,"Insumo agregado correctamente", "Reposicion exitosa",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		
-		return it;
+		if(bandera) {
+			System.out.println("bien");
+			return it;
+		}
+		else {
+			System.out.println("mal");
+			return null;
+		}
+		
 	}
 }
