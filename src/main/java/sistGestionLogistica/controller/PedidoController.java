@@ -52,14 +52,14 @@ public class PedidoController {
 		
 		
 	}
-	public void crearPedido(String numOrden, String idPlantaDestino, String fechaMaxima, String[][] itemDetalle) throws SQLException, DatosInvalidosException {
-		Integer numeroOrden=-1, idDestino=-1, idInsumo=-1, cantidad=-1;
-		Double precio=-1.0;
+	public void crearPedido(String numOrden, String idPlantaDestino, String fechaMaxima, List<ItemDetalle> items) throws SQLException, DatosInvalidosException {
+		Integer numeroOrden=-1, idDestino=-1;
+//		Integer idInsumo=-1, cantidad=-1;
 		LocalDate fechaMax;
-		List<ItemDetalle> items = new ArrayList<ItemDetalle>();
-		Insumo insumo;
+//		List<ItemDetalle> items = new ArrayList<ItemDetalle>();
+//		Insumo insumo;
 		Planta destino;
-		ServiceInsumo si= new ServiceInsumo();
+//		ServiceInsumo si= new ServiceInsumo();
 		ServicePedido sp= new ServicePedido();
 		ServicePlanta splanta= new ServicePlanta();
 		
@@ -74,14 +74,14 @@ public class PedidoController {
 		if(sp.buscarPorNumOrden(numeroOrden).getNumOrden() > 0) throw new DatosInvalidosException("El numero de orden ya existe.");
 		
 		//creamos los itemDetalle
-		for(int i=0;i<itemDetalle.length;i++) {
-			idInsumo=Integer.valueOf(itemDetalle[i][0]);
-			cantidad= Integer.valueOf(itemDetalle[i][1]);
-			if(cantidad>0) {
-				insumo=si.buscarPorId(idInsumo);
-				items.add(new ItemDetalle(numeroOrden,insumo,cantidad));
-			}else throw new DatosInvalidosException("Las cantidades deben ser mayor a cero.");
-		}
+//		for(int i=0;i<itemDetalle.length;i++) {
+//			idInsumo=Integer.valueOf(itemDetalle[i][0]);
+//			cantidad= Integer.valueOf(itemDetalle[i][1]);
+//			if(cantidad>0) {
+//				insumo=si.buscarPorId(idInsumo);
+//				items.add(new ItemDetalle(numeroOrden,insumo,cantidad));
+//			}else throw new DatosInvalidosException("Las cantidades deben ser mayor a cero.");
+//		}
 		
 		//creamos la planta destino
 		destino =splanta.buscarPorId(idDestino);
