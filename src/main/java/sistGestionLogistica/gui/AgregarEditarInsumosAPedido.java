@@ -106,6 +106,8 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				Boolean existe = false;
 
 				if(!cantidad.getText().isBlank()) {
 					
@@ -114,13 +116,16 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 						it = new ItemDetalle(lista.get(insumo.getSelectedIndex()), Integer.valueOf(cantidad.getText()));
 						JOptionPane.showMessageDialog(null,"Insumo agregado correctamente a pedido", "Carga exitosa",JOptionPane.INFORMATION_MESSAGE);
 						
-						listaItems.add(it);
-						/*if(!listaItems.contains(it)) {
+						for(ItemDetalle unItem: listaItems) {
+							if(unItem.getInsumo().getIdInsumo()==it.getInsumo().getIdInsumo()){
+								unItem.setCantidad(unItem.getCantidad()+it.getCantidad());
+								existe=true;
+							}
+						}
+						if(!existe) {
 							listaItems.add(it);
 						}
-						else {
-							listaItems.indexOf(it)
-						}*/
+						
 						btnAgregar.setEnabled(false);
 						System.out.println("Item detalle agregado");
 					}

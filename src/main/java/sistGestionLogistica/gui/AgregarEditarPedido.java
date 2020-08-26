@@ -132,7 +132,7 @@ public class AgregarEditarPedido {
 		//--------------------
 		
 		JButton btnActualizar = new JButton("Actualizar");
-		btnActualizar.setBounds(225, 110, 120, 20);
+		btnActualizar.setBounds(200, 110, 120, 20);
 		panel.add(btnActualizar);
 		
 		btnActualizar.addActionListener(new AccionBuscar());
@@ -146,8 +146,11 @@ public class AgregarEditarPedido {
 		frame.setVisible(true);
 		
 		JButton btnAgregar = new JButton("Agregar Items");
-		btnAgregar.setBounds(75, 110, 120, 20);
+		btnAgregar.setBounds(50, 110, 120, 20);
 		panel.add(btnAgregar);
+		JButton btnCrear = new JButton("Crear");
+		btnCrear.setBounds(350, 110, 120, 20);
+		panel.add(btnCrear);
 
 		btnAgregar.addActionListener(new ActionListener(){
 				
@@ -165,6 +168,18 @@ public class AgregarEditarPedido {
 				
 			}				
 		});
+		
+		/*btnCrear.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			
+				System.out.println("Creando pedido");
+				PedidoController pc = new PedidoController();
+				pc.crearPedido(String numOrden, String idPlantaDestino, String fechaMaxima, List<ItemDetalle> items);
+				System.out.println("Creando pedido");
+			}				
+		});*/
 		
 		
 	}
