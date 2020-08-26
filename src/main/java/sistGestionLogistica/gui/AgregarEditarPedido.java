@@ -30,6 +30,7 @@ public class AgregarEditarPedido {
 	private Integer ancho;
 	private JTable tableItemDetalle;
 	private ArrayList<ItemDetalle> items;
+	Vector<Integer> plantaID;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -169,17 +170,22 @@ public class AgregarEditarPedido {
 			}				
 		});
 		
-		/*btnCrear.addActionListener(new ActionListener(){
+		btnCrear.addActionListener(new ActionListener(){
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			
 				System.out.println("Creando pedido");
 				PedidoController pc = new PedidoController();
-				pc.crearPedido(String numOrden, String idPlantaDestino, String fechaMaxima, List<ItemDetalle> items);
+				try {
+					pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
+				} catch (SQLException | DatosInvalidosException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				System.out.println("Creando pedido");
 			}				
-		});*/
+		});
 		
 		
 	}
