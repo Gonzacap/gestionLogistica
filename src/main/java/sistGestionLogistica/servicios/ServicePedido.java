@@ -18,5 +18,9 @@ public class ServicePedido {
 	public Pedido buscarPorNumOrden(Integer numOrden) throws SQLException {
 		return pedidoDao.buscarNumOrden(numOrden);
 	}
+	public void cancelarPedido(Integer numOrden) {
+		pedidoDao.cancelarPedido(numOrden);
+		
+	}
 
 }

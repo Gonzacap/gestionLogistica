@@ -11,5 +11,6 @@ public interface PedidoDao {
 	public Boolean update(Pedido pe) throws SQLException ;
 	public Pedido buscarNumOrden(Integer numOrden) throws SQLException ;
 	public List<Pedido> buscarTodos() throws SQLException ;
+	public void cancelarPedido(Integer numOrden);
 	
 }

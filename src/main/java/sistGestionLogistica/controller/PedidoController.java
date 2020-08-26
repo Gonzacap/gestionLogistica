@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import excepciones.DatosInvalidosException;
+import excepciones.PedidoCanceladoException;
 import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.ItemDetalle;
@@ -18,6 +19,7 @@ import sistGestionLogistica.enums.EstadoPedido;
 import sistGestionLogistica.servicios.ServiceInsumo;
 import sistGestionLogistica.servicios.ServicePedido;
 import sistGestionLogistica.servicios.ServicePlanta;
+import sistGestionLogistica.servicios.ServiceStockInsumo;
 
 public class PedidoController {
 
@@ -91,5 +93,17 @@ public class PedidoController {
 		Pedido pedido = new Pedido(numeroOrden,destino, LocalDate.now(),fechaMax, items, EstadoPedido.CREADA);
 		sp.registrarPedido(pedido);
 		
+	}
+	//Si devuelve vacio cancela el pedido
+	public List<Planta> plantasConStock(Integer numOrden) throws SQLException, PedidoCanceladoException{
+		ServicePedido sp = new ServicePedido();
+		ServiceStockInsumo ssi= new ServiceStockInsumo();
+		Pedido pedido = sp.buscarPorNumOrden(numOrden);
+		List<Planta> resultado = ssi.plantasConStock(pedido.getItem());
+		if(resultado.isEmpty()) {
+			sp.cancelarPedido(numOrden);
+			throw new PedidoCanceladoException("No existen plantas con esa cantidad de Stock. su pedido fue Cancelado.");
+		}
+		return resultado;
 	}
 }

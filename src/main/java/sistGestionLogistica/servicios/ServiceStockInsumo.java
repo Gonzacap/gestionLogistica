@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import sistGestionLogistica.dao.StockInsumoDao;
 import sistGestionLogistica.dao.StockInsumoDaoMysql;
 import sistGestionLogistica.dominio.Camion;
+import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.dominio.StockInsumo;
 
@@ -46,13 +47,29 @@ public class ServiceStockInsumo {
 	}
 	
 	//Argumento: lista de Insumo-Cantidad [][2]
-	public List<Planta> plantasConStock(Integer[][] listaInsumosCantidad){
+//	public List<Planta> plantasConStock(Integer[][] listaInsumosCantidad){
+//		List<Planta> plantasFinal=new ArrayList<Planta>();
+//		if(listaInsumosCantidad[0][0] != null) {
+//			plantasFinal = stockDao.plantasConInsumo(listaInsumosCantidad[0][0], listaInsumosCantidad[0][1]);
+//			
+//			for(int i = 1; i< listaInsumosCantidad.length; i++ ) {
+//				List<Planta> aux =stockDao.plantasConInsumo(listaInsumosCantidad[i][0], listaInsumosCantidad[i][1]);
+//				plantasFinal = new ArrayList<Planta>(aux.stream()
+//								.filter(plantasFinal::contains).collect(Collectors.toList()));
+//			}
+//		}
+//		
+//		
+//		return plantasFinal;
+//	}
+	
+	public List<Planta> plantasConStock(List<ItemDetalle> listaInsumosCantidad){
 		List<Planta> plantasFinal=new ArrayList<Planta>();
-		if(listaInsumosCantidad[0][0] != null) {
-			plantasFinal = stockDao.plantasConInsumo(listaInsumosCantidad[0][0], listaInsumosCantidad[0][1]);
+		if(!listaInsumosCantidad.isEmpty()) {
+			plantasFinal = stockDao.plantasConInsumo(listaInsumosCantidad.get(0).getInsumo().getIdInsumo(),listaInsumosCantidad.get(0).getCantidad());
 			
-			for(int i = 1; i< listaInsumosCantidad.length; i++ ) {
-				List<Planta> aux =stockDao.plantasConInsumo(listaInsumosCantidad[i][0], listaInsumosCantidad[i][1]);
+			for(ItemDetalle id : listaInsumosCantidad) {
+				List<Planta> aux =stockDao.plantasConInsumo(id.getInsumo().getIdInsumo(), id.getCantidad());
 				plantasFinal = new ArrayList<Planta>(aux.stream()
 								.filter(plantasFinal::contains).collect(Collectors.toList()));
 			}

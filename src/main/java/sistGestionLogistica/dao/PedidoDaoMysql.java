@@ -142,4 +142,31 @@ public class PedidoDaoMysql implements PedidoDao{
 		 return lista;
 	}
 
+
+	@Override
+	public void cancelarPedido(Integer numOrden) {
+		String cancelar =	" UPDATE pedido SET estado = ?  WHERE numOrden = ?";
+		try {
+			
+				conn = DB.getConexion();
+				System.out.println("EJECUTA CANCELAR");
+				pstmt= conn.prepareStatement(cancelar);
+				pstmt.setString(1, EstadoPedido.CANCELADA.toString());
+				pstmt.setInt(2, numOrden);
+		
+			pstmt.executeUpdate();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(pstmt!=null) pstmt.close();
+					if(conn!=null) conn.close();				
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		
+		
+	}
+
 }
