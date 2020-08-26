@@ -113,7 +113,14 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 						
 						it = new ItemDetalle(lista.get(insumo.getSelectedIndex()), Integer.valueOf(cantidad.getText()));
 						JOptionPane.showMessageDialog(null,"Insumo agregado correctamente a pedido", "Carga exitosa",JOptionPane.INFORMATION_MESSAGE);
+						
 						listaItems.add(it);
+						/*if(!listaItems.contains(it)) {
+							listaItems.add(it);
+						}
+						else {
+							listaItems.indexOf(it)
+						}*/
 						btnAgregar.setEnabled(false);
 						System.out.println("Item detalle agregado");
 					}
