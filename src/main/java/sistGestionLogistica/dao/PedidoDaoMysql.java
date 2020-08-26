@@ -138,6 +138,7 @@ public class PedidoDaoMysql implements PedidoDao{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		ServicePlanta sp = new ServicePlanta();
 	    List<Pedido> lista = new ArrayList<Pedido>();
+	    ItemDetalleDao daoItem = new ItemDetalleDaoMysql();
 	    
 		try {
 			conn = DB.getConexion();
@@ -152,6 +153,7 @@ public class PedidoDaoMysql implements PedidoDao{
 				pe.setFechaSolicitud(LocalDate.parse((CharSequence) rs.getString("fechaSolicitud"), formatter));
 				pe.setFechaEntrega(LocalDate.parse((CharSequence) rs.getString("fechaEntrega"), formatter));
 				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+				pe.setItem(daoItem.buscarNumOrden(pe.getNumOrden()));
 				
 				lista.add(pe);
 			}

@@ -1,6 +1,8 @@
 package sistGestionLogistica.gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import sistGestionLogistica.dao.StockInsumoDao;
 import sistGestionLogistica.dao.StockInsumoDaoMysql;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.InsumoLiquido;
+import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.enums.UnidadMedida;
 import sistGestionLogistica.servicios.ServiceInsumo;
 
@@ -23,22 +26,27 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 	private Integer ancho;
 	private JComboBox<String> insumo;
 	private JTextField cantidad;
+	private Integer numOrden;
+	private ItemDetalle it;
+	private Boolean bandera;
 
 	public static void main(String[] args) throws SQLException {
 		
-		AgregarEditarInsumosAPedido window = new AgregarEditarInsumosAPedido();
+		AgregarEditarInsumosAPedido window = new AgregarEditarInsumosAPedido("-1");
 		window.setVisible(true);
 	}
 
-	public AgregarEditarInsumosAPedido() throws SQLException {
+	public AgregarEditarInsumosAPedido(String num) throws SQLException {
 		super();
-		inicializar();
+		this.numOrden = Integer.valueOf(num);
+		ItemDetalle item = inicializar();
 	}
 	
-	private void inicializar() throws SQLException{
+	private ItemDetalle inicializar() throws SQLException{
 		
 		alto = 100;
 		ancho = 100;
+		bandera=false;
 		
 		this.setBounds(ancho, alto, 4*ancho, 2*alto);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -59,14 +67,12 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		ServiceInsumo ser = new ServiceInsumo();
 		
 		ArrayList<Insumo> lista =  (ArrayList<Insumo>) ser.buscarInsumo(in);
-		Vector<Integer> insumoID= new Vector<>();
 		Vector<String> insumoLbl= new Vector<>();
 		StockInsumoDao sid = new StockInsumoDaoMysql();
 		
 		for(int i = 0; i < lista.size(); i++){
 			
 			insumoLbl.add(lista.get(i).getIdInsumo()+" - "+lista.get(i).getDescripcion());
-			insumoID.add(lista.get(i).getIdInsumo());
 			
 		}
 		System.out.print("\n");
@@ -74,7 +80,7 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		
 		insumo = new JComboBox<String>(insumoLbl);
 		insumo.setBounds(200, 25, 120, 20);
-		cantidad = new JTextField();
+		cantidad = new JTextField("-1");
 		cantidad.setBounds(200, 50, 120, 20);
 		JLabel lblInsumo = new JLabel("Insumo");
 		lblInsumo.setBounds(25, 25, 150, 20);
@@ -92,27 +98,26 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		btnAgregar.setBounds(75, 85, 150, 20);
 		panel.add(btnAgregar);
 		
-		/*btnAgregar.addActionListener(new ActionListener(){
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-		
-		StockInsumoController ic= new StockInsumoController();
-						
-		try {
-			ic.agregarStockInsumo(idPlanta.toString(), insumoID.get(comboBox_Insumo.getSelectedIndex()).toString(), textField_Cantidad.getText(), textField_PtoRep.getText());
-			JOptionPane.showMessageDialog(frame,"Insumo agregado correctamente", "Reposicion exitosa",JOptionPane.INFORMATION_MESSAGE);
+		btnAgregar.addActionListener(new ActionListener(){
 			
-		} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException e1) {
-			e1.printStackTrace();
-			
-		} catch (SQLException e1) {
-			//TODO Auto-generated catch block
-			e1.printStackTrace();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				bandera = true;
+				
+				it = new ItemDetalle(numOrden, lista.get(insumo.getSelectedIndex()), Integer.valueOf(cantidad.getText()));
+				//OptionPane.showMessageDialog(frame,"Insumo agregado correctamente", "Reposicion exitosa",JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		
+		if(bandera) {
+			System.out.println("bien");
+			return it;
 		}
-	}				
-	});*/
+		else {
+			System.out.println("mal");
+			return null;
+		}
 		
-}
-	
+	}
 }
