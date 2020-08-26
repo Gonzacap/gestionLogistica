@@ -39,6 +39,9 @@ public class EnvioDetalle {
 	public void setCostoEnvio() {
 		this.costoEnvio = costoEnvio(rutaAsignada, camionAsignado.getCostoKM(), camionAsignado.getCostoHora()) ;
 	}
+	public void setCostoEnvio(Double costoEnvio) {
+		this.costoEnvio = costoEnvio ;
+	}
 	public List<Ruta> getRutaAsignada() {
 		return rutaAsignada;
 	}

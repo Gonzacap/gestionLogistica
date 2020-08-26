@@ -54,6 +54,7 @@ public class PedidoController {
 		
 		
 	}
+	
 	public void crearPedido(String numOrden, String idPlantaDestino, String fechaMaxima, List<ItemDetalle> items) throws SQLException, DatosInvalidosException {
 		Integer numeroOrden=-1, idDestino=-1;
 //		Integer idInsumo=-1, cantidad=-1;
