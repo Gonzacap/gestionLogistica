@@ -86,7 +86,7 @@ public class AgregarEditarPedido {
 		System.out.print("\n");
 		//--------------
 		
-		numOrden = new JTextField();
+		numOrden = new JTextField("-1");
 		numOrden.setBounds(200, 25, 120, 20);
 		plantas = new JComboBox<String>(plantaLbl);
 		plantas.setBounds(200, 50, 120, 20);
