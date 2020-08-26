@@ -19,19 +19,20 @@ public class Pedido {
 	  
   };
   
-public Pedido( Integer numOrden, Planta plantaDestino, LocalDate fechaSolicitud, LocalDate fechaEntrega,
-		Double costoEnvio, List<Ruta> rutaAsignada, List<ItemDetalle> item, Camion camionAsignado,
-		EstadoPedido estado) {
-	
-	
+
+
+
+public Pedido(Integer numOrden, Planta plantaDestino, LocalDate fechaSolicitud, LocalDate fechaEntrega,
+		List<ItemDetalle> item, EstadoPedido estado) {
+	super();
 	this.numOrden = numOrden;
 	this.plantaDestino = plantaDestino;
 	this.fechaSolicitud = fechaSolicitud;
 	this.fechaEntrega = fechaEntrega;
-
 	this.item = item;
 	this.estado = estado;
 }
+
 
 
 
