@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-08-2020 a las 00:26:54
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.2.33
+-- Tiempo de generación: 28-08-2020 a las 00:55:56
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.2.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,8 +65,8 @@ INSERT INTO `camion` (`ID`, `PATENTE`, `MARCA`, `MODELO`, `KM`, `COSTO_KM`, `COS
 --
 
 CREATE TABLE `enviodetalle` (
+  `idEnvio` int(11) NOT NULL,
   `numOrden` int(11) NOT NULL,
-  `plantaOrigen` int(11) NOT NULL,
   `camionAsignado` int(11) NOT NULL,
   `costoEnvio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -146,11 +146,20 @@ INSERT INTO `insumoliquido` (`idInsumo`, `densidad`) VALUES
 --
 
 CREATE TABLE `itemdetalle` (
+  `idDetalle` int(11) NOT NULL,
   `numOrden` int(11) NOT NULL,
   `insumo` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precioItem` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `itemdetalle`
+--
+
+INSERT INTO `itemdetalle` (`idDetalle`, `numOrden`, `insumo`, `cantidad`, `precioItem`) VALUES
+(1, 1111, 1, 50, 2500),
+(2, 1111, 4, 50, 2250);
 
 -- --------------------------------------------------------
 
@@ -166,6 +175,13 @@ CREATE TABLE `pedido` (
   `estado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`numOrden`, `plantaDestino`, `fechaSolicitud`, `fechaEntrega`, `estado`) VALUES
+(1111, 1, '2020-08-27', '2020-12-31', 'CREADA');
+
 -- --------------------------------------------------------
 
 --
@@ -174,8 +190,7 @@ CREATE TABLE `pedido` (
 
 CREATE TABLE `pertenecea` (
   `idRuta` int(11) NOT NULL,
-  `numOrden` int(11) NOT NULL,
-  `orden` int(11) NOT NULL
+  `numOrden` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -222,7 +237,9 @@ CREATE TABLE `ruta` (
 --
 
 INSERT INTO `ruta` (`idRuta`, `distancia`, `duracionViaje`, `pesoMaximo`, `plantaOrigen`, `plantaDestino`) VALUES
-(1, 25, 2, 85, 1, 2);
+(1, 25, 2, 85, 1, 2),
+(2, 12, 56, 78, 3, 1),
+(3, 67, 45, 78, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -239,6 +256,15 @@ CREATE TABLE `stockinsumo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Volcado de datos para la tabla `stockinsumo`
+--
+
+INSERT INTO `stockinsumo` (`idStockInsumo`, `planta`, `insumo`, `cantidad`, `puntoReposicion`) VALUES
+(1, 1, 1, 123, 12),
+(2, 3, 1, 123, 12),
+(3, 1, 3, 40, 50);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -252,10 +278,9 @@ ALTER TABLE `camion`
 -- Indices de la tabla `enviodetalle`
 --
 ALTER TABLE `enviodetalle`
-  ADD PRIMARY KEY (`numOrden`),
-  ADD UNIQUE KEY `numOrden` (`numOrden`),
+  ADD PRIMARY KEY (`idEnvio`),
   ADD UNIQUE KEY `camionAsignado` (`camionAsignado`),
-  ADD KEY `FK_PLANTAORIGEN` (`plantaOrigen`);
+  ADD KEY `FK_ORDENENVIO` (`numOrden`);
 
 --
 -- Indices de la tabla `insumo`
@@ -279,9 +304,9 @@ ALTER TABLE `insumoliquido`
 -- Indices de la tabla `itemdetalle`
 --
 ALTER TABLE `itemdetalle`
-  ADD PRIMARY KEY (`numOrden`) USING BTREE,
-  ADD UNIQUE KEY `numOrden` (`numOrden`),
-  ADD KEY `FK_insumo_ITEM` (`insumo`);
+  ADD PRIMARY KEY (`idDetalle`),
+  ADD KEY `FK_insumo_ITEM` (`insumo`),
+  ADD KEY `FK_ITEM_ENVIO` (`numOrden`);
 
 --
 -- Indices de la tabla `pedido`
@@ -331,6 +356,12 @@ ALTER TABLE `camion`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
+-- AUTO_INCREMENT de la tabla `enviodetalle`
+--
+ALTER TABLE `enviodetalle`
+  MODIFY `idEnvio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `insumo`
 --
 ALTER TABLE `insumo`
@@ -349,6 +380,12 @@ ALTER TABLE `insumoliquido`
   MODIFY `idInsumo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `itemdetalle`
+--
+ALTER TABLE `itemdetalle`
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `planta`
 --
 ALTER TABLE `planta`
@@ -358,13 +395,13 @@ ALTER TABLE `planta`
 -- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
-  MODIFY `idRuta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idRuta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `stockinsumo`
 --
 ALTER TABLE `stockinsumo`
-  MODIFY `idStockInsumo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idStockInsumo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -374,9 +411,12 @@ ALTER TABLE `stockinsumo`
 -- Filtros para la tabla `enviodetalle`
 --
 ALTER TABLE `enviodetalle`
+  ADD CONSTRAINT `FK_CAMIONENVIO` FOREIGN KEY (`camionAsignado`) REFERENCES `camion` (`ID`),
+  ADD CONSTRAINT `FK_CAMION_ENVIO` FOREIGN KEY (`camionAsignado`) REFERENCES `camion` (`ID`),
   ADD CONSTRAINT `FK_ENVIO_CAMION` FOREIGN KEY (`camionAsignado`) REFERENCES `camion` (`ID`),
   ADD CONSTRAINT `FK_ENVIO_ORDEN` FOREIGN KEY (`numOrden`) REFERENCES `pedido` (`numOrden`),
-  ADD CONSTRAINT `FK_PLANTAORIGEN` FOREIGN KEY (`plantaOrigen`) REFERENCES `planta` (`idPlanta`);
+  ADD CONSTRAINT `FK_ENVIO_PEDIDO` FOREIGN KEY (`numOrden`) REFERENCES `pedido` (`numOrden`),
+  ADD CONSTRAINT `FK_ORDENENVIO` FOREIGN KEY (`numOrden`) REFERENCES `pedido` (`numOrden`);
 
 --
 -- Filtros para la tabla `insumogeneral`
@@ -394,6 +434,7 @@ ALTER TABLE `insumoliquido`
 -- Filtros para la tabla `itemdetalle`
 --
 ALTER TABLE `itemdetalle`
+  ADD CONSTRAINT `FK_ITEM_ENVIO` FOREIGN KEY (`numOrden`) REFERENCES `pedido` (`numOrden`),
   ADD CONSTRAINT `FK_ITEM_ORDEN` FOREIGN KEY (`numOrden`) REFERENCES `pedido` (`numOrden`),
   ADD CONSTRAINT `FK_insumo_ITEM` FOREIGN KEY (`insumo`) REFERENCES `insumo` (`idInsumo`);
 
