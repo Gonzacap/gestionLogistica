@@ -81,18 +81,9 @@ public class PedidoController {
 	}
 	
 	public String[][] buscarPedido(String estado ) throws SQLException{
-		Integer numOrden=-1, idDestino=-1;
-		LocalDate fechaMax=LocalDate.MIN;
-		LocalDate fechaSol=LocalDate.MIN;
-		List<ItemDetalle> item=null; 
-		EstadoPedido estadoPedido;
-		Planta planta=null;
-	   
-		estadoPedido = EstadoPedido.valueOf(estado);
-		
-		Pedido pe = new Pedido(numOrden, planta, fechaSol, fechaMax, item, estadoPedido);
+		EstadoPedido ep= EstadoPedido.valueOf(estado);
 		ServicePedido sp = new ServicePedido();
-		return this.aMatriz(sp.buscarPedido(pe));
+		return this.aMatriz(sp.buscarPorEstado(ep));
 	}
 	public String[][] aMatriz(List<Pedido> listaPedido){
 		

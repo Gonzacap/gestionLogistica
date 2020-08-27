@@ -35,11 +35,6 @@ public class ServicePedido {
 		return this.pedidoDao.buscarTodos();
 	}
 	
-	public List<Pedido> buscarPedido(Pedido pe) throws SQLException{
-		
-		Predicate<Pedido> filtroEstado = (t) -> (pe.getEstado().equals(t.getEstado()));
-		
-		return this.pedidoDao.buscarTodos().stream().filter(filtroEstado).collect(Collectors.toList());
-	}
+	
 
 }
