@@ -19,7 +19,7 @@ import sistGestionLogistica.servicios.ServiceInsumo;
 import sistGestionLogistica.servicios.ServicePlanta;
 
 
-public class AgregarEditarPedido {
+public class AgregarEditarPedido2 {
 
 	private JTextField numOrden;
 	private JFrame frame;
@@ -37,7 +37,7 @@ public class AgregarEditarPedido {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarEditarPedido window = new AgregarEditarPedido();
+					AgregarEditarPedido2 window = new AgregarEditarPedido2();
 					window.agregar();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -47,7 +47,7 @@ public class AgregarEditarPedido {
 		});
 	}
 
-	public AgregarEditarPedido() {
+	public AgregarEditarPedido2() {
 		//super();
 		inicializar();
 	}

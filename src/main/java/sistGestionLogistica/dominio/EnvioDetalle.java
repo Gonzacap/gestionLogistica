@@ -4,9 +4,10 @@ import java.util.List;
 
 public class EnvioDetalle {
    
-    Integer numOrden;
-    Camion camionAsignado;
-    Double costoEnvio;
+    private Integer numOrden;
+    private Camion camionAsignado;
+    private Double costoEnvio;
+    private EnvioDetalle detalles;
     private List<Ruta> rutaAsignada;
     
     public EnvioDetalle() {};

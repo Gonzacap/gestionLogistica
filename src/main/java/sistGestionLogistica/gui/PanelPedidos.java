@@ -11,14 +11,14 @@ import javax.swing.table.DefaultTableModel;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.PlantaController;
+import sistGestionLogistica.enums.EstadoPedido;
 import sistGestionLogistica.sistema.App;
 
 public class PanelPedidos extends JPanel {
 
 	private JTable table_Plantas;
-	private JTextField textField_ID;
-	private JTextField textField_Nombre;
-	private JTextField textField_Tipo;
+	private JComboBox<String> comboEstado;
+	private String[] estadospedido = {"CREADA","PROCESADA","ENTREGADA","CANCELADA"};
 	private Integer idAux;
 
 	public PanelPedidos() {
@@ -66,10 +66,10 @@ public class PanelPedidos extends JPanel {
 		table_Plantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_Plantas.setToolTipText("");
 		
-		table_Plantas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"ID", "Nombre"/*, "Tipo"*/}) {
+		table_Plantas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"Nro. Orden", "Planta Origen", "Planta Destino", "Fecha Solicitud", "Fecha Solicitud", "Estado"}) {
 			
 			Class[] columnTypes = new Class[] {
-				Object.class, String.class//, String.class
+				Object.class, String.class, String.class, String.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -93,36 +93,26 @@ public class PanelPedidos extends JPanel {
 		
 		p.fill = GridBagConstraints.HORIZONTAL;
 		
-		textField_ID = new JTextField();
+		comboEstado = new JComboBox<String>(estadospedido);
 		p.gridx = 1;
 		p.gridy = 0;
-		panelBuscar.add(textField_ID, p);
-		
-		textField_Nombre = new JTextField();
-		p.gridx = 1;
-		p.gridy = 1;
-		panelBuscar.add(textField_Nombre, p);
+		panelBuscar.add(comboEstado, p);
 		
 		//-------------------------
 		
 		p.fill = GridBagConstraints.CENTER;
 		
-		JLabel lblId = new JLabel("ID");
+		JLabel lblEstado = new JLabel("Estado del pedido");
 		p.gridx = 0;
 		p.gridy = 0;
-		panelBuscar.add(lblId, p);
-		JLabel lblNom = new JLabel("Nombre");
-		p.gridx = 0;
-		p.gridy = 1;
-		panelBuscar.add(lblNom, p);
+		panelBuscar.add(lblEstado, p);
 		
 		//---------------------
 		
 		p.fill = GridBagConstraints.CENTER;
 		
 		JButton btnBuscar = new JButton("Buscar"+"\n"+"Actualizar");
-		p.gridx = 8;
-		p.gridheight = 1;
+		p.gridx = 3;
 		p.gridy = 0;
 		panelBuscar.add(btnBuscar, p);
 		
@@ -185,30 +175,30 @@ public class PanelPedidos extends JPanel {
 	
 	//-----------------buscar-actualizar----------------
 	
-	/*class AccionBuscar implements ActionListener {
+	class AccionBuscar implements ActionListener {
 		 
 		@Override
 		 public void actionPerformed(ActionEvent e) {
 			 
-			 System.out.println("Planta -> Buscar");
+			 System.out.println("Pedido -> Buscar-Actualizar");
 			 
-			 PlantaController pc=new PlantaController();
+			// PlantaController pc=new PlantaController();
 			 
-			 try {
-				this.actualizarTabla(pc.buscarPlanta(textField_ID.getText(), textField_Nombre.getText()));
+			 //try {
+				//this.actualizarTabla(pc.buscarPlanta(textField_ID.getText(), textField_Nombre.getText()));
 				System.out.println("Buscar OK");
 			
-			 } catch (DatosInvalidosException | SQLException e1) {
+			 //} catch (DatosInvalidosException | SQLException e1) {
 				//e1.printStackTrace();
-			}
+			//}
 		 }	
 
 		private void actualizarTabla(String[][] aMostrar) throws NumberFormatException, DatosInvalidosException, SQLException {
 			
-			table_Plantas.setModel(new DefaultTableModel(aMostrar,	new String[] {"ID", "Nombre"}) 
+			table_Plantas.setModel(new DefaultTableModel(aMostrar,	new String[] {"Nro. Orden", "Planta Origen", "Planta Destino", "Fecha Solicitud", "Fecha Solicitud", "Estado"}) 
 			{
 				Class[] columnTypes = new Class[] {
-					Object.class, String.class//, String.class
+					Object.class, String.class, String.class, String.class, String.class, String.class, String.class
 				};
 					
 				public Class getColumnClass(int columnIndex) {
@@ -217,6 +207,6 @@ public class PanelPedidos extends JPanel {
 			});
 			
 		}
-	}*/
+	}
 	
 }
