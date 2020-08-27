@@ -18,7 +18,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 	private ResultSet rs = null;
 
 	@Override
-	public Boolean save(EnvioDetalle envio) {
+	public Boolean save(EnvioDetalle envio) throws SQLException {
 		String insert = "INSERT INTO enviodetalle(numOrden,camionAsignado,costoEnvio) VALUES(?,?,?) ";
 		try {
 

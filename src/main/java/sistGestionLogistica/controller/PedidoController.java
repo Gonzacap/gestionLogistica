@@ -17,6 +17,7 @@ import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.dominio.Ruta;
 import sistGestionLogistica.enums.EstadoPedido;
 import sistGestionLogistica.servicios.ServiceInsumo;
+import sistGestionLogistica.servicios.ServiceItemDetalle;
 import sistGestionLogistica.servicios.ServicePedido;
 import sistGestionLogistica.servicios.ServicePlanta;
 import sistGestionLogistica.servicios.ServiceStockInsumo;
@@ -27,7 +28,7 @@ public class PedidoController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void agregar(String orden,String planta , String fSolicitud, String fEntrega,String costo, String ruta , String insumo, String cantidad , String camion,String creado) 
+	/*public void agregar(String orden,String planta , String fSolicitud, String fEntrega,String costo, String ruta , String insumo, String cantidad , String camion,String creado) 
 			throws SQLException, DatosInvalidosException,DateTimeParseException,NumberFormatException
 	{
            ServicePlanta sp = new ServicePlanta();
@@ -53,16 +54,17 @@ public class PedidoController {
 		   
 		
 		
-	}
+	}*/
 	
 	public void crearPedido(String numOrden, String idPlantaDestino, String fechaMaxima, List<ItemDetalle> items) throws SQLException, DatosInvalidosException {
 		Integer numeroOrden=-1, idDestino=-1;
 		LocalDate fechaMax;
 
 		Planta destino;
-
+        ItemDetalle item;
 		ServicePedido sp= new ServicePedido();
 		ServicePlanta splanta= new ServicePlanta();
+		ServiceItemDetalle sid = new ServiceItemDetalle();
 		
 		//parseamos todos los datos que no sean String
 		numeroOrden= Integer.valueOf(numOrden);
@@ -83,6 +85,12 @@ public class PedidoController {
 		//creamos el pedido
 		Pedido pedido = new Pedido(numeroOrden,destino, LocalDate.now(),fechaMax, items, EstadoPedido.CREADA);
 		sp.registrarPedido(pedido);
+		//Agrego los items a la db 
+		for(ItemDetalle unItem : items) {
+			item = new ItemDetalle(Integer.valueOf(numOrden), unItem.getInsumo(), unItem.getCantidad());
+			sid.registrarItem(item);
+		}
+	
 		
 	}
 	//Si devuelve vacio cancela el pedido

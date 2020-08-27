@@ -19,7 +19,7 @@ public class ItemDetalleDaoMysql implements ItemDetalleDao {
 	private ResultSet rs = null;
 
 	@Override
-	public Boolean save(ItemDetalle item) {
+	public Boolean save(ItemDetalle item) throws SQLException {
 		String insert = "INSERT INTO itemDetalle(numOrden,insumo,cantidad,precioItem) VALUES(?,?,?,?)";
 		try {
 

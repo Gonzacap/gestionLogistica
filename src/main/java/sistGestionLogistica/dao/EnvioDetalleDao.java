@@ -8,7 +8,7 @@ import sistGestionLogistica.dominio.ItemDetalle;
 
 public interface EnvioDetalleDao {
 	
-    public Boolean save(EnvioDetalle envio);
+    public Boolean save(EnvioDetalle envio) throws SQLException;
     public Boolean update(EnvioDetalle envio) throws SQLException ;
 	public List<EnvioDetalle> buscarNumOrden(Integer numOrden) throws SQLException ;
 	public List<EnvioDetalle> buscarTodos() throws SQLException ;

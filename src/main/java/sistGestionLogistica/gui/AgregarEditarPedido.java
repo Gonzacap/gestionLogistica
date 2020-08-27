@@ -90,11 +90,11 @@ public class AgregarEditarPedido {
 		System.out.print("\n");
 		//--------------
 		
-		numOrden = new JTextField("-1");
+		numOrden = new JTextField();
 		numOrden.setBounds(200, 25, 120, 20);
 		plantas = new JComboBox<String>(plantaLbl);
 		plantas.setBounds(200, 50, 120, 20);
-		FechaMaxEntrega = new JTextField("31/12/1999");
+		FechaMaxEntrega = new JTextField("31/12/2020");
 		FechaMaxEntrega.setBounds(200, 75, 120, 20);
 		JLabel lblNumOrden = new JLabel("Numero de Orden");
 		lblNumOrden.setBounds(25, 25, 150, 20);
@@ -182,6 +182,7 @@ public class AgregarEditarPedido {
 				PedidoController pc = new PedidoController();
 				try {
 					pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
+					
 				
 				} catch (SQLException | DatosInvalidosException e1) {
 					// TODO Auto-generated catch block
