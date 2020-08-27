@@ -21,7 +21,7 @@ public class ServiceItemDetalle {
 			return this.itemDao.update(item);
 		}
 			
-		public List<ItemDetalle> buscarPorId(Integer numOrden) throws SQLException {
+		public List<ItemDetalle> buscarPorNumOrden(Integer numOrden) throws SQLException {
 			return this.itemDao.buscarNumOrden(numOrden);
 		}
 		public List<ItemDetalle> buscarTodos() throws SQLException{

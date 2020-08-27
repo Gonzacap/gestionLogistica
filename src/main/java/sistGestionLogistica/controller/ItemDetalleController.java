@@ -1,5 +1,6 @@
 package sistGestionLogistica.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import sistGestionLogistica.dao.StockInsumoDaoMysql;
@@ -7,19 +8,26 @@ import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.InsumoGeneral;
 import sistGestionLogistica.dominio.InsumoLiquido;
 import sistGestionLogistica.dominio.ItemDetalle;
+import sistGestionLogistica.servicios.ServiceItemDetalle;
+
 
 public class ItemDetalleController {
 	
 	public ItemDetalleController() {
 		
 	}
-
+	public String[][] buscarItems(String numOrden ) throws SQLException{
+		Integer numeroOrden = Integer.valueOf(numOrden);
+		ServiceItemDetalle sid = new ServiceItemDetalle ();
+		
+		return this.aMatriz(sid.buscarPorNumOrden(numeroOrden));
+	}
 	//recive una lista de ItemDetalle y la pasa a una matriz String
 	
 	public String[][] aMatriz(List<ItemDetalle> listaItems){
 		
 		String[][] matriz = new String[listaItems.size()][4];
-		StockInsumoDaoMysql aux = new StockInsumoDaoMysql();
+		
 		
 		for(int i=0; i<listaItems.size();i++) {
 			
@@ -37,7 +45,7 @@ public class ItemDetalleController {
 		public String[][] aMatriz2(List<ItemDetalle> listaItems){
 			
 			String[][] matriz = new String[listaItems.size()][3];
-			StockInsumoDaoMysql aux = new StockInsumoDaoMysql();
+			
 			
 			for(int i=0; i<listaItems.size();i++) {
 				
