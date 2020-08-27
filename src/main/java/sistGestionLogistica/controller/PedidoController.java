@@ -87,7 +87,7 @@ public class PedidoController {
 	}
 	public String[][] aMatriz(List<Pedido> listaPedido){
 		
-		String[][] matriz = new String[listaPedido.size()][4];
+		String[][] matriz = new String[listaPedido.size()][5];
 		for(int i=0; i<listaPedido.size();i++) {
 			matriz[i][0]= listaPedido.get(i).getNumOrden().toString();
 			matriz[i][1]=  listaPedido.get(i).getPlantaDestino().getNombre().toString();
