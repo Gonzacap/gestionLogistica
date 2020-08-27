@@ -92,7 +92,7 @@ public class PedidoController {
 		
 		Pedido pe = new Pedido(numOrden, planta, fechaSol, fechaMax, item, estadoPedido);
 		ServicePedido sp = new ServicePedido();
-		return this.aMatriz(sp.buscarTodos());
+		return this.aMatriz(sp.buscarPedido(pe));
 	}
 	public String[][] aMatriz(List<Pedido> listaPedido){
 		

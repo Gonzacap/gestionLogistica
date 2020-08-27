@@ -3,10 +3,10 @@ package sistGestionLogistica.servicios;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import sistGestionLogistica.dao.*;
-import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.dominio.Pedido;
 import sistGestionLogistica.enums.EstadoPedido;
@@ -31,7 +31,15 @@ public class ServicePedido {
 		
 	}
 	public List<Pedido> buscarTodos() throws SQLException{
+		
 		return this.pedidoDao.buscarTodos();
+	}
+	
+	public List<Pedido> buscarPedido(Pedido pe) throws SQLException{
+		
+		Predicate<Pedido> filtroEstado = (t) -> (pe.getEstado().equals(t.getEstado()));
+		
+		return this.pedidoDao.buscarTodos().stream().filter(filtroEstado).collect(Collectors.toList());
 	}
 
 }
