@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import excepciones.DatosInvalidosException;
+import sistGestionLogistica.controller.PedidoController;
 import sistGestionLogistica.controller.PlantaController;
 import sistGestionLogistica.enums.EstadoPedido;
 import sistGestionLogistica.sistema.App;
@@ -19,7 +20,7 @@ public class PanelPedidos extends JPanel {
 	private JTable table_Plantas;
 	private JComboBox<String> comboEstado;
 	private String[] estadospedido = {"CREADA","PROCESADA","ENTREGADA","CANCELADA"};
-	private Integer idAux;
+	private Integer nroAux;
 
 	public PanelPedidos() {
 
@@ -42,18 +43,22 @@ public class PanelPedidos extends JPanel {
 		
 		//---------Botones-----------------
 		
-		JButton btnAlta = new JButton("Alta");
+		JButton btnAlta = new JButton("Crear Pedido");
 		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
 		JButton btnBaja = new JButton("Baja");
 		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds((anchoP+110), (altoP/5), 90, 25);
+		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
+		JButton btnAgregarStock = new JButton("Finalizar Pedido");
+		btnAgregarStock.setBounds((anchoP+3*110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
 		panel.add(btnEditar);
+		panel.add(btnAgregarStock);
 		
 		btnEditar.setEnabled(false);
+		btnAgregarStock.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
@@ -66,10 +71,10 @@ public class PanelPedidos extends JPanel {
 		table_Plantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table_Plantas.setToolTipText("");
 		
-		table_Plantas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"Nro. Orden", "Planta Origen", "Planta Destino", "Fecha Solicitud", "Fecha Solicitud", "Estado"}) {
+		table_Plantas.setModel(new DefaultTableModel(new Object[][] {},new String[] {"Nro. Orden", "Planta Destino", "Fecha Solicitud", "Fecha Entrega", "Estado"}) {
 			
 			Class[] columnTypes = new Class[] {
-				Object.class, String.class, String.class, String.class, String.class, String.class, String.class
+				Object.class, String.class, String.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -153,18 +158,19 @@ public class PanelPedidos extends JPanel {
 			//llamar a metodo editar
 
 		});
-		//btnBuscar.addActionListener(new AccionBuscar());
+		btnBuscar.addActionListener(new AccionBuscar());
 	
 	//---------accion click-------
 	
 	table_Plantas.addMouseListener(new MouseAdapter() { //
 		
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("Plantas -> click Seleccionar");
+			System.out.println("Pedidos -> click Seleccionar");
 			int fila = table_Plantas.rowAtPoint(e.getPoint());
 			
 			if(fila>-1) {
-				idAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
+				nroAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
+				btnAgregarStock.setEnabled(true);
 				btnEditar.setEnabled(true);
 			}
 			
@@ -182,23 +188,28 @@ public class PanelPedidos extends JPanel {
 			 
 			 System.out.println("Pedido -> Buscar-Actualizar");
 			 
-			// PlantaController pc=new PlantaController();
+			 PedidoController pc= new PedidoController();
 			 
-			 //try {
-				//this.actualizarTabla(pc.buscarPlanta(textField_ID.getText(), textField_Nombre.getText()));
+			 try {
+				//this.actualizarTabla(pc.buscarPedido(comboEstado.getSelectedItem().toString()));
+				//this.actualizarTabla(pc.buscarPedido("CREADA"));
+				
+				System.out.println(pc.buscarPedido("CREADA").length);
+				
 				System.out.println("Buscar OK");
 			
-			 //} catch (DatosInvalidosException | SQLException e1) {
+			} catch ( SQLException e1) {
+			//} catch ( DatosInvalidosException | SQLException e1) {
 				//e1.printStackTrace();
-			//}
+			}
 		 }	
 
 		private void actualizarTabla(String[][] aMostrar) throws NumberFormatException, DatosInvalidosException, SQLException {
 			
-			table_Plantas.setModel(new DefaultTableModel(aMostrar,	new String[] {"Nro. Orden", "Planta Origen", "Planta Destino", "Fecha Solicitud", "Fecha Solicitud", "Estado"}) 
+			table_Plantas.setModel(new DefaultTableModel(aMostrar,	new String[] {"Nro. Orden", "Planta Destino", "Fecha Solicitud", "Fecha Entrega", "Estado"}) 
 			{
 				Class[] columnTypes = new Class[] {
-					Object.class, String.class, String.class, String.class, String.class, String.class, String.class
+					Object.class, String.class, String.class, String.class, String.class, String.class
 				};
 					
 				public Class getColumnClass(int columnIndex) {

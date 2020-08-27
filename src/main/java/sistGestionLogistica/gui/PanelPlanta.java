@@ -49,7 +49,7 @@ public class PanelPlanta extends JPanel {
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
 		JButton btnAgregarStock = new JButton("Agregar Stock");
-		btnAgregarStock.setBounds((anchoP+3*110), (altoP/5), 90, 25);
+		btnAgregarStock.setBounds((anchoP+3*110), (altoP/5), 150, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);

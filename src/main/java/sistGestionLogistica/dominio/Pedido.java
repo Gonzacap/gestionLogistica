@@ -14,6 +14,7 @@ public class Pedido {
   private LocalDate fechaEntrega;
   private List<ItemDetalle> item; 
   private EstadoPedido estado;
+  private EnvioDetalle detalles;
   
   public Pedido() {
 	  
@@ -105,16 +106,5 @@ public void setEstado(EstadoPedido estado) {
 	this.estado = estado;
 }
 
-
-
-
-
-
-  
-  
-
-  
-  
-  
   
 }
