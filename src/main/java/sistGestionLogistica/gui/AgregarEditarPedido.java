@@ -191,7 +191,7 @@ public class AgregarEditarPedido {
 				
 				} catch (SQLException | DatosInvalidosException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					//e1.printStackTrace();
 				}
 				
 				System.out.println("Pedido creado");

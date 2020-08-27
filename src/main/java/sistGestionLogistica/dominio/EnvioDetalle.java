@@ -7,7 +7,6 @@ public class EnvioDetalle {
     private Integer numOrden;
     private Camion camionAsignado;
     private Double costoEnvio;
-    private EnvioDetalle detalles;
     private List<Ruta> rutaAsignada;
     
     public EnvioDetalle() {};
