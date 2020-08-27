@@ -191,15 +191,14 @@ public class PanelPedidos extends JPanel {
 			 PedidoController pc= new PedidoController();
 			 
 			 try {
-				//this.actualizarTabla(pc.buscarPedido(comboEstado.getSelectedItem().toString()));
+				this.actualizarTabla(pc.buscarPedido(comboEstado.getSelectedItem().toString()));
 				//this.actualizarTabla(pc.buscarPedido("CREADA"));
 				
-				System.out.println(pc.buscarPedido("CREADA").length);
-				
+				//System.out.println(pc.buscarPedido("CREADA").length);
 				System.out.println("Buscar OK");
 			
-			} catch ( SQLException e1) {
-			//} catch ( DatosInvalidosException | SQLException e1) {
+			//} catch ( SQLException e1) {
+			} catch ( DatosInvalidosException | SQLException e1) {
 				//e1.printStackTrace();
 			}
 		 }	
