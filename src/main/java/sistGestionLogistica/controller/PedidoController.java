@@ -95,6 +95,7 @@ public class PedidoController {
 			matriz[i][3]=  listaPedido.get(i).getFechaEntrega().toString();
 			matriz[i][4]=  listaPedido.get(i).getEstado().toString();
 		}
+		System.out.println();
 		return matriz;
 		
 	}

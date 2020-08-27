@@ -98,8 +98,7 @@ public class PedidoDaoMysql implements PedidoDao{
 	public Pedido buscarNumOrden(Integer numOrden) {
 		String buscar = "SELECT * FROM pedido WHERE numOrden = ?";
 		Pedido pe = new Pedido();
-		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		ServicePlanta sp = new ServicePlanta();
+		 ServicePlanta sp = new ServicePlanta();
 		pe.setNumOrden(-1);
 		try {
 			conn = DB.getConexion();
@@ -110,8 +109,8 @@ public class PedidoDaoMysql implements PedidoDao{
               
 				pe.setNumOrden(rs.getInt("numOrden"));
 				pe.setPlantaDestino(sp.buscarPorId(rs.getInt("PlantaDestino")));
-				pe.setFechaSolicitud(LocalDate.parse((CharSequence) rs.getString("fechaSolicitud"), formatter));
-				pe.setFechaEntrega(LocalDate.parse((CharSequence) rs.getString("fechaEntrega"), formatter));
+				pe.setFechaSolicitud(rs.getDate("fechaSolicitud").toLocalDate());
+				pe.setFechaEntrega((rs.getDate("fechaEntrega").toLocalDate()));
 				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
 			}
 			
@@ -135,7 +134,6 @@ public class PedidoDaoMysql implements PedidoDao{
 	@Override
 	public List<Pedido> buscarTodos() throws SQLException {
 		String buscar = "SELECT * FROM pedido ";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		ServicePlanta sp = new ServicePlanta();
 	    List<Pedido> lista = new ArrayList<Pedido>();
 	    ItemDetalleDao daoItem = new ItemDetalleDaoMysql();
@@ -150,8 +148,8 @@ public class PedidoDaoMysql implements PedidoDao{
 				Pedido pe = new Pedido();
 				pe.setNumOrden(rs.getInt("numOrden"));
 				pe.setPlantaDestino(sp.buscarPorId(rs.getInt("PlantaDestino")));
-				pe.setFechaSolicitud(LocalDate.parse((CharSequence) rs.getString("fechaSolicitud"), formatter));
-				pe.setFechaEntrega(LocalDate.parse((CharSequence) rs.getString("fechaEntrega"), formatter));
+				pe.setFechaSolicitud(rs.getDate("fechaSolicitud").toLocalDate());
+				pe.setFechaEntrega((rs.getDate("fechaEntrega").toLocalDate()));
 				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
 				pe.setItem(daoItem.buscarNumOrden(pe.getNumOrden()));
 				

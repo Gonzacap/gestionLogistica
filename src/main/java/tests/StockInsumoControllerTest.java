@@ -9,8 +9,11 @@ import org.junit.Test;
 
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.StockInsumoController;
+import sistGestionLogistica.dao.PedidoDaoMysql;
 import sistGestionLogistica.dao.StockInsumoDaoMysql;
+import sistGestionLogistica.dominio.Pedido;
 import sistGestionLogistica.dominio.Planta;
+import sistGestionLogistica.servicios.ServicePedido;
 import sistGestionLogistica.servicios.ServiceStockInsumo;
 
 public class StockInsumoControllerTest {
@@ -39,6 +42,10 @@ public class StockInsumoControllerTest {
 //		
 //		List<Planta> p= ss.plantasConStock(matriz);
 //		System.out.println(p);
+		PedidoDaoMysql pdao= new PedidoDaoMysql();
+		List<Pedido> lista= pdao.buscarTodos();
+		System.out.println(lista);
+		
 		
 	}
 
