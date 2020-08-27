@@ -28,34 +28,8 @@ public class PedidoController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	/*public void agregar(String orden,String planta , String fSolicitud, String fEntrega,String costo, String ruta , String insumo, String cantidad , String camion,String creado) 
-			throws SQLException, DatosInvalidosException,DateTimeParseException,NumberFormatException
-	{
-           ServicePlanta sp = new ServicePlanta();
-		   Integer numOrden;
-		   Planta plantaDestino = null;
-		   LocalDate fechaSolicitud;
-		   LocalDate fechaEntrega;
-		   Double costoEnvio;
-		   List<Ruta> rutaAsignada = new ArrayList<>();
-		   List<ItemDetalle> item = new ArrayList<>();; 
-		   Camion camionAsignado  = null;
-		   EstadoPedido estado;
-		   
-		 
-		   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		   
-		   numOrden = Integer.valueOf(orden);
-		   plantaDestino = sp.buscarPorId(Integer.valueOf(planta));
-		   fechaSolicitud = LocalDate.parse((CharSequence)fSolicitud, formatter);
-		   fechaEntrega = LocalDate.parse((CharSequence)fEntrega, formatter);
-		   costoEnvio = Double.valueOf(costo);
-		   
-		   
-		
-		
-	}*/
 	
+
 	public void crearPedido(String numOrden, String idPlantaDestino, String fechaMaxima, List<ItemDetalle> items) throws SQLException, DatosInvalidosException {
 		Integer numeroOrden=-1, idDestino=-1;
 		LocalDate fechaMax;
@@ -104,5 +78,33 @@ public class PedidoController {
 			throw new PedidoCanceladoException("No existen plantas con esa cantidad de Stock. su pedido fue Cancelado.");
 		}
 		return resultado;
+	}
+	
+	public String[][] buscarPedido(String estado ) throws SQLException{
+		Integer numOrden=-1, idDestino=-1;
+		LocalDate fechaMax=LocalDate.MIN;
+		LocalDate fechaSol=LocalDate.MIN;
+		List<ItemDetalle> item=null; 
+		EstadoPedido estadoPedido;
+		Planta planta=null;
+	   
+		estadoPedido = EstadoPedido.valueOf(estado);
+		
+		Pedido pe = new Pedido(numOrden, planta, fechaSol, fechaMax, item, estadoPedido);
+		ServicePedido sp = new ServicePedido();
+		return this.aMatriz(sp.buscarTodos());
+	}
+	public String[][] aMatriz(List<Pedido> listaPedido){
+		
+		String[][] matriz = new String[listaPedido.size()][4];
+		for(int i=0; i<listaPedido.size();i++) {
+			matriz[i][0]= listaPedido.get(i).getNumOrden().toString();
+			matriz[i][1]=  listaPedido.get(i).getPlantaDestino().getNombre().toString();
+			matriz[i][2]=  listaPedido.get(i).getFechaSolicitud().toString();
+			matriz[i][3]=  listaPedido.get(i).getFechaEntrega().toString();
+			matriz[i][4]=  listaPedido.get(i).getEstado().toString();
+		}
+		return matriz;
+		
 	}
 }

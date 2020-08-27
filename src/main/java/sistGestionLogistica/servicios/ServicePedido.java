@@ -30,5 +30,8 @@ public class ServicePedido {
 		return pedidoDao.buscarTodos().stream().filter((t) -> t.getEstado().equals(estado)).collect(Collectors.toList());
 		
 	}
+	public List<Pedido> buscarTodos() throws SQLException{
+		return this.pedidoDao.buscarTodos();
+	}
 
 }
