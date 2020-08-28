@@ -42,6 +42,7 @@ public class App extends JFrame{
 	private JMenu menuInsumos;
 	private JMenu menuPedidos;
 	private JMenu menuRutas;
+	private JMenu menuMatriz;
 	private JMenuBar barraMenu;
 	private JMenuItem gestorPlantas;
 	private JMenuItem gestorCamiones;
@@ -49,6 +50,7 @@ public class App extends JFrame{
 	private JMenuItem gestorPedidos;
 	private JMenuItem gestorRutas;
 	private JMenuItem gestorStock;
+	private JMenuItem visualizarMatriz;
 	
 	private PanelPlanta pP;
 	private PanelCamion pC;
@@ -56,6 +58,7 @@ public class App extends JFrame{
 	private PanelPedidos pD;
 	private PanelRutas pR;
 	private PanelStock pS;
+	private PanelMatrizCaminoMinimo pM;
 	
 	//----------------METODOS----------------
 	
@@ -68,6 +71,7 @@ public class App extends JFrame{
 		this.menuInsumos = new JMenu("Insumos");
 		this.menuPedidos = new JMenu("Pedidos");
 		this.menuRutas = new JMenu("Rutas");
+		this.menuMatriz = new JMenu("Matriz de Camino Minimo");
 		this.barraMenu = new JMenuBar();
 		this.gridbag = new GridBagConstraints();
 		this.gestorPlantas = new JMenuItem("Gestionar Plantas");
@@ -76,12 +80,14 @@ public class App extends JFrame{
 		this.gestorPedidos =new JMenuItem("Gestionar Pedidos");
 		this.gestorRutas =new JMenuItem("Gestionar Rutas");
 		this.gestorStock =new JMenuItem("Stocks a Reponer");
+		this.visualizarMatriz =new JMenuItem("Visualizar Matriz");
 		
 		this.pP = new PanelPlanta();
 		this.pI = new PanelInsumo();
 		this.pC = new PanelCamion();
 		this.pD = new PanelPedidos();
 		this.pR = new PanelRutas();
+		this.pM = new PanelMatrizCaminoMinimo();
 		//this.pS = new PanelStock();
 		
 		//--estoy habria que borrarlo si se hace una pantalla de inicio--
@@ -99,11 +105,13 @@ public class App extends JFrame{
 		menuPedidos.add(gestorPedidos);
 		menuRutas.add(gestorRutas);
 		menuCamiones.add(gestorCamiones);
+		menuMatriz.add(visualizarMatriz);
 		barraMenu.add(menuPlantas);
 		barraMenu.add(menuCamiones);
 		barraMenu.add(menuInsumos);
 		barraMenu.add(menuPedidos);
 		barraMenu.add(menuRutas);
+		barraMenu.add(menuMatriz);
 		this.setJMenuBar(barraMenu);
 		
 		
@@ -173,6 +181,21 @@ public class App extends JFrame{
 			this.revalidate();
 			this.repaint();
 		});
+		gestorStock.addActionListener(e->{
+			this.pS = new PanelStock();			
+			System.out.println("App -> Panel Stocks");
+			pS.inicializar(this);
+			pS.pantallaInsumosAReponer(this);
+			this.revalidate();
+			this.repaint();
+		});
+		visualizarMatriz.addActionListener(e->{
+			
+			System.out.println("App -> Visualizar Matriz");
+			pM.inicializar(this);			
+			this.revalidate();
+			this.repaint();
+		});
 		
 	}
 	
@@ -195,6 +218,7 @@ public class App extends JFrame{
 	}
 	
 	public void camionesActivated() {
+		this.visualizarMatriz.setEnabled(true);
 		this.gestorCamiones.setEnabled(false);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(true);
@@ -203,6 +227,7 @@ public class App extends JFrame{
 		this.gestorStock.setEnabled(true);
 	}
 	public void plantasActivated() {
+		this.visualizarMatriz.setEnabled(true);
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(false);
 		this.gestorInsumos.setEnabled(true);
@@ -211,6 +236,7 @@ public class App extends JFrame{
 		this.gestorStock.setEnabled(true);
 	}
 	public void insumosActivated() {
+		this.visualizarMatriz.setEnabled(true);
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(false);
@@ -219,6 +245,7 @@ public class App extends JFrame{
 		this.gestorStock.setEnabled(true);
 	}
 	public void pedidosActivated() {
+		this.visualizarMatriz.setEnabled(true);
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(true);
@@ -227,6 +254,7 @@ public class App extends JFrame{
 		this.gestorStock.setEnabled(true);
 	}
 	public void rutasActivated() {
+		this.visualizarMatriz.setEnabled(true);
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(true);
@@ -235,6 +263,7 @@ public class App extends JFrame{
 		this.gestorStock.setEnabled(true);
 	}
 	public void stockActivated() {
+		this.visualizarMatriz.setEnabled(true);
 		this.gestorCamiones.setEnabled(true);
 		this.gestorPlantas.setEnabled(true);
 		this.gestorInsumos.setEnabled(true);
@@ -243,12 +272,22 @@ public class App extends JFrame{
 		this.gestorStock.setEnabled(false);
 	}
 	public void stockEnabled() {
+		this.visualizarMatriz.setEnabled(false);
 		this.gestorCamiones.setEnabled(false);
 		this.gestorPlantas.setEnabled(false);
 		this.gestorInsumos.setEnabled(false);
 		this.gestorPedidos.setEnabled(false);
 		this.gestorRutas.setEnabled(false);
 		this.gestorStock.setEnabled(false);
+	}
+	public void matrizActivated() {
+		this.visualizarMatriz.setEnabled(false);
+		this.gestorCamiones.setEnabled(true);
+		this.gestorPlantas.setEnabled(true);
+		this.gestorInsumos.setEnabled(true);
+		this.gestorPedidos.setEnabled(true);
+		this.gestorRutas.setEnabled(true);
+		this.gestorStock.setEnabled(true);
 	}
 	
 }

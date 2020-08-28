@@ -199,6 +199,20 @@ public class PanelPedidos extends JPanel {
 			btnBuscar.doClick();
 
 		});
+		btnFinalizar.addActionListener(e-> {	//
+			
+			System.out.println("Pedidos -> Editar Pedido");
+
+			PedidoController fp = new PedidoController();
+			try {
+				fp.finalizarPedido(nroAux.toString());
+				JOptionPane.showMessageDialog(null,"El pedido fue entregado correctamente", "Pedido Finalizado",JOptionPane.INFORMATION_MESSAGE);
+			} catch (NumberFormatException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+		});
 		btnBuscar.addActionListener(new AccionBuscar());
 	
 	//---------accion click-------

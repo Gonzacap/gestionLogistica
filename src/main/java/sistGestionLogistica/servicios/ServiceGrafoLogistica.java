@@ -270,10 +270,10 @@ public class ServiceGrafoLogistica {
 			return salida; // Si no se puede llegar al destino, retornar vacio;
 		}
 	}
-	public Double[][] matrizKilometros(GrafoLogistica grafo, String tipo) {
+	public Double[][] matrizKilometros(GrafoLogistica grafo) {
 		return this.matrizKoT(grafo, "K");
 	}
-	public Double[][] matrizTiempo(GrafoLogistica grafo, String tipo) {
+	public Double[][] matrizTiempo(GrafoLogistica grafo) {
 		return this.matrizKoT(grafo, "T");
 	}
 	
