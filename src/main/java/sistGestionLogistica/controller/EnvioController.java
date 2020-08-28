@@ -36,6 +36,7 @@ public class EnvioController {
 		if(numeroOrden>0 ) {
 			EnvioDetalle envio = new EnvioDetalle(numeroOrden, sed.asignarCamion(), camino);
 			sed.registrarItem(envio);
+			sp.cambiarEstado(numeroOrden, EstadoPedido.PROCESADA);
 		}else throw new DatosInvalidosException("Error ");
 		
 		
