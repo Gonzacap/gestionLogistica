@@ -12,6 +12,7 @@ import org.junit.Test;
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.CamionController;
 import sistGestionLogistica.dominio.Camion;
+import sistGestionLogistica.servicios.ServiceCamion;
 
 public class CamionControllerTest {
 
@@ -65,17 +66,20 @@ public class CamionControllerTest {
 //	}
 	
 	@Test
-	public void testBuscarCamion() {
-		CamionController cc= new CamionController();
-		
-		
-		try {
-			String[][] lis = cc.buscarCamion("5", "", "", "", "", "", "", "");
-			System.out.println(lis);
-		} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void testBuscarCamion() throws SQLException {
+//		CamionController cc= new CamionController();
+//		
+//		
+//		try {
+//			String[][] lis = cc.buscarCamion("5", "", "", "", "", "", "", "");
+//			System.out.println(lis);
+//		} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+		ServiceCamion sc = new ServiceCamion();
+		sc.sumarKM(7, 12);
 		
 		
 		

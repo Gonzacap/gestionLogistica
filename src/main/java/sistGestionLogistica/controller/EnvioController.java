@@ -78,6 +78,7 @@ public class EnvioController {
 		ServiceStockInsumo ssi= new ServiceStockInsumo();
 		Pedido pedido = sp.buscarPorNumOrden(numOrden);
 		List<Planta> resultado = ssi.plantasConStock(pedido.getItem());
+		resultado.remove(pedido.getPlantaDestino());
 		if(resultado.isEmpty()) {
 			sp.cambiarEstado(numOrden, EstadoPedido.CANCELADA);
 			JOptionPane.showMessageDialog(null,"No hay planta con stock para realizar el pedido", "Stock insuficiente",JOptionPane.ERROR_MESSAGE);
