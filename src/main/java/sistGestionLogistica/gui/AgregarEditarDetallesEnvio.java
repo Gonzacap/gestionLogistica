@@ -218,7 +218,17 @@ public class AgregarEditarDetallesEnvio {
 		btnAgregar.addActionListener(new ActionListener(){
 				
 			@Override
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {	
+				EnvioController ec = new EnvioController();
+				try {
+					ec.agregarEnvio(nroPedido.toString(),(List<Ruta>) caminos.get(comboCaminoOptimo.getSelectedIndex()));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				} catch (DatosInvalidosException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		}	
 	});
 		
