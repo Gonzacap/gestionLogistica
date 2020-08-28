@@ -164,19 +164,18 @@ public class AgregarEditarPedido {
 
 		btnAgregar.addActionListener(new ActionListener(){
 				
-				@Override
-				public void actionPerformed(ActionEvent e) {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				
 				try {
 					AgregarEditarInsumosAPedido ai = new AgregarEditarInsumosAPedido(items);
-					//ai.setVisible(true);
-					btnActualizar.doClick();
+					ai.frame.setVisible(true);
 					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					//e1.printStackTrace();
 				}
-				btnActualizar.doClick();
+				//btnActualizar.doClick();
 			}				
 		});
 		
@@ -187,25 +186,30 @@ public class AgregarEditarPedido {
 			
 				System.out.println("Creando pedido");
 				
-				if(items!=null) {
-					for(ItemDetalle i: items) {
-						i.setNumOrden(Integer.valueOf(numOrden.getText()));				
-					}
-					
-					PedidoController pc = new PedidoController();
-					try {
-						pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
-						
-					} catch (SQLException | DatosInvalidosException e1) {
-						// TODO Auto-generated catch block
-						//e1.printStackTrace();
-					}
+				if(!numOrden.getText().isBlank()) {
+					if(items!=null) {
 				
-					System.out.println("Pedido creado");
-					frame.dispose();
+						for(ItemDetalle i: items) {
+							i.setNumOrden(Integer.valueOf(numOrden.getText()));				
+						}
+					
+						PedidoController pc = new PedidoController();
+						try {
+							pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
+						
+						} catch (SQLException | DatosInvalidosException e1) {
+							// TODO Auto-generated catch block
+							//e1.printStackTrace();
+						}
+						System.out.println("Pedido creado");
+						frame.dispose();
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"El pedido no puede estar vacio", "Datos Invalidos",JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				else {
-						JOptionPane.showMessageDialog(null,"El pedido no puede estar vacio", "Datos Invalidos",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Ingrese el numero de orden", "Datos Invalidos",JOptionPane.ERROR_MESSAGE);
 				}
 			}
 				

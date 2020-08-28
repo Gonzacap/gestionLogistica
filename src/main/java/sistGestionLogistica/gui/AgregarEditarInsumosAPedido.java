@@ -21,7 +21,7 @@ import sistGestionLogistica.servicios.ServiceInsumo;
 
 public class AgregarEditarInsumosAPedido {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JPanel panel;
 	private Integer alto;
 	private Integer ancho;
@@ -47,6 +47,7 @@ public class AgregarEditarInsumosAPedido {
 		ArrayList<ItemDetalle> lista = new ArrayList<ItemDetalle>();
 		this.listaItems = lista;
 		inicializar();
+		
 	}
 	
 	private void inicializar() throws SQLException{
@@ -54,6 +55,7 @@ public class AgregarEditarInsumosAPedido {
 		alto = 100;
 		ancho = 100;
 		
+		frame = new JFrame();
 		frame.setBounds(ancho, alto, 4*ancho, 2*alto);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

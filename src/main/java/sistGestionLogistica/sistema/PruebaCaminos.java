@@ -1,51 +1,41 @@
 package sistGestionLogistica.sistema;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
+import javax.swing.JOptionPane;
+
+import sistGestionLogistica.comparator.CompareCamion;
+import sistGestionLogistica.dao.EnvioDetalleDaoMysql;
+import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.GrafoLogistica;
 import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.dominio.Ruta;
+import sistGestionLogistica.servicios.ServiceCamion;
 import sistGestionLogistica.servicios.ServiceGrafoLogistica;
 
 public class PruebaCaminos {
 
 	public static void main(String[] args) throws SQLException{
-		
-		ServiceGrafoLogistica sgl= new ServiceGrafoLogistica();
-		GrafoLogistica gf = sgl.inicializarGrafo();
-		
-		ArrayList<ArrayList<Ruta>> l = new ArrayList<ArrayList<Ruta>>();
-		
-		Planta p1 = new Planta();
-		Planta p2 = new Planta();
-		
-		for(Planta p: gf.getListaPlanta()) {
-			//System.out.println(p.getNombre());
-			if(p.getId()==3) {
-				p1=p;
-			}
-			if(p.getId()==2) {
-				p2=p;
-			}
+		EnvioDetalleDaoMysql envioDao = new EnvioDetalleDaoMysql();
+		  ServiceCamion sc = new ServiceCamion();
+		  Comparator<Camion> comparator = new CompareCamion();
+			PriorityQueue<Camion> cola= new PriorityQueue<Camion>(comparator);
+			List<Camion> todosCamiones = sc.buscarCamion(new Camion(-1,"","","",-1.0,-1.0,-1,LocalDate.MIN));
+			List<Camion> camionesAsignados = envioDao.camionesAsignados();
 			
-		}
-		/*System.out.println("rutas:");
-		for(Ruta r: gf.getListaRuta()) {
-			System.out.println(r.getIdRuta()+" "+r.getDuracionViaje()+" "+r.getDistancia());
-		}*/
-		
-		System.out.println("planta origen "+p1.getNombre());
-		System.out.println("planta destino "+p2.getNombre());
-		
-		l = sgl.caminoMinimoKm(gf, p1, p2);
-		
-		//System.out.println("esto es un separador");
-		
-		for(Ruta r: l.get(0)) {
-			System.out.println(r.getIdRuta());
-		}
-		
+			for(Camion c: camionesAsignados) {
+			  todosCamiones.remove(c);
+				
+			}
+			System.out.println("asignados: " +camionesAsignados);
+			System.out.println("");
+			System.out.println("todos: " + todosCamiones);
+			
+
 	}
 }
