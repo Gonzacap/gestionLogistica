@@ -306,11 +306,11 @@ public class ServiceGrafoLogistica {
 	
 	}
 	
-	public Integer gradoEntrada(Planta p) throws SQLException {
+	public Integer gradoEntrada(GrafoLogistica grafo, Planta p) throws SQLException {
 		Integer grado=0;
-		List<Ruta> rutas = new ArrayList<Ruta>();
-		ServiceRuta sr = new ServiceRuta();
-		rutas= sr.buscarTodos();
+		List<Ruta> rutas = grafo.getListaRuta();
+//		ServiceRuta sr = new ServiceRuta();
+//		rutas= sr.buscarTodos();
 		for(Ruta r : rutas) {
 			if(r.getPlantaDestino().equals(p)) {
 				grado++;
@@ -319,11 +319,11 @@ public class ServiceGrafoLogistica {
 		
 		return grado;
 	}
-	public Integer gradoSalida(Planta p) throws SQLException {
+	public Integer gradoSalida(GrafoLogistica grafo,Planta p) throws SQLException {
 		Integer grado=0;
-		List<Ruta> rutas = new ArrayList<Ruta>();
-		ServiceRuta sr = new ServiceRuta();
-		rutas= sr.buscarTodos();
+		List<Ruta> rutas = grafo.getListaRuta();
+//		ServiceRuta sr = new ServiceRuta();
+//		rutas= sr.buscarTodos();
 		for(Ruta r : rutas) {
 			if(r.getPlantaOrigen().equals(p)) {
 				grado++;
