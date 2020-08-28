@@ -26,20 +26,25 @@ public class AgregarEditarDetallesEnvio {
 	private JPanel panel;
 	private JComboBox<String> plantas;
 	private JComboBox<String> comboRecorridoPor;
-	private JTextField FechaMaxEntrega;
+	private JComboBox<String> cominoOptimo;
+	private JLabel lblPlanta;
+	private JLabel lblKmT;
+	private JLabel lblCamino;
+	private JButton btnCalcular;
+	private JButton btnMostrar;
+	private JButton btnAgregar;
+	//private ArrayList<ItemDetalle> items ;
+	//private Vector<Integer> plantaID;
+	//private Vector<String> plantaLbl;
 	private Integer alto;
 	private Integer ancho;
-	private JTable tableItemDetalle;
-	private ArrayList<ItemDetalle> items ;
-	private Vector<Integer> plantaID;
-	private Vector<String> plantaLbl;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					AgregarEditarDetallesEnvio window = new AgregarEditarDetallesEnvio();
-					window.agregar();
+					//window.agregar();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,8 +60,6 @@ public class AgregarEditarDetallesEnvio {
 	
 	private void inicializar(){
 		
-		items = new ArrayList<ItemDetalle>();
-		
 		alto = 100;
 		ancho = 100;
 		
@@ -71,10 +74,11 @@ public class AgregarEditarDetallesEnvio {
 		panel.setLayout(null);
 		panel.setVisible(true);
 		
-		items = new ArrayList<ItemDetalle>();
+		frame.setTitle("Agregar Detalles Envio");
+		frame.setVisible(true);
 		
 		//----------string para el combo box-------
-		
+		/*
 		Planta p= new Planta(-1,"");
 		ServicePlanta ser = new ServicePlanta();
 		
@@ -89,191 +93,69 @@ public class AgregarEditarDetallesEnvio {
 			
 		}
 		System.out.print("\n");
+		*/
 		//--------------
 		
-		numOrden = new JTextField();
-		numOrden.setBounds(200, 25, 120, 20);
-		plantas = new JComboBox<String>(plantaLbl);
-		plantas.setBounds(200, 50, 120, 20);
-		FechaMaxEntrega = new JTextField("31/12/2020");
-		FechaMaxEntrega.setBounds(200, 75, 120, 20);
-		JLabel lblNumOrden = new JLabel("Numero de Orden");
-		lblNumOrden.setBounds(25, 25, 150, 20);
-		JLabel lblPlantas = new JLabel("Plantas");
-		lblPlantas.setBounds(25, 50, 150, 20);
-		JLabel lblFecha = new JLabel("Fecha maxima de entrega");
-		lblFecha.setBounds(25, 75, 150, 20);
 		
-		panel.add(numOrden);
-		panel.add(lblNumOrden);
+		plantas = new JComboBox<String>();
+		plantas.setBounds(200, 25, 120, 20);
+		comboRecorridoPor = new JComboBox<String>();
+		comboRecorridoPor.setBounds(200, 50, 120, 20);
+		cominoOptimo = new JComboBox<String>();
+		cominoOptimo.setBounds(200, 100, 120, 20);
+		lblPlanta = new JLabel("PlantaOrigen");
+		lblPlanta.setBounds(25, 25, 150, 20);
+		lblKmT = new JLabel("Recorrido por...");
+		lblKmT.setBounds(25, 50, 150, 20);
+		lblCamino = new JLabel("Camino Optimo");
+		lblCamino.setBounds(25, 100, 150, 20);
+		btnCalcular = new JButton("Calcular Camino");
+		btnCalcular.setBounds(25, 75, 150, 20);
+		btnMostrar = new JButton("Mostrar Recorrido");
+		btnMostrar.setBounds(25, 125, 150, 20);
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.setBounds(350, 90, 120, 20);
+				
 		panel.add(plantas);
-		panel.add(FechaMaxEntrega);
-		panel.add(lblPlantas);
-		panel.add(lblFecha);
-		
-		//-------------------
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(ancho, 3*(alto/2), (3*ancho), (alto));
-		panel.add(scrollPane);
-		
-		//-------tabla-------
-		
-		tableItemDetalle = new JTable();
-		scrollPane.setViewportView(tableItemDetalle);
-		tableItemDetalle.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableItemDetalle.setToolTipText("");
-		
-		tableItemDetalle.setModel(new DefaultTableModel(new Object[][] {},new String[] {"Insumo", "Cantidad", "Precio"}) {
-			
-			Class[] columnTypes = new Class[] {
-				/*Object.class, */String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		
-		//--------------------
-		
-		JButton btnActualizar = new JButton("Actualizar");
-		btnActualizar.setBounds(200, 110, 120, 20);
-		panel.add(btnActualizar);
-		
-		btnActualizar.addActionListener(new AccionBuscar());
-		
-	}
-	
-
-	public void agregar() throws SQLException{
-		
-		frame.setTitle("Crear Pedido");
-		frame.setVisible(true);
-		
-		JButton btnAgregar = new JButton("Agregar Items");
-		btnAgregar.setBounds(50, 110, 120, 20);
+		panel.add(comboRecorridoPor);
+		panel.add(cominoOptimo);
+		panel.add(lblPlanta);
+		panel.add(lblKmT);
+		panel.add(lblCamino);
+		panel.add(btnCalcular);
+		panel.add(btnMostrar);
 		panel.add(btnAgregar);
-		JButton btnCrear = new JButton("Crear");
-		btnCrear.setBounds(350, 110, 120, 20);
-		panel.add(btnCrear);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(ancho, 3*(alto/2), (3*ancho), (alto));
+		panel.add(textArea);
 
-		btnAgregar.addActionListener(new ActionListener(){
+		btnMostrar.addActionListener(new ActionListener(){
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-				
-				try {
-					AgregarEditarInsumosAPedido ai = new AgregarEditarInsumosAPedido(items);
-					ai.setVisible(true);
-					
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					//e1.printStackTrace();
-				}
+
 				
 			}				
 		});
-		
-		btnCrear.addActionListener(new ActionListener(){
+
+		btnCalcular.addActionListener(new ActionListener(){
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
+				
+			}				
+		});
+		btnAgregar.addActionListener(new ActionListener(){
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 			
-				System.out.println("Creando pedido");
-				
-				for(ItemDetalle i: items) {
-					i.setNumOrden(Integer.valueOf(numOrden.getText()));				
-				}
-				
-				PedidoController pc = new PedidoController();
-				try {
-					pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
-					
-				
-				} catch (SQLException | DatosInvalidosException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-				System.out.println("Pedido creado");
-			}				
-		});
+		}				
+	});
 		
-		
-	}
-	
-	/*public void editarStock(Integer id) {
-		
-
-	}
-	
-	public void editar(){
-		
-		//this.inicializar();	
-		frame.setTitle("Editar Insumo en Stock");
-		frame.setVisible(true);
-		
-		
-		//JButton btnAgregar = new JButton("Editar");
-		//btnAgregar.setBounds(252, 105, 89, 23);
-		//panel.add(btnAgregar);
-		
-		
-		JButton btnEditar = new JButton("EDITAR");
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				StockInsumoController ic= new StockInsumoController();
-				
-				//try {
-					//pc.registrarPlanta(textField_Nombre.getText());
-					
-					JOptionPane.showMessageDialog(frame,"La planta fue editada con exito.", "Edicion Exitosa",JOptionPane.INFORMATION_MESSAGE);
-				
-				//} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
-					//Mensaje de error
-					//JOptionPane.showMessageDialog(frame,"Por favor verifique sus datos.","Datos Invalidos",JOptionPane.ERROR_MESSAGE);
-					//e1.printStackTrace();
-				//}
-			}
-		});
-
-		
-	}*/
-	
-	//-----------------actualizar----------------
-	
-	class AccionBuscar implements ActionListener {
-	 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-		 
-			System.out.println("Actualizando tabla de items");
-		 
-			ItemDetalleController ic=new ItemDetalleController();
-				 
-			try {
-				this.actualizarTabla(ic.aMatriz2(items));
-				System.out.println("Actualizar Ok");
-					
-			} catch (DatosInvalidosException | SQLException e1) {
-				//e1.printStackTrace();
-			}
-		}	
-
-		private void actualizarTabla(String[][] aMostrar) throws NumberFormatException, DatosInvalidosException, SQLException {
-				
-			tableItemDetalle.setModel(new DefaultTableModel(aMostrar,	new String[] {"Insumo", "Cantidad", "Precio"}) {
-				
-				Class[] columnTypes = new Class[] {
-						/*Object.class, */String.class, String.class, String.class
-				};
-				
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			});		
-		}
 	}
 	
 }
