@@ -24,8 +24,8 @@ public class PanelPedidos extends JPanel {
 	private String[] estadospedido = {"CREADA","PROCESADA","ENTREGADA","CANCELADA"};
 	private Integer nroAux;
 	private JButton btnAlta;
-	private JButton btnBaja;
-	private JButton btnEditar;
+	//private JButton btnBaja;
+	//private JButton btnEditar;
 	private JButton btnAgregarEnvio;
 	private JButton btnDetalles;	
 
@@ -226,8 +226,7 @@ public class PanelPedidos extends JPanel {
 			 System.out.println("Pedido -> Buscar-Actualizar");
 			 
 			 btnAgregarEnvio.setEnabled(false);
-			btnEditar.setEnabled(false);
-			btnDetalles.setEnabled(false);
+			 btnDetalles.setEnabled(false);
 			 
 			 PedidoController pc= new PedidoController();
 			 
