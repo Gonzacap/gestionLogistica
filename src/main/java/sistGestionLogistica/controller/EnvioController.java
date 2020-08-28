@@ -32,18 +32,19 @@ public class EnvioController {
 		ServicePedido spedido= new ServicePedido();
 		Pedido pedido = spedido.buscarPorNumOrden(numOrden);
 		ServicePlanta splanta = new ServicePlanta();
-		Planta pantaFin= splanta.buscarPorId(idPlanta);
+		Planta plantaInicio= splanta.buscarPorId(idPlanta);
 		ServiceGrafoLogistica sGrafo = new ServiceGrafoLogistica();
 		GrafoLogistica grafo= sGrafo.inicializarGrafo();
 		
 		switch(rutasOptimas) {
 		case "KILOMETRO":
-			
+			lista=sGrafo.caminoMinimoKm(grafo, plantaInicio , pedido.getPlantaDestino());
+			break;
+		case "TIEMPO":
+			lista=sGrafo.caminoMinimoTiempo(grafo, plantaInicio, pedido.getPlantaDestino());
+			break;
 		
 		}
-		
-		
-		
 		return lista;
 	}
 	
