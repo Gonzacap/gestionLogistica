@@ -92,9 +92,8 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 	}
 
 	@Override
-	public List<EnvioDetalle> buscarNumOrden(Integer numOrden) throws SQLException {
+	public EnvioDetalle buscarNumOrden(Integer numOrden) throws SQLException {
 		String buscar = "SELECT * FROM enviodetalle WHERE numOrden = ?";
-		List<EnvioDetalle> lista=new ArrayList<EnvioDetalle>();
 		EnvioDetalle envio = new EnvioDetalle();
 		ServiceCamion sc= new ServiceCamion();
 		envio.setNumOrden(-1);
@@ -109,7 +108,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 				envio.setCamionAsignado(sc.buscarPorId(rs.getInt("camionAsignado")));;
 				envio.setCostoEnvio(rs.getDouble("costoEnvio"));
 				envio.setRutaAsignada(this.obtenerListaRutaPedido(envio.getNumOrden()));
-				lista.add(envio);
+				
 			}
 			
 		} catch (Exception e) {
@@ -125,7 +124,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 			
 		}
 		
-		return lista;
+		return envio;
 	}
 
 	@Override

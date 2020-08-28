@@ -13,4 +13,5 @@ public interface CamionDao {
 	public Camion buscarPorId(Integer id) throws SQLException;
 	public void borrar(Integer id) throws SQLException;
 	public List<Camion> buscarTodos() throws SQLException;
+
 }

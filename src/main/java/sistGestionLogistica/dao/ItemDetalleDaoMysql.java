@@ -87,7 +87,7 @@ public class ItemDetalleDaoMysql implements ItemDetalleDao {
 	public List<ItemDetalle> buscarNumOrden(Integer numOrden) throws SQLException {
 		String buscar = "SELECT * FROM itemdetalle WHERE numOrden = ?";
 		List<ItemDetalle> lista = new ArrayList<ItemDetalle>();
-		ItemDetalle item = new ItemDetalle();
+		
 		ServiceInsumo si = new ServiceInsumo();
 		item.setNumOrden(-1);
 		try {
@@ -96,7 +96,7 @@ public class ItemDetalleDaoMysql implements ItemDetalleDao {
 			pstmt.setInt(1, numOrden);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-
+				ItemDetalle item = new ItemDetalle();
 				item.setNumOrden(rs.getInt("numOrden"));
 				item.setInsumo(si.buscarPorId(rs.getInt("insumo")));
 				item.setCantidad(rs.getInt("cantidad"));

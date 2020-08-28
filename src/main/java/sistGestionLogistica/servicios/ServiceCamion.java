@@ -105,6 +105,12 @@ public class ServiceCamion {
 		
 
 	}
+	public void sumarKM(Integer idCamion, Integer kmASumar) throws SQLException {
+		Camion c = camionDao.buscarPorId(idCamion);
+		Integer nuevo= c.getKm() + kmASumar;
+		c.setKm(nuevo);
+		camionDao.update(c);
+	}
 	
 	
 
