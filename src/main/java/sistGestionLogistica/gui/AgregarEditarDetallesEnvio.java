@@ -35,7 +35,7 @@ public class AgregarEditarDetallesEnvio {
 	private JButton btnAgregar;
 	private ArrayList<Planta> lista;
 	private Vector<String> plantaLbl;
-	private Vector<Integer> caminosLbl;
+	private Vector<String> caminosLbl;
 	private Integer alto;
 	private Integer ancho;
 	private Integer nroPedido;
@@ -146,9 +146,9 @@ public class AgregarEditarDetallesEnvio {
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(ancho, 3*(alto/2), (3*ancho), (alto));
-		
-		scrollPane.add(textArea);
-		panel.add(scrollPane);
+		panel.add(textArea);
+		//scrollPane.add(textArea);
+		//panel.add(scrollPane);
 
 		//------------------------
 		
@@ -172,16 +172,20 @@ public class AgregarEditarDetallesEnvio {
 			public void actionPerformed(ActionEvent e) {
 				
 				EnvioController ec = new EnvioController();
-				try {
-					caminos = new ArrayList<ArrayList<Ruta>>();
-					
-					ec.calcularCaminos(nroPedido,lista.get(comboPlantas.getSelectedIndex()).getId(), comboRecorridoPor.getSelectedItem().toString());
 				
-					for(int i=1; i<=caminos.size();i++) {
-						//caminosLbl.add(i);
-						comboCaminoOptimo.addItem("camino "+i);
+				try {
+					comboCaminoOptimo.removeAll();
+					
+					caminos = new ArrayList<ArrayList<Ruta>>(ec.calcularCaminos(nroPedido,lista.get(comboPlantas.getSelectedIndex()).getId(), comboRecorridoPor.getSelectedItem().toString()));
+					
+					for(Integer i=1; i<=caminos.size(); i++) {
+						//caminosLbl.add("camino "+i.toString());
+						comboCaminoOptimo.addItem("camino "+i.toString());
 					}
+					
 					comboCaminoOptimo.setEnabled(true);
+					//frame.revalidate();
+					//frame.repaint();
 				
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
