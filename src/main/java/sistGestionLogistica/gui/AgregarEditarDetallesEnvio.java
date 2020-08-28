@@ -39,6 +39,7 @@ public class AgregarEditarDetallesEnvio {
 	private Integer alto;
 	private Integer ancho;
 	private Integer nroPedido;
+	private Integer plantaAux;
 	private String[] kmt = {"KILOMETRO","TIEMPO"};
 	private ArrayList<ArrayList<Ruta>> caminos;
 
@@ -177,8 +178,9 @@ public class AgregarEditarDetallesEnvio {
 				
 				try {
 					comboCaminoOptimo.removeAllItems();
+					plantaAux = lista.get(comboPlantas.getSelectedIndex()).getId();
 					
-					caminos = new ArrayList<ArrayList<Ruta>>(ec.calcularCaminos(nroPedido,lista.get(comboPlantas.getSelectedIndex()).getId(), comboRecorridoPor.getSelectedItem().toString()));
+					caminos = new ArrayList<ArrayList<Ruta>>(ec.calcularCaminos(nroPedido, plantaAux, comboRecorridoPor.getSelectedItem().toString()));
 					
 					if(caminos.isEmpty()) {
 						JOptionPane.showMessageDialog(null,
@@ -231,7 +233,7 @@ public class AgregarEditarDetallesEnvio {
 			public void actionPerformed(ActionEvent e) {	
 				EnvioController ec = new EnvioController();
 				try {
-					ec.agregarEnvio(nroPedido.toString(),(List<Ruta>) caminos.get(comboCaminoOptimo.getSelectedIndex()));
+					ec.agregarEnvio(nroPedido.toString(),(List<Ruta>) caminos.get(comboCaminoOptimo.getSelectedIndex()),plantaAux);
 					
 					//System.out.println(caminos.get(comboCaminoOptimo.getSelectedIndex()).size());
 				} catch (SQLException e1) {
