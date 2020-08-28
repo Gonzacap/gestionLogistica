@@ -22,7 +22,7 @@ public class GrafoLogisticaControllerTest {
 //		gflc.conectarPlantas("25", "2", "85", "1", "2");
 		
 		EnvioController ec = new EnvioController();
-		ArrayList<ArrayList<Ruta>> lista = ec.calcularCaminos(33, 3, "KILOMETRO");
+		ArrayList<ArrayList<Ruta>> lista = ec.calcularCaminos(1111, 3, "KILOMETRO");
 		System.out.println(lista);
 	}
 
