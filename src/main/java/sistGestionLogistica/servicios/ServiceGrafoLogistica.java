@@ -146,6 +146,7 @@ public class ServiceGrafoLogistica {
 		Vector<Planta> marcado = new Vector(graph.getListaPlanta().size()); // Este arreglo nos permitira determinar los nodos procesados.
 		ArrayList<ArrayList<Ruta>> salida = new ArrayList<ArrayList<Ruta>>();
 		Boolean hayCamino = false;
+		Double maximo = 9999999.0;
 		
 		System.out.println("dijkstra tiempo - camino minimo");
 		
@@ -161,9 +162,17 @@ public class ServiceGrafoLogistica {
 			//System.out.println(e.getActual().getNombre());
 			
 			//if (e.getPlanta().equals(fin)) return e.getCamino() ; // Retornamos el caminino, hemos llegado al nodo destino.
-			if (e.getPlanta().equals(fin)) {
-				salida.add(e.getCamino()); //retorno una lisata de caminos
-				hayCamino = true;
+			
+			if (e.getPlanta().equals(fin)) {	//retorno una lisata de caminos
+				
+				if(!hayCamino) {
+					maximo = e.getAcumulado();
+					salida.add(e.getCamino()); 
+					hayCamino = true;
+				}
+				else if(e.getAcumulado()<=maximo) {
+					salida.add(e.getCamino());
+				}
 			}
 			
 			adyacencias = this.adyacenciasT(graph, e.getPlanta()); // hacer un metodo que retorne la lista de rutas salientes de una planta
@@ -203,6 +212,7 @@ public class ServiceGrafoLogistica {
 		Vector<Planta> marcado = new Vector(graph.getListaPlanta().size()); // Este arreglo nos permitira determinar los nodos procesados.
 		ArrayList<ArrayList<Ruta>> salida = new ArrayList<ArrayList<Ruta>>();
 		Boolean hayCamino = false;
+		Double maximo = 9999999.0;
 		
 		System.out.println("dijkstra km - camino minimo");
 		
@@ -215,10 +225,18 @@ public class ServiceGrafoLogistica {
 			Estado e = cola.poll(); // Se desencola el elemento minimo.
 			marcado.add(e.getPlanta()); // Se marca el nodo como visitado.
 			
-			//if (e.getPlanta().equals(fin))	return e.getCamino() ; // Retornamos el caminino?, hemos llegado al nodo destino.
-			if (e.getPlanta().equals(fin)) {
-				salida.add(e.getCamino()); //retorno una lisata de caminos
-				hayCamino = true;
+			//if (e.getPlanta().equals(fin)) return e.getCamino() ; // Retornamos el caminino, hemos llegado al nodo destino.
+			
+			if (e.getPlanta().equals(fin)) {	//retorno una lisata de caminos
+				
+				if(!hayCamino) {
+					maximo = e.getAcumulado();
+					salida.add(e.getCamino()); 
+					hayCamino = true;
+				}
+				else if(e.getAcumulado()<=maximo) {
+					salida.add(e.getCamino());
+				}
 			}
 			
 			adyacencias = this.adyacenciasKm(graph, e.getPlanta()); // hacer un metodo que retorne la lista de rutas salientes de una planta
