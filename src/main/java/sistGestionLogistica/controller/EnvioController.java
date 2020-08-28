@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import excepciones.PedidoCanceladoException;
 import sistGestionLogistica.dominio.EnvioDetalle;
 import sistGestionLogistica.dominio.GrafoLogistica;
@@ -56,7 +58,9 @@ public class EnvioController {
 		List<Planta> resultado = ssi.plantasConStock(pedido.getItem());
 		if(resultado.isEmpty()) {
 			sp.cambiarEstado(numOrden, EstadoPedido.CANCELADA);
+			JOptionPane.showMessageDialog(null,"No hay planta con stock para realizar el pedido", "Stock insuficiente",JOptionPane.ERROR_MESSAGE);
 			throw new PedidoCanceladoException("No existen plantas con esa cantidad de Stock. su pedido fue Cancelado.");
+			
 		}
 		return resultado;
 	}

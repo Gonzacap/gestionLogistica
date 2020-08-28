@@ -22,7 +22,6 @@ import sistGestionLogistica.servicios.ServicePlanta;
 
 public class AgregarEditarDetallesEnvio {
 
-	private JTextField numOrden;
 	private JFrame frame;
 	private JPanel panel;
 	private JComboBox<String> plantas;
@@ -93,17 +92,14 @@ public class AgregarEditarDetallesEnvio {
 				plantaLbl.add(lista.get(i).getId()+" - "+lista.get(i).getNombre());
 			}
 			
-		} catch (SQLException e1) {
+		} catch (SQLException | PedidoCanceladoException e1) {
 			// TODO Auto-generated catch block
 			//e1.printStackTrace();
-		} catch (PedidoCanceladoException e1) {
-			
-			btnCalcular.setEnabled(false);
-			btnMostrar.setEnabled(false);
-			btnAgregar.setEnabled(false);
-			JOptionPane.showMessageDialog(null,"No hay planta con stock para realizar el pedido", "Stock insuficiente",JOptionPane.ERROR_MESSAGE);
-			//e1.printStackTrace();
+			this.lista = new ArrayList<Planta>();
+			this.plantaLbl= new Vector<String>();
 		}
+		
+		frame.setVisible(true);
 		
 		//--------------
 		
