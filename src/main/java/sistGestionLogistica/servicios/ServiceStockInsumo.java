@@ -78,5 +78,13 @@ public class ServiceStockInsumo {
 		
 		return plantasFinal;
 	}
-
+    
+	public void actualizarCantidad(Integer idPlanta , Integer cantidad) {
+		
+	   Integer cant;
+	   cant= this.stockDao.buscarCantidad(idPlanta);
+		
+		this.stockDao.actualizarStock(idPlanta, cant - cantidad);
+		
+	}
 }

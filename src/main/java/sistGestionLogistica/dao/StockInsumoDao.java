@@ -16,4 +16,6 @@ public interface StockInsumoDao {
 	public List<StockInsumo> faltantes();
 	public List<StockInsumo> buscarStockPlanta(Integer id);
 	public List<Planta> plantasConInsumo(Integer idInsumo, Integer cantidad);
+	public void actualizarStock(Integer idPlanta , Integer cantidad );
+	public Integer buscarCantidad(Integer idPlanta);
 }

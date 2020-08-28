@@ -67,7 +67,20 @@ public class PedidoController {
 	
 		
 	}
-
+      
+	public void finalizarPedido(String numOrden) throws NumberFormatException, SQLException {
+		ServiceItemDetalle sid = new ServiceItemDetalle();
+		ServiceStockInsumo ss = new ServiceStockInsumo();
+		List<ItemDetalle> items= sid.buscarPorNumOrden(Integer.valueOf(numOrden));
+		ServicePedido sp = new ServicePedido();
+		Pedido pe = new Pedido();
+		pe = sp.buscarPorNumOrden(Integer.valueOf(numOrden));
+		for(ItemDetalle unItem: items) {
+			 ss.actualizarCantidad(pe.getEnvio().getRutaAsignada().get(0).getPlantaOrigen().getId(), unItem.getCantidad());
+		}
+		sp.cambiarEstado(Integer.valueOf(numOrden), EstadoPedido.ENTREGADA);
+		
+	}
 	
 	public String[][] buscarPedido(String estado ) throws SQLException{
 		EstadoPedido ep= EstadoPedido.valueOf(estado);
