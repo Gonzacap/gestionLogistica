@@ -67,18 +67,7 @@ public class PedidoController {
 	
 		
 	}
-	//Si devuelve vacio cancela el pedido
-	public List<Planta> plantasConStock(Integer numOrden) throws SQLException, PedidoCanceladoException{
-		ServicePedido sp = new ServicePedido();
-		ServiceStockInsumo ssi= new ServiceStockInsumo();
-		Pedido pedido = sp.buscarPorNumOrden(numOrden);
-		List<Planta> resultado = ssi.plantasConStock(pedido.getItem());
-		if(resultado.isEmpty()) {
-			sp.cambiarEstado(numOrden, EstadoPedido.CANCELADA);
-			throw new PedidoCanceladoException("No existen plantas con esa cantidad de Stock. su pedido fue Cancelado.");
-		}
-		return resultado;
-	}
+
 	
 	public String[][] buscarPedido(String estado ) throws SQLException{
 		EstadoPedido ep= EstadoPedido.valueOf(estado);

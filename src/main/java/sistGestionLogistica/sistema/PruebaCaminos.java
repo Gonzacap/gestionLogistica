@@ -16,7 +16,7 @@ public class PruebaCaminos {
 		ServiceGrafoLogistica sgl= new ServiceGrafoLogistica();
 		GrafoLogistica gf = sgl.inicializarGrafo();
 		
-		List<Ruta> l = new ArrayList<Ruta>();
+		ArrayList<ArrayList<Ruta>> l = new ArrayList<ArrayList<Ruta>>();
 		
 		Planta p1 = new Planta();
 		Planta p2 = new Planta();
@@ -43,7 +43,7 @@ public class PruebaCaminos {
 		
 		//System.out.println("esto es un separador");
 		
-		for(Ruta r: l) {
+		for(Ruta r: l.get(0)) {
 			System.out.println(r.getIdRuta());
 		}
 		
