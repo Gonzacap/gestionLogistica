@@ -202,7 +202,7 @@ public class ServiceGrafoLogistica {
 		}
 		else {
 			System.out.println("no encontro camino");
-			return null; // Si no se puede llegar al destino, retornar null;
+			return salida; // Si no se puede llegar al destino, retornar vacio;
 		}
 	}
 	
@@ -267,8 +267,43 @@ public class ServiceGrafoLogistica {
 		}
 		else {
 			System.out.println("no encontro camino");
-			return null; // Si no se puede llegar al destino, retornar null;
+			return salida; // Si no se puede llegar al destino, retornar vacio;
 		}
+	}
+	public Double[][] matrizKilometros(GrafoLogistica grafo, String tipo) {
+		return this.matrizKoT(grafo, "K");
+	}
+	public Double[][] matrizTiempo(GrafoLogistica grafo, String tipo) {
+		return this.matrizKoT(grafo, "T");
+	}
+	
+	private Double[][] matrizKoT(GrafoLogistica grafo, String tipo) {
+		//creamos la matriz con la cantidad de plantas
+		Double matriz[][] = new Double[grafo.getListaPlanta().size()][grafo.getListaPlanta().size()];
+		ServiceRuta sr= new ServiceRuta();
+		for(int i=0; i<grafo.getListaPlanta().size();i++) {
+			for(int j=0;j<grafo.getListaPlanta().size();j++) {
+				//si la planta es la misma setea en 0 
+				if(i==j) matriz[i][j]=0.0;
+				else {
+					List<Ruta> ruta;
+					//calcula el camino minimo dependiendo si es por Kilometro o tiempo
+					if(tipo.equals("K")) ruta= this.caminoMinimoKm(grafo, grafo.getListaPlanta().get(i), grafo.getListaPlanta().get(j)).get(0);
+					else ruta= this.caminoMinimoTiempo(grafo, grafo.getListaPlanta().get(i), grafo.getListaPlanta().get(j)).get(0);
+					//si la ruta es vacia setea en 0
+					if(ruta.isEmpty()) matriz[i][j] =0.0;
+					//sino setea los kilometros o el tiempo de la ruta
+					else {
+						if(tipo.equals("K")) matriz[i][j] = sr.kilometrosRuta(ruta);
+						else matriz[i][j] = sr.tiempoRuta(ruta);
+					}
+				}
+				
+			}
+			
+		}
+		return matriz;
+	
 	}
 
 }
