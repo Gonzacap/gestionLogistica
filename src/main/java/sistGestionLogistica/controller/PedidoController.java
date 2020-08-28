@@ -10,12 +10,14 @@ import java.util.List;
 import excepciones.DatosInvalidosException;
 import excepciones.PedidoCanceladoException;
 import sistGestionLogistica.dominio.Camion;
+import sistGestionLogistica.dominio.EnvioDetalle;
 import sistGestionLogistica.dominio.Insumo;
 import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.dominio.Pedido;
 import sistGestionLogistica.dominio.Planta;
 import sistGestionLogistica.dominio.Ruta;
 import sistGestionLogistica.enums.EstadoPedido;
+import sistGestionLogistica.servicios.ServiceEnvioDetalle;
 import sistGestionLogistica.servicios.ServiceInsumo;
 import sistGestionLogistica.servicios.ServiceItemDetalle;
 import sistGestionLogistica.servicios.ServicePedido;
@@ -72,16 +74,16 @@ public class PedidoController {
 	
 		ServicePedido sp = new ServicePedido();
 		
-		/*	ServiceItemDetalle sid = new ServiceItemDetalle();
+		ServiceItemDetalle sid = new ServiceItemDetalle();
 		ServiceStockInsumo ss = new ServiceStockInsumo();
+		ServiceEnvioDetalle sed= new ServiceEnvioDetalle();
+		EnvioDetalle ed = new EnvioDetalle();
 		List<ItemDetalle> items= sid.buscarPorNumOrden(Integer.valueOf(numOrden));
-		
-		Pedido pe = new Pedido();
-		pe = sp.buscarPorNumOrden(Integer.valueOf(numOrden));
+		ed= sed.buscarPorNumOrden(Integer.valueOf(numOrden));
 		
 		for(ItemDetalle unItem: items) {
-			 ss.actualizarCantidad(pe.getEnvio().getRutaAsignada().get(0).getPlantaOrigen().getId(), unItem.getCantidad());
-		}*/
+			 ss.actualizarCantidad(ed.getPlantaOrigen(), unItem.getCantidad());
+		}
 		sp.cambiarEstado(Integer.valueOf(numOrden), EstadoPedido.ENTREGADA);
 		
 	}

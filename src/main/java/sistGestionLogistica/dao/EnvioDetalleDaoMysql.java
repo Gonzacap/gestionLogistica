@@ -23,7 +23,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 
 	@Override
 	public Boolean save(EnvioDetalle envio) throws SQLException {
-		String insert = "INSERT INTO enviodetalle(numOrden,camionAsignado,costoEnvio) VALUES(?,?,?) ";
+		String insert = "INSERT INTO enviodetalle(numOrden,camionAsignado,costoEnvio,plantaOrigen) VALUES(?,?,?,?) ";
 		ServiceCamion sc = new ServiceCamion();
 		ServiceRuta sr = new ServiceRuta();
 		try {
@@ -35,6 +35,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 			ps.setInt(1, envio.getNumOrden() );
 			ps.setInt(2, envio.getCamionAsignado().getId() );
 			ps.setDouble(3, envio.getCostoEnvio());
+			ps.setInt(4, envio.getPlantaOrigen());
 			
 			
 			if(envio.getRutaAsignada() !=  null) {
@@ -116,6 +117,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 				envio.setNumOrden(rs.getInt("numOrden"));
 				envio.setCamionAsignado(sc.buscarPorId(rs.getInt("camionAsignado")));;
 				envio.setCostoEnvio(rs.getDouble("costoEnvio"));
+				envio.setPlantaOrigen(rs.getInt("plantaOrigen"));
 				envio.setRutaAsignada(this.obtenerListaRutaPedido(envio.getNumOrden()));
 				
 			}
@@ -152,6 +154,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 				envio.setNumOrden(rs.getInt("numOrden"));
 				envio.setCamionAsignado(sc.buscarPorId(rs.getInt("camionAsignado")));;
 				envio.setCostoEnvio(rs.getDouble("costoEnvio"));
+				envio.setPlantaOrigen(rs.getInt("plantaOrigen"));
 				envio.setRutaAsignada(this.obtenerListaRutaPedido(envio.getNumOrden()));
 				lista.add(envio);
 			}

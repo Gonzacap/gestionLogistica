@@ -245,11 +245,11 @@ public class StockInsumoDaoMysql implements StockInsumoDao {
 	}
 
 	public void actualizarStock(Integer idPlanta, Integer cantidad) {
-		String actualizar = "UPDATE stockInsumo SET cantidad= ? WHERE idPlanta = ?";
+		String actualizar = "UPDATE stockInsumo SET cantidad= ? WHERE Planta = ?";
 		try {
 
 			conn = DB.getConexion();
-			System.out.println("EJECUTA UPDATE ESTADO");
+			System.out.println("EJECUTA UPDATE PLANTA");
 			pstmt = conn.prepareStatement(actualizar);
 			pstmt.setInt(1, cantidad);
 			pstmt.setInt(2, idPlanta);
@@ -272,7 +272,7 @@ public class StockInsumoDaoMysql implements StockInsumoDao {
 
 	@Override
 	public Integer buscarCantidad(Integer idPlanta) {
-		String buscar = "SELECT cantidad FROM stockinsumo WHERE idPlanta=?";
+		String buscar = "SELECT cantidad FROM stockinsumo WHERE planta=?";
 		Integer cantidad = 0;
 		try {
 

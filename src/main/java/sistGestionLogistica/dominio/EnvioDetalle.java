@@ -8,17 +8,17 @@ public class EnvioDetalle {
     private Camion camionAsignado;
     private Double costoEnvio;
     private List<Ruta> rutaAsignada;
-    
+    private Integer plantaOrigen;
     public EnvioDetalle() {};
     
-	public EnvioDetalle(Integer numOrden, Camion camionAsignado, List<Ruta> rutaAsignada
+	public EnvioDetalle(Integer numOrden, Camion camionAsignado, List<Ruta> rutaAsignada, Integer plantaOrigen
 			) {
 		
 		this.numOrden = numOrden;
 		this.camionAsignado = camionAsignado;
 		this.costoEnvio = costoEnvio(rutaAsignada, camionAsignado.getCostoKM(), camionAsignado.getCostoHora()) ;
 		this.rutaAsignada = rutaAsignada;
-		
+		this.plantaOrigen = plantaOrigen;
 		
 	}
 	
@@ -58,6 +58,14 @@ public class EnvioDetalle {
 		}
 		
 		return porKm + porHora;
+	}
+
+	public Integer getPlantaOrigen() {
+		return plantaOrigen;
+	}
+
+	public void setPlantaOrigen(Integer plantaOrigen) {
+		this.plantaOrigen = plantaOrigen;
 	}
 	
     

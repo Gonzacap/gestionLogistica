@@ -24,7 +24,7 @@ import sistGestionLogistica.servicios.ServiceStockInsumo;
 public class EnvioController {
 	
    
-	public void agregarEnvio(String numOrden, List<Ruta> camino) throws SQLException, DatosInvalidosException {
+	public void agregarEnvio(String numOrden, List<Ruta> camino, Integer plantaOrigen) throws SQLException, DatosInvalidosException {
 		
 		Integer numeroOrden=-1;
 		numeroOrden= Integer.valueOf(numOrden);
@@ -34,7 +34,7 @@ public class EnvioController {
 		
 		
 		if(numeroOrden>0 ) {
-			EnvioDetalle envio = new EnvioDetalle(numeroOrden, sed.asignarCamion(), camino);
+			EnvioDetalle envio = new EnvioDetalle(numeroOrden, sed.asignarCamion(), camino, plantaOrigen);
 			sed.registrarItem(envio);
 			sp.cambiarEstado(numeroOrden, EstadoPedido.PROCESADA);
 		}else throw new DatosInvalidosException("Error ");
