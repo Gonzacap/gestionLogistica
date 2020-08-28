@@ -332,4 +332,67 @@ public class ServiceGrafoLogistica {
 		
 		return grado;
 	}
+	public List<Planta> plantasEntrada(GrafoLogistica grafo,Planta p){
+		List<Planta> lista = new ArrayList<Planta>();
+		List<Ruta> rutas = grafo.getListaRuta();
+		for(Ruta r : rutas) {
+			if(r.getPlantaDestino().equals(p)) {
+				lista.add(r.getPlantaOrigen());
+			}
+		}
+		return lista;
+		
+	}
+	public List<Double> pageRank(GrafoLogistica grafo) throws SQLException{
+		List<Planta> plantas = grafo.getListaPlanta();
+		Double d= 0.5;
+		
+		List<Double> pgActual= this.inicializaPG(plantas.size());
+		List<List<Planta>> entrantes = this.obtenerEntrantes(grafo, plantas);
+		List<Double> pgAnterior= new ArrayList<Double>();
+		do {
+			pgAnterior= this.copiarLista(pgActual);
+			//recorremos la lista de plantas por indice
+			for(int i=0; i<plantas.size();i++) {
+				//agregamos el factor de amortiguacion que definimos en 0.5
+				Double auxNuevo= d;
+				//iteramos en los nodos entrantes
+				for(Planta p : entrantes.get(i)) {
+					// sumamos el factor de amortiguacion multiplicado por el pageRank de la planta entrante
+					// dividido el grado de salida de la planta entrante
+					auxNuevo+= d*(pgActual.get(plantas.indexOf(p))/ this.gradoSalida(grafo, p));
+				}
+				//guardamos el double truncado a 6 decimales
+				pgActual.set(i,this.truncateTo(auxNuevo, 6));
+			}
+			//cuando las listas sean iguales quiere decir que el algoritmo se estabilizó
+		}while(pgActual.containsAll(pgAnterior) && pgAnterior.containsAll(pgActual));
+		
+		return pgActual;
+	}
+
+	private List<Double> inicializaPG(Integer total) {
+		List<Double> inicializada= new ArrayList<Double>();
+		for(int i=0; i<total;i++) inicializada.add(1.0);
+		return inicializada;
+	}
+	private List<Double> copiarLista(List<Double> lista){
+		List<Double> nueva= new ArrayList<Double>();
+		for(Double d : lista) nueva.add(d.doubleValue());
+		return nueva;
+	}
+	private List<List<Planta>> obtenerEntrantes(GrafoLogistica grafo, List<Planta> lista) {
+		List<List<Planta>> resultado = new ArrayList<List<Planta>>();
+		for(Planta p : lista) {
+			resultado.add(this.plantasEntrada(grafo, p));
+		}
+		
+		return resultado;
+	}
+	private double truncateTo( double unroundedNumber, int decimalPlaces ){
+	    int truncatedNumberInt = (int)( unroundedNumber * Math.pow( 10, decimalPlaces ) );
+	    double truncatedNumber = (double)( truncatedNumberInt / Math.pow( 10, decimalPlaces ) );
+	    return truncatedNumber;
+	}
+	
 }
