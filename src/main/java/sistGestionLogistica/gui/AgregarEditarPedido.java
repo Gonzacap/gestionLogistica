@@ -16,6 +16,7 @@ import sistGestionLogistica.controller.*;
 import sistGestionLogistica.dao.*;
 import sistGestionLogistica.dominio.*;
 import sistGestionLogistica.servicios.ServiceInsumo;
+import sistGestionLogistica.servicios.ServiceItemDetalle;
 import sistGestionLogistica.servicios.ServicePlanta;
 
 
@@ -32,7 +33,8 @@ public class AgregarEditarPedido {
 	private ArrayList<ItemDetalle> items ;
 	private Vector<Integer> plantaID;
 	private Vector<String> plantaLbl;
-
+	private JButton btnActualizar;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -135,7 +137,7 @@ public class AgregarEditarPedido {
 		
 		//--------------------
 		
-		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar = new JButton("Actualizar");
 		btnActualizar.setBounds(200, 110, 120, 20);
 		panel.add(btnActualizar);
 		
@@ -169,7 +171,7 @@ public class AgregarEditarPedido {
 					// TODO Auto-generated catch block
 					//e1.printStackTrace();
 				}
-				
+				btnActualizar.doClick();
 			}				
 		});
 		
@@ -200,6 +202,31 @@ public class AgregarEditarPedido {
 		
 		
 	}
+	
+	public void verDetalle(Pedido p) throws SQLException {
+		
+		frame.setTitle("Detalles del Pedido");
+		frame.setVisible(true);
+		
+		panel.remove(plantas);
+		panel.remove(numOrden);
+		
+		JLabel numOrden = new JLabel(p.getNumOrden().toString());
+		numOrden.setBounds(200, 25, 120, 20);
+		JLabel nomPlanta = new JLabel(p.getPlantaDestino().getNombre());
+		nomPlanta.setBounds(200, 50, 120, 20);
+		
+		ServiceItemDetalle sid = new ServiceItemDetalle ();
+		this.items = (ArrayList<ItemDetalle>) sid.buscarPorNumOrden(p.getNumOrden());
+		
+		for(ItemDetalle i: items) {
+			System.out.println(i.getInsumo().getIdInsumo());
+		}
+		
+		btnActualizar.doClick();
+		
+	}
+	
 	
 	/*public void editarStock(Integer id) {
 		

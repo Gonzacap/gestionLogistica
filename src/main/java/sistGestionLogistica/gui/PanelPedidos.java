@@ -12,7 +12,9 @@ import javax.swing.table.DefaultTableModel;
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.PedidoController;
 import sistGestionLogistica.controller.PlantaController;
+import sistGestionLogistica.dominio.Pedido;
 import sistGestionLogistica.enums.EstadoPedido;
+import sistGestionLogistica.servicios.ServicePedido;
 import sistGestionLogistica.sistema.App;
 
 public class PanelPedidos extends JPanel {
@@ -51,14 +53,18 @@ public class PanelPedidos extends JPanel {
 		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
 		JButton btnAgregarStock = new JButton("Finalizar Pedido");
 		btnAgregarStock.setBounds((anchoP+3*110), (altoP/5), 90, 25);
+		JButton btnDetalles = new JButton("Ver detalles");
+		btnDetalles.setBounds((anchoP+4*110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
 		panel.add(btnEditar);
 		panel.add(btnAgregarStock);
+		panel.add(btnDetalles);
 		
 		btnEditar.setEnabled(false);
 		btnAgregarStock.setEnabled(false);
+		btnDetalles.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
@@ -158,6 +164,24 @@ public class PanelPedidos extends JPanel {
 			//llamar a metodo editar
 
 		});
+		btnDetalles.addActionListener(e-> {	//Acciondetalles
+		
+			System.out.println("Pedidos -> Editar Pedido");
+			
+			ServicePedido sp = new ServicePedido();
+			AgregarEditarPedido pedido = new AgregarEditarPedido();
+			
+			try {
+				Pedido pedidoAux = sp.buscarPorNumOrden(nroAux);
+				pedido.verDetalle(pedidoAux);
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				//e1.printStackTrace();
+			}
+			
+
+		});
 		btnBuscar.addActionListener(new AccionBuscar());
 	
 	//---------accion click-------
@@ -172,6 +196,7 @@ public class PanelPedidos extends JPanel {
 				nroAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
 				btnAgregarStock.setEnabled(true);
 				btnEditar.setEnabled(true);
+				btnDetalles.setEnabled(true);
 			}
 			
 		}
