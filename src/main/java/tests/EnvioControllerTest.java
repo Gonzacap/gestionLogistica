@@ -15,12 +15,12 @@ public class EnvioControllerTest {
 
 	@Test
 	public void test() throws SQLException, DatosInvalidosException {
-		EnvioController ec= new EnvioController();
-		List<Ruta> ruta= ec.calcularCaminos(58, 3, "KILOMETRO").get(0);
-		ec.agregarEnvio("58", ruta);
-		System.out.println("llego");
-		
-		
+//		EnvioController ec= new EnvioController();
+//		List<Ruta> ruta= ec.calcularCaminos(58, 3, "KILOMETRO").get(0);
+//		ec.agregarEnvio("58", ruta);
+//		System.out.println("llego");
+//		
+//		
 	}
 
 }
