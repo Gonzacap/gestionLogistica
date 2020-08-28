@@ -27,7 +27,8 @@ public class PanelPedidos extends JPanel {
 	//private JButton btnBaja;
 	//private JButton btnEditar;
 	private JButton btnAgregarEnvio;
-	private JButton btnDetalles;	
+	private JButton btnDetalles;
+	private JButton btnFinalizar;
 
 	public PanelPedidos() {
 
@@ -51,22 +52,26 @@ public class PanelPedidos extends JPanel {
 		//---------Botones-----------------
 		
 		btnAlta = new JButton("Crear Pedido");
-		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
+		btnAlta.setBounds((anchoP), (altoP/5), 130, 25);
 		/*btnBaja = new JButton("Baja");
 		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
 		btnEditar = new JButton("Editar");
 		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);*/
 		btnAgregarEnvio = new JButton("Agregar envio");
-		btnAgregarEnvio.setBounds((anchoP+1*110), (altoP/5), 90, 25);
+		btnAgregarEnvio.setBounds((anchoP+1*140), (altoP/5), 130, 25);
 		btnDetalles = new JButton("Ver detalles");
-		btnDetalles.setBounds((anchoP+2*110), (altoP/5), 90, 25);
+		btnDetalles.setBounds((anchoP+2*140), (altoP/5), 130, 25);
+		btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.setBounds((anchoP+3*140), (altoP/5), 130, 25);
 		
 		panel.add(btnAlta);
 		//panel.add(btnBaja);
 		//panel.add(btnEditar);
 		panel.add(btnAgregarEnvio);
 		panel.add(btnDetalles);
+		panel.add(btnFinalizar);
 		
+		btnFinalizar.setEnabled(false);
 		btnAgregarEnvio.setEnabled(false);
 		btnDetalles.setEnabled(false);
 		
@@ -206,8 +211,13 @@ public class PanelPedidos extends JPanel {
 			
 			if(fila>-1) {
 				nroAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
-				btnAgregarEnvio.setEnabled(true);
-//				btnEditar.setEnabled(true);
+				
+				if(comboEstado.getSelectedItem().toString()=="CREADA") {
+					btnAgregarEnvio.setEnabled(true);
+				}
+				if(comboEstado.getSelectedItem().toString()=="PROCESADA") {
+					btnFinalizar.setEnabled(true);
+				}				
 				btnDetalles.setEnabled(true);
 			}
 			
@@ -227,6 +237,7 @@ public class PanelPedidos extends JPanel {
 			 
 			 btnAgregarEnvio.setEnabled(false);
 			 btnDetalles.setEnabled(false);
+			 btnFinalizar.setEnabled(false);
 			 
 			 PedidoController pc= new PedidoController();
 			 

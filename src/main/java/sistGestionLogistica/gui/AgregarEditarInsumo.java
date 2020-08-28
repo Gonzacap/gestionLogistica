@@ -157,7 +157,7 @@ public class AgregarEditarInsumo {
 				try {
 					ic.agregarInsumo(textField_Descripcion.getText(), comboBox_UnidadMedida.getSelectedItem().toString(),textField_Costo.getText(), textField_Precio.getText(),textField_Peso.getText() ,textField_Densidad.getText(), comboBox_Tipo.getSelectedItem().toString());
 					JOptionPane.showMessageDialog(frame,"El insumo fue dado de alta con exito.", "Alta Exitosa",JOptionPane.INFORMATION_MESSAGE);
-					
+					frame.dispose();
 				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
 					//e1.printStackTrace();
@@ -196,6 +196,7 @@ public class AgregarEditarInsumo {
 					ic.editarInsumo(textField_id.getText(), textField_Descripcion.getText(), comboBox_UnidadMedida.getSelectedItem().toString(),textField_Costo.getText(), textField_Precio.getText(),textField_Peso.getText() ,textField_Densidad.getText(), comboBox_Tipo.getSelectedItem().toString());
 					JOptionPane.showMessageDialog(
 							frame,"El insumo fue editado con exito.", "Edicion Exitosa",JOptionPane.INFORMATION_MESSAGE);
+					frame.dispose();
 				} catch (DateTimeParseException | DatosInvalidosException | NumberFormatException e1) {
 					//Mensaje de error
 					JOptionPane.showMessageDialog(

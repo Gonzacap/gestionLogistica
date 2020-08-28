@@ -116,11 +116,11 @@ public class PanelStock extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Agregar Insumos");
-		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
+		btnAlta.setBounds((anchoP), (altoP/5), 130, 25);
 		JButton btnEditar = new JButton("Editar Isumo");
-		btnEditar.setBounds((anchoP+110), (altoP/5), 90, 25);
+		btnEditar.setBounds((anchoP+155), (altoP/5), 130, 25);
 		JButton btnAtras= new JButton("Volver a Plantas");
-		btnAtras.setBounds((anchoP+2*110), (altoP/5), 90, 25);
+		btnAtras.setBounds((anchoP+2*155), (altoP/5), 130, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnEditar);

@@ -42,11 +42,11 @@ public class PanelInsumo extends JPanel {
 		//---------Botones-----------------
 		
 		JButton btnAlta = new JButton("Alta");
-		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
+		btnAlta.setBounds((anchoP), (altoP/5), 110, 25);
 		JButton btnBaja = new JButton("Baja");
-		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
+		btnBaja.setBounds((anchoP+120), (altoP/5), 110, 25);
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
+		btnEditar.setBounds((anchoP+2*120), (altoP/5), 110, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
