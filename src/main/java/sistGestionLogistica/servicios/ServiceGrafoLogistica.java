@@ -305,5 +305,31 @@ public class ServiceGrafoLogistica {
 		return matriz;
 	
 	}
-
+	
+	public Integer gradoEntrada(Planta p) throws SQLException {
+		Integer grado=0;
+		List<Ruta> rutas = new ArrayList<Ruta>();
+		ServiceRuta sr = new ServiceRuta();
+		rutas= sr.buscarTodos();
+		for(Ruta r : rutas) {
+			if(r.getPlantaDestino().equals(p)) {
+				grado++;
+			}
+		}
+		
+		return grado;
+	}
+	public Integer gradoSalida(Planta p) throws SQLException {
+		Integer grado=0;
+		List<Ruta> rutas = new ArrayList<Ruta>();
+		ServiceRuta sr = new ServiceRuta();
+		rutas= sr.buscarTodos();
+		for(Ruta r : rutas) {
+			if(r.getPlantaOrigen().equals(p)) {
+				grado++;
+			}
+		}
+		
+		return grado;
+	}
 }

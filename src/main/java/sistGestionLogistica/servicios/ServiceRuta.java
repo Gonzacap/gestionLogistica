@@ -52,6 +52,11 @@ public Ruta buscarPorId(Integer id) throws SQLException {
 	return this.rutaDao.buscarPorId(id);
 }
 
+public List<Ruta> buscarTodos() throws SQLException{
+	
+	return this.rutaDao.buscarTodos();
+}
+
 public Double kilometrosRuta(List<Ruta> listaRutas) {
 	Double resultado=0.0;
 	if(listaRutas == null) return resultado;
