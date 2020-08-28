@@ -27,8 +27,7 @@ public class PanelPedidos extends JPanel {
 	private JButton btnBaja;
 	private JButton btnEditar;
 	private JButton btnAgregarEnvio;
-	private JButton btnDetalles;
-	
+	private JButton btnDetalles;	
 
 	public PanelPedidos() {
 
@@ -53,22 +52,21 @@ public class PanelPedidos extends JPanel {
 		
 		btnAlta = new JButton("Crear Pedido");
 		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
-		btnBaja = new JButton("Baja");
+		/*btnBaja = new JButton("Baja");
 		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
 		btnEditar = new JButton("Editar");
-		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
-		btnAgregarEnvio = new JButton("Finalizar Pedido");
-		btnAgregarEnvio.setBounds((anchoP+3*110), (altoP/5), 90, 25);
+		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);*/
+		btnAgregarEnvio = new JButton("Agregar envio");
+		btnAgregarEnvio.setBounds((anchoP+1*110), (altoP/5), 90, 25);
 		btnDetalles = new JButton("Ver detalles");
-		btnDetalles.setBounds((anchoP+4*110), (altoP/5), 90, 25);
+		btnDetalles.setBounds((anchoP+2*110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
-		panel.add(btnBaja);
-		panel.add(btnEditar);
+		//panel.add(btnBaja);
+		//panel.add(btnEditar);
 		panel.add(btnAgregarEnvio);
 		panel.add(btnDetalles);
 		
-		btnEditar.setEnabled(false);
 		btnAgregarEnvio.setEnabled(false);
 		btnDetalles.setEnabled(false);
 		
@@ -157,7 +155,7 @@ public class PanelPedidos extends JPanel {
 			
 			
 		});
-		btnBaja.addActionListener(e-> { //AccionBaja
+		/*btnBaja.addActionListener(e-> { //AccionBaja
 			
 			System.out.println("Pedidos -> Baja");
 			
@@ -169,7 +167,7 @@ public class PanelPedidos extends JPanel {
 			//nuevo pedidos controller
 			//llamar a metodo editar
 
-		});
+		});*/
 		btnDetalles.addActionListener(e-> {	//Acciondetalles
 		
 			System.out.println("Pedidos -> Editar Pedido");
@@ -193,6 +191,7 @@ public class PanelPedidos extends JPanel {
 			System.out.println("Pedidos -> Editar Pedido");
 
 			AgregarEditarDetallesEnvio ade = new AgregarEditarDetallesEnvio(nroAux);
+			btnBuscar.doClick();
 
 		});
 		btnBuscar.addActionListener(new AccionBuscar());

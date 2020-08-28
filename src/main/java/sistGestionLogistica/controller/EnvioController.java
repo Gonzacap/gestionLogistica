@@ -29,12 +29,13 @@ public class EnvioController {
 		return this.aMatriz(sed.buscarPorNumOrden(numeroOrden));
 	}
 	// rutasOptimas acepta solo "KILOMETRO" o "TIEMPO"
-	public ArrayList<ArrayList<Ruta>> calcularCaminos(Integer numOrden,Integer idPlanta, String rutasOptimas) throws SQLException{
+	public ArrayList<ArrayList<Ruta>> calcularCaminos(Integer numOrden, Integer idPlanta/*Planta plantaI*/, String rutasOptimas) throws SQLException{
 		ArrayList<ArrayList<Ruta>> lista = new ArrayList<ArrayList<Ruta>>();
 		ServicePedido spedido= new ServicePedido();
 		Pedido pedido = spedido.buscarPorNumOrden(numOrden);
 		ServicePlanta splanta = new ServicePlanta();
 		Planta plantaInicio= splanta.buscarPorId(idPlanta);
+		//Planta plantaInicio= plantaI;
 		ServiceGrafoLogistica sGrafo = new ServiceGrafoLogistica();
 		GrafoLogistica grafo= sGrafo.inicializarGrafo();
 		

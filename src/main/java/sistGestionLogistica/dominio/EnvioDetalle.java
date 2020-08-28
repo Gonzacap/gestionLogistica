@@ -11,7 +11,7 @@ public class EnvioDetalle {
     
     public EnvioDetalle() {};
     
-	public EnvioDetalle(Integer numOrden, Camion camionAsignado, Double costoEnvio, List<Ruta> rutaAsignada
+	public EnvioDetalle(Integer numOrden, Camion camionAsignado, List<Ruta> rutaAsignada
 			) {
 		
 		this.numOrden = numOrden;

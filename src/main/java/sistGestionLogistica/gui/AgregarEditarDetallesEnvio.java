@@ -24,21 +24,23 @@ public class AgregarEditarDetallesEnvio {
 
 	private JFrame frame;
 	private JPanel panel;
-	private JComboBox<String> plantas;
+	private JComboBox<String> comboPlantas;
 	private JComboBox<String> comboRecorridoPor;
-	private JComboBox<String> cominoOptimo;
+	private JComboBox<String> comboCaminoOptimo;
 	private JLabel lblPlanta;
 	private JLabel lblKmT;
 	private JLabel lblCamino;
 	private JButton btnCalcular;
 	private JButton btnMostrar;
 	private JButton btnAgregar;
-	//private Vector<Integer> plantaID;
 	private ArrayList<Planta> lista;
 	private Vector<String> plantaLbl;
+	private Vector<Integer> caminosLbl;
 	private Integer alto;
 	private Integer ancho;
 	private Integer nroPedido;
+	private String[] kmt = {"KILOMETRO","TIEMPO"};
+	private ArrayList<ArrayList<Ruta>> caminos;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -78,6 +80,8 @@ public class AgregarEditarDetallesEnvio {
 		
 		frame.setTitle("Agregar Detalles Envio");
 		frame.setVisible(true);
+		frame.revalidate();
+		frame.repaint();
 		
 		//----------string para el combo box-------
 		
@@ -97,18 +101,17 @@ public class AgregarEditarDetallesEnvio {
 			//e1.printStackTrace();
 			this.lista = new ArrayList<Planta>();
 			this.plantaLbl= new Vector<String>();
+			frame.dispose();
 		}
-		
-		frame.setVisible(true);
 		
 		//--------------
 		
-		plantas = new JComboBox<String>();
-		plantas.setBounds(200, 25, 120, 20);
-		comboRecorridoPor = new JComboBox<String>();
+		comboPlantas= new JComboBox<String>(plantaLbl);
+		comboPlantas.setBounds(200, 25, 120, 20);
+		comboRecorridoPor = new JComboBox<String>(kmt);
 		comboRecorridoPor.setBounds(200, 50, 120, 20);
-		cominoOptimo = new JComboBox<String>();
-		cominoOptimo.setBounds(200, 100, 120, 20);
+		comboCaminoOptimo = new JComboBox<String>();
+		comboCaminoOptimo.setBounds(200, 100, 120, 20);
 		lblPlanta = new JLabel("PlantaOrigen");
 		lblPlanta.setBounds(25, 25, 150, 20);
 		lblKmT = new JLabel("Recorrido por...");
@@ -122,15 +125,21 @@ public class AgregarEditarDetallesEnvio {
 		btnAgregar = new JButton("Agregar");
 		btnAgregar.setBounds(350, 90, 120, 20);
 				
-		panel.add(plantas);
+		panel.add(comboPlantas);
 		panel.add(comboRecorridoPor);
-		panel.add(cominoOptimo);
+		panel.add(comboCaminoOptimo);
 		panel.add(lblPlanta);
 		panel.add(lblKmT);
 		panel.add(lblCamino);
 		panel.add(btnCalcular);
 		panel.add(btnMostrar);
 		panel.add(btnAgregar);
+		
+		comboRecorridoPor.setEnabled(false);
+		btnCalcular.setEnabled(false);
+		comboCaminoOptimo.setEnabled(false);
+		btnMostrar.setEnabled(false);
+		btnAgregar.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(ancho, 3*(alto/2), (3*ancho), (alto));
@@ -141,31 +150,74 @@ public class AgregarEditarDetallesEnvio {
 		scrollPane.add(textArea);
 		panel.add(scrollPane);
 
-		btnMostrar.addActionListener(new ActionListener(){
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-
-				
-			}				
-		});
-
-		btnCalcular.addActionListener(new ActionListener(){
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-
-				
-			}				
-		});
-		btnAgregar.addActionListener(new ActionListener(){
+		//------------------------
+		
+		comboPlantas.addActionListener(new ActionListener(){
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				comboRecorridoPor.setEnabled(true);
+			}				
+		});
+		comboRecorridoPor.addActionListener(new ActionListener(){
 			
-		}				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnCalcular.setEnabled(true);
+			}				
+		});
+		btnCalcular.addActionListener(new ActionListener(){
+	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				EnvioController ec = new EnvioController();
+				try {
+					caminos = new ArrayList<ArrayList<Ruta>>();
+					
+					ec.calcularCaminos(nroPedido,lista.get(comboPlantas.getSelectedIndex()).getId(), comboRecorridoPor.getSelectedItem().toString());
+				
+					for(int i=1; i<=caminos.size();i++) {
+						//caminosLbl.add(i);
+						comboCaminoOptimo.addItem("camino "+i);
+					}
+					comboCaminoOptimo.setEnabled(true);
+				
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				}
+			}				
+		});		
+		comboCaminoOptimo.addActionListener(new ActionListener(){
+				
+				@Override
+			public void actionPerformed(ActionEvent e) {
+				btnMostrar.setEnabled(true);
+			}				
+		});
+		btnMostrar.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				for(Ruta r: caminos.get(comboCaminoOptimo.getSelectedIndex())) {
+					
+					textArea.append(r.toString());
+					textArea.append(System.getProperty("line.separator"));
+				}
+				
+				btnAgregar.setEnabled(true);		
+				
+			}	
+		});
+		btnAgregar.addActionListener(new ActionListener(){
+				
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+		}	
 	});
+		
 		
 	}
 	

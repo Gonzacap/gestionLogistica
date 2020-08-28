@@ -201,11 +201,12 @@ public class AgregarEditarPedido {
 					}
 				
 					System.out.println("Pedido creado");
-					}
-					else {
-						JOptionPane.showMessageDialog(null,"El pedido no puede estar vacio", "Datos Invalidos",JOptionPane.ERROR_MESSAGE);
-					}
+					frame.dispose();
 				}
+				else {
+						JOptionPane.showMessageDialog(null,"El pedido no puede estar vacio", "Datos Invalidos",JOptionPane.ERROR_MESSAGE);
+				}
+			}
 				
 		});
 		
