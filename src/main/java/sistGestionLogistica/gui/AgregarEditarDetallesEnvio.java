@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Vector;
 
 import excepciones.DatosInvalidosException;
+import excepciones.PedidoCanceladoException;
 import sistGestionLogistica.controller.*;
 import sistGestionLogistica.dao.*;
 import sistGestionLogistica.dominio.*;
@@ -33,17 +34,18 @@ public class AgregarEditarDetallesEnvio {
 	private JButton btnCalcular;
 	private JButton btnMostrar;
 	private JButton btnAgregar;
-	//private ArrayList<ItemDetalle> items ;
 	//private Vector<Integer> plantaID;
-	//private Vector<String> plantaLbl;
+	private ArrayList<Planta> lista;
+	private Vector<String> plantaLbl;
 	private Integer alto;
 	private Integer ancho;
+	private Integer nroPedido;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarEditarDetallesEnvio window = new AgregarEditarDetallesEnvio();
+					AgregarEditarDetallesEnvio window = new AgregarEditarDetallesEnvio(-1);
 					//window.agregar();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -53,8 +55,9 @@ public class AgregarEditarDetallesEnvio {
 		});
 	}
 
-	public AgregarEditarDetallesEnvio() {
+	public AgregarEditarDetallesEnvio(Integer nro) {
 		//super();
+		this.nroPedido = nro;
 		inicializar();
 	}
 	
@@ -78,24 +81,31 @@ public class AgregarEditarDetallesEnvio {
 		frame.setVisible(true);
 		
 		//----------string para el combo box-------
-		/*
-		Planta p= new Planta(-1,"");
-		ServicePlanta ser = new ServicePlanta();
 		
-		ArrayList<Planta> lista =  (ArrayList<Planta>) ser.buscarPlanta(p);
-		this.plantaID= new Vector<>();
-		this.plantaLbl= new Vector<>();
+		EnvioController ec = new EnvioController();
 		
-		for(int i = 0; i < lista.size(); i++){
+		try {
+			this.lista = (ArrayList<Planta>) ec.plantasConStock(this.nroPedido);
+			this.plantaLbl= new Vector<String>();
 			
-			plantaLbl.add(lista.get(i).getId()+" - "+lista.get(i).getNombre());
-			plantaID.add(lista.get(i).getId());
+			for(int i = 0; i < lista.size(); i++){
+				
+				plantaLbl.add(lista.get(i).getId()+" - "+lista.get(i).getNombre());
+			}
 			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+		} catch (PedidoCanceladoException e1) {
+			
+			btnCalcular.setEnabled(false);
+			btnMostrar.setEnabled(false);
+			btnAgregar.setEnabled(false);
+			JOptionPane.showMessageDialog(null,"No hay planta con stock para realizar el pedido", "Stock insuficiente",JOptionPane.ERROR_MESSAGE);
+			//e1.printStackTrace();
 		}
-		System.out.print("\n");
-		*/
-		//--------------
 		
+		//--------------
 		
 		plantas = new JComboBox<String>();
 		plantas.setBounds(200, 25, 120, 20);
@@ -126,9 +136,14 @@ public class AgregarEditarDetallesEnvio {
 		panel.add(btnMostrar);
 		panel.add(btnAgregar);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(ancho, 3*(alto/2), (3*ancho), (alto));
+		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(ancho, 3*(alto/2), (3*ancho), (alto));
-		panel.add(textArea);
+		
+		scrollPane.add(textArea);
+		panel.add(scrollPane);
 
 		btnMostrar.addActionListener(new ActionListener(){
 				

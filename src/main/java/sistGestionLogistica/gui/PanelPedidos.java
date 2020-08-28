@@ -26,7 +26,7 @@ public class PanelPedidos extends JPanel {
 	private JButton btnAlta;
 	private JButton btnBaja;
 	private JButton btnEditar;
-	private JButton btnAgregarStock;
+	private JButton btnAgregarEnvio;
 	private JButton btnDetalles;
 	
 
@@ -57,19 +57,19 @@ public class PanelPedidos extends JPanel {
 		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
 		btnEditar = new JButton("Editar");
 		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
-		btnAgregarStock = new JButton("Finalizar Pedido");
-		btnAgregarStock.setBounds((anchoP+3*110), (altoP/5), 90, 25);
+		btnAgregarEnvio = new JButton("Finalizar Pedido");
+		btnAgregarEnvio.setBounds((anchoP+3*110), (altoP/5), 90, 25);
 		btnDetalles = new JButton("Ver detalles");
 		btnDetalles.setBounds((anchoP+4*110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
 		panel.add(btnBaja);
 		panel.add(btnEditar);
-		panel.add(btnAgregarStock);
+		panel.add(btnAgregarEnvio);
 		panel.add(btnDetalles);
 		
 		btnEditar.setEnabled(false);
-		btnAgregarStock.setEnabled(false);
+		btnAgregarEnvio.setEnabled(false);
 		btnDetalles.setEnabled(false);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -188,6 +188,13 @@ public class PanelPedidos extends JPanel {
 			
 
 		});
+		btnAgregarEnvio.addActionListener(e-> {	//AccionAgregarDetEnvio
+		
+			System.out.println("Pedidos -> Editar Pedido");
+
+			AgregarEditarDetallesEnvio ade = new AgregarEditarDetallesEnvio(nroAux);
+
+		});
 		btnBuscar.addActionListener(new AccionBuscar());
 	
 	//---------accion click-------
@@ -200,7 +207,7 @@ public class PanelPedidos extends JPanel {
 			
 			if(fila>-1) {
 				nroAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
-				btnAgregarStock.setEnabled(true);
+				btnAgregarEnvio.setEnabled(true);
 				btnEditar.setEnabled(true);
 				btnDetalles.setEnabled(true);
 			}
@@ -219,7 +226,7 @@ public class PanelPedidos extends JPanel {
 			 
 			 System.out.println("Pedido -> Buscar-Actualizar");
 			 
-			btnAgregarStock.setEnabled(false);
+			 btnAgregarEnvio.setEnabled(false);
 			btnEditar.setEnabled(false);
 			btnDetalles.setEnabled(false);
 			 
