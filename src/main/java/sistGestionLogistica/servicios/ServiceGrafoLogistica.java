@@ -262,6 +262,7 @@ public class ServiceGrafoLogistica {
 		}
 		
 		if(hayCamino) {
+			System.out.println("se encontraron "+salida.size()+" caminos");
 			return salida;
 		}
 		else {
