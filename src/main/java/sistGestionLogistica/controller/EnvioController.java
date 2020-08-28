@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import excepciones.DatosInvalidosException;
 import excepciones.PedidoCanceladoException;
 import sistGestionLogistica.dominio.EnvioDetalle;
 import sistGestionLogistica.dominio.GrafoLogistica;
@@ -21,6 +22,25 @@ import sistGestionLogistica.servicios.ServicePlanta;
 import sistGestionLogistica.servicios.ServiceStockInsumo;
 
 public class EnvioController {
+	
+   
+	public void agregarEnvio(String numOrden, List<Ruta> camino) throws SQLException, DatosInvalidosException {
+		
+		Integer numeroOrden=-1;
+		numeroOrden= Integer.valueOf(numOrden);
+		ServiceEnvioDetalle sed = new ServiceEnvioDetalle();
+		
+		
+		if(numeroOrden>0 ) {
+			EnvioDetalle envio = new EnvioDetalle(numeroOrden, sed.asignarCamion(), camino);
+			sed.registrarItem(envio);
+			
+		}else throw new DatosInvalidosException("Error ");
+		
+		
+		
+		
+	}
 	
 	public String[][] buscarItems(String numOrden ) throws SQLException{
 		Integer numeroOrden = Integer.valueOf(numOrden);
