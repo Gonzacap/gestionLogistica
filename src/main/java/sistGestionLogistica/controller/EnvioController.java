@@ -26,7 +26,7 @@ public class EnvioController {
 		
 		return this.aMatriz(sed.buscarPorNumOrden(numeroOrden));
 	}
-	
+	// rutasOptimas acepta solo "KILOMETRO" o "TIEMPO"
 	public ArrayList<ArrayList<Ruta>> calcularCaminos(Integer numOrden,Integer idPlanta, String rutasOptimas) throws SQLException{
 		ArrayList<ArrayList<Ruta>> lista = new ArrayList<ArrayList<Ruta>>();
 		ServicePedido spedido= new ServicePedido();
