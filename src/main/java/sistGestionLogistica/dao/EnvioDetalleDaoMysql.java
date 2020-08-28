@@ -13,6 +13,7 @@ import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.EnvioDetalle;
 import sistGestionLogistica.dominio.Ruta;
 import sistGestionLogistica.servicios.ServiceCamion;
+import sistGestionLogistica.servicios.ServiceRuta;
 
 
 public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
@@ -23,6 +24,8 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 	@Override
 	public Boolean save(EnvioDetalle envio) throws SQLException {
 		String insert = "INSERT INTO enviodetalle(numOrden,camionAsignado,costoEnvio) VALUES(?,?,?) ";
+		ServiceCamion sc = new ServiceCamion();
+		ServiceRuta sr = new ServiceRuta();
 		try {
 
 			con = DB.getConexion();
@@ -33,6 +36,7 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 			ps.setInt(2, envio.getCamionAsignado().getId() );
 			ps.setDouble(3, envio.getCostoEnvio());
 			
+			
 			if(envio.getRutaAsignada() !=  null) {
 				for(int i=0; i< envio.getRutaAsignada().size(); i++) {
 					//guardamos la ruta asignada ordenada
@@ -40,8 +44,11 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 				}
 			}
 			
+			sc.sumarKM(envio.getCamionAsignado().getId(), sr.kilometrosRuta(envio.getRutaAsignada()).intValue());
 		
 			ps.executeUpdate();
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 
