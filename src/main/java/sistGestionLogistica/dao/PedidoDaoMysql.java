@@ -99,6 +99,7 @@ public class PedidoDaoMysql implements PedidoDao{
 		String buscar = "SELECT * FROM pedido WHERE numOrden = ?";
 		Pedido pe = new Pedido();
 		 ServicePlanta sp = new ServicePlanta();
+		 ItemDetalleDao daoItem = new ItemDetalleDaoMysql();
 		pe.setNumOrden(-1);
 		try {
 			conn = DB.getConexion();
@@ -112,6 +113,7 @@ public class PedidoDaoMysql implements PedidoDao{
 				pe.setFechaSolicitud(rs.getDate("fechaSolicitud").toLocalDate());
 				pe.setFechaEntrega((rs.getDate("fechaEntrega").toLocalDate()));
 				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
+				pe.setItem(daoItem.buscarNumOrden(pe.getNumOrden()));
 			}
 			
 		} catch (Exception e) {
