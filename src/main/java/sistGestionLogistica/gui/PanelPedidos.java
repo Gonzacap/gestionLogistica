@@ -23,6 +23,12 @@ public class PanelPedidos extends JPanel {
 	private JComboBox<String> comboEstado;
 	private String[] estadospedido = {"CREADA","PROCESADA","ENTREGADA","CANCELADA"};
 	private Integer nroAux;
+	private JButton btnAlta;
+	private JButton btnBaja;
+	private JButton btnEditar;
+	private JButton btnAgregarStock;
+	private JButton btnDetalles;
+	
 
 	public PanelPedidos() {
 
@@ -45,15 +51,15 @@ public class PanelPedidos extends JPanel {
 		
 		//---------Botones-----------------
 		
-		JButton btnAlta = new JButton("Crear Pedido");
+		btnAlta = new JButton("Crear Pedido");
 		btnAlta.setBounds((anchoP), (altoP/5), 90, 25);
-		JButton btnBaja = new JButton("Baja");
+		btnBaja = new JButton("Baja");
 		btnBaja.setBounds((anchoP+110), (altoP/5), 90, 25);
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds((anchoP+2*110), (altoP/5), 90, 25);
-		JButton btnAgregarStock = new JButton("Finalizar Pedido");
+		btnAgregarStock = new JButton("Finalizar Pedido");
 		btnAgregarStock.setBounds((anchoP+3*110), (altoP/5), 90, 25);
-		JButton btnDetalles = new JButton("Ver detalles");
+		btnDetalles = new JButton("Ver detalles");
 		btnDetalles.setBounds((anchoP+4*110), (altoP/5), 90, 25);
 		
 		panel.add(btnAlta);
@@ -212,6 +218,10 @@ public class PanelPedidos extends JPanel {
 		 public void actionPerformed(ActionEvent e) {
 			 
 			 System.out.println("Pedido -> Buscar-Actualizar");
+			 
+			btnAgregarStock.setEnabled(false);
+			btnEditar.setEnabled(false);
+			btnDetalles.setEnabled(false);
 			 
 			 PedidoController pc= new PedidoController();
 			 

@@ -92,12 +92,6 @@ public class AgregarEditarPedido {
 		System.out.print("\n");
 		//--------------
 		
-		numOrden = new JTextField();
-		numOrden.setBounds(200, 25, 120, 20);
-		plantas = new JComboBox<String>(plantaLbl);
-		plantas.setBounds(200, 50, 120, 20);
-		FechaMaxEntrega = new JTextField("31/12/2020");
-		FechaMaxEntrega.setBounds(200, 75, 120, 20);
 		JLabel lblNumOrden = new JLabel("Numero de Orden");
 		lblNumOrden.setBounds(25, 25, 150, 20);
 		JLabel lblPlantas = new JLabel("Plantas");
@@ -105,14 +99,11 @@ public class AgregarEditarPedido {
 		JLabel lblFecha = new JLabel("Fecha maxima de entrega");
 		lblFecha.setBounds(25, 75, 150, 20);
 		
-		panel.add(numOrden);
 		panel.add(lblNumOrden);
-		panel.add(plantas);
-		panel.add(FechaMaxEntrega);
 		panel.add(lblPlantas);
 		panel.add(lblFecha);
 		
-		//-------------------
+		//--------------
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(ancho, 3*(alto/2), (3*ancho), (alto));
@@ -151,6 +142,19 @@ public class AgregarEditarPedido {
 		frame.setTitle("Crear Pedido");
 		frame.setVisible(true);
 		
+		numOrden = new JTextField();
+		numOrden.setBounds(200, 25, 120, 20);
+		plantas = new JComboBox<String>(plantaLbl);
+		plantas.setBounds(200, 50, 120, 20);
+		FechaMaxEntrega = new JTextField("31/12/2020");
+		FechaMaxEntrega.setBounds(200, 75, 120, 20);
+		
+		panel.add(numOrden);
+		panel.add(plantas);
+		panel.add(FechaMaxEntrega);
+		
+		//-------------
+		
 		JButton btnAgregar = new JButton("Agregar Items");
 		btnAgregar.setBounds(50, 110, 120, 20);
 		panel.add(btnAgregar);
@@ -182,22 +186,27 @@ public class AgregarEditarPedido {
 			
 				System.out.println("Creando pedido");
 				
-				for(ItemDetalle i: items) {
-					i.setNumOrden(Integer.valueOf(numOrden.getText()));				
-				}
-				
-				PedidoController pc = new PedidoController();
-				try {
-					pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
+				if(items!=null) {
+					for(ItemDetalle i: items) {
+						i.setNumOrden(Integer.valueOf(numOrden.getText()));				
+					}
 					
+					PedidoController pc = new PedidoController();
+					try {
+						pc.crearPedido(numOrden.getText(), plantaID.get(plantas.getSelectedIndex()).toString(), FechaMaxEntrega.getText(), items);
+						
+					} catch (SQLException | DatosInvalidosException e1) {
+						// TODO Auto-generated catch block
+						//e1.printStackTrace();
+					}
 				
-				} catch (SQLException | DatosInvalidosException e1) {
-					// TODO Auto-generated catch block
-					//e1.printStackTrace();
+					System.out.println("Pedido creado");
+					}
+					else {
+						JOptionPane.showMessageDialog(null,"El pedido no puede estar vacio", "Datos Invalidos",JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				
-				System.out.println("Pedido creado");
-			}				
 		});
 		
 		
@@ -208,13 +217,16 @@ public class AgregarEditarPedido {
 		frame.setTitle("Detalles del Pedido");
 		frame.setVisible(true);
 		
-		panel.remove(plantas);
-		panel.remove(numOrden);
-		
 		JLabel numOrden = new JLabel(p.getNumOrden().toString());
 		numOrden.setBounds(200, 25, 120, 20);
 		JLabel nomPlanta = new JLabel(p.getPlantaDestino().getNombre());
 		nomPlanta.setBounds(200, 50, 120, 20);
+		JLabel fechaEntrega = new JLabel(p.getFechaEntrega().toString());
+		fechaEntrega.setBounds(200, 75, 120, 20);
+		
+		panel.add(numOrden);
+		panel.add(nomPlanta);
+		panel.add(fechaEntrega);
 		
 		ServiceItemDetalle sid = new ServiceItemDetalle ();
 		this.items = (ArrayList<ItemDetalle>) sid.buscarPorNumOrden(p.getNumOrden());

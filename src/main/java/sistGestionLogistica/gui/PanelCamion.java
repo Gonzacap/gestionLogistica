@@ -33,6 +33,7 @@ public class PanelCamion extends JPanel {
 
 	public void inicializar(App aplicacion) { //App seria el JFrame
 		aplicacion.setTitle("Sistema de Gestion Logistica - Camiones");		
+
 		
 		PanelCamion panel = new PanelCamion();
 		panel.setLayout(null);
