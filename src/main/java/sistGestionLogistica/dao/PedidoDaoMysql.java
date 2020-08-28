@@ -100,6 +100,7 @@ public class PedidoDaoMysql implements PedidoDao{
 		Pedido pe = new Pedido();
 		 ServicePlanta sp = new ServicePlanta();
 		 ItemDetalleDao daoItem = new ItemDetalleDaoMysql();
+		    EnvioDetalleDao daoEnvio = new EnvioDetalleDaoMysql();
 		pe.setNumOrden(-1);
 		try {
 			conn = DB.getConexion();
@@ -113,7 +114,8 @@ public class PedidoDaoMysql implements PedidoDao{
 				pe.setFechaSolicitud(rs.getDate("fechaSolicitud").toLocalDate());
 				pe.setFechaEntrega((rs.getDate("fechaEntrega").toLocalDate()));
 				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
-				pe.setItem(daoItem.buscarNumOrden(pe.getNumOrden()));
+				pe.setItem(daoItem.buscarNumOrden(rs.getInt("numOrden")));
+				pe.setEnvio(daoEnvio.buscarNumOrden(rs.getInt("numOrden")));
 			}
 			
 		} catch (Exception e) {
@@ -139,6 +141,7 @@ public class PedidoDaoMysql implements PedidoDao{
 		ServicePlanta sp = new ServicePlanta();
 	    List<Pedido> lista = new ArrayList<Pedido>();
 	    ItemDetalleDao daoItem = new ItemDetalleDaoMysql();
+	    EnvioDetalleDao daoEnvio = new EnvioDetalleDaoMysql();
 	    
 		try {
 			conn = DB.getConexion();
@@ -153,8 +156,8 @@ public class PedidoDaoMysql implements PedidoDao{
 				pe.setFechaSolicitud(rs.getDate("fechaSolicitud").toLocalDate());
 				pe.setFechaEntrega((rs.getDate("fechaEntrega").toLocalDate()));
 				pe.setEstado(EstadoPedido.valueOf(rs.getString("estado")));
-				pe.setItem(daoItem.buscarNumOrden(pe.getNumOrden()));
-				
+				pe.setItem(daoItem.buscarNumOrden(rs.getInt("numOrden")));
+				pe.setEnvio(daoEnvio.buscarNumOrden(rs.getInt("numOrden")));
 				lista.add(pe);
 			}
 			

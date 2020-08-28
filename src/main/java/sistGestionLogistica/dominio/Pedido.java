@@ -1,7 +1,6 @@
 package sistGestionLogistica.dominio;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import sistGestionLogistica.enums.EstadoPedido;
@@ -14,7 +13,7 @@ public class Pedido {
   private LocalDate fechaEntrega;
   private List<ItemDetalle> item; 
   private EstadoPedido estado;
-  private EnvioDetalle detalles;
+  private EnvioDetalle envio;
   
   public Pedido() {
 	  
@@ -104,6 +103,20 @@ public EstadoPedido getEstado() {
 
 public void setEstado(EstadoPedido estado) {
 	this.estado = estado;
+}
+
+
+
+
+public EnvioDetalle getEnvio() {
+	return this.envio;
+}
+
+
+
+
+public void setEnvio(EnvioDetalle envio) {
+	this.envio = envio;
 }
 
   
