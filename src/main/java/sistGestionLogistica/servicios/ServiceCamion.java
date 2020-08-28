@@ -60,16 +60,7 @@ public class ServiceCamion {
 		
 	}
 	
-	public PriorityQueue<Camion> obtenerColaCamiones() throws SQLException{
-		Comparator<Camion> comparator = new CompareCamion();
-		PriorityQueue<Camion> cola= new PriorityQueue<Camion>(comparator);
-		List<Camion> lista = this.buscarCamion(new Camion(-1,"","","",-1.0,-1.0,-1,LocalDate.MIN));
-		
-		for(Camion c : lista) {
-			cola.add(c);
-		}
-		return cola;
-	}
+
 	public List<Camion> buscarCamion(Camion cam) throws SQLException {
 		
 		//inicializamos predicados

@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import sistGestionLogistica.connection.DB;
+import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.dominio.EnvioDetalle;
 import sistGestionLogistica.dominio.Ruta;
 import sistGestionLogistica.servicios.ServiceCamion;
@@ -224,5 +226,42 @@ public class EnvioDetalleDaoMysql implements EnvioDetalleDao {
 		
 		return lista;
 	}
-
+  
+	public List<Camion> camionesAsignados(){
+		String camiones = "SELECT camionAsignado FROM enviodetalle e , pedido p "
+				+ "WHERE e.numOrden=p.numOrden "
+				+ "AND  p.estado = 'PROCESADA' ";
+		List<Camion> lista = new ArrayList<Camion>();
+		ServiceCamion sc = new ServiceCamion();
+		
+		try {
+			con = DB.getConexion();
+			ps = con.prepareStatement(camiones);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				
+			Camion c = new Camion();
+			c= sc.buscarPorId(rs.getInt("camionAsignado"));
+				lista.add(c);
+			}
+			
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		finally {
+			try {
+				if(ps!=null) ps.close();
+				if(con!=null) con.close();				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return lista;
+		
+		
+	}
+		
+	
 }

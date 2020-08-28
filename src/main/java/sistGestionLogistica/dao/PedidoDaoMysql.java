@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sistGestionLogistica.connection.DB;
-import sistGestionLogistica.dominio.Camion;
-import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.dominio.Pedido;
 import sistGestionLogistica.enums.EstadoPedido;
 import sistGestionLogistica.servicios.ServicePlanta;

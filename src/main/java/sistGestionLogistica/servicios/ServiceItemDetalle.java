@@ -2,7 +2,6 @@ package sistGestionLogistica.servicios;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import sistGestionLogistica.dao.ItemDetalleDao;
 import sistGestionLogistica.dao.ItemDetalleDaoMysql;
 import sistGestionLogistica.dominio.ItemDetalle;
@@ -27,7 +26,7 @@ public class ServiceItemDetalle {
 		public List<ItemDetalle> buscarTodos() throws SQLException{
 			return this.itemDao.buscarTodos();
 		}
-			
+	
 		
 		
 }
