@@ -89,7 +89,7 @@ public class ItemDetalleDaoMysql implements ItemDetalleDao {
 		List<ItemDetalle> lista = new ArrayList<ItemDetalle>();
 		
 		ServiceInsumo si = new ServiceInsumo();
-		item.setNumOrden(-1);
+		
 		try {
 			conn = DB.getConexion();
 			pstmt = conn.prepareStatement(buscar);
