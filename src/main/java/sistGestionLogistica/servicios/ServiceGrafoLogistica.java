@@ -140,10 +140,12 @@ public class ServiceGrafoLogistica {
 		return ady;
 	}
 	
-	public ArrayList<Ruta> caminoMinimoTiempo(GrafoLogistica graph, Planta inicio, Planta fin){
+	public ArrayList<ArrayList<Ruta>> caminoMinimoTiempo(GrafoLogistica graph, Planta inicio, Planta fin){
 		
 		PriorityQueue<Estado> cola = new PriorityQueue(1,new CompareRutas()); // La cola de prioridad.
 		Vector<Planta> marcado = new Vector(graph.getListaPlanta().size()); // Este arreglo nos permitira determinar los nodos procesados.
+		ArrayList<ArrayList<Ruta>> salida = new ArrayList<ArrayList<Ruta>>();
+		Boolean hayCamino = false;
 		
 		System.out.println("dijkstra tiempo - camino minimo");
 		
@@ -158,7 +160,11 @@ public class ServiceGrafoLogistica {
 			
 			//System.out.println(e.getActual().getNombre());
 			
-			if (e.getPlanta().equals(fin)) return e.getCamino() ; // Retornamos el caminino, hemos llegado al nodo destino.
+			//if (e.getPlanta().equals(fin)) return e.getCamino() ; // Retornamos el caminino, hemos llegado al nodo destino.
+			if (e.getPlanta().equals(fin)) {
+				salida.add(e.getCamino()); //retorno una lisata de caminos
+				hayCamino = true;
+			}
 			
 			adyacencias = this.adyacenciasT(graph, e.getPlanta()); // hacer un metodo que retorne la lista de rutas salientes de una planta
 			
@@ -182,14 +188,21 @@ public class ServiceGrafoLogistica {
 			
 		}
 		
-		System.out.println("no hay camino");
-		return null; // Si no se puede llegar al destino, retornar null;	
+		if(hayCamino) {
+			return salida;
+		}
+		else {
+			System.out.println("no encontro camino");
+			return null; // Si no se puede llegar al destino, retornar null;
+		}
 	}
 	
-	public ArrayList<Ruta> caminoMinimoKm(GrafoLogistica graph, Planta inicio, Planta fin){
+	public ArrayList<ArrayList<Ruta>> caminoMinimoKm(GrafoLogistica graph, Planta inicio, Planta fin){
 		
 		PriorityQueue<Estado> cola = new PriorityQueue(1,new CompareRutas()); // La cola de prioridad.
 		Vector<Planta> marcado = new Vector(graph.getListaPlanta().size()); // Este arreglo nos permitira determinar los nodos procesados.
+		ArrayList<ArrayList<Ruta>> salida = new ArrayList<ArrayList<Ruta>>();
+		Boolean hayCamino = false;
 		
 		System.out.println("dijkstra km - camino minimo");
 		
@@ -202,7 +215,11 @@ public class ServiceGrafoLogistica {
 			Estado e = cola.poll(); // Se desencola el elemento minimo.
 			marcado.add(e.getPlanta()); // Se marca el nodo como visitado.
 			
-			if (e.getPlanta().equals(fin))	return e.getCamino() ; // Retornamos el caminino?, hemos llegado al nodo destino.
+			//if (e.getPlanta().equals(fin))	return e.getCamino() ; // Retornamos el caminino?, hemos llegado al nodo destino.
+			if (e.getPlanta().equals(fin)) {
+				salida.add(e.getCamino()); //retorno una lisata de caminos
+				hayCamino = true;
+			}
 			
 			adyacencias = this.adyacenciasKm(graph, e.getPlanta()); // hacer un metodo que retorne la lista de rutas salientes de una planta
 			
@@ -226,8 +243,13 @@ public class ServiceGrafoLogistica {
 			
 		}
 		
-		System.out.println("no encontro camino");
-		return null; // Si no se puede llegar al destino, retornar null;
+		if(hayCamino) {
+			return salida;
+		}
+		else {
+			System.out.println("no encontro camino");
+			return null; // Si no se puede llegar al destino, retornar null;
+		}
 	}
 
 }

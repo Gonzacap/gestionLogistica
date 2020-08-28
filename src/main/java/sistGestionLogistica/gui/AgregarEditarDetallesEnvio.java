@@ -19,12 +19,13 @@ import sistGestionLogistica.servicios.ServiceInsumo;
 import sistGestionLogistica.servicios.ServicePlanta;
 
 
-public class AgregarEditarPedido2 {
+public class AgregarEditarDetallesEnvio {
 
 	private JTextField numOrden;
 	private JFrame frame;
 	private JPanel panel;
 	private JComboBox<String> plantas;
+	private JComboBox<String> comboRecorridoPor;
 	private JTextField FechaMaxEntrega;
 	private Integer alto;
 	private Integer ancho;
@@ -37,7 +38,7 @@ public class AgregarEditarPedido2 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarEditarPedido2 window = new AgregarEditarPedido2();
+					AgregarEditarDetallesEnvio window = new AgregarEditarDetallesEnvio();
 					window.agregar();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -47,7 +48,7 @@ public class AgregarEditarPedido2 {
 		});
 	}
 
-	public AgregarEditarPedido2() {
+	public AgregarEditarDetallesEnvio() {
 		//super();
 		inicializar();
 	}
