@@ -79,6 +79,8 @@ public class AgregarEditarDetallesEnvio {
 		panel.setVisible(true);
 		
 		frame.setTitle("Agregar Detalles Envio");
+		JOptionPane.showMessageDialog(null,
+				"Seleccione planta y recorrido para calcular el camino", "Atencion!",JOptionPane.INFORMATION_MESSAGE);
 		frame.setVisible(true);
 		frame.revalidate();
 		frame.repaint();
@@ -174,18 +176,26 @@ public class AgregarEditarDetallesEnvio {
 				EnvioController ec = new EnvioController();
 				
 				try {
-					comboCaminoOptimo.removeAll();
+					comboCaminoOptimo.removeAllItems();
 					
 					caminos = new ArrayList<ArrayList<Ruta>>(ec.calcularCaminos(nroPedido,lista.get(comboPlantas.getSelectedIndex()).getId(), comboRecorridoPor.getSelectedItem().toString()));
 					
-					for(Integer i=1; i<=caminos.size(); i++) {
-						//caminosLbl.add("camino "+i.toString());
-						comboCaminoOptimo.addItem("camino "+i.toString());
+					if(caminos.isEmpty()) {
+						JOptionPane.showMessageDialog(null,
+								"No hay camino a recorrer para llegar a la planta de destino", "Atencion!",JOptionPane.INFORMATION_MESSAGE);
 					}
+					else {
+						
 					
-					comboCaminoOptimo.setEnabled(true);
-					//frame.revalidate();
-					//frame.repaint();
+						for(Integer i=1; i<=caminos.size(); i++) {
+							//caminosLbl.add("camino "+i.toString());
+							comboCaminoOptimo.addItem("camino "+i.toString());
+						}
+					
+						comboCaminoOptimo.setEnabled(true);
+						frame.revalidate();
+						//frame.repaint();
+					}
 				
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -222,11 +232,13 @@ public class AgregarEditarDetallesEnvio {
 				EnvioController ec = new EnvioController();
 				try {
 					ec.agregarEnvio(nroPedido.toString(),(List<Ruta>) caminos.get(comboCaminoOptimo.getSelectedIndex()));
+					
+					//System.out.println(caminos.get(comboCaminoOptimo.getSelectedIndex()).size());
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					//e1.printStackTrace();
+					//TODO Auto-generated catch block
+					e1.printStackTrace();
 				} catch (DatosInvalidosException e1) {
-					// TODO Auto-generated catch block
+					//TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		}	

@@ -19,8 +19,9 @@ import sistGestionLogistica.dominio.ItemDetalle;
 import sistGestionLogistica.enums.UnidadMedida;
 import sistGestionLogistica.servicios.ServiceInsumo;
 
-public class AgregarEditarInsumosAPedido extends JFrame{
+public class AgregarEditarInsumosAPedido {
 
+	private JFrame frame;
 	private JPanel panel;
 	private Integer alto;
 	private Integer ancho;
@@ -32,7 +33,7 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 	public static void main(String[] args) throws SQLException {
 		
 		AgregarEditarInsumosAPedido window = new AgregarEditarInsumosAPedido();
-		window.setVisible(true);
+		window.frame.setVisible(true);
 	}
 
 	public AgregarEditarInsumosAPedido(ArrayList<ItemDetalle> lista) throws SQLException{
@@ -53,17 +54,17 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		alto = 100;
 		ancho = 100;
 		
-		this.setBounds(ancho, alto, 4*ancho, 2*alto);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.getContentPane().setLayout(null);
+		frame.setBounds(ancho, alto, 4*ancho, 2*alto);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
 		panel.setBounds(0, 0, 4*ancho, 2*alto);
-		this.getContentPane().add(panel);
+		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		panel.setVisible(true);
 
-		this.setTitle("Agregar Items a pedido");
+		frame.setTitle("Agregar Items a pedido");
 		//this.setVisible(true);
 		
 		//----------string para el combo box-------
@@ -128,6 +129,7 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 						
 						btnAgregar.setEnabled(false);
 						System.out.println("Item detalle agregado");
+						frame.dispose();
 					}
 					else {
 						JOptionPane.showMessageDialog(null,"La cantidad tiene que ser mayor a cero", "Datos Incorrectos",JOptionPane.ERROR_MESSAGE);
@@ -141,6 +143,4 @@ public class AgregarEditarInsumosAPedido extends JFrame{
 		});
 		
 	}
-	
-	
 }

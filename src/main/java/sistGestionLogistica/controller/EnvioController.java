@@ -29,12 +29,13 @@ public class EnvioController {
 		Integer numeroOrden=-1;
 		numeroOrden= Integer.valueOf(numOrden);
 		ServiceEnvioDetalle sed = new ServiceEnvioDetalle();
+		ServicePedido sp = new ServicePedido();
+		
 		
 		
 		if(numeroOrden>0 ) {
 			EnvioDetalle envio = new EnvioDetalle(numeroOrden, sed.asignarCamion(), camino);
 			sed.registrarItem(envio);
-			
 		}else throw new DatosInvalidosException("Error ");
 		
 		

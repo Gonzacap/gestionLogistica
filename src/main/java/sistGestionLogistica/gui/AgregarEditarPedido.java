@@ -169,7 +169,8 @@ public class AgregarEditarPedido {
 				
 				try {
 					AgregarEditarInsumosAPedido ai = new AgregarEditarInsumosAPedido(items);
-					ai.setVisible(true);
+					//ai.setVisible(true);
+					btnActualizar.doClick();
 					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

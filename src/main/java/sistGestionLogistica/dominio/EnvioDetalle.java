@@ -17,6 +17,7 @@ public class EnvioDetalle {
 		this.numOrden = numOrden;
 		this.camionAsignado = camionAsignado;
 		this.costoEnvio = costoEnvio(rutaAsignada, camionAsignado.getCostoKM(), camionAsignado.getCostoHora()) ;
+		this.rutaAsignada = rutaAsignada;
 		
 		
 	}
