@@ -207,7 +207,7 @@ public class PanelPedidos extends JPanel {
 			if(fila>-1) {
 				nroAux = Integer.valueOf((String) table_Plantas.getValueAt(fila,0));
 				btnAgregarEnvio.setEnabled(true);
-				btnEditar.setEnabled(true);
+//				btnEditar.setEnabled(true);
 				btnDetalles.setEnabled(true);
 			}
 			
