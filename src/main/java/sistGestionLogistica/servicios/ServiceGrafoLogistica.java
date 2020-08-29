@@ -366,7 +366,7 @@ public class ServiceGrafoLogistica {
 				pgActual.set(i,this.truncateTo(auxNuevo, 6));
 			}
 			//cuando las listas sean iguales quiere decir que el algoritmo se estabilizó
-		}while(pgActual.containsAll(pgAnterior) && pgAnterior.containsAll(pgActual));
+		}while(!(pgActual.containsAll(pgAnterior) && pgAnterior.containsAll(pgActual)));
 		
 		return pgActual;
 	}
