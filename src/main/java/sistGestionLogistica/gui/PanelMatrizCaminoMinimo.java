@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 import excepciones.DatosInvalidosException;
+import sistGestionLogistica.controller.GrafoLogisticaController;
 import sistGestionLogistica.controller.PlantaController;
+import sistGestionLogistica.dominio.GrafoLogistica;
 import sistGestionLogistica.gui.PanelPlanta.AccionBuscar;
+import sistGestionLogistica.servicios.ServiceGrafoLogistica;
 import sistGestionLogistica.sistema.App;
 
 public class PanelMatrizCaminoMinimo extends JPanel {
@@ -59,13 +62,43 @@ public class PanelMatrizCaminoMinimo extends JPanel {
 		
 		//--------------------
 	
+		areaParaMatriz = new JTextArea();
+		//areaParaMatriz.setBounds(anchoP, 3*(altoP/2), (3*anchoP), (altoP));
+		areaParaMatriz.setBounds((anchoP), (4*altoP), (6*anchoP), (4*altoP));
+		panel.add(areaParaMatriz);
+		
 		//--------Acciones Botones--------------	
 		
 		btnActualizar.addActionListener(e-> {	//AccionAlta
 			
+			try {
 			System.out.println("Matriz -> Visualizar");
 			
+			GrafoLogisticaController gc = new GrafoLogisticaController();
 			
+			Double[][] mkm = gc.matPorKm();		
+			Double[][] mt = gc.matPorTiempo();
+			 
+			areaParaMatriz.append("Matriz por Km");
+			areaParaMatriz.append(System.getProperty("line.separator"));
+			areaParaMatriz.append(System.getProperty("line.separator"));
+			
+			for(int i=0; i<mkm.length;i++) {
+				
+				for(int j=0; j<mkm[i].length;j++) {
+					areaParaMatriz.append((mkm[i][j]).toString()+"  ");
+					
+				}
+				areaParaMatriz.append(System.getProperty("line.separator"));
+			}
+			areaParaMatriz.append(System.getProperty("line.separator"));
+			
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//aplicacion.revalidate();
+			//aplicacion.repaint();
 		});
 
 	

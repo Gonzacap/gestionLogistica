@@ -64,7 +64,7 @@ public class GrafoLogisticaController {
 		return sg.matrizKilometros(graf);
 	}
 	
-	public Double[][] matPorTiempo(GrafoLogistica grafo) throws SQLException {
+	public Double[][] matPorTiempo() throws SQLException {
 		
 		ServiceGrafoLogistica sg = new ServiceGrafoLogistica();
 		GrafoLogistica graf = sg.inicializarGrafo(); 
