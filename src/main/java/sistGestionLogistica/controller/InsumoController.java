@@ -112,11 +112,11 @@ public class InsumoController {
 		if(!idInsumo.isBlank()) id=Integer.valueOf(idInsumo);
 		if(!descripcion.isBlank()) descripcion = descripcion.toUpperCase();
 		
-		//creamos el modelo del camion a buscar
+		//creamos el modelo del insumo a buscar
 		Insumo ins= new InsumoLiquido(id,descripcion,-1.0,-1.0,UnidadMedida.KG,-1.0);
 		ServiceInsumo ser = new ServiceInsumo();
 				
-		//buscamos los camiones que coincidan con la busqueda y los devolvemos como matriz de string
+		//buscamos los insumos que coincidan con la busqueda y los devolvemos como matriz de string
 		return this.aMatriz(ser.buscarInsumo(ins));
 		
 		

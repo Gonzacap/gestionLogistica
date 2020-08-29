@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-08-2020 a las 01:45:02
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.5
+-- Tiempo de generación: 29-08-2020 a las 07:15:21
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.2.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,9 +52,9 @@ INSERT INTO `camion` (`ID`, `PATENTE`, `MARCA`, `MODELO`, `KM`, `COSTO_KM`, `COS
 (15, '126ABC', 'FIAT', 'CARGO', 112, '50.00', '50.00', '2017-04-12'),
 (16, '123456', '23456', '23456', 123, '12.00', '12.00', '1912-12-12'),
 (19, 'GONZALITU', '123123', '123', 123, '123.00', '123.00', '1999-12-12'),
-(22, '12345678YTV', 'TOYOTA', 'YKC', 91, '12.00', '12.00', '1999-12-12'),
+(22, '12345678YTV', 'TOYOTA', 'YKC', 123, '12.00', '12.00', '1999-12-12'),
 (23, 'ASL456', 'EDITANDO', 'K', 200, '100.00', '135.00', '2019-12-22'),
-(24, '123XYZ', 'FIAT', 'CARGO', 87, '100.00', '100.00', '2019-10-22'),
+(24, '123XYZ', 'FIAT', 'CARGO', 82, '100.00', '100.00', '2019-10-22'),
 (25, '2345', 'HONDA', 'ALGO', 123, '123.00', '123.00', '1992-12-12'),
 (27, '11112222', 'XIAOMI', 'REDMI', 123, '123.00', '123.00', '1999-12-12');
 
@@ -78,9 +78,9 @@ CREATE TABLE `enviodetalle` (
 
 INSERT INTO `enviodetalle` (`idEnvio`, `numOrden`, `camionAsignado`, `costoEnvio`, `plantaOrigen`) VALUES
 (10, 1111, 15, 4750, 3),
-(11, 1234, 24, 6800, 3),
-(12, 1234, 22, 816, 3),
-(13, 547, 14, 8088.8, 3);
+(11, 6, 24, 1400, 4),
+(12, 9, 22, 1584, 5),
+(13, 33, 14, 8088.8, 3);
 
 -- --------------------------------------------------------
 
@@ -170,8 +170,18 @@ CREATE TABLE `itemdetalle` (
 
 INSERT INTO `itemdetalle` (`idDetalle`, `numOrden`, `insumo`, `cantidad`, `precioItem`) VALUES
 (13, 1111, 1, 50, 2500),
-(14, 1234, 1, 1, 50),
-(15, 547, 1, 2, 100);
+(14, 76, 1, 20, 1000),
+(15, 76, 3, 2, 48),
+(16, 5, 1, 20, 1000),
+(17, 6, 1, 30, 1500),
+(18, 9, 3, 30, 720),
+(19, 11, 6, 20, 960),
+(20, 23, 1, 1400, 70000),
+(21, 23, 2, 1400, 32200),
+(22, 23, 4, 1400, 63000),
+(23, 27, 6, 1, 48),
+(24, 29, 2, 2, 46),
+(25, 33, 1, 10, 500);
 
 -- --------------------------------------------------------
 
@@ -192,9 +202,16 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`numOrden`, `plantaDestino`, `fechaSolicitud`, `fechaEntrega`, `estado`) VALUES
-(547, 1, '2020-08-28', '2020-12-31', 'PROCESADA'),
-(1111, 2, '2020-08-28', '2020-12-31', 'ENTREGADA'),
-(1234, 1, '2020-08-28', '2020-12-31', 'PROCESADA');
+(5, 10, '2020-08-29', '2020-12-31', 'CREADA'),
+(6, 2, '2020-08-29', '2020-12-31', 'PROCESADA'),
+(9, 6, '2020-08-29', '2020-12-31', 'PROCESADA'),
+(11, 10, '2020-08-29', '2020-12-31', 'CREADA'),
+(23, 5, '2020-08-29', '2020-12-31', 'CANCELADA'),
+(27, 8, '2020-08-29', '2020-12-31', 'CREADA'),
+(29, 2, '2020-08-29', '2020-12-31', 'CANCELADA'),
+(33, 1, '2020-08-29', '2020-12-31', 'ENTREGADA'),
+(76, 2, '2020-08-29', '2020-07-12', 'CREADA'),
+(1111, 2, '2020-08-28', '2020-12-31', 'ENTREGADA');
 
 -- --------------------------------------------------------
 
@@ -214,9 +231,11 @@ CREATE TABLE `pertenecea` (
 
 INSERT INTO `pertenecea` (`idRuta`, `numOrden`, `orden`) VALUES
 (1, 1111, 1),
-(2, 547, 0),
+(2, 33, 0),
 (2, 1111, 0),
-(2, 1234, 0);
+(4, 6, 1),
+(5, 6, 0),
+(9, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -240,7 +259,9 @@ INSERT INTO `planta` (`idPlanta`, `nombre`) VALUES
 (4, 'BUENOS AIRES'),
 (5, 'JUANJO C'),
 (6, 'PEDRITO VM'),
-(8, 'THE PLANTA');
+(8, 'THE PLANTA'),
+(9, 'CORDOBA'),
+(10, 'HERNANDARIAS');
 
 -- --------------------------------------------------------
 
@@ -266,7 +287,11 @@ INSERT INTO `ruta` (`idRuta`, `distancia`, `duracionViaje`, `pesoMaximo`, `plant
 (2, 12, 56, 78, 3, 1),
 (3, 67, 45, 78, 3, 2),
 (4, 5, 5, 5, 5, 2),
-(5, 2, 2, 2, 4, 5);
+(5, 2, 2, 2, 4, 5),
+(7, 7, 85, 99, 2, 3),
+(8, 76, 858, 9, 4, 3),
+(9, 44, 88, 99, 5, 6),
+(10, 85, 25, 22, 8, 9);
 
 -- --------------------------------------------------------
 
@@ -288,10 +313,21 @@ CREATE TABLE `stockinsumo` (
 
 INSERT INTO `stockinsumo` (`idStockInsumo`, `planta`, `insumo`, `cantidad`, `puntoReposicion`) VALUES
 (1, 1, 1, 123, 12),
-(2, 3, 1, 73, 12),
+(2, 3, 1, 63, 12),
 (3, 1, 3, 40, 50),
 (4, 4, 1, 78, 14),
-(5, 8, 6, 80, 12);
+(5, 8, 6, 80, 12),
+(6, 9, 1, 800, 100),
+(7, 9, 6, 500, 200),
+(8, 9, 4, 50, 500),
+(9, 5, 1, 55, 200),
+(10, 5, 3, 555, 444),
+(11, 5, 7, 600, 700),
+(12, 4, 3, 55, 1),
+(13, 4, 6, 600, 500),
+(14, 2, 1, 800, 10),
+(15, 2, 5, 55, 700),
+(16, 10, 1, 1, 1000);
 
 --
 -- Índices para tablas volcadas
@@ -412,25 +448,25 @@ ALTER TABLE `insumoliquido`
 -- AUTO_INCREMENT de la tabla `itemdetalle`
 --
 ALTER TABLE `itemdetalle`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `planta`
 --
 ALTER TABLE `planta`
-  MODIFY `idPlanta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idPlanta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `ruta`
 --
 ALTER TABLE `ruta`
-  MODIFY `idRuta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idRuta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `stockinsumo`
 --
 ALTER TABLE `stockinsumo`
-  MODIFY `idStockInsumo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idStockInsumo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
