@@ -78,17 +78,30 @@ public class PanelMatrizCaminoMinimo extends JPanel {
 			
 			Double[][] mkm = gc.matPorKm();		
 			Double[][] mt = gc.matPorTiempo();
+			
+			Integer columna = mkm.length;
+			Integer fila = mkm[0].length;
 			 
-			areaParaMatriz.append("Matriz por Km");
+			areaParaMatriz.append("                    Matriz por Km");
+			areaParaMatriz.append("                    ");
+			areaParaMatriz.append("                    Matriz por Tiempo");
 			areaParaMatriz.append(System.getProperty("line.separator"));
 			areaParaMatriz.append(System.getProperty("line.separator"));
 			
-			for(int i=0; i<mkm.length;i++) {
+			for(int i=0; i<columna;i++) {
 				
-				for(int j=0; j<mkm[i].length;j++) {
-					areaParaMatriz.append((mkm[i][j]).toString()+"  ");
+				for(int j=0; j<fila;j++) {
+					areaParaMatriz.append((mkm[i][j]).toString()+"   ");
 					
 				}
+				areaParaMatriz.append("                    ");
+				
+				for(int j=0; j<fila;j++) {
+					areaParaMatriz.append((mt[i][j]).toString()+"   ");
+					
+				}
+				
+				areaParaMatriz.append(System.getProperty("line.separator"));
 				areaParaMatriz.append(System.getProperty("line.separator"));
 			}
 			areaParaMatriz.append(System.getProperty("line.separator"));
