@@ -12,8 +12,11 @@ import org.junit.Test;
 import excepciones.DatosInvalidosException;
 import sistGestionLogistica.controller.PedidoController;
 import sistGestionLogistica.dominio.ItemDetalle;
+import sistGestionLogistica.dominio.Pedido;
 import sistGestionLogistica.dominio.Planta;
+import sistGestionLogistica.enums.EstadoPedido;
 import sistGestionLogistica.servicios.ServiceInsumo;
+import sistGestionLogistica.servicios.ServicePedido;
 import sistGestionLogistica.servicios.ServicePlanta;
 
 public class PedidoControllerTest {
@@ -24,10 +27,12 @@ public class PedidoControllerTest {
 	}
 
 	@Test
+	//insertar un numOrden que no este en la DB
 	public void crearPedidoCorrectoTest() throws SQLException, DatosInvalidosException {
+		Integer numOrden= 666;
+		
 		List<ItemDetalle> items = new ArrayList<ItemDetalle>();
 		ServiceInsumo si= new ServiceInsumo();
-		Integer numOrden= 76;
 		items.add(new ItemDetalle(numOrden,si.buscarPorId(1),20));
 		items.add(new ItemDetalle(numOrden,si.buscarPorId(3),2));
 		
@@ -69,7 +74,13 @@ public class PedidoControllerTest {
 			System.out.println(matriz[i][0]+ " "+ matriz[i][1]+ " "+ matriz[i][2]+ " "+ matriz[i][3]+ " "+ matriz[i][4]);
 		}
 	}
-	
+	@Test 
+	public void fianlizarPedidoCorrectoTest() throws NumberFormatException, SQLException {
+		ServicePedido sp = new ServicePedido();
+		List<Pedido> lista = sp.buscarPorEstado(EstadoPedido.PROCESADA);
+		pc.finalizarPedido(lista.get(0).getNumOrden().toString());
+		
+	}
 	
 	
 

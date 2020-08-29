@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-08-2020 a las 07:15:21
+-- Tiempo de generación: 29-08-2020 a las 08:06:55
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.2.32
 
@@ -181,7 +181,9 @@ INSERT INTO `itemdetalle` (`idDetalle`, `numOrden`, `insumo`, `cantidad`, `preci
 (22, 23, 4, 1400, 63000),
 (23, 27, 6, 1, 48),
 (24, 29, 2, 2, 46),
-(25, 33, 1, 10, 500);
+(25, 33, 1, 10, 500),
+(26, 4, 2, 3000, 69000),
+(27, 4, 5, 3000, 195000);
 
 -- --------------------------------------------------------
 
@@ -202,6 +204,7 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`numOrden`, `plantaDestino`, `fechaSolicitud`, `fechaEntrega`, `estado`) VALUES
+(4, 3, '2020-08-29', '2020-12-31', 'CREADA'),
 (5, 10, '2020-08-29', '2020-12-31', 'CREADA'),
 (6, 2, '2020-08-29', '2020-12-31', 'PROCESADA'),
 (9, 6, '2020-08-29', '2020-12-31', 'PROCESADA'),
@@ -448,7 +451,7 @@ ALTER TABLE `insumoliquido`
 -- AUTO_INCREMENT de la tabla `itemdetalle`
 --
 ALTER TABLE `itemdetalle`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `planta`

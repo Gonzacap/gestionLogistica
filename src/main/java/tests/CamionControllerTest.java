@@ -15,73 +15,37 @@ import sistGestionLogistica.dominio.Camion;
 import sistGestionLogistica.servicios.ServiceCamion;
 
 public class CamionControllerTest {
+	CamionController cc= new CamionController();
 
-//	@Test
-//	public void testAgregarCamion() {
-//		CamionController cc= new CamionController();
-//		
-//			try {
-//				cc.agregarCamion("AAA149", "Ford", "hache", "1200", "100", "1300", "01/11/2010");
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (DatosInvalidosException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//	
-//	
-//	@Test 
-//	public void testEditarCamion() {
-//		CamionController cc= new CamionController();
-//		
-//		try {
-//			cc.editarCamion("1","GMD345", "Ford", "ka", "1200", "100", "1300", "01/11/1999");
-//		} catch (DatosInvalidosException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	@Test
+	public void testAgregarCamion() throws DateTimeParseException, NumberFormatException, SQLException, DatosInvalidosException {
+		
+			cc.agregarCamion("AAA149", "Ford", "hache", "1200", "100", "1300", "01/11/2010");
+		
+			
+		}
 	
-//	@Test 
-//	public void testBorrarCamion() {
-//		CamionController cc= new CamionController();
-//		
-//		try {
-//			cc.borrarCamion("9");
-//		} catch (DatosInvalidosException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//	}
+	
+	@Test 
+	public void testEditarCamion() throws DateTimeParseException, NumberFormatException, DatosInvalidosException, SQLException {
+		//editar por idCamion
+			cc.editarCamion("1","GMD345", "Ford", "ka", "1200", "100", "1300", "01/11/1999");
+	}
+	
+	@Test 
+	public void testBorrarCamion() throws NumberFormatException, DatosInvalidosException, SQLException {
+			//insertar id del camion a borrar
+			cc.borrarCamion("9");
+		
+	}
 	
 	@Test
-	public void testBuscarCamion() throws SQLException {
-//		CamionController cc= new CamionController();
-//		
-//		
-//		try {
-//			String[][] lis = cc.buscarCamion("5", "", "", "", "", "", "", "");
-//			System.out.println(lis);
-//		} catch (DateTimeParseException | NumberFormatException | DatosInvalidosException | SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-		ServiceCamion sc = new ServiceCamion();
-		sc.sumarKM(7, 12);
-		
-		
+	public void buscarCamionTest() throws SQLException, DateTimeParseException, NumberFormatException, DatosInvalidosException {
+			//al enviar todo vacio busca todos los camiones
+			String[][] lis = cc.buscarCamion("", "", "", "", "", "", "", "");
+			for(int i=0; i<lis.length;i++) {
+				System.out.println(lis[i][0]+"\t"+lis[i][1]);
+			}
 		
 	}
 
