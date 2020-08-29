@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-08-2020 a las 00:43:34
+-- Tiempo de generación: 29-08-2020 a las 01:45:02
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -48,13 +48,13 @@ INSERT INTO `camion` (`ID`, `PATENTE`, `MARCA`, `MODELO`, `KM`, `COSTO_KM`, `COS
 (7, 'QWE123', 'KIA', 'qw', 109, '123.00', '12.00', '2011-12-10'),
 (12, 'HHH11', 'KIA', 'L', 123, '12.00', '123.00', '2012-02-01'),
 (13, '123ABC', 'RENO', '19', 100, '100.00', '100.00', '1999-12-12'),
-(14, '456ASQ', 'FORD', 'FOCUS', 92, '556.00', '25.30', '2019-01-09'),
+(14, '456ASQ', 'FORD', 'FOCUS', 104, '556.00', '25.30', '2019-01-09'),
 (15, '126ABC', 'FIAT', 'CARGO', 112, '50.00', '50.00', '2017-04-12'),
 (16, '123456', '23456', '23456', 123, '12.00', '12.00', '1912-12-12'),
 (19, 'GONZALITU', '123123', '123', 123, '123.00', '123.00', '1999-12-12'),
-(22, '12345678YTV', 'TOYOTA', 'YKC', 79, '12.00', '12.00', '1999-12-12'),
+(22, '12345678YTV', 'TOYOTA', 'YKC', 91, '12.00', '12.00', '1999-12-12'),
 (23, 'ASL456', 'EDITANDO', 'K', 200, '100.00', '135.00', '2019-12-22'),
-(24, '123XYZ', 'FIAT', 'CARGO', 75, '100.00', '100.00', '2019-10-22'),
+(24, '123XYZ', 'FIAT', 'CARGO', 87, '100.00', '100.00', '2019-10-22'),
 (25, '2345', 'HONDA', 'ALGO', 123, '123.00', '123.00', '1992-12-12'),
 (27, '11112222', 'XIAOMI', 'REDMI', 123, '123.00', '123.00', '1999-12-12');
 
@@ -77,7 +77,10 @@ CREATE TABLE `enviodetalle` (
 --
 
 INSERT INTO `enviodetalle` (`idEnvio`, `numOrden`, `camionAsignado`, `costoEnvio`, `plantaOrigen`) VALUES
-(10, 1111, 15, 4750, 3);
+(10, 1111, 15, 4750, 3),
+(11, 1234, 24, 6800, 3),
+(12, 1234, 22, 816, 3),
+(13, 547, 14, 8088.8, 3);
 
 -- --------------------------------------------------------
 
@@ -166,7 +169,9 @@ CREATE TABLE `itemdetalle` (
 --
 
 INSERT INTO `itemdetalle` (`idDetalle`, `numOrden`, `insumo`, `cantidad`, `precioItem`) VALUES
-(13, 1111, 1, 50, 2500);
+(13, 1111, 1, 50, 2500),
+(14, 1234, 1, 1, 50),
+(15, 547, 1, 2, 100);
 
 -- --------------------------------------------------------
 
@@ -187,7 +192,9 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`numOrden`, `plantaDestino`, `fechaSolicitud`, `fechaEntrega`, `estado`) VALUES
-(1111, 2, '2020-08-28', '2020-12-31', 'ENTREGADA');
+(547, 1, '2020-08-28', '2020-12-31', 'PROCESADA'),
+(1111, 2, '2020-08-28', '2020-12-31', 'ENTREGADA'),
+(1234, 1, '2020-08-28', '2020-12-31', 'PROCESADA');
 
 -- --------------------------------------------------------
 
@@ -207,7 +214,9 @@ CREATE TABLE `pertenecea` (
 
 INSERT INTO `pertenecea` (`idRuta`, `numOrden`, `orden`) VALUES
 (1, 1111, 1),
-(2, 1111, 0);
+(2, 547, 0),
+(2, 1111, 0),
+(2, 1234, 0);
 
 -- --------------------------------------------------------
 
@@ -379,7 +388,7 @@ ALTER TABLE `camion`
 -- AUTO_INCREMENT de la tabla `enviodetalle`
 --
 ALTER TABLE `enviodetalle`
-  MODIFY `idEnvio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idEnvio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `insumo`
@@ -403,7 +412,7 @@ ALTER TABLE `insumoliquido`
 -- AUTO_INCREMENT de la tabla `itemdetalle`
 --
 ALTER TABLE `itemdetalle`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `planta`
