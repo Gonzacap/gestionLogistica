@@ -59,6 +59,7 @@ public class App extends JFrame{
 	private PanelRutas pR;
 	private PanelStock pS;
 	private PanelMatrizCaminoMinimo pM;
+	private PanelInicio inicio;
 	
 	//----------------METODOS----------------
 	
@@ -71,7 +72,7 @@ public class App extends JFrame{
 		this.menuInsumos = new JMenu("Insumos");
 		this.menuPedidos = new JMenu("Pedidos");
 		this.menuRutas = new JMenu("Rutas");
-		this.menuMatriz = new JMenu("Matriz de Camino Minimo");
+		this.menuMatriz = new JMenu("Matriz");
 		this.barraMenu = new JMenuBar();
 		this.gridbag = new GridBagConstraints();
 		this.gestorPlantas = new JMenuItem("Gestionar Plantas");
@@ -91,12 +92,10 @@ public class App extends JFrame{
 		//this.pS = new PanelStock();
 		
 		//--estoy habria que borrarlo si se hace una pantalla de inicio--
-		pP.inicializar(this);
-		pI.inicializar(this);
-		pD.inicializar(this);
-		pR.inicializar(this);
-		//pS.inicializar(this);
-		pC.inicializar(this);
+		
+		
+		
+		//pC.inicializar(this);
 		//--------------------------
 		
 		menuPlantas.add(gestorPlantas);
@@ -117,14 +116,13 @@ public class App extends JFrame{
 		
 		//Pantalla de inicio?---------
 		
-		/*JPanel panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBackground(Color.red);
-		panel.add(new Label("Sistema de Gestion Logistica"));
+		this.inicio = new PanelInicio();
 		
-		this.setContentPane(panel);
+		this.setTitle("Sistema de Gestion Logistica");
+		this.setContentPane(this.inicio);
+		this.setVisible(true);
 		this.revalidate();
-		this.repaint();*/
+		//this.repaint();
 		
 		//--------Acciones Botones--------------	
 		
@@ -288,6 +286,20 @@ public class App extends JFrame{
 		this.gestorPedidos.setEnabled(true);
 		this.gestorRutas.setEnabled(true);
 		this.gestorStock.setEnabled(true);
+	}
+	
+	class PanelInicio extends JPanel {
+		
+		private ImageIcon img;
+		
+		@Override
+		public void paint(Graphics g) {
+			img = new ImageIcon(getClass().getResource("PantallaInicio.jpg"));
+			Dimension d = getSize();
+			g.drawImage(img.getImage(), 0, 0, d.width ,d.height, null);
+			this.setOpaque(false);
+			super.paintComponent(g);
+		}
 	}
 	
 }

@@ -21,21 +21,16 @@ import sistGestionLogistica.servicios.ServiceGrafoLogistica;
 public class PruebaCaminos {
 
 	public static void main(String[] args) throws SQLException{
-		EnvioDetalleDaoMysql envioDao = new EnvioDetalleDaoMysql();
-		  ServiceCamion sc = new ServiceCamion();
-		  Comparator<Camion> comparator = new CompareCamion();
-			PriorityQueue<Camion> cola= new PriorityQueue<Camion>(comparator);
-			List<Camion> todosCamiones = sc.buscarCamion(new Camion(-1,"","","",-1.0,-1.0,-1,LocalDate.MIN));
-			List<Camion> camionesAsignados = envioDao.camionesAsignados();
-			
-			for(Camion c: camionesAsignados) {
-			  todosCamiones.remove(c);
-				
-			}
-			System.out.println("asignados: " +camionesAsignados);
-			System.out.println("");
-			System.out.println("todos: " + todosCamiones);
-			
+		
+		ServiceGrafoLogistica sg = new ServiceGrafoLogistica();
+		GrafoLogistica grap = sg.inicializarGrafo();
+		
+		List<Double> asd =sg.pageRank(grap);
+		
+		
+		for(Double pr: asd) {
+			System.out.println(pr);
+		}
 
 	}
 }
