@@ -3,7 +3,9 @@ package sistGestionLogistica.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
@@ -70,6 +72,18 @@ public class GrafoLogisticaController {
 		GrafoLogistica graf = sg.inicializarGrafo(); 
 		
 		return sg.matrizTiempo(graf);
+	}
+	public Map<Planta,Double> pageRank() throws SQLException{
+		Map<Planta,Double> mapa= new HashMap<Planta,Double>();
+		ServiceGrafoLogistica sgl= new ServiceGrafoLogistica();
+		GrafoLogistica grafo = sgl.inicializarGrafo();
+		List<Planta> plantas= grafo.getListaPlanta();
+		List<Double> pageRank= sgl.pageRank(grafo);
+		
+		for(int i=0; i< plantas.size();i++) {
+			mapa.put(plantas.get(i), pageRank.get(i));
+		}
+		return mapa;	
 	}
 
 }
