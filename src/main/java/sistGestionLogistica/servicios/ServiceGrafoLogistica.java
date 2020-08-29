@@ -287,25 +287,30 @@ public class ServiceGrafoLogistica {
 				if(i==j) matriz[i][j]=0.0;
 				else {
 					List<Ruta> ruta;
+					List<ArrayList<Ruta>> listaRuta ;
 					//calcula el camino minimo dependiendo si es por Kilometro o tiempo
-					if(tipo.equals("K")) ruta= this.caminoMinimoKm(grafo, grafo.getListaPlanta().get(i), grafo.getListaPlanta().get(j)).get(0);
-					else ruta= this.caminoMinimoTiempo(grafo, grafo.getListaPlanta().get(i), grafo.getListaPlanta().get(j)).get(0);
+					if(tipo.equals("K")) listaRuta= this.caminoMinimoKm(grafo, grafo.getListaPlanta().get(i), grafo.getListaPlanta().get(j));
+					else listaRuta= this.caminoMinimoTiempo(grafo, grafo.getListaPlanta().get(i), grafo.getListaPlanta().get(j));
 					//si la ruta es vacia setea en 0
-					if(ruta.isEmpty()) matriz[i][j] =0.0;
-					//sino setea los kilometros o el tiempo de la ruta
+					if(listaRuta.isEmpty()) matriz[i][j] =0.0;
 					else {
-						if(tipo.equals("K")) matriz[i][j] = sr.kilometrosRuta(ruta);
-						else matriz[i][j] = sr.tiempoRuta(ruta);
+						ruta = listaRuta.get(0);
+						if(ruta.isEmpty()) matriz[i][j] =0.0;
+						//sino setea los kilometros o el tiempo de la ruta
+						else {
+							if(tipo.equals("K")) matriz[i][j] = sr.kilometrosRuta(ruta);
+							else matriz[i][j] = sr.tiempoRuta(ruta);
 					}
 				}
 				
 			}
 			
 		}
-		return matriz;
+	
 	
 	}
-	
+		return matriz;
+	}
 	public Integer gradoEntrada(GrafoLogistica grafo, Planta p) throws SQLException {
 		Integer grado=0;
 		List<Ruta> rutas = grafo.getListaRuta();
