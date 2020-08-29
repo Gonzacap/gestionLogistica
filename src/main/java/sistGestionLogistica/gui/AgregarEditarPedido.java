@@ -202,6 +202,8 @@ public class AgregarEditarPedido {
 							//e1.printStackTrace();
 						}
 						System.out.println("Pedido creado");
+						JOptionPane.showMessageDialog(null,
+								"Pedico creado de forma exitosa", "Pedido Creado",JOptionPane.INFORMATION_MESSAGE);
 						frame.dispose();
 					}
 					else {

@@ -234,6 +234,9 @@ public class AgregarEditarDetallesEnvio {
 				EnvioController ec = new EnvioController();
 				try {
 					ec.agregarEnvio(nroPedido.toString(),(List<Ruta>) caminos.get(comboCaminoOptimo.getSelectedIndex()),plantaAux);
+					JOptionPane.showMessageDialog(null,
+							"Detalles de envio agregado a pedido correctamente", "Envio Agregado",JOptionPane.INFORMATION_MESSAGE);
+					frame.dispose();
 					
 					//System.out.println(caminos.get(comboCaminoOptimo.getSelectedIndex()).size());
 				} catch (SQLException e1) {
