@@ -4,10 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 import excepciones.DatosInvalidosException;
 import excepciones.GrafoException;
@@ -83,7 +85,13 @@ public class GrafoLogisticaController {
 		for(int i=0; i< plantas.size();i++) {
 			mapa.put(plantas.get(i), pageRank.get(i));
 		}
-		return mapa;	
+		return sortByValue(mapa);	
 	}
+	 public  Map<Planta, Double> sortByValue(final Map<Planta, Double> wordCounts) {
+	        return wordCounts.entrySet()
+	                .stream()
+	                .sorted((Map.Entry.<Planta, Double >comparingByValue().reversed()))
+	                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+	    }
 
 }

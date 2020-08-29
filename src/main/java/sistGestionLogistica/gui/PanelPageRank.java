@@ -3,7 +3,9 @@ package sistGestionLogistica.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.swing.*;
 
@@ -77,8 +79,7 @@ public class PanelPageRank extends JPanel {
 			System.out.println("Matriz -> Visualizar");
 			
 			GrafoLogisticaController gc = new GrafoLogisticaController();
-			pageRank = gc.pageRank();
-			
+			pageRank= gc.pageRank();
 			pageRank.forEach((k,v) -> areaParaMatriz.append("Planta: " + k.getId() +" - " + k.getNombre() + "   PageRank: " + v+System.getProperty("line.separator")));
 			
 			areaParaMatriz.append(System.getProperty("line.separator"));
@@ -95,5 +96,6 @@ public class PanelPageRank extends JPanel {
 	
 	}
 	
+	  
 	
 }
