@@ -9,7 +9,7 @@ Basicamente era un ABM de camiones, plantas, rutas, productos y pedidos, en [TP-
 
 Mi aporte en este sistema fue la mayor parte del frontend y de la UI (la cual tuve que hacer a las corridas) y toda la logica de grafos, entre otros.
 
-Actualmente la BD de la app es local, mi idea es en un futuro no muy lejano subirla a algun host para que no haya que subirla a un local host, tambien pueden ver las capturas de algunas de las pantallas.
+Actualmente la [BD](https://github.com/Gonzacap/gestionLogistica/blob/master/died2020.sql) de la app es local, mi idea es en un futuro no muy lejano subirla a algun host para que no haya que subirla a un local host, tambien pueden ver las capturas de algunas de las pantallas.
 
 Ya que estamos cuento de donde salio la pantalla de inicio.
 Queriamos hacerle una pantalla de inicio y yo queria que sea algo bizarro como homenaje al libro que dice "sistemas operativos" y tiene dinosaurios, a lo que un amigo dijo que estabamos haciendo mucho codigo spaghetti y magia!! Hice nuestra antalla de inicio, un plato de spaghetti con el titulo "Sistema de Gestion Logistica" 
