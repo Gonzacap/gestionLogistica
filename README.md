@@ -5,7 +5,7 @@ Este sistema fue creado como un trabajo practico grupal para la asignatura de DI
 * [Repositorio original](https://github.com/santiespindd/gestionLogistica/)
 
 Basicamente era un ABM de camiones, plantas, rutas, productos y pedidos, en [TP-INTEGRADOR-2020.pdf](https://github.com/Gonzacap/gestionLogistica/blob/master/TP-INTEGRADOR-2020.pdf)
- esta el enunciado completo por si interesa leerlo. Esta hecho usando SQL, Java y Java Swing para la UI
+ esta el enunciado completo por si interesa leerlo. Esta hecho usando MySQL, Java y Java Swing para la UI
 
 Mi aporte en este sistema fue la mayor parte del frontend y de la UI (la cual tuve que hacer a las corridas) y toda la logica de grafos, entre otros.
 
